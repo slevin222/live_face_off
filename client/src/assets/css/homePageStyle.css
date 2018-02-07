@@ -1,0 +1,54 @@
+body{
+    user-select: none;
+}
+
+.signInArea {
+    border: 1px solid black;
+    width: 70%;
+    margin: 10% auto;
+}
+
+.homeTitle {
+
+}
+
+.top{
+    height: 30%;
+    width: 100%;
+}
+
+#titleH1{
+    font-size:65px;
+    text-align:center;
+    margin: 0;
+    padding: 0;
+}
+
+/*#password{*/
+    /*width: 40%;*/
+/*}*/
+
+/*#username{*/
+    /*width: 40%;*/
+/*}*/
+
+.inputFieldCentering {
+    width: 35%;
+    margin: 0 auto;
+}
+
+.signUpBtn {
+    margin-right: 10px;
+}
+
+.logInBtn {
+    margin-left: 10px;
+}
+
+.facebookBtn {
+    margin-right: 10px;
+}
+
+.googleBtn {
+    margin-left: 10px;
+}
