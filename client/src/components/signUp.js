@@ -1,17 +1,15 @@
 import React from 'react';
+
+import { Link } from 'react-router-dom';
+
 import '../assets/css/signUpStyle.css';
 
 export default (props)=> {
-    let flexOrHide = props.showOrHide ? 'flex' : 'none';
-
-    const style = {
-        display: flexOrHide
-    };
-
     return (
-        <div className="signUpBackground" style={style}>
+        <div className="signUpBackground">
             <div className="signUpArea">
                 <div className="row">
+
                     <form className="col s12">
 
                         <div className="row">
@@ -30,7 +28,7 @@ export default (props)=> {
 
                         <div className="row">
                             <div className="input-field col s12">
-                                <label htmlFor="signUpEmail">Emaill</label>
+                                <label htmlFor="signUpEmail">Email</label>
                                 <input id="signUpEmail" type="email" className="validate"/>
                             </div>
                         </div>
@@ -38,11 +36,12 @@ export default (props)=> {
                         <div className="row">
                             <div className='col s12 center-align'>
                                 <button type='submit' className='signUpBtn waves-effect waves-light btn'>Sign Up</button>
-                                <button onClick={props.displaySignUp} type='button' className='logInBtn waves-effect waves-light btn'>Cancel</button>
+                                <Link className='logInBtn waves-effect waves-light btn' to='/'>Cancel</Link>
                             </div>
                         </div>
 
                     </form>
+
                 </div>
             </div>
         </div>

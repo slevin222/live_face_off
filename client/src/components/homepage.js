@@ -1,27 +1,11 @@
 import React, {Component} from 'react';
+
+import { Link } from 'react-router-dom';
+
 import '../assets/css/homePageStyle.css';
-import SignUp from "./signUp";
 
 class Homepage extends Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            signUpDisplay: false
-        }
-
-        this.signUp = this.signUp.bind(this);
-    }
-
-    signUp(){
-        this.setState({
-            signUpDisplay: !this.state.signUpDisplay
-        })
-    }
-
     render(){
-        const {signUpDisplay} = this.state;
-
         return (
             <div className='container'>
                 <div className='signInArea'>
@@ -50,7 +34,7 @@ class Homepage extends Component {
 
                             <div className="row">
                                 <div className='buttonArea col s12'>
-                                    <button onClick={this.signUp} type='button' className='signUpBtn waves-effect waves-light btn'>Sign Up</button>
+                                    <Link className='logInBtn waves-effect waves-light btn' to='/register'>register</Link>
                                     <button type='submit' className='logInBtn waves-effect waves-light btn'>Log In</button>
                                 </div>
                             </div>
@@ -65,8 +49,6 @@ class Homepage extends Component {
                         </form>
                     </div>
                 </div>
-
-                <SignUp displaySignUp={this.signUp} showOrHide={signUpDisplay}/>
             </div>
         )
     }
