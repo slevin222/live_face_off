@@ -9,6 +9,7 @@ export default class CardDeck extends Component() {
         this.image = "images/" + this.name + this.suit + ".png";
     }
 
+
     deck() {
         this.names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
         this.suits = ['H', 'D', 'S', 'C'];
@@ -24,6 +25,7 @@ export default class CardDeck extends Component() {
         }
         return cards;
     }
+    deck(card);
 
     shuffleDeck() {
         let counter = this.deck.cards.length;
