@@ -1,10 +1,20 @@
 import React, {Component} from 'react';
-
 import { Link } from 'react-router-dom';
-
 import '../assets/css/homePageStyle.css';
+import axios from 'axios';
+
+
 
 class Homepage extends Component {
+    constructor(props) {
+        super(props);
+        this.getRequest = this.getRequest.bind(this);
+    }
+    getRequest() {
+        axios.get('http://localhost:5000/auth/google').then(resp => {
+            console.log('Get Resp:', resp);
+        });
+    }
     render(){
         return (
             <div className='container'>
@@ -20,14 +30,14 @@ class Homepage extends Component {
                             <div className='inputFieldCentering'>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <label htmlFor="username">Username</label>
-                                        <input id="username" type="text" className="validate"/>
+                                        <label htmlFor="username"></label>
+                                        <input type="text" className="validate" placeholder="Username" />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <label htmlFor="password">Password</label>
-                                        <input id="password" type="password" className="validate"/>
+                                        <label htmlFor="password"></label>
+                                        <input id="password" type="password" className="validate" placeholder="Password" />
                                     </div>
                                 </div>
                             </div>
@@ -42,8 +52,8 @@ class Homepage extends Component {
                             <div className="row">
                                 <div className='buttonAreaTwo col s12 center-align'>
                                     <p className='center-align'>----------------------- or login with -----------------------</p>
-                                    <button type='button' className='facebookBtn waves-effect waves-light btn light-blue darken-1'>Facebook</button>
-                                    <button type='button' className='googleBtn waves-effect waves-light btn deep-orange darken-1'>Google</button>
+                                    <a className="facebookBtn waves-effect waves-light btn light-blue darken-1" href="">Facebook</a>
+                                    <a className="googleBtn waves-effect waves-light btn deep-orange darken-1" href="http://localhost:5000/auth/google">Google</a>
                                 </div>
                             </div>
                         </form>
