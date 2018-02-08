@@ -1,36 +1,21 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import '../assets/css/homePageStyle.css';
-import SignUp from "./signUp";
 import axios from 'axios';
-// import GoogleLogin from 'react-google-login';
 
 
 
 class Homepage extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            signUpDisplay: false
-        }
-        this.signUp = this.signUp.bind(this);
         this.getRequest = this.getRequest.bind(this);
     }
-
-    signUp() {
-        this.setState({
-            signUpDisplay: !this.state.signUpDisplay
-        })
-    }
-
     getRequest() {
         axios.get('http://localhost:5000/auth/google').then(resp => {
             console.log('Get Resp:', resp);
         });
     }
-
-    render() {
-        const { signUpDisplay } = this.state;
-
+    render(){
         return (
             <div className='container'>
                 <div className='signInArea'>
@@ -59,8 +44,7 @@ class Homepage extends Component {
 
                             <div className="row">
                                 <div className='buttonArea col s12'>
-                                    <a href="http://localhost:5000/users/register" className='signUpBtn waves-effect waves-light btn'>Sign Up</a>
-                                    {/* <button onClick={this.signUp} type='button' className='signUpBtn waves-effect waves-light btn'>Sign Up</button> */}
+                                    <Link className='logInBtn waves-effect waves-light btn' to='/register'>register</Link>
                                     <button type='submit' className='logInBtn waves-effect waves-light btn'>Log In</button>
                                 </div>
                             </div>
@@ -75,8 +59,6 @@ class Homepage extends Component {
                         </form>
                     </div>
                 </div>
-
-                <SignUp displaySignUp={this.signUp} showOrHide={signUpDisplay} />
             </div>
         )
     }
