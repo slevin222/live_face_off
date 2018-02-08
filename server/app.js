@@ -2,14 +2,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const app = express();
 
 
 //Load Models
+require('./models/GoogleUsers');
 require('./models/Users');
 
 //Load Routes
 const auth = require('./routes/auth');
+const users = require('./routes/users');
 
 //Load Keys file
 const keys = require('./config/keys');
@@ -34,9 +39,19 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+//Cross Browser compatiability 
+app.use(cors());
+
 //Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(cookieParser());
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
+}));
 
 //Set global vars
 app.use((req, res, next) => {
@@ -46,13 +61,23 @@ app.use((req, res, next) => {
 
 //Use Routes
 app.use('/auth', auth);
+app.use('/users', users);
 
 app.get('/', (req, res) => {
     res.send('Hello');
-})
+});
 
-const port = process.env.PORT || 3000;
+app.get('/test', (req, res) => {
+    res.send({ msg: 'Data from server here' });
+});
+
+app.post('/test', (req, res) => {
+    console.log('Test post request data:', req.body);
+    res.send({ msg: 'Data from post request', dataReceived: req.body });
+});
+
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
     console.log('Server connected on ' + port);
-})
+});

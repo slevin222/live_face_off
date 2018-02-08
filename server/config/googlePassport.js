@@ -4,7 +4,7 @@ const keys = require('./keys');
 
 
 //Load user model
-const User = mongoose.model('users');
+const User = mongoose.model('googleUsers');
 
 module.exports = function (passport) {
     passport.use(
@@ -15,7 +15,6 @@ module.exports = function (passport) {
             proxy: true
         }, (accessToken, refreshToken, profile, done) => {
             // console.log(accessToken);
-            // console.log(profile);
             const image = profile.photos[0].value.substring(0, profile.photos[0].value.indexOf('?'));
             const newUser = {
                 googleID: profile.id,
@@ -24,6 +23,7 @@ module.exports = function (passport) {
                 email: profile.emails[0].value,
                 image: image
             }
+            console.log('New User added: ', newUser);
             //Check for existing user
             User.findOne({
                 googleID: profile.id
@@ -37,7 +37,7 @@ module.exports = function (passport) {
                         .save()
                         .then(user => done(null, user));
                 }
-            })
+            });
         })
     );
     passport.serializeUser((user, done) => {
