@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const UserSchema = new Schema({
-    name: {
+const GoogleUserSchema = new Schema({
+    googleID: {
         type: String,
         required: false
     },
@@ -11,14 +11,15 @@ const UserSchema = new Schema({
         type: String,
         required: false
     },
-    password: {
+    firstName: {
         type: String,
-        required: false
     },
-    date: {
-        type: Date,
-        default: Date.now
+    lastName: {
+        type: String
+    },
+    image: {
+        type: String
     }
 });
 
-mongoose.model('users', UserSchema);
+mongoose.model('googleUsers', GoogleUserSchema);
