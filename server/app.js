@@ -1,12 +1,15 @@
 const express = require('express');
+const http = require('http');
 const mongoose = require('mongoose');
+const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const app = express();
-
+const server = http.Server(app);
+const io = require('socket.io')(server);
 
 //Load Models
 require('./models/GoogleUsers');
@@ -76,8 +79,13 @@ app.post('/test', (req, res) => {
     res.send({ msg: 'Data from post request', dataReceived: req.body });
 });
 
+io.on("connection", function (socket) {
+    socket.on("stream", function (img) {
+        socket.broadcast.emit("stream", img);
+    });
+});
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log('Server connected on ' + port);
 });
