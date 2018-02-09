@@ -11,7 +11,6 @@ router.get('/google/callback', passport.authenticate('google', {
 }), (req, res) => {
     //Successful authentication, redirect home. if you redirect  res.redirect('http://localhost:3000/gamepage' will go to game page
     res.redirect('http://localhost:3000/gamepage');
-
 });
 
 router.get('/verify', (req, res) => {

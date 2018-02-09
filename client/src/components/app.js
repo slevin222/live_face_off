@@ -8,7 +8,6 @@ import GameBoard from './gameBoard';
 import GamePage from './gamePage';
 
 const App = () => {
-
     return (
         <Router>
             <div>
