@@ -1,26 +1,31 @@
 .fullPage{
     height: 100%;
     width: 100%;
+    /* display:flex; */
 }
 
-.webCams{
-    display: flex;
+.webcams{
+    /* display: flex; */
     justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap;
     height: 30%;
-    width: 100%;
-    
+    margin: 0;
+}
 
+video{
+    height: 98%;
+    width: 98%;
 }
 .cam{
-    height: 90%;
-    width: 25%;
-    background-color: blue;
+    height: 100%;
+    text-align: center;
+    /* width: 25%; */
+    /* border: 1px solid black; */
 }
 
 .stats{
     width: 20%;
     height: 68%;
     background-color: lightgray;
+    display: inline-flex;
 }

@@ -9,18 +9,14 @@ import '../assets/css/gamePage.css';
 export default props => {
     return (
         <div className="fullPage">
-            <div className="col s12 webcams">
-                <div className="cam">
-                    <Webcamfeed />
-                </div>
-                <div className="cam">Cam2</div>
-                <div className="cam">Cam3</div>
-                <div className="cam">Cam4</div>
+            <div className="row col s12 webcams">
+                <div className="cam col s3">Cam 1</div>
+                <div className="cam col s3"> <Webcamfeed /></div>
+                <div className="cam col s3">Cam 3</div>
+                <div className="cam col s3">Cam 4</div>
             </div>
-            <div classname="stats">
+            <div className="row col s12 gameCards">
                 <StatsArea />
-            </div>
-            <div className="gameArea">
                 <GameBoard />
             </div>
         </div>
