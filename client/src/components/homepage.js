@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/homePageStyle.css';
 import axios from 'axios';
@@ -15,7 +15,7 @@ class Homepage extends Component {
             console.log('Get Resp:', resp);
         });
     }
-    render(){
+    render() {
         return (
             <div className='container'>
                 <div className='signInArea'>

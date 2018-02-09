@@ -1,0 +1,94 @@
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    user-select: none;
+}
+#container{
+    height: 100vh;
+    width: 100vw;
+}
+.gameArea{
+    height: 69vh;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+}
+.gameCards{
+    margin: 0;
+}
+.playerHand{
+    height: 60%;
+    width: 100%;
+    display: flex;
+    background-color: lightslategrey;
+} 
+
+.playerCard0{
+    height: 80%;
+    width: 17%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 1%;
+    margin-left: 2%;
+   
+}
+
+.playerCard1,
+.playerCard2,
+.playerCard3,
+.playerCard4{
+    height: 80%;
+    width: 17%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 1%;
+   
+} 
+
+
+.bottomInfo{
+    width: 100%;
+    height: 8%;
+
+    display: flex;
+}
+
+.footer{
+    width: 100%;
+    height: 5%;
+    text-align: center;
+    
+  
+}
+.bottom0{
+    height: 80%;
+    width: 17%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: .8%;
+    margin-left: 2%;
+    border-radius: 3%;
+    font-size: 3vmin;
+    justify-content: center;
+}
+
+.bottom1,
+.bottom2,
+.bottom3,
+.bottom4{
+    height: 80%;
+    width: 17%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: .8%;
+    border-radius: 3%;
+    font-size: 3vmin;
+    justify-content: center;
+}

@@ -9,7 +9,7 @@ router.get('/google', passport.authenticate('google', {
 router.get('/google/callback', passport.authenticate('google', {
     failureRedirect: '/'
 }), (req, res) => {
-    //Successful authentication, redirect home.
+    //Successful authentication, redirect home. if you redirect  res.redirect('http://localhost:3000/gamepage' will go to game page
     res.redirect('http://localhost:3000/gamepage');
 });
 
