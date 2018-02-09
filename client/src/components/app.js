@@ -10,11 +10,11 @@ import GamePage from './gamePage';
 const App = () => {
     return (
         <Router>
-            <div>
-                <Route exact path='/' component={Homepage} />
-                <Route path='/register' component={signUp} />
-                <Route path='/gamepage' component={GamePage} />
-            </div>
+
+            <Route exact path='/' component={Homepage} />
+            <Route path='/register' component={signUp} />
+            <Route path='/gamepage' component={GamePage} />
+
         </Router>
     )
 }
