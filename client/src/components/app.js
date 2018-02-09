@@ -8,20 +8,15 @@ import GameBoard from './gameBoard';
 import GamePage from './gamePage';
 
 const App = () => {
-    // <Webcamfeed />
+
     return (
-        <div id="container">
-            {<GamePage />}
-
-        </div>
-        // {/* // <Router>
-        // //     <div>
-        // //         <Route exact path='/' component={Homepage} />
-        // //         <Route path='/register' component={signUp} />
-        // //     </div>
-        // // </Router> */}
-
-
+        <Router>
+            <div>
+                <Route exact path='/' component={Homepage} />
+                <Route path='/register' component={signUp} />
+                <Route path='/gamepage' component={GamePage} />
+            </div>
+        </Router>
     )
 }
 export default App;

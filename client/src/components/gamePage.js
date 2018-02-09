@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import GameBoard from './gameBoard';
 import Webcamfeed from './webcam';
 import StatsArea from './statsArea';
