@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/css/game.css';
-import nineSpades from '../assets/images/9Spng';
+import nineSpades from '../assets/images/9S.png';
 import sevenSpades from '../assets/images/7S.png';
 import jackClubs from '../assets/images/JC.png';
 import twoHearts from '../assets/images/2H.png';
@@ -8,8 +8,7 @@ import threeClubs from '../assets/images/3C.png';
 
 export default props => {
     return (
-        <div className="container">
-            <div className="playerTurn">Player 1</div>
+        <div className="gameArea">
             <div className="playerHand">
                 <div className="playerCard0" style={{ backgroundImage: "url(" + nineSpades + ")" }}></div>
                 <div className="playerCard1" style={{ backgroundImage: "url(" + sevenSpades + ")" }}></div>

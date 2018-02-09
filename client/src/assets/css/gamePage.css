@@ -1,0 +1,26 @@
+.fullPage{
+    height: 100%;
+    width: 100%;
+}
+
+.webCams{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 30%;
+    width: 100%;
+    
+
+}
+.cam{
+    height: 90%;
+    width: 25%;
+    background-color: blue;
+}
+
+.stats{
+    width: 20%;
+    height: 68%;
+    background-color: lightgray;
+}
