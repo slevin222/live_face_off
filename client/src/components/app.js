@@ -6,13 +6,13 @@ import Homepage from './homepage';
 import signUp from './signUp';
 
 const App = () => {
-    return <Webcamfeed />
-    // return (
-    //     <div>
-    //         <Route exact path='/' component={Homepage} />
-    //         <Route path='/register' component={signUp} />
-    //     </div>
-    // )
+    // return <Webcamfeed />
+    return (
+        <div>
+            <Route exact path='/' component={Homepage} />
+            <Route path='/register' component={signUp} />
+        </div>
+    )
 }
 
 export default App;
