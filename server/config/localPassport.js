@@ -7,8 +7,11 @@ const User = mongoose.model('users');
 
 module.exports = function (passport) {
     passport.use(new LocalStrategy({
-        usernameField: 'username'
-    }, (email, password, done) => {
+        usernameField: 'email',
+        passwordField: 'password',
+        session: true,
+        passReqToCallback: true
+    }, (req, email, password, done) => {
         // Match user
         User.findOne({
             email: email
@@ -18,7 +21,6 @@ module.exports = function (passport) {
                     message: 'No User Found'
                 });
             }
-
             // Match password
             bcrypt.compare(password, user.password, (err, isMatch) => {
                 if (err) throw err;

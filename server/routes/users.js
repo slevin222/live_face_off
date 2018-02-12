@@ -8,24 +8,15 @@ const router = express.Router();
 require('../models/Users');
 const User = mongoose.model('users');
 
-// User Login Route
-router.get('/login', (req, res) => {
-    res.render('users/login');
-});
-
-// User Register Route
-router.get('/register', (req, res) => {
-    res.redirect('../../client/src/components/signUp');
-});
-
-// Login Form POST
+//Login Form POST
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/ideas',
-        failureRedirect: '/users/login',
-        failureFlash: true
+        successRedirect: 'https://localhost:3000/gamepage',
+        failureRedirect: 'https://localhost:3000/login',
+        // failureFlash: true
     })(req, res, next);
 });
+
 
 // Register Form POST
 router.post('/register', (req, res) => {
@@ -57,7 +48,7 @@ router.post('/register', (req, res) => {
         })
             .then(user => {
                 if (user) {
-                    req.flash('error_msg', 'Email already regsitered');
+                    // req.flash('error_msg', 'Email already regsitered');
                     res.redirect('/users/register');
                 } else {
                     const newUser = new User({
@@ -65,14 +56,13 @@ router.post('/register', (req, res) => {
                         email: req.body.email,
                         password: req.body.password
                     });
-
                     bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(newUser.password, salt, (err, hash) => {
                             if (err) throw err;
                             newUser.password = hash;
                             newUser.save()
                                 .then(user => {
-                                    req.flash('success_msg', 'You are now registered and can log in');
+                                    // req.flash('success_msg', 'You are now registered and can log in');
                                     res.redirect('/users/login');
                                 })
                                 .catch(err => {
@@ -89,7 +79,7 @@ router.post('/register', (req, res) => {
 // Logout User
 router.get('/logout', (req, res) => {
     req.logout();
-    req.flash('success_msg', 'You are logged out');
+    // req.flash('success_msg', 'You are logged out');
     res.redirect('/users/login');
 });
 

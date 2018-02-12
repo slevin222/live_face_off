@@ -84,6 +84,7 @@ io.on("connection", function (socket) {
         socket.broadcast.emit("stream", img);
     });
 });
+
 const port = process.env.PORT || 5000;
 
 server.listen(port, () => {
