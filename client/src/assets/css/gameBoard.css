@@ -9,10 +9,12 @@ body{
     width: 100vw;
 }
 .gameArea{
-    height: 69vh;
+    height: 100%;
+    width: 80%;
     display: flex;
     flex-wrap: wrap;
     padding: 0;
+    background-color: darkolivegreen;
 }
 .gameCards{
     margin: 0;
@@ -25,15 +27,14 @@ body{
 } 
 
 .playerCard0{
-    height: 80%;
-    width: 17%;
+    height: 65%;
+    width: 18.9%;
     display: inline-flex;
     flex-wrap: wrap;
     cursor: pointer;
-    background-repeat: no-repeat;
     background-size: cover;
     border-radius: 1%;
-    margin-left: 2%;
+    margin: .5%;
    
 }
 
@@ -41,14 +42,14 @@ body{
 .playerCard2,
 .playerCard3,
 .playerCard4{
-    height: 80%;
-    width: 17%;
+    height: 65%;
+    width: 18.9%;
     display: inline-flex;
     flex-wrap: wrap;
     cursor: pointer;
-    background-repeat: no-repeat;
     background-size: cover;
     border-radius: 1%;
+    margin: .5%;
    
 } 
 

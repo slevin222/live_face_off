@@ -1,6 +1,11 @@
 .statsArea{
-    height: 69%;
+    height: 100%;
     width: 20%;
-    display:inline-flex;
-  
+    box-sizing: border-box;
+    border: 1px solid black;
+    text-align: center;
+    background-color: ghostwhite;
+   
 }
+
+
