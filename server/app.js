@@ -11,6 +11,9 @@ const app = express();
 const server = http.Server(app);
 const io = require('socket.io')(server);
 
+//Path middleware
+app.use(express.static(path.resolve(__dirname, 'client', 'dist')));
+
 //Load Models
 require('./models/GoogleUsers');
 require('./models/Users');
@@ -22,8 +25,8 @@ const users = require('./routes/users');
 //Load Keys file
 const keys = require('./config/keys');
 
-//Passport Config
-require('./config/localpassport')(passport);
+// //Passport Config
+require('./config/localPassport')(passport);
 require('./config/googlepassport')(passport);
 
 //Map global promises
@@ -70,20 +73,17 @@ app.get('/', (req, res) => {
     res.send('Hello');
 });
 
-app.get('/test', (req, res) => {
-    res.send({ msg: 'Data from server here' });
-});
 
-app.post('/test', (req, res) => {
-    console.log('Test post request data:', req.body);
-    res.send({ msg: 'Data from post request', dataReceived: req.body });
-});
+// io.on("connection", function (socket) {
+//     socket.on("stream", function (img) {
+//         socket.broadcast.emit("stream", img);
+//     });
+// });
 
-io.on("connection", function (socket) {
-    socket.on("stream", function (img) {
-        socket.broadcast.emit("stream", img);
-    });
-});
+// //Route for all static files from the client side
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+// });
 
 const port = process.env.PORT || 5000;
 
