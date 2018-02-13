@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/homePageStyle.css';
 import axios from 'axios';
 
-
-
-class Homepage extends Component {
+class LoginPage extends Component {
     constructor(props) {
         super(props);
-        this.getRequest = this.getRequest.bind(this);
+        this.getRequest = this.postRequest.bind(this);
     }
-    getRequest() {
-        axios.get('http://localhost:5000/auth/google').then(resp => {
+    postRequest() {
+        axios.post('http://localhost:5000/users/login').then(resp => {
             console.log('Get Resp:', resp);
         });
     }
@@ -25,27 +23,24 @@ class Homepage extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <form className="col s12 center-align">
-
+                        <form className="col s12 center-align" action="http://localhost:5000/users/login" method="post">
                             <div className='inputFieldCentering'>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <label htmlFor="username"></label>
-                                        <input type="text" className="validate" placeholder="Username" />
+                                        <input type="text" className="validate" name="email" placeholder="Email" />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <label htmlFor="password"></label>
-                                        <input id="password" type="password" className="validate" placeholder="Password" />
+                                        <input id="password" type="password" className="validate" name="password" placeholder="Password" />
                                     </div>
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className='buttonArea col s12'>
-                                    <Link className='logInBtn waves-effect waves-light btn' to='/register'>register</Link>
-                                    <button type='submit' className='logInBtn waves-effect waves-light btn'>Log In</button>
+                                    <Link className='logInBtn waves-effect waves-light btn' to='/register'>Register</Link>
+                                    <button onClick={this.postRequest} className='logInBtn waves-effect waves-light btn'>Log In</button>
                                 </div>
                             </div>
 
@@ -64,4 +59,4 @@ class Homepage extends Component {
     }
 }
 
-export default Homepage;
+export default LoginPage;
