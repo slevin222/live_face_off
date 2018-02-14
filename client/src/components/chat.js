@@ -17,7 +17,7 @@ class Chat extends Component {
             this.setState({
                 messages: [...this.state.messages, data.message]
             })
-            // this.displayMessage();
+
         });
     }
     sendMessage() {
@@ -51,7 +51,6 @@ class Chat extends Component {
 
     render() {
         const { message, output, messages } = this.state;
-
         console.log(messages);
         return (
             <div id="lituation-chat">
@@ -61,9 +60,8 @@ class Chat extends Component {
                     </div>
                     <div id="feedback"></div>
                 </div>
-                {/* <input id="handle" type="text" placeholder="User ID"/> */}
-                <input value={this.state.message} onChange={this.handleInputChange.bind(this)} id="message" type="text" placeholder="Message" />
-                <button onClick={this.sendMessage.bind(this)} id="send">Send</button>
+                <input value={this.state.message} onChange={this.handleInputChange.bind(this)} id="message" type="text" placeholder="Type Message" />
+                <button className="btn green-accent-3" onClick={this.sendMessage.bind(this)} id="send">Send</button>
             </div>
         )
     }
