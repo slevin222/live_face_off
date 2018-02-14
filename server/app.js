@@ -74,11 +74,20 @@ app.get('/', (req, res) => {
 });
 
 
-// io.on("connection", function (socket) {
-//     socket.on("stream", function (img) {
-//         socket.broadcast.emit("stream", img);
-//     });
-// });
+//socket.io for chat 
+io.on('connection', function(socket){
+    console.log('Made socket connection.', socket.id)
+
+    socket.on('chat', function(data){
+        console.log(data);
+        io.sockets.emit('chat', data);
+    });
+
+
+    socket.on('typing', function(data){
+        socket.broadcast.emit('typing', data)
+    });
+});
 
 // //Route for all static files from the client side
 // app.get('*', (req, res) => {
