@@ -47,7 +47,7 @@ class LoginPage extends Component {
                             <div className="row">
                                 <div className='buttonAreaTwo col s12 center-align'>
                                     <p className='center-align'>----------------------- or login with -----------------------</p>
-                                    <a className="facebookBtn waves-effect waves-light btn light-blue darken-1" href="">Facebook</a>
+                                    <a className="facebookBtn waves-effect waves-light btn light-blue darken-1" href="http://localhost:5000/auth/facebook">Facebook</a>
                                     <a className="googleBtn waves-effect waves-light btn deep-orange darken-1" href="http://localhost:5000/auth/google">Google</a>
                                 </div>
                             </div>
