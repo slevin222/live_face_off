@@ -5,6 +5,7 @@ import sevenSpades from '../assets/images/7S.png';
 import jackClubs from '../assets/images/JC.png';
 import twoHearts from '../assets/images/2H.png';
 import threeClubs from '../assets/images/3C.png';
+// import RunGame from './runGame';
 
 export default props => {
     return (

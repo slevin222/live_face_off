@@ -11,10 +11,11 @@ h2{
 
 #lituation-chat{
     max-width: 600px;
-    margin: 30px auto;
     border: 1px solid #ddd;
     box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
     border-radius: 2px;
+    box-sizing: border-box;
+    
 }
 
 #chat-window{
@@ -46,8 +47,8 @@ label{
     padding: 10px 20px;
 }
 
-input{
-    padding: 10px 20px;
+#message{
+    /* padding: 10px 20px; */
     box-sizing: border-box;
     background: #eee;
     border: 0;
@@ -57,9 +58,10 @@ input{
     border-bottom: 1px solid #eee;
     font-family: Nunito;
     font-size: 16px;
+    margin: 0;
 }
 
-button{
+/* .button{
     background: #ada59a;
     color: #fff;
     font-size: 18px;
@@ -67,7 +69,7 @@ button{
     padding: 12px 0;
     width: 100%;
     border-radius: 0 0 2px 2px;
-}
+} */
 
 input::-webkit-input-placeholder, 
 handle::-webkit-input-placeholder {
