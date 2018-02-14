@@ -12,7 +12,7 @@ const server = http.Server(app);
 const io = require('socket.io')(server);
 
 //Path middleware
-app.use(express.static(path.resolve(__dirname, 'client', 'dist')));
+app.use(express.static(path.resolve(__dirname, '../client', 'dist')));
 
 //Load Models
 require('./models/GoogleUsers');
@@ -75,26 +75,22 @@ app.get('/', (req, res) => {
     res.send('Hello');
 });
 
-
 //socket.io for chat 
-io.on('connection', function(socket){
+io.on('connection', function (socket) {
     console.log('Made socket connection.', socket.id)
-
-    socket.on('chat', function(data){
+    socket.on('chat', function (data) {
         console.log(data);
         io.sockets.emit('chat', data);
     });
-
-
-    socket.on('typing', function(data){
+    socket.on('typing', function (data) {
         socket.broadcast.emit('typing', data)
     });
 });
 
-// //Route for all static files from the client side
-// app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
-// });
+//Route for all static files from the client side
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+});
 
 const port = process.env.PORT || 5000;
 

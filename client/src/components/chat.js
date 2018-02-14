@@ -20,7 +20,6 @@ class Chat extends Component {
 
         });
     }
-
     sendMessage() {
         this.socket.emit('chat', {
             message: this.state.message,
@@ -53,7 +52,6 @@ class Chat extends Component {
     render() {
         const { message, output, messages } = this.state;
         console.log(messages);
-
         return (
             <div id="lituation-chat">
                 <div id="chat-window">
