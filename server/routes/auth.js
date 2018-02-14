@@ -2,16 +2,33 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 
+
+//GOOGLE ROUTES
+
 router.get('/google', passport.authenticate('google', {
     scope: ['profile', 'email']
 }));
 
 router.get('/google/callback', passport.authenticate('google', {
-    failureRedirect: '/'
+    failureRedirect: 'http://localhost:3000/login'
 }), (req, res) => {
     //Successful authentication, redirect home. if you redirect  res.redirect('http://localhost:3000/gamepage' will go to game page
     res.redirect('http://localhost:3000/gamepage');
 });
+
+//FACEBOOK ROUTES
+router.get('/facebook',
+    passport.authenticate('facebook', {
+        scope: ['profile', 'email']
+    }
+    ));
+
+router.get('/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: 'http://localhost:3000/login' }),
+    (req, res) => {
+        // Successful authentication, redirect home.
+        res.redirect('http://localhost:3000/gamepage');
+    });
 
 router.get('/verify', (req, res) => {
     if (req.user) {

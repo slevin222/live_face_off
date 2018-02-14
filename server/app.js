@@ -17,6 +17,7 @@ app.use(express.static(path.resolve(__dirname, 'client', 'dist')));
 //Load Models
 require('./models/GoogleUsers');
 require('./models/Users');
+require('./models/FacebookUsers');
 
 //Load Routes
 const auth = require('./routes/auth');
@@ -27,7 +28,8 @@ const keys = require('./config/keys');
 
 // //Passport Config
 require('./config/localPassport')(passport);
-require('./config/googlepassport')(passport);
+require('./config/googlePassport')(passport);
+require('./config/facebookPassport')(passport);
 
 //Map global promises
 mongoose.Promise = global.Promise;
