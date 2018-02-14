@@ -1,11 +1,13 @@
 import React from 'react';
 import '../assets/css/statsArea.css';
 import icon from '../assets/images/icon.jpg';
+import Chat from './chat';
 
 export default props => {
     return (
         <div className="statsArea">
-            <h4>Chat Box</h4>
+            <Chat/>
+            {/* <h4>Chat Box</h4>
             <div className="card-panel grey lighten-5 z-depth-1">
                 <div className="row valign-wrapper">
                     <div className="col s2">
@@ -17,7 +19,7 @@ export default props => {
                         </span>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
