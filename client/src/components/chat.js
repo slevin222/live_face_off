@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../assets/css/chat.css';
 import openSocket from 'socket.io-client';
 import ChatHistory from './chatHistory';
 
 class Chat extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             message: "",
@@ -20,10 +20,7 @@ class Chat extends Component {
             // this.displayMessage();
         });
     }
-    componentWillMount(){
-        
-    }
-    sendMessage(){
+    sendMessage() {
         this.socket.emit('chat', {
             message: this.state.message,
             // handle: handle.value
@@ -33,17 +30,17 @@ class Chat extends Component {
         });
     }
 
-    handleInputChange(event){
-        const {value} = event.target;
+    handleInputChange(event) {
+        const { value } = event.target;
         this.setState({
             message: value
         });
     }
-    
+
     // message.addEventListener('keypress', function(){
     //     socket.emit('typing', handle.value);
     // })
-    
+
     displayMessage(message) {
 
     }
@@ -52,22 +49,22 @@ class Chat extends Component {
     //     feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
     // });
 
-    render(){
-        const {message , output, messages} = this.state;
+    render() {
+        const { message, output, messages } = this.state;
 
         console.log(messages);
-        return(
-        <div id="lituation-chat">
-            <div id="chat-window">
-                <div id="output">
-                    <ChatHistory data={messages}/>
+        return (
+            <div id="lituation-chat">
+                <div id="chat-window">
+                    <div id="output">
+                        <ChatHistory data={messages} />
+                    </div>
+                    <div id="feedback"></div>
                 </div>
-                <div id="feedback"></div>
+                {/* <input id="handle" type="text" placeholder="User ID"/> */}
+                <input value={this.state.message} onChange={this.handleInputChange.bind(this)} id="message" type="text" placeholder="Message" />
+                <button onClick={this.sendMessage.bind(this)} id="send">Send</button>
             </div>
-            {/* <input id="handle" type="text" placeholder="User ID"/> */}
-            <input value={this.state.message} onChange={this.handleInputChange.bind(this)} id="message" type="text" placeholder="Message"/>
-            <button onClick={this.sendMessage.bind(this)} id="send">Send</button>
-        </div>
         )
     }
 }
