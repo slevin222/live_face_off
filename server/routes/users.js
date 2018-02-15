@@ -11,8 +11,8 @@ const User = mongoose.model('users');
 // Login Form POST
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: 'http://localhost:3000/gamepage',
-        failureRedirect: 'http://localhost:3000/login',
+        successRedirect: '/gamepage',
+        failureRedirect: '/login',
     })(req, res, next);
 });
 
@@ -25,7 +25,7 @@ router.post('/register', (req, res) => {
             if (user) {
                 console.log(user);
                 console.log('Email in use');
-                res.redirect('http://localhost:3000/register');
+                res.redirect('/register');
             } else {
                 const newUser = new User({
                     firstName: req.body.firstName,
@@ -39,7 +39,7 @@ router.post('/register', (req, res) => {
                         newUser.save()
                             .then(user => {
                                 console.log('You may now login!')
-                                res.redirect('http://localhost:3000/login');
+                                res.redirect('/login');
                             })
                             .catch(err => {
                                 console.log(err);
