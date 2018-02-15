@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
+const tokenGenerator = require('./helpers/token_generator');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const app = express();
@@ -26,7 +27,7 @@ const users = require('./routes/users');
 //Load Keys file
 const keys = require('./config/keys');
 
-// //Passport Config
+//Passport Config
 require('./config/localPassport')(passport);
 require('./config/googlePassport')(passport);
 require('./config/facebookPassport')(passport);
@@ -82,6 +83,13 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('typing', data)
     });
 });
+
+// //Token Generator Route
+// app.get('/gamepage', function (req, res) {
+//     const identity = req.query.identity || 'identity';
+//     const room = req.query.room;
+//     res.send(tokenGenerator(identity, room));
+// });
 
 //Route for all static files from the client side
 app.get('*', (req, res) => {
