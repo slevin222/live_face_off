@@ -9,7 +9,7 @@ class LoginPage extends Component {
         this.getRequest = this.postRequest.bind(this);
     }
     postRequest() {
-        axios.post('http://localhost:5000/users/login').then(resp => {
+        axios.post('/users/login').then(resp => {
             console.log('Get Resp:', resp);
         });
     }
@@ -23,7 +23,7 @@ class LoginPage extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <form className="col s12 center-align" action="http://localhost:5000/users/login" method="post">
+                        <form className="col s12 center-align" action="/users/login" method="post">
                             <div className='inputFieldCentering'>
                                 <div className="row">
                                     <div className="input-field col s12">
@@ -47,8 +47,8 @@ class LoginPage extends Component {
                             <div className="row">
                                 <div className='buttonAreaTwo col s12 center-align'>
                                     <p className='center-align'>----------------------- or login with -----------------------</p>
-                                    <a className="facebookBtn waves-effect waves-light btn light-blue darken-1" href="http://localhost:5000/auth/facebook">Facebook</a>
-                                    <a className="googleBtn waves-effect waves-light btn deep-orange darken-1" href="http://localhost:5000/auth/google">Google</a>
+                                    <a className="facebookBtn waves-effect waves-light btn light-blue darken-1" href="/auth/facebook">Facebook</a>
+                                    <a className="googleBtn waves-effect waves-light btn deep-orange darken-1" href="/auth/google">Google</a>
                                 </div>
                             </div>
                         </form>

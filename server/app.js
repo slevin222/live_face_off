@@ -12,7 +12,7 @@ const server = http.Server(app);
 const io = require('socket.io')(server);
 
 //Path middleware
-app.use(express.static(path.resolve(__dirname, '../client', 'dist')));
+app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
 //Load Models
 require('./models/GoogleUsers');
@@ -71,10 +71,6 @@ app.use((req, res, next) => {
 app.use('/auth', auth);
 app.use('/users', users);
 
-app.get('/', (req, res) => {
-    res.send('Hello');
-});
-
 //socket.io for chat 
 io.on('connection', function (socket) {
     console.log('Made socket connection.', socket.id)
@@ -89,7 +85,7 @@ io.on('connection', function (socket) {
 
 //Route for all static files from the client side
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
 const port = process.env.PORT || 5000;
