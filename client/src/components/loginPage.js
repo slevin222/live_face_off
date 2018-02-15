@@ -19,7 +19,7 @@ class LoginPage extends Component {
                 <div className='signInArea'>
                     <div className='row'>
                         <div className="col s12 homeTitle center-align">
-                            <h1>Epic Times</h1>
+                            <h1>Live Face Off</h1>
                         </div>
                     </div>
                     <div className="row">
