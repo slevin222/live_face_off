@@ -18,7 +18,7 @@ class SignUp extends Component {
             <div className="signUpBackground">
                 <div className="signUpArea">
                     <div className="row">
-                        <form className="col s12" action="http://localhost:5000/users/register" method="post">
+                        <form className="col s12" action="/users/register" method="post">
                             <div className="row">
                                 <div className="input-field col s12">
                                     <input id="signUpUsername" type="text" name="firstName" className="validate" placeholder="First Name" required />
