@@ -87,7 +87,9 @@ io.on('connection', function (socket) {
 //Token Generator Route
 app.post('/gamepage', function (req, res) {
     const identity = req.query.identity || 'identity';
-    const room = req.query.room;
+    const room = req.query.room || 'cal';
+    console.log(identity);
+    console.log(room);
     console.log(tokenGenerator(identity, room));
     res.send(tokenGenerator(identity, room));
 });

@@ -15,7 +15,8 @@ class TwilioWebcam extends Component {
             fontWeight: 'lighter'
         }
         this.state = {
-            token: ''
+            token: '',
+            roomName: 'cal'
         };
     }
     postRequest() {
@@ -31,7 +32,7 @@ class TwilioWebcam extends Component {
         this.postRequest();
     }
     render() {
-        const { token } = this.state;
+        const { token, roomName } = this.state;
         console.log('token from the axios request', token);
         if (!token) {
             return (
@@ -42,7 +43,7 @@ class TwilioWebcam extends Component {
         } else {
             return (
                 <div style={{ height: '800px', width: '50%' }}>
-                    <TwilioVideo roomName={'214'} token={token} style={{ ...this.shadowStyle, boxShadow: '5px 5px 5px #e0e3e4' }} />
+                    <TwilioVideo roomName={roomName} token={token} style={{ ...this.shadowStyle, boxShadow: '5px 5px 5px #e0e3e4' }} />
                 </div>
             );
         }

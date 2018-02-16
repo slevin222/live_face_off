@@ -12,10 +12,10 @@ export default props => {
     return (
         <div className="fullPage">
             <div className="row col s12 webcams">
-                <div className="cam col s3">Cam 1</div>
                 <div className="cam col s3"><TwilioWebcam /></div>
-                <div className="cam col s3">Cam 3</div>
-                <div className="cam col s3">Cam 4</div>
+                <div className="cam col s3"><TwilioWebcam /></div>
+                <div className="cam col s3"><TwilioWebcam /></div>
+                <div className="cam col s3"><TwilioWebcam /></div>
             </div>
             <div className="row col s12 gameCards">
                 <StatsArea />
