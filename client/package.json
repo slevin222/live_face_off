@@ -21,10 +21,12 @@
     "url": "https://github.com/Learning-Fuze/react_starter.git"
   },
   "dependencies": {
+    "@opentok/client": "^2.13.0",
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "material-ui": "^0.20.0",
     "materialize-css": "^0.100.2",
+    "opentok-react": "^0.7.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-google-login": "^3.0.4",
