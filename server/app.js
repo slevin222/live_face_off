@@ -84,12 +84,13 @@ io.on('connection', function (socket) {
     });
 });
 
-// //Token Generator Route
-// app.get('/gamepage', function (req, res) {
-//     const identity = req.query.identity || 'identity';
-//     const room = req.query.room;
-//     res.send(tokenGenerator(identity, room));
-// });
+//Token Generator Route
+app.post('/gamepage', function (req, res) {
+    const identity = req.query.identity || 'identity';
+    const room = req.query.room;
+    console.log(tokenGenerator(identity, room));
+    res.send(tokenGenerator(identity, room));
+});
 
 //Route for all static files from the client side
 app.get('*', (req, res) => {

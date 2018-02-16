@@ -1,107 +1,45 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-// var ConversationContainer = require('./conversationContainer.jsx');
+// import logo from './logo.svg';
+// import './App.css';
+import axios from 'axios';
+import TwilioVideo from 'react-twilio';
 
-var conversationsClient;
-var activeConversation;
-var previewMedia;
-var identity;
-
-// Check for WebRTC
-if (!navigator.webkitGetUserMedia && !navigator.mozGetUserMedia) {
-    alert('WebRTC is not available in your browser.');
-}
-
-$.getJSON('/token', function (data) {
-    identity = data.identity;
-    var accessManager = new Twilio.AccessManager(data.token);
-
-    // Check the browser console to see your generated identity. 
-    // Send an invite to yourself if you want! 
-    console.log(identity);
-
-    // Create a Conversations Client and connect to Twilio
-    conversationsClient = new Twilio.Conversations.Client(accessManager);
-    conversationsClient.listen().then(clientConnected, function (error) {
-        log('Could not connect to Twilio: ' + error.message);
-    });
-});
-
-// Successfully connected!
-function clientConnected() {
-    document.getElementById('invite-controls').style.display = 'block';
-    log("Connected to Twilio. Listening for incoming Invites as '" + conversationsClient.identity + "'");
-
-    conversationsClient.on('invite', function (invite) {
-        log('Incoming invite from: ' + invite.from);
-        invite.accept().then(conversationStarted);
-    });
-
-    // Bind button to create conversation
-    document.getElementById('button-invite').onclick = function () {
-        var inviteTo = document.getElementById('invite-to').value;
-        if (activeConversation) {
-            // Add a participant
-            activeConversation.invite(inviteTo);
-        } else {
-            // Create a conversation
-            var options = {};
-            if (previewMedia) {
-                options.localMedia = previewMedia;
-            }
-            conversationsClient.inviteToConversation(inviteTo, options).then(conversationStarted, function (error) {
-                log('Unable to create conversation');
-                console.error('Unable to create conversation', error);
-            });
+class TwilioWebcam extends Component {
+    constructor(props) {
+        super(props);
+        this.shadowStyle = {
+            border: '1px solid #dcd9d9',
+            borderRadius: '4px',
+            marginBottom: '15px',
+            boxShadow: '5px 5px 5px #e0e3e4',
+            fontWeight: 'lighter'
         }
-    };
-}
-
-// Conversation is live
-function conversationStarted(conversation) {
-    log('In an active Conversation');
-    activeConversation = conversation;
-    // Draw local video, if not already previewing
-    if (!previewMedia) {
-        ReactDOM.render(<ConversationContainer conversation={conversation} />, document.getElementById('local-conversation'));
+        this.state = {
+            token: ''
+        };
     }
-
-    // When a participant joins, draw their video on screen
-    conversation.on('participantConnected', function (participant) {
-        log("Participant '" + participant.identity + "' connected");
-    });
-
-    // When a participant disconnects, note in log
-    conversation.on('participantDisconnected', function (participant) {
-        log("Participant '" + participant.identity + "' disconnected");
-    });
-
-    // When the conversation ends, stop capturing local video
-    conversation.on('disconnected', function (conversation) {
-        log("Connected to Twilio. Listening for incoming Invites as '" + conversationsClient.identity + "'");
-        ReactDOM.unmountComponentAtNode(document.getElementById('local-conversation'));
-        activeConversation = null;
-    });
-}
-
-//  Local video preview
-document.getElementById('button-preview').onclick = function () {
-    if (!previewMedia) {
-        previewMedia = new Twilio.Conversations.LocalMedia();
-        Twilio.Conversations.getUserMedia().then(
-            function (mediaStream) {
-                previewMedia.addStream(mediaStream);
-                previewMedia.attach('#local-media');
-            },
-            function (error) {
-                console.error('Unable to access local media', error);
-                log('Unable to access Camera and Microphone');
+    postRequest() {
+        axios.post('/gamepage')
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    token: res.data
+                });
             });
-    };
-};
-
-// Activity log
-function log(message) {
-    document.getElementById('log-content').innerHTML = message;
+    }
+    componentWillMount() {
+        this.postRequest();
+    }
+    render() {
+        const { token } = this.state;
+        console.log('token from the axios request', token);
+        return (
+            <div style={{ height: '800px', width: '50%' }}>
+                <TwilioVideo roomName={'214'} token={token} style={{ ...this.shadowStyle, boxShadow: '5px 5px 5px #e0e3e4' }} />
+                <button type="button" onClick={this.postRequest.bind(this)}>Get Response Data</button>
+            </div>
+        );
+    }
 }
 
+export default TwilioWebcam;
