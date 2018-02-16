@@ -33,12 +33,19 @@ class TwilioWebcam extends Component {
     render() {
         const { token } = this.state;
         console.log('token from the axios request', token);
-        return (
-            <div style={{ height: '800px', width: '50%' }}>
-                <TwilioVideo roomName={'214'} token={token} style={{ ...this.shadowStyle, boxShadow: '5px 5px 5px #e0e3e4' }} />
-                <button type="button" onClick={this.postRequest.bind(this)}>Get Response Data</button>
-            </div>
-        );
+        if (!token) {
+            return (
+                <div>
+                    Hi
+                </div>
+            )
+        } else {
+            return (
+                <div style={{ height: '800px', width: '50%' }}>
+                    <TwilioVideo roomName={'214'} token={token} style={{ ...this.shadowStyle, boxShadow: '5px 5px 5px #e0e3e4' }} />
+                </div>
+            );
+        }
     }
 }
 
