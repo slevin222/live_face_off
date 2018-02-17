@@ -7,9 +7,11 @@ import twoHearts from '../assets/images/2H.png';
 import threeClubs from '../assets/images/3C.png';
 // import RunGame from './runGame';
 
+
 export default props => {
     return (
         <div className="gameArea">
+
             <div className="playerCard0" style={{ backgroundImage: "url(" + nineSpades + ")" }}></div>
             <div className="playerCard1" style={{ backgroundImage: "url(" + sevenSpades + ")" }}></div>
             <div className="playerCard2" style={{ backgroundImage: "url(" + jackClubs + ")" }}></div>
