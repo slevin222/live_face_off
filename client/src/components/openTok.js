@@ -99,7 +99,8 @@ class TokBox extends Component {
     componentDidMount() {
         console.log('CDM in progress!', OT);
 
-        this.publisher = OT.initPublisher();
+        this.publisher = OT.initPublisher('webcamContainer',
+            { width: 350, height: 250 });
 
         this.getRequest();
     }
@@ -119,7 +120,6 @@ class TokBox extends Component {
         }
         return (
             <div>
-                <Link to="/login">Go to Login</Link>
                 <div>Session Status: {connection}</div>
                 {error ? (
                     <div className="error">
