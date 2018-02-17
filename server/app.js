@@ -5,7 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
-const tokenGenerator = require('./helpers/token_generator');
+// const tokenGenerator = require('./helpers/token_generator');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const app = express();
@@ -23,6 +23,7 @@ require('./models/FacebookUsers');
 //Load Routes
 const auth = require('./routes/auth');
 const users = require('./routes/users');
+const tokbox = require('./routes/tokbox');
 
 //Load Keys file
 const keys = require('./config/keys');
@@ -71,6 +72,7 @@ app.use((req, res, next) => {
 //Use Routes
 app.use('/auth', auth);
 app.use('/users', users);
+app.use('/tokbox', tokbox);
 
 //socket.io for chat 
 io.on('connection', function (socket) {
@@ -85,15 +87,26 @@ io.on('connection', function (socket) {
 });
 
 // //Token Generator Route
-// app.get('/gamepage', function (req, res) {
+// app.use('/gamepage', function (req, res) {
 //     const identity = req.query.identity || 'identity';
-//     const room = req.query.room;
+//     const room = req.query.room || 'cal';
+//     console.log(identity);
+//     console.log(room);
+//     console.log(tokenGenerator(identity, room));
 //     res.send(tokenGenerator(identity, room));
 // });
 
 //Route for all static files from the client side
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'client', 'dist', 'index.html'));
+});
+
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 const port = process.env.PORT || 5000;
