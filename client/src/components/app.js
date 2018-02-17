@@ -8,7 +8,6 @@ import GamePage from './gamePage';
 import TokBox from './openTok';
 
 const App = () => {
-
     return (
         <div className="mainApp">
             <Route path="/sessionpage" component={TokBox} />

@@ -88,6 +88,7 @@ class TokBox extends Component {
             });
     }
     componentDiDMount() {
+        console.log('CDM in progress!');
         this.getRequest();
     }
 
