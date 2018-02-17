@@ -10,3 +10,9 @@ module.exports = {
     TOKBOX_API_KEY: '46061342',
     TOKBOX_SECRET: '402a524fddd0c458f75f99ce256e6b7b128da88d'
 };
+
+if (process.env.NODE_ENV === 'production') {
+    module.exports = require('./keys_prod');
+} else {
+    module.exports = require('./keys_dev');
+}

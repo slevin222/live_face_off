@@ -5,7 +5,6 @@ import axios from 'axios';
 const OT = require('@opentok/client');
 const publisher = OT.initPublisher();
 
-
 class TokBox extends Component {
     constructor(props) {
         super(props);
@@ -88,7 +87,7 @@ class TokBox extends Component {
                 });
             });
     }
-    componentDidMount() {
+    componentDiDMount() {
         this.getRequest();
     }
 
