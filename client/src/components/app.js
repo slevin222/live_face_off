@@ -11,7 +11,7 @@ const App = () => {
 
     return (
         <div className="mainApp">
-            <Route exact path="/sessionpage" component={TokBox} />
+            <Route path="/sessionpage" component={TokBox} />
             <Route path='/login' component={LoginPage} />
             <Route path='/register' component={signUp} />
             <Route path='/gamepage' component={GamePage} />
