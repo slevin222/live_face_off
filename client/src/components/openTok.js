@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { OTSession, OTPublisher, OTStreams, OTSubscriber } from 'opentok-react';
+import { Link } from 'react-router-dom';
 import '../assets/css/tokbox.css';
 import axios from 'axios';
 const OT = require('@opentok/client');
-const publisher = OT.initPublisher();
 
 class TokBox extends Component {
     constructor(props) {
@@ -16,6 +16,10 @@ class TokBox extends Component {
             sessionId: '',
             token: '',
         };
+
+        this.publisher = null;
+
+
         this.sessionEventHandlers = {
             sessionConnected: () => {
                 this.setState({ connection: 'Connected' });
@@ -40,6 +44,11 @@ class TokBox extends Component {
             },
             streamDestroyed: ({ reason }) => {
                 console.log(`Publisher stream destroyed because: ${reason}`);
+
+                const body = document.body;
+                const otRoot = document.querySelector(".OT_root");
+
+                body.removeChild(otRoot);
             },
         };
 
@@ -88,8 +97,16 @@ class TokBox extends Component {
             });
     }
     componentDidMount() {
-        console.log('CDM in progress!');
+        console.log('CDM in progress!', OT);
+
+        this.publisher = OT.initPublisher();
+
         this.getRequest();
+    }
+
+    componentWillUnmount() {
+        console.log('Open Tok Unmounting');
+        this.publisher.disconnect();
     }
 
     render() {
@@ -102,6 +119,7 @@ class TokBox extends Component {
         }
         return (
             <div>
+                <Link to="/login">Go to Login</Link>
                 <div>Session Status: {connection}</div>
                 {error ? (
                     <div className="error">
