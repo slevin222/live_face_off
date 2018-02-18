@@ -18,9 +18,9 @@ class SignUp extends Component {
             <div className="container">
                 <div className="row">
                     <form className="col s12" action="/users/register" method="post">
-                        <div className="row">
+                        <div style={{marginTop: '10px', marginBottom: '0'}} className="row">
                             <div className='col s6'>
-                                <h4>Sign Up f</h4>
+                                <h4>Sign Up</h4>
                             </div>
                         </div>
                         <div className="row">
