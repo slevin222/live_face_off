@@ -7,14 +7,14 @@ import SignUp from './signUp';
 import LoginPage from './loginPage';
 import LobbyPage from './lobbyPage';
 import GamePage from './gamePage';
-import TokBox from './openTok';
+import CamGame from './camGame';
 
 const App = () => {
     return (
         <div className="mainApp">
-            <Navbar/>
+            <Navbar />
             <Route exact path='/' component={Homepage} />
-            <Route path="/sessionpage" component={TokBox} />
+            <Route path="/camGame" component={CamGame} />
             <Route path='/gamepage' component={GamePage} />
             <Route path='/lobby' component={LobbyPage} />
             <Route path='/register' component={SignUp} />

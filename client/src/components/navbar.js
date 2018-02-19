@@ -5,9 +5,9 @@ export default () => {
     return (
         <nav className='blue-grey darken-3'>
             <div className="nav-wrapper ">
-                <Link style={{marginLeft: '10px'}} to='/' className='brand-logo'>Live Face Off</Link>
+                <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo'>Live Face Off</Link>
                 <ul className="right">
-                    <li><Link to='/sessionpage'>TEMP Sessionpage Link</Link></li>
+                    <li><Link to='/camGame'>WebCam Game</Link></li>
                     <li><Link to='/gamepage'>TEMP Gamepage Link</Link></li>
                     <li><Link to='/lobby'>Lobby</Link></li>
                     <li><Link to='/register'>Sign Up</Link></li>
