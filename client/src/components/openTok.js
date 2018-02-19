@@ -102,6 +102,9 @@ class TokBox extends Component {
         this.publisher = OT.initPublisher('webcamContainer',
             { width: 350, height: 250 });
 
+        //  example var publisher = OT.initPublisher("publisher-element-id",
+        //   {fitMode: "contain"});
+
         this.getRequest();
     }
 
