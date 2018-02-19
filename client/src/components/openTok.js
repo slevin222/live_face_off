@@ -45,10 +45,10 @@ class TokBox extends Component {
             streamDestroyed: ({ reason }) => {
                 console.log(`Publisher stream destroyed because: ${reason}`);
 
-                const body = document.body;
-                const otRoot = document.querySelector(".OT_root");
+                // const body = document.body;
+                // const otRoot = document.querySelector(".OT_root");
 
-                body.removeChild(otRoot);
+                // body.removeChild(otRoot);
             },
         };
 
@@ -101,6 +101,9 @@ class TokBox extends Component {
 
         this.publisher = OT.initPublisher('webcamContainer',
             { width: 350, height: 250 });
+
+        //  example var publisher = OT.initPublisher("publisher-element-id",
+        //   {fitMode: "contain"});
 
         this.getRequest();
     }

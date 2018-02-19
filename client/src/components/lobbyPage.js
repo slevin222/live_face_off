@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
 
+
 class LobbyPage extends Component {
     constructor(props){
         super(props);
@@ -39,7 +40,6 @@ class LobbyPage extends Component {
                 <div className="divider"></div>
                 <div className='row'>
                     <div className='col s12'>
-
                     </div>
                 </div>
                 <div className="divider"></div>

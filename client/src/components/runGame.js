@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-// import cardDeck from './cardDeck';
+import deck from './deck';
 
 class RunGame extends Component {
     constructor(props) {
         super(props);
-
+        console.log("runGame: ", deck);
         this.state = {
-            deckOfCards: [],
+            deckOfCards: deck,
+            currentPlayer: null,
+            players: [1, 2, 3, 4],
             player1Hand: [],
             player2Hand: [],
             player3Hand: [],
@@ -17,73 +19,39 @@ class RunGame extends Component {
     }
 
     componentDidMount() {
-        this.deck();
-    }
-
-    card(value, name, suit, image) {
-        this.value = value;
-        this.name = name;
-        this.suit = suit;
-        this.image = "images/" + this.name + this.suit + ".png";
-
+        this.shuffleDeck(deck);
     }
 
 
-    deck() {
-        this.names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-        this.suits = ['H', 'D', 'S', 'C'];
-        const cards = [];
-        for (let s = 0; s < this.suits.length; s++) {
-            for (let n = 0; n < this.names.length; n++) {
-                const allCards = new card(this.value = n + 1, this.names[n], this.suits[s])
-                if (allCards.value > 10) {
-                    allCards.value = 10;
-                }
-                cards.push(allCards);
-            }
-        }
-
+    shuffleDeck(deck) {
+        const shuffledDeck = deck.sort(function () { return 0.5 - Math.random(); });
         this.setState({
-            deckOfCards: cards
+            deckOfCards: shuffledDeck,
+            currentPlayer: null,
+            players: [1, 2, 3, 4],
+            player1Hand: [],
+            player2Hand: [],
+            player3Hand: [],
+            player4Hand: [],
+            discardPile: []
         });
 
     }
 
-    render() {
-        const { deckOfCards } = this.state;
-        console.log('cards :', deckOfCards);
-        return (
-            <div>
-                Hello{/* {cards} */}
-            </div>
-        )
+    deal(currentPlayer) {
+        // this.shuffleDeck(deck);
+        // currentPlayer.hand.push(this.deck.cards.shift());
+        this.state.player1Hand.push(this.state.deck.shift());
     }
 
-    // shuffleDeck() {
-    //     let counter = this.cards.length;
-    //     while (counter > 0) {
-    //         let index = Math.floor(Math.random() * counter);
-    //         counter--;
-    //         let temp = this.cards[counter];
-    //         this.cards[counter] = this.cards[index];
-    //         this.cards[index] = temp;
-    //     }
-    //     return this.cards;
-    // }
-
-    // deal(currentPlayer) {
-    //     this.shuffleDeck();
-    //     currentPlayer.hand.push(this.deck.cards.shift());
-    // }
-
-    // dealInitialHand() {
-    //     let cardCounter = 5;
-    //     for (let cardCountIndex = 0; cardCountIndex < cardCounter; cardCountIndex++) {
-    //         for (let playerIndex = 0; playerIndex < this.players.length; playerIndex++) {
-    //             this.deal(this.players[playerIndex]);
-    //         }
-    //     }
-    // }
+    dealInitialHand() {
+        let cardCounter = 5;
+        for (let cardCountIndex = 0; cardCountIndex < cardCounter; cardCountIndex++) {
+            for (let playersIndex = 0; playersIndex < this.state.players.length; playerIndex++) {
+                this.deal(this.state.players[playerIndex]);
+            }
+        }
+    }
 
 
     // runGame() {
@@ -180,6 +148,15 @@ class RunGame extends Component {
     //     console.log('Discard cards by using game.discardCards([array of indexes]). Pass in the object of each card you want to discard. For example, to discard the' +
     //         ' first two cards it would look like: game.discardCards([0,1])');
     // }
+    render() {
+        const { deckOfCards } = this.state;
+        console.log('cards :', deckOfCards);
+        return (
+            <div>
+                Hello{/* {cards} */}
+            </div>
+        )
+    }
 }
 
 export default RunGame;
