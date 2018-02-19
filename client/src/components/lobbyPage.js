@@ -4,12 +4,39 @@ import '../assets/css/lobbyPage.css'
 class LobbyPage extends Component {
     constructor(props){
         super(props);
+
+        this.state = {
+            lobbies: [],
+            gameType: '',
+            players: '',
+            room: ''
+        }
+    }
+
+    componentWillMount(){
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+
+                let dropdowns = document.getElementsByClassName("dropdownContent");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    }
+
+    dropdownFunc(){
+        document.getElementById("gameTypeDropdown").classList.toggle("show");
     }
 
     render(){
         return (
             <div className='container'>
                 <h5>Main Lobby</h5>
+                <div className="divider"></div>
                 <div className='row'>
                     <div className='col s12'>
 
@@ -21,13 +48,31 @@ class LobbyPage extends Component {
                         <h5 className='center-align'>Create a Game</h5>
                         <div className='row'>
                             <div className='col s3'>
-                                <p>test</p>
+                                <div className="dropdown">
+                                    <button onClick={this.dropdownFunc} className="btn dropbtn">Game Type</button>
+                                    <div id="gameTypeDropdown" className="dropdownContent">
+                                        <span>Webcam</span>
+                                        <span>Deal 52</span>
+                                    </div>
+                                </div>
                             </div>
                             <div className='col s3'>
-                                <p>test</p>
+                                <div className="dropdown">
+                                    <button onClick={this.dropdownFunc} className="btn dropbtn">Players</button>
+                                    <div id="playersDropdown" className="dropdownContent">
+                                        <span>Webcam</span>
+                                        <span>Deal 52</span>
+                                    </div>
+                                </div>
                             </div>
                             <div className='col s3'>
-                                <p>test</p>
+                                <div className="dropdown">
+                                    <button onClick={this.dropdownFunc} className="btn dropbtn">Room</button>
+                                    <div id="roomDropdown" className="dropdownContent">
+                                        <span>Webcam</span>
+                                        <span>Deal 52</span>
+                                    </div>
+                                </div>
                             </div>
                             <div className='col s3'>
                                 <button type='button' className='btn blue-grey darken-2'>Start</button>
@@ -36,6 +81,7 @@ class LobbyPage extends Component {
                     </div>
                 </div>
                 <div className="divider"></div>
+                {/*This table would be a separate component*/}
                 <div className='row'>
                     <div className='col s8'>
                         <h5 className='center-align'>Lobbies</h5>
