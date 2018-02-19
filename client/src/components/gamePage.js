@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import GameBoard from './gameBoard';
 import StatsArea from './statsArea';
 import '../assets/css/gamePage.css';
-import TokBox from './openTok';
+// import TokBox from './openTok';
+import RunGame from './runGame'
 
 
 
@@ -15,11 +16,12 @@ class GamePage extends Component {
         return (
             <div className="fullPage">
                 <div className="row col s12 webcams" id="webcamContainer">
-                    <TokBox />
+                    {/* <TokBox /> */}
                 </div>
                 <div className="row col s12 gameCards">
                     <StatsArea />
-                    <GameBoard />
+                    {/* <GameBoard /> */}
+                    <RunGame />
                 </div>
             </div>
         )

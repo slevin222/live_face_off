@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
+
 class LobbyPage extends Component {
-    render(){
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
         return (
-            <div className='container'>
+            <div id='container'>
                 <h1>Main Lobby</h1>
                 <div className='row'>
                     <div className='col s12'>
