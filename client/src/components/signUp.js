@@ -1,51 +1,91 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/signUpStyle.css';
+import DisplayMessages from './errorMessage';
 import axios from 'axios';
+
 
 class SignUp extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            form: {
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: '',
+                password2: '',
+            },
+            messages: null
+        }
+        this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    // postRequest() {
-    //     axios.post('http://localhost:5000/users/register')
-    //         .then(res => {
-    //             console.log('The response from the registration: ', resp);
-    //         });
-    // }
+    handleSubmit(event) {
+        console.log("We're handling the submit");
+        const { form } = this.state;
+        event.preventDefault();
+        axios.post('/users/register', form)
+            .then(res => {
+                console.log("this is the response", res);
+                debugger
+                if (res.data.hasOwnProperty('pathname')) {
+                    const { origin } = location;
+                    location.href = `${origin}${res.data.pathname}`;
+                }
+
+                if (res.data.hasOwnProperty('messages')) {
+                    this.setState({
+                        messages: res.data.messages
+                    });
+                }
+            });
+    }
+    handleInput(event) {
+        const { value, name } = event.target;
+        const { form } = this.state;
+        form[name] = value;
+        this.setState({
+          form: { ...form }
+        });
+    }
     render() {
+        const { displayMessages, handleInput, handleSubmit } = this;
+        const {firstName, lastName, email, password, password2, messages } = this.state;
+
         return (
             <div className="container">
+                <DisplayMessages messages={ messages }/>
                 <div className="row">
-                    <form className="col s12" action="/users/register" method="post">
-                        <div style={{marginTop: '10px', marginBottom: '0'}} className="row">
+                    <form className="col s12 center center-align" onSubmit={ handleSubmit }>
+                        <div style={{ marginTop: '10px', marginBottom: '0' }} className="row">
                             <div className='col s6'>
                                 <h4>Sign Up</h4>
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="signUpUsername" type="text" name="firstName" className="validate" placeholder="First Name" required />
+                                <input id="signUpFirstName" type="text" name="firstName" className="validate" placeholder="First Name" onChange={ handleInput } value={firstName} required />
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="signUpUsername" type="text" name="lastName" className="validate" placeholder="Last Name" required />
+                                <input id="signUpLastName" type="text" name="lastName" className="validate" placeholder="Last Name" onChange={ handleInput } value={lastName} required />
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="signUpEmail" type="email" name="email" placeholder="Email" className="validate" required />
+                                <input id="signUpEmail" type="email" name="email" placeholder="Email" className="validate" onChange={ handleInput }  value={email} required />
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="signUpPassword" type="password" name="password" placeholder="Password" className="validate" required />
+                                <input id="signUpPassword" type="password" name="password" placeholder="Password" className="validate" onChange={ handleInput } value={password} required />
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="signUpPassword" type="password" name="password2" placeholder="Confirm Password" className="validate" required />
+                                <input id="signUpPassword2" type="password" name="password2" placeholder="Confirm Password" className="validate" onChange={ handleInput } value={password2} required />
                             </div>
                         </div>
                         <div className="row">
@@ -61,4 +101,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp
+export default SignUp;

@@ -5,7 +5,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
-// const tokenGenerator = require('./helpers/token_generator');
+const exphbs = require('express-handlebars');
+const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const app = express();
@@ -43,11 +44,20 @@ mongoose.connect(keys.mongoURI)
     })
     .catch(err => console.log(err));
 
+// Handlebars Middleware
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main'
+}));
+app.set('view engine', 'handlebars');
+
 //Body Parser Middleware
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
+
+//FLash Middleware
+app.use(flash());
 
 //Cross Browser compatiability 
 app.use(cors());
@@ -65,6 +75,9 @@ app.use(session({
 
 //Set global vars
 app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
     res.locals.user = req.user || null;
     next();
 })
@@ -86,21 +99,10 @@ io.on('connection', function (socket) {
     });
 });
 
-// //Token Generator Route
-// app.use('/gamepage', function (req, res) {
-//     const identity = req.query.identity || 'identity';
-//     const room = req.query.room || 'cal';
-//     console.log(identity);
-//     console.log(room);
-//     console.log(tokenGenerator(identity, room));
-//     res.send(tokenGenerator(identity, room));
-// });
-
 //Route for all static files from the client side
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'client', 'dist', 'index.html'));
 });
-
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
