@@ -27,7 +27,7 @@ class LoginPage extends Component {
                             <div className='inputFieldCentering'>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <input type="text" className="validate" name="email" placeholder="Email" />
+                                    <input type="text" className="validate" name="email" placeholder="Email" />
                                     </div>
                                 </div>
                                 <div className="row">

@@ -23,9 +23,9 @@ router.post('/register', (req, res) => {
     })
         .then(user => {
             if (user) {
-                console.log(user);
-                console.log('Email in use');
-                res.redirect('/register');
+                res.json({
+                    messages: 'Not a valid email, please try a different one!'
+                });
             } else {
                 const newUser = new User({
                     firstName: req.body.firstName,
@@ -39,7 +39,7 @@ router.post('/register', (req, res) => {
                         newUser.save()
                             .then(user => {
                                 console.log('You may now login!')
-                                res.redirect('/login');
+                                res.json({pathname: '/login'});
                             })
                             .catch(err => {
                                 console.log(err);
