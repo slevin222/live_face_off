@@ -6,6 +6,7 @@ class CamGame extends Component {
     constructor(props) {
         super(props)
     }
+
     render() {
         return (
             <div className="webpage row s12">

@@ -153,7 +153,7 @@ class RunGame extends Component {
         console.log('cards :', deckOfCards);
         return (
             <div>
-                Hello{/* {cards} */}
+                {/* {cards} */}
             </div>
         )
     }

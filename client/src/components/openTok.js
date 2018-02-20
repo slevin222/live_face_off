@@ -3,12 +3,13 @@ import { OTSession, OTPublisher, OTStreams, OTSubscriber } from 'opentok-react';
 import { Link } from 'react-router-dom';
 import '../assets/css/tokbox.css';
 import axios from 'axios';
+import GamePage from './gamePage';
 const OT = require('@opentok/client');
 
 class TokBox extends Component {
     constructor(props) {
         super(props);
-        console.log("opentok : ", props)
+        console.log("opentok : ", props.data)
         this.state = {
             error: null,
             connection: 'Connecting',
@@ -16,8 +17,9 @@ class TokBox extends Component {
             apiKey: '',
             sessionId: '',
             token: '',
-            camSize: { width: "73vw", height: "84vh" },
+            camSize: (props.data === "deal52") ? { width: "20vw", height: "30vh" } : { width: "73vw", height: "84vh" }
         };
+
 
         this.publisher = null;
 
@@ -98,6 +100,8 @@ class TokBox extends Component {
                 });
             });
     }
+
+
     componentDidMount() {
         const { camSize } = this.state;
         console.log('CDM in progress!', OT);
