@@ -5,8 +5,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
-const exphbs = require('express-handlebars');
-const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const app = express();
@@ -44,20 +42,12 @@ mongoose.connect(keys.mongoURI)
     })
     .catch(err => console.log(err));
 
-// Handlebars Middleware
-app.engine('handlebars', exphbs({
-    defaultLayout: 'main'
-}));
-app.set('view engine', 'handlebars');
-
 //Body Parser Middleware
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
 
-//FLash Middleware
-app.use(flash());
 
 //Cross Browser compatiability 
 app.use(cors());

@@ -28,7 +28,6 @@ class SignUp extends Component {
         axios.post('/users/register', form)
             .then(res => {
                 console.log("this is the response", res);
-                debugger
                 if (res.data.hasOwnProperty('pathname')) {
                     const { origin } = location;
                     location.href = `${origin}${res.data.pathname}`;
@@ -50,7 +49,7 @@ class SignUp extends Component {
         });
     }
     render() {
-        const { displayMessages, handleInput, handleSubmit } = this;
+        const {handleInput, handleSubmit } = this;
         const {firstName, lastName, email, password, password2, messages } = this.state;
 
         return (
@@ -65,27 +64,27 @@ class SignUp extends Component {
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="signUpFirstName" type="text" name="firstName" className="validate" placeholder="First Name" onChange={ handleInput } value={firstName} required />
+                            <i className="material-icons prefix">mood</i><input id="signUpFirstName" type="text" name="firstName" className="validate" placeholder="First Name" onChange={ handleInput } value={firstName} required />
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="signUpLastName" type="text" name="lastName" className="validate" placeholder="Last Name" onChange={ handleInput } value={lastName} required />
+                            <i className="material-icons prefix">mood</i><input id="signUpLastName" type="text" name="lastName" className="validate" placeholder="Last Name" onChange={ handleInput } value={lastName} required />
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="signUpEmail" type="email" name="email" placeholder="Email" className="validate" onChange={ handleInput }  value={email} required />
+                            <i className="material-icons prefix">mail_outline</i><input id="signUpEmail" type="email" name="email" placeholder="Email" className="validate" onChange={ handleInput }  value={email} required />
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="signUpPassword" type="password" name="password" placeholder="Password" className="validate" onChange={ handleInput } value={password} required />
+                            <i className="material-icons prefix">work</i><input id="signUpPassword" type="password" name="password" placeholder="Password" className="validate" onChange={ handleInput } value={password} required />
                             </div>
                         </div>
                         <div className="row">
                             <div className="input-field col s6">
-                                <input id="signUpPassword2" type="password" name="password2" placeholder="Confirm Password" className="validate" onChange={ handleInput } value={password2} required />
+                            <i className="material-icons prefix">work</i><input id="signUpPassword2" type="password" name="password2" placeholder="Confirm Password" className="validate" onChange={ handleInput } value={password2} required />
                             </div>
                         </div>
                         <div className="row">

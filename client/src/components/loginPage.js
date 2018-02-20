@@ -1,21 +1,61 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/homePageStyle.css';
+import DisplayMessages from './errorMessage';
 import axios from 'axios';
 
 class LoginPage extends Component {
     constructor(props) {
         super(props);
-        this.getRequest = this.postRequest.bind(this);
+        this.state = {
+            form: {
+                email: '',
+                password: ''
+            },
+            messages: null
+        }
+        this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.getRequest = this.postRequest.bind(this);
     }
-    postRequest() {
-        axios.post('/users/login').then(resp => {
-            console.log('Get Resp:', resp);
+    // postRequest() {
+    //     axios.post('/users/login').then(resp => {
+    //         console.log('Get Resp:', resp);
+    //     });
+    // }
+    handleSubmit(event) {
+        console.log("We're handling the submit");
+        const { form } = this.state;
+        event.preventDefault();
+        axios.post('/users/login', form)
+            .then(res => {
+                console.log("this is the response", res);
+                if (res.data.hasOwnProperty('pathname')) {
+                    const { origin } = location;
+                    location.href = `${origin}${res.data.pathname}`;
+                }
+
+                if (res.data.hasOwnProperty('messages')) {
+                    this.setState({
+                        messages: res.data.messages
+                    });
+                }
+            });
+    }
+    handleInput(event) {
+        const { value, name } = event.target;
+        const { form } = this.state;
+        form[name] = value;
+        this.setState({
+          form: { ...form }
         });
     }
     render() {
+        const {handleInput, handleSubmit } = this;
+        const {email, password, messages } = this.state;
         return (
             <div className='container'>
+                <DisplayMessages messages={ messages }/>
                 <div className='signInArea'>
                     <div className='row'>
                         <div className="col s12 homeTitle center-align">
@@ -23,16 +63,16 @@ class LoginPage extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <form className="col s12 center-align" action="/users/login" method="post">
+                        <form className="col s12 center-align" onSubmit={ handleSubmit }>
                             <div className='inputFieldCentering'>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                    <input type="text" className="validate" name="email" placeholder="Email" />
+                                    <i className="material-icons prefix">mail_outline</i><input type="text" className="validate" name="email" placeholder="Email" onChange={ handleInput } value={email} />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <input id="password" type="password" className="validate" name="password" placeholder="Password" />
+                                    <i className="material-icons prefix">work</i><input id="password" type="password" className="validate" name="password" placeholder="Password" onChange={ handleInput } value={password} />
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +80,7 @@ class LoginPage extends Component {
                             <div className="row">
                                 <div className='buttonArea col s12'>
                                     <Link className='logInBtn waves-effect waves-light btn' to='/register'>Register</Link>
-                                    <button onClick={this.postRequest} className='logInBtn waves-effect waves-light btn'>Log In</button>
+                                    <button type="submit" className='logInBtn waves-effect waves-light btn'>Log In</button>
                                 </div>
                             </div>
 
