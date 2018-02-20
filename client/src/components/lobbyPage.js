@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
 
-
 class LobbyPage extends Component {
     constructor(props){
         super(props);
@@ -14,23 +13,8 @@ class LobbyPage extends Component {
         }
     }
 
-    componentWillMount(){
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-
-                let dropdowns = document.getElementsByClassName("dropdownContent");
-                for (let i = 0; i < dropdowns.length; i++) {
-                    let openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    }
-
-    dropdownFunc(){
-        document.getElementById("gameTypeDropdown").classList.toggle("show");
+    componentDidMount(){
+        $('select').material_select();
     }
 
     render(){
@@ -46,44 +30,51 @@ class LobbyPage extends Component {
                 <div className='row'>
                     <div className='col s12'>
                         <h5 className='center-align'>Create a Game</h5>
-                        <div className='row'>
+
+                        <form className='row'>
                             <div className='col s3'>
-                                <div className="dropdown">
-                                    <button onClick={this.dropdownFunc} className="btn dropbtn">Game Type</button>
-                                    <div id="gameTypeDropdown" className="dropdownContent">
-                                        <span>Webcam</span>
-                                        <span>Deal 52</span>
-                                    </div>
+                                <div className="input-field col s10">
+                                    <select>
+                                        <option value="" disabled selected>Game Type</option>
+                                        <option value="1">Webcam</option>
+                                        <option value="2">Deal 52</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className='col s3'>
-                                <div className="dropdown">
-                                    <button onClick={this.dropdownFunc} className="btn dropbtn">Players</button>
-                                    <div id="playersDropdown" className="dropdownContent">
-                                        <span>Webcam</span>
-                                        <span>Deal 52</span>
-                                    </div>
+                                <div className="input-field col s10">
+                                    <select>
+                                        <option value="" disabled selected>Players</option>
+                                        <option value="1">1 Player</option>
+                                        <option value="2">2 Players</option>
+                                        <option value="3">3 Players</option>
+                                        <option value="3">4 Players</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className='col s3'>
-                                <div className="dropdown">
-                                    <button onClick={this.dropdownFunc} className="btn dropbtn">Room</button>
-                                    <div id="roomDropdown" className="dropdownContent">
-                                        <span>Webcam</span>
-                                        <span>Deal 52</span>
-                                    </div>
+                                <div className="input-field col s10">
+                                    <select>
+                                        <option value="" disabled selected>Select Room</option>
+                                        <option value="1">Room 1</option>
+                                        <option value="2">Room 2</option>
+                                        <option value="3">Room 3</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className='col s3'>
-                                <button type='button' className='btn blue-grey darken-2'>Start</button>
+                                <div className='col s10'>
+                                    <button className='btn blue-grey darken-2' style={{ marginTop: '20px' }}>Start</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
                 <div className="divider"></div>
                 {/*This table would be a separate component*/}
                 <div className='row'>
-                    <div className='col s8'>
+                    <div className='col s8 offset-s2'>
                         <h5 className='center-align'>Lobbies</h5>
                         <table className='highlight bordered'>
                             <thead>
