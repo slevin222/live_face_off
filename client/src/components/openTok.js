@@ -8,6 +8,7 @@ const OT = require('@opentok/client');
 class TokBox extends Component {
     constructor(props) {
         super(props);
+        console.log("opentok : ", props)
         this.state = {
             error: null,
             connection: 'Connecting',
@@ -15,6 +16,7 @@ class TokBox extends Component {
             apiKey: '',
             sessionId: '',
             token: '',
+            camSize: { width: "73vw", height: "84vh" },
         };
 
         this.publisher = null;
@@ -97,10 +99,10 @@ class TokBox extends Component {
             });
     }
     componentDidMount() {
+        const { camSize } = this.state;
         console.log('CDM in progress!', OT);
 
-        this.publisher = OT.initPublisher('webcamContainer',
-            { width: 350, height: 250 });
+        this.publisher = OT.initPublisher('webcamContainer', camSize);
 
         //  example var publisher = OT.initPublisher("publisher-element-id",
         //   {fitMode: "contain"});
