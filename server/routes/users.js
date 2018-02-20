@@ -9,12 +9,19 @@ require('../models/Users');
 const User = mongoose.model('users');
 
 // Login Form POST
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/gamepage',
-        failureRedirect: '/login',
+router.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (err) { 
+            return next(err); 
+        };
+        if (!user) { 
+           return res.json({messages: 'Not a valid combination, please try a different one!'}); 
+        };
+        if(user) {
+            res.json({pathname: '/lobby'});
+        }
     })(req, res, next);
-});
+  });
 
 // Register Form POST
 router.post('/register', (req, res) => {
