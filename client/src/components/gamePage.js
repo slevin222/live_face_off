@@ -13,10 +13,11 @@ class GamePage extends Component {
         super(props)
     }
     render() {
+        const game = "deal52";
         return (
             <div className="fullPage">
                 <div className="row col s12 webcams" id="webcamContainer">
-                    <TokBox />
+                    <TokBox data={game} />
                 </div>
                 <div className="row col s12 gameCards">
                     <Chat />

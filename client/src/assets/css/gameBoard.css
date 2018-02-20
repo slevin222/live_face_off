@@ -24,8 +24,8 @@ body{
 } 
 
 .playerCard0{
-    height: 65%;
-    width: 18.9%;
+    height: 60%;
+    width: 17%;
     display: inline-flex;
     flex-wrap: wrap;
     cursor: pointer;
@@ -39,8 +39,8 @@ body{
 .playerCard2,
 .playerCard3,
 .playerCard4{
-    height: 65%;
-    width: 18.9%;
+    height: 60%;
+    width: 17%;
     display: inline-flex;
     flex-wrap: wrap;
     cursor: pointer;
