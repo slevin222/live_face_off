@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
 
 class LobbyPage extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -13,11 +13,11 @@ class LobbyPage extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         $('select').material_select();
     }
 
-    render(){
+    render() {
         return (
             <div className='container'>
                 <h5>Main Lobby</h5>
@@ -36,8 +36,8 @@ class LobbyPage extends Component {
                                 <div className="input-field col s10">
                                     <select>
                                         <option value="" disabled selected>Game Type</option>
-                                        <option value="1">Webcam</option>
-                                        <option value="2">Deal 52</option>
+                                        <option name="webcam" value="1">Webcam</option>
+                                        <option value="deal52">Deal 52</option>
                                     </select>
                                 </div>
                             </div>
@@ -45,10 +45,10 @@ class LobbyPage extends Component {
                                 <div className="input-field col s10">
                                     <select>
                                         <option value="" disabled selected>Players</option>
-                                        <option value="1">1 Player</option>
-                                        <option value="2">2 Players</option>
-                                        <option value="3">3 Players</option>
-                                        <option value="3">4 Players</option>
+                                        <option name="player1" value="1">1 Player</option>
+                                        <option name="player2" value="2">2 Players</option>
+                                        <option name="player3" value="3">3 Players</option>
+                                        <option name="player4" value="3">4 Players</option>
                                     </select>
                                 </div>
                             </div>
@@ -56,9 +56,16 @@ class LobbyPage extends Component {
                                 <div className="input-field col s10">
                                     <select>
                                         <option value="" disabled selected>Select Room</option>
-                                        <option value="1">Room 1</option>
-                                        <option value="2">Room 2</option>
-                                        <option value="3">Room 3</option>
+                                        <option name="room1" value="1">Room 1</option>
+                                        <option name="room2" value="2">Room 2</option>
+                                        <option name="room3" value="3">Room 3</option>
+                                        <option name="room4" value="4">Room 4</option>
+                                        <option name="room5" value="5">Room 5</option>
+                                        <option name="room6" value="6">Room 6</option>
+                                        <option name="room7" value="7">Room 7</option>
+                                        <option name="room8" value="8">Room 8</option>
+                                        <option name="room9" value="9">Room 9</option>
+                                        <option name="room10" value="10">Room 10</option>
                                     </select>
                                 </div>
                             </div>

@@ -14,6 +14,12 @@ const io = require('socket.io')(server);
 //Path middleware
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
+//Load Helpers
+const {
+    ensureAuthenticated,
+    ensureGuest
+} = require('./helpers/auth');
+
 //Load Models
 require('./models/GoogleUsers');
 require('./models/Users');
@@ -65,9 +71,6 @@ app.use(session({
 
 //Set global vars
 app.use((req, res, next) => {
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
     res.locals.user = req.user || null;
     next();
 })
