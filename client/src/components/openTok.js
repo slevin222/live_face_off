@@ -9,8 +9,8 @@ const OT = require('@opentok/client');
 class TokBox extends Component {
     constructor(props) {
         super(props);
-        console.log("opentok : ", props.data)
         this.state = {
+            room: '',
             error: null,
             connection: 'Connecting',
             publishVideo: true,
@@ -89,18 +89,28 @@ class TokBox extends Component {
         this.setState({ publishVideo: !this.state.publishVideo });
     };
 
-    getRequest() {
-        axios.get('/tokbox/room/room1')
-            .then(res => {
-                console.log(res.data);
-                this.setState({
-                    apiKey: res.data.apiKey,
-                    sessionId: res.data.sessionId,
-                    token: res.data.token
-                });
-            });
-    }
+    // getRequest() {
+    //     axios.post('/tokbox/room/1')
+    //         .then(res => {
+    //             console.log(res.data);
+    //             this.setState({
+    //                 apiKey: res.data.apiKey,
+    //                 sessionId: res.data.sessionId,
+    //                 token: res.data.token
+    //             });
+    //         });
+    // }
 
+    componentWillMount() {
+        let sessionInfo = sessionStorage.getItem('gameSession');
+        sessionInfo = JSON.parse(sessionInfo);
+        this.setState({
+            apiKey: sessionInfo.apiKey,
+            sessionId: sessionInfo.sessionId,
+            token: sessionInfo.token
+        });
+        console.log('sessionStorage item: ', sessionInfo);
+    }
 
     componentDidMount() {
         const { camSize } = this.state;
@@ -111,7 +121,7 @@ class TokBox extends Component {
         //  example var publisher = OT.initPublisher("publisher-element-id",
         //   {fitMode: "contain"});
 
-        this.getRequest();
+        // this.getRequest();
     }
 
     componentWillUnmount() {
