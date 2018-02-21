@@ -18,18 +18,27 @@ class LobbyPage extends Component {
         this.lobbyData = [
             {
                 'gameType': 'Deal 52',
+                'currentPlayers': '4',
                 'maxPlayers': '4',
                 'room': '1'
             },
             {
                 'gameType': 'Deal 52',
-                'maxPlayers': '2',
+                'currentPlayers': '3',
+                'maxPlayers': '4',
                 'room': '2'
             },
             {
                 'gameType': 'Webcam',
+                'currentPlayers': '1',
                 'maxPlayers': '2',
-                'room': '2'
+                'room': '3'
+            },
+            {
+                'gameType': 'Webcam',
+                'currentPlayers': '1',
+                'maxPlayers': '2',
+                'room': '3'
             },
         ]
 
