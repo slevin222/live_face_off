@@ -56,7 +56,7 @@ class LobbyPage extends Component {
                 'room': room
             }],
         });
-        const data = { gameType, room, players };
+        const data = { gameType, room, maxPlayers };
         console.log('Data sent to server: ', data);
         axios({
             method: 'post',
@@ -64,7 +64,7 @@ class LobbyPage extends Component {
             data: {
                 gameType,
                 room,
-                players
+                maxPlayers
             }
         }).then(res => {
             console.log("this is the response", res);
@@ -170,7 +170,7 @@ class LobbyPage extends Component {
                     </div>
                 </div>
                 <div className='divider'></div>
-                <LobbyList data={lobbies}/>
+                <LobbyList data={lobbies} />
             </div>
         )
     }
