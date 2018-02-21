@@ -16,15 +16,8 @@ class LoginPage extends Component {
         }
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.getRequest = this.postRequest.bind(this);
     }
-    // postRequest() {
-    //     axios.post('/users/login').then(resp => {
-    //         console.log('Get Resp:', resp);
-    //     });
-    // }
     handleSubmit(event) {
-        console.log("We're handling the submit");
         const { form } = this.state;
         event.preventDefault();
         axios.post('/users/login', form)
@@ -47,15 +40,15 @@ class LoginPage extends Component {
         const { form } = this.state;
         form[name] = value;
         this.setState({
-          form: { ...form }
+            form: { ...form }
         });
     }
     render() {
-        const {handleInput, handleSubmit } = this;
-        const {email, password, messages } = this.state;
+        const { handleInput, handleSubmit } = this;
+        const { email, password, messages } = this.state;
         return (
             <div className='container'>
-                <DisplayMessages messages={ messages }/>
+                <DisplayMessages messages={messages} />
                 <div className='signInArea'>
                     <div className='row'>
                         <div className="col s12 homeTitle center-align">
@@ -63,16 +56,16 @@ class LoginPage extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <form className="col s12 center-align" onSubmit={ handleSubmit }>
+                        <form className="col s12 center-align" onSubmit={handleSubmit}>
                             <div className='inputFieldCentering'>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                    <i className="material-icons prefix">mail_outline</i><input type="text" className="validate" name="email" placeholder="Email" onChange={ handleInput } value={email} />
+                                        <i className="material-icons prefix">mail_outline</i><input type="text" className="validate" name="email" placeholder="Email" onChange={handleInput} value={email} />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                    <i className="material-icons prefix">work</i><input id="password" type="password" className="validate" name="password" placeholder="Password" onChange={ handleInput } value={password} />
+                                        <i className="material-icons prefix">work</i><input id="password" type="password" className="validate" name="password" placeholder="Password" onChange={handleInput} value={password} />
                                     </div>
                                 </div>
                             </div>
@@ -87,8 +80,8 @@ class LoginPage extends Component {
                             <div className="row">
                                 <div className='buttonAreaTwo col s12 center-align'>
                                     <p className='center-align'>----------------------- or login with -----------------------</p>
-                                    <a className="facebookBtn waves-effect waves-light btn light-blue darken-1" href="/auth/facebook">Facebook</a>
-                                    <a className="googleBtn waves-effect waves-light btn deep-orange darken-1" href="/auth/google">Google</a>
+                                    <a className="facebookBtn waves-effect waves-light btn light-blue darken-3" href="/auth/facebook">Facebook</a>
+                                    <a className="googleBtn waves-effect waves-light btn deep-orange darken-2" href="/auth/google">Google</a>
                                 </div>
                             </div>
                         </form>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TokBox from './openTok';
 import Chat from './chat';
+import LobbyPage from './lobbyPage';
 
 class CamGame extends Component {
     constructor(props) {

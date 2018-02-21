@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
+import axios from 'axios';
 
 class LobbyPage extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -17,54 +18,65 @@ class LobbyPage extends Component {
     }
 
     handleSubmit(event) {
-        console.log('Submitting form', this.state);
-
         event.preventDefault();
-        const { lobbies, gameType, players, room} = this.state;
-
+        const { lobbies, gameType, players, room } = this.state;
         this.setState({
             lobbies: [...lobbies, {
                 'gameType': gameType,
                 'players': players,
                 'room': room
             }],
-            gameType: '',
-            players: '',
-            room: ''
+        });
+        const data = { gameType, room };
+        console.log('Data sent to server: ', data);
+        axios({
+            method: 'post',
+            url: `/tokbox/room/${room}`,
+            data: {
+                gameType,
+                room
+            }
+        }).then(res => {
+            console.log("this is the response", res);
+            const dataFromServer = JSON.stringify(res.data);
+            sessionStorage.setItem('gameSession', dataFromServer);
+            console.log(JSON.parse(dataFromServer));
+            if (res.data.hasOwnProperty('pathname')) {
+                const { origin } = location;
+                location.href = `${origin}${res.data.pathname}`;
+            }
         });
     }
 
-    handleChange(event){
+    handleChange(event) {
         const { name, value } = event.target;
-
         this.setState({
             [name]: value
         })
     }
 
-    componentDidMount(){
+    componentDidMount() {
         $('select').material_select();
-        $('select').on('change', this.handleChange)
+        $('select').on('change', this.handleChange);
     }
 
-    componentWillUnmount(){
-        $('select').off('change', this.handleChange)
+    componentWillUnmount() {
+        $('select').off('change', this.handleChange);
     }
 
-    render(){
-        const { lobbies, gameType, players, room} = this.state;
-
+    render() {
+        const { lobbies, gameType, players, room } = this.state;
         return (
             <div className='container'>
                 <div className='divider'></div>
-                <div className='row' style={{marginTop: '20px'}}>
+                <div className='row' style={{ marginTop: '20px' }}>
                     <div className='col s12'>
                         <ul className='collection'>
                             <li className='collection-item avatar'>
                                 <i className='material-icons circle green'>insert_chart</i>
-                                <h5 style={{marginTop: 0}}><span>Elton John</span></h5>
-                                <p>Team Name: blue<br/>
-                                    Last Login: Yesterday<br/>
+                                <h5 style={{ marginTop: 0 }}><span>Elton John</span></h5>
+                                <p>Team Name: blue<br />
+                                    Last Login: Yesterday<br />
                                     Games Played: 1
                                 </p>
                             </li>
@@ -104,13 +116,19 @@ class LobbyPage extends Component {
                                         <option value='1'>Room 1</option>
                                         <option value='2'>Room 2</option>
                                         <option value='3'>Room 3</option>
-                                        <option value='4'>Room 3</option>
+                                        <option value='4'>Room 4</option>
+                                        <option value='5'>Room 5</option>
+                                        <option value='6'>Room 6</option>
+                                        <option value='7'>Room 7</option>
+                                        <option value='8'>Room 8</option>
+                                        <option value='9'>Room 9</option>
+                                        <option value='10'>Room 10</option>
                                     </select>
                                 </div>
                             </div>
                             <div className='col s3'>
                                 <div className='col s8 offset-s2'>
-                                    <button className='btn blue-grey darken-2' style={{ marginTop: '23px' }}>Start</button>
+                                    <button className='btn blue-grey darken-2' type="submit" style={{ marginTop: '23px' }}>Start</button>
                                 </div>
                             </div>
                         </form>

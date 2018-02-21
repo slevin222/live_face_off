@@ -40,13 +40,20 @@ router.get('/session', function (req, res) {
 /**
  * GET /room/:name
  */
-router.get('/room/:name', function (req, res) {
-    const roomName = req.params.name;
-    console.log('attempting to create a session associated with the room: ' + roomName);
+router.post('/room/:id', function (req, res) {
+    let { gameType } = req.body
+    console.log(req.params.id);
+    let room = req.params.id;
+    if (gameType === 'deal52') {
+        gameType = 'gamepage';
+    } else if (gameType === 'webcam') {
+        gameType = 'camGame';
+    }
+    console.log('attempting to create a session associated with the room: ' + room);
 
     // if the room name is associated with a session ID, fetch that
-    if (roomToSessionIdDictionary[roomName]) {
-        const sessionId = roomToSessionIdDictionary[roomName];
+    if (roomToSessionIdDictionary[room]) {
+        const sessionId = roomToSessionIdDictionary[room];
 
         // generate token
         const token = opentok.generateToken(sessionId);
@@ -54,7 +61,8 @@ router.get('/room/:name', function (req, res) {
         res.send({
             apiKey: apiKey,
             sessionId: sessionId,
-            token: token
+            token: token,
+            pathname: `/${gameType}`
         });
     }
     // if this is the first time the room is being accessed, create a new session ID
@@ -70,7 +78,8 @@ router.get('/room/:name', function (req, res) {
             // IMPORTANT: Because this is stored in memory, restarting your server will reset these values
             // if you want to store a room-to-session association in your production application
             // you should use a more persistent storage for them
-            roomToSessionIdDictionary[roomName] = session.sessionId;
+            roomToSessionIdDictionary[room] = session.sessionId;
+            console.log('Session as it is stored in the dictionary: ', roomToSessionIdDictionary[room]);
 
             // generate token
             const token = opentok.generateToken(session.sessionId);
@@ -78,7 +87,8 @@ router.get('/room/:name', function (req, res) {
             res.send({
                 apiKey: apiKey,
                 sessionId: session.sessionId,
-                token: token
+                token: token,
+                pathname: `/${gameType}`
             });
         });
     }

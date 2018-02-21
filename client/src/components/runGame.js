@@ -4,7 +4,6 @@ import deck from './deck';
 class RunGame extends Component {
     constructor(props) {
         super(props);
-        console.log("runGame: ", deck);
         this.state = {
             deckOfCards: deck,
             currentPlayer: null,
@@ -150,7 +149,6 @@ class RunGame extends Component {
     // }
     render() {
         const { deckOfCards } = this.state;
-        console.log('cards :', deckOfCards);
         return (
             <div>
                 {/* {cards} */}

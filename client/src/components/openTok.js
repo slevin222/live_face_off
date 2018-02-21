@@ -9,7 +9,6 @@ const OT = require('@opentok/client');
 class TokBox extends Component {
     constructor(props) {
         super(props);
-        console.log("opentok : ", props.data)
         this.state = {
             error: null,
             connection: 'Connecting',
@@ -20,9 +19,7 @@ class TokBox extends Component {
             camSize: (props.data === "deal52") ? { width: "20vw", height: "30vh" } : { width: "73vw", height: "84vh" }
         };
 
-
         this.publisher = null;
-
 
         this.sessionEventHandlers = {
             sessionConnected: () => {
@@ -48,11 +45,6 @@ class TokBox extends Component {
             },
             streamDestroyed: ({ reason }) => {
                 console.log(`Publisher stream destroyed because: ${reason}`);
-
-                // const body = document.body;
-                // const otRoot = document.querySelector(".OT_root");
-
-                // body.removeChild(otRoot);
             },
         };
 
@@ -89,18 +81,16 @@ class TokBox extends Component {
         this.setState({ publishVideo: !this.state.publishVideo });
     };
 
-    getRequest() {
-        axios.get('/tokbox/room/room1')
-            .then(res => {
-                console.log(res.data);
-                this.setState({
-                    apiKey: res.data.apiKey,
-                    sessionId: res.data.sessionId,
-                    token: res.data.token
-                });
-            });
+    componentWillMount() {
+        let sessionInfo = sessionStorage.getItem('gameSession');
+        sessionInfo = JSON.parse(sessionInfo);
+        this.setState({
+            apiKey: sessionInfo.apiKey,
+            sessionId: sessionInfo.sessionId,
+            token: sessionInfo.token
+        });
+        console.log('sessionStorage item: ', sessionInfo);
     }
-
 
     componentDidMount() {
         const { camSize } = this.state;
@@ -111,7 +101,7 @@ class TokBox extends Component {
         //  example var publisher = OT.initPublisher("publisher-element-id",
         //   {fitMode: "contain"});
 
-        this.getRequest();
+        // this.getRequest();
     }
 
     componentWillUnmount() {
