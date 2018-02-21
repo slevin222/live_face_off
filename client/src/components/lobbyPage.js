@@ -56,14 +56,15 @@ class LobbyPage extends Component {
                 'room': room
             }],
         });
-        const data = { gameType, room };
+        const data = { gameType, room, players };
         console.log('Data sent to server: ', data);
         axios({
             method: 'post',
             url: `/tokbox/room/${room}`,
             data: {
                 gameType,
-                room
+                room,
+                players
             }
         }).then(res => {
             console.log("this is the response", res);

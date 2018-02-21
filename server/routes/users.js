@@ -9,19 +9,20 @@ require('../models/Users');
 const User = mongoose.model('users');
 
 // Login Form POST
-router.post('/login', function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
-        if (err) { 
-            return next(err); 
+router.post('/login', function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) {
+            return next(err);
         };
-        if (!user) { 
-           return res.json({messages: 'Not a valid combination, please try a different one!'}); 
+        if (!user) {
+            return res.json({ messages: 'Not a valid combination, please try a different one!' });
         };
-        if(user) {
-            res.json({pathname: '/lobby'});
+        if (user) {
+            req.session.user = user;
+            res.json({ pathname: '/lobby' });
         }
     })(req, res, next);
-  });
+});
 
 // Register Form POST
 router.post('/register', (req, res) => {
@@ -46,7 +47,7 @@ router.post('/register', (req, res) => {
                         newUser.save()
                             .then(user => {
                                 console.log('You may now login!')
-                                res.json({pathname: '/login'});
+                                res.json({ pathname: '/login' });
                             })
                             .catch(err => {
                                 console.log(err);
