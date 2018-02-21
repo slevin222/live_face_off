@@ -92,7 +92,7 @@ class LobbyPage extends Component {
                             <div className='col s3'>
                                 <div className='input-field col s8 offset-s2'>
                                     <select value={gameType} name='gameType'>
-                                        <option value='' disabled selected>Game Type</option>
+                                        <option value='' disabled>Game Type</option>
                                         <option value='webcam'>Webcam</option>
                                         <option value='deal52'>Deal 52</option>
                                     </select>
@@ -101,7 +101,7 @@ class LobbyPage extends Component {
                             <div className='col s3'>
                                 <div className='input-field col s8 offset-s2'>
                                     <select value={players} name='players'>
-                                        <option value='' disabled selected>Players</option>
+                                        <option value='' disabled>Players</option>
                                         <option value='1'>1 Player</option>
                                         <option value='2'>2 Players</option>
                                         <option value='3'>3 Players</option>
@@ -112,7 +112,7 @@ class LobbyPage extends Component {
                             <div className='col s3'>
                                 <div className='input-field col s8 offset-s2'>
                                     <select value={room} name='room'>
-                                        <option value='' disabled selected>Select Room</option>
+                                        <option value='' disabled>Select Room</option>
                                         <option value='1'>Room 1</option>
                                         <option value='2'>Room 2</option>
                                         <option value='3'>Room 3</option>
