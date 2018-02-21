@@ -16,7 +16,6 @@ class TokBox extends Component {
             apiKey: '',
             sessionId: '',
             token: '',
-            // camSize: (props.data === "deal52") ? { width: "20vw", height: "30vh" } : { width: "73vw", height: "84vh" }
         };
 
         this.publisher = null;

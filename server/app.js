@@ -24,6 +24,7 @@ const {
 require('./models/GoogleUsers');
 require('./models/Users');
 require('./models/FacebookUsers');
+require('./models/Lobby');
 
 //Load Routes
 const auth = require('./routes/auth');
@@ -64,21 +65,23 @@ app.use(passport.session());
 
 app.use(cookieParser());
 app.use(session({
-    secret: 'secret',
+    secret: 'PCKS#1217',
     resave: false,
     saveUninitialized: false,
 }));
 
-//Set global vars
-app.use((req, res, next) => {
-    res.locals.user = req.user || null;
-    next();
-})
+// //Set global vars
+// app.use((req, res, next) => {
+//     res.locals.user = req.user || null;
+//     next();
+// });
+
 
 //Use Routes
 app.use('/auth', auth);
 app.use('/users', users);
 app.use('/tokbox', tokbox);
+
 
 //socket.io for chat 
 io.on('connection', function (socket) {

@@ -19,6 +19,9 @@ if (!apiKey || !secret) {
     process.exit();
 };
 
+// Load Lobby model
+const Lobby = mongoose.model('lobby');
+
 
 const opentok = new OpenTok(apiKey, secret);
 
@@ -41,7 +44,7 @@ router.get('/session', function (req, res) {
  * GET /room/:name
  */
 router.post('/room/:id', function (req, res) {
-    let { gameType } = req.body
+    let { gameType, players } = req.body
     console.log(req.params.id);
     let room = req.params.id;
     if (gameType === 'deal52') {
@@ -50,48 +53,63 @@ router.post('/room/:id', function (req, res) {
         gameType = 'camGame';
     }
     console.log('attempting to create a session associated with the room: ' + room);
-
     // if the room name is associated with a session ID, fetch that
-    if (roomToSessionIdDictionary[room]) {
-        const sessionId = roomToSessionIdDictionary[room];
+    Lobby.findOne({ roomNumber: room }, 'players sessionId', (err, lobby) => {
+        if (err) return next(err);
 
-        // generate token
-        const token = opentok.generateToken(sessionId);
-        res.setHeader('Content-Type', 'application/json');
-        res.send({
-            apiKey: apiKey,
-            sessionId: sessionId,
-            token: token,
-            pathname: `/${gameType}`
-        });
-    }
-    // if this is the first time the room is being accessed, create a new session ID
-    else {
-        opentok.createSession({ mediaMode: 'routed' }, function (err, session) {
-            if (err) {
-                console.log(err);
-                res.status(500).send({ error: 'createSession error:' + err });
-                return;
-            }
+        if (!lobby) {
+            // if this is the first time the room is being accessed, create a new session ID
+            opentok.createSession({ mediaMode: 'routed' }, function (err, session) {
+                console.log("This is the session", session);
+                if (err) {
+                    console.log(err);
+                    res.status(500).send({ error: 'createSession error:' + err });
+                    return;
+                }
 
-            // now that the room name has a session associated wit it, store it in memory
-            // IMPORTANT: Because this is stored in memory, restarting your server will reset these values
-            // if you want to store a room-to-session association in your production application
-            // you should use a more persistent storage for them
-            roomToSessionIdDictionary[room] = session.sessionId;
-            console.log('Session as it is stored in the dictionary: ', roomToSessionIdDictionary[room]);
+                const lobby = new Lobby({
+                    roomNumber: room,
+                    gameType: gameType,
+                    sessionId: session.sessionId,
+                    players: [req.session.user._id],
+                    maxPlayer: players
+                });
+                lobby.save((err) => {
+                    if (err) return next(err);
+                });
+
+                // generate token
+                const token = opentok.generateToken(session.sessionId);
+                res.setHeader('Content-Type', 'application/json');
+                res.send({
+                    apiKey: apiKey,
+                    sessionId: session.sessionId,
+                    token: token,
+                    pathname: `/${gameType}`
+                });
+            });
+        } else {
+            lobby.players.push(req.session.user._id);
+            lobby.save(function (err, updatedLobby) {
+                if (err) return next(err);
+
+                console.log("This is our updatedLobby", updatedLobby);
+            });
 
             // generate token
-            const token = opentok.generateToken(session.sessionId);
+            const token = opentok.generateToken(lobby.sessionId);
             res.setHeader('Content-Type', 'application/json');
             res.send({
                 apiKey: apiKey,
-                sessionId: session.sessionId,
+                sessionId: lobby.sessionId,
                 token: token,
                 pathname: `/${gameType}`
             });
-        });
-    }
+        }
+    });
+
+
+
 });
 
 module.exports = router;
