@@ -112,15 +112,16 @@ class TokBox extends Component {
 
     render() {
         console.log('openTok State:', this.state);
-        console.log("render props :", this.props);
         const { apiKey, sessionId, token, error, connection, publishVideo } = this.state;
+        const vidWidth = (this.props.data === "deal52") ? { width: 200, height: 200 } : { width: 900, height: 900 };
+
         if (!apiKey) {
             return (
                 <h1>Loading...</h1>
             )
         }
         return (
-            <div>
+            <div className="row col s12">
                 <div>Session Status: {connection}</div>
                 {error ? (
                     <div className="error">
@@ -134,18 +135,18 @@ class TokBox extends Component {
                     onError={this.onSessionError}
                     eventHandlers={this.sessionEventHandlers}
                 >
-                    <button onClick={this.toggleVideo}>
+                    <button className="btn btn grey" onClick={this.toggleVideo}>
                         {publishVideo ? 'Disable' : 'Enable'} Video
           </button>
                     <OTPublisher
-                        properties={{ publishVideo, width: 150, height: 150, }}
+                        properties={{ publishVideo, width: 170, height: 150, }}
                         onPublish={this.onPublish}
                         onError={this.onPublishError}
                         eventHandlers={this.publisherEventHandlers}
                     />
                     <OTStreams>
                         <OTSubscriber
-                            properties={{ width: 200, height: 200 }}
+                            properties={vidWidth}
                             onSubscribe={this.onSubscribe}
                             onError={this.onSubscribeError}
                             eventHandlers={this.subscriberEventHandlers}
