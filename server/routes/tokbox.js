@@ -44,7 +44,7 @@ router.get('/session', function (req, res) {
  * GET /room/:name
  */
 router.post('/room/:id', function (req, res) {
-    let { gameType, players } = req.body
+    let { gameType, maxPlayers } = req.body
     console.log(req.params.id);
     let room = req.params.id;
     if (gameType === 'deal52') {
@@ -56,28 +56,24 @@ router.post('/room/:id', function (req, res) {
     // if the room name is associated with a session ID, fetch that
     Lobby.findOne({ roomNumber: room }, 'players sessionId', (err, lobby) => {
         if (err) return next(err);
-
         if (!lobby) {
             // if this is the first time the room is being accessed, create a new session ID
             opentok.createSession({ mediaMode: 'routed' }, function (err, session) {
-                console.log("This is the session", session);
                 if (err) {
                     console.log(err);
                     res.status(500).send({ error: 'createSession error:' + err });
                     return;
                 }
-
                 const lobby = new Lobby({
                     roomNumber: room,
                     gameType: gameType,
                     sessionId: session.sessionId,
                     players: [req.session.user._id],
-                    maxPlayer: players
+                    maxPlayer: maxPlayers
                 });
                 lobby.save((err) => {
                     if (err) return next(err);
                 });
-
                 // generate token
                 const token = opentok.generateToken(session.sessionId);
                 res.setHeader('Content-Type', 'application/json');
@@ -92,10 +88,7 @@ router.post('/room/:id', function (req, res) {
             lobby.players.push(req.session.user._id);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);
-
-                console.log("This is our updatedLobby", updatedLobby);
             });
-
             // generate token
             const token = opentok.generateToken(lobby.sessionId);
             res.setHeader('Content-Type', 'application/json');
@@ -107,9 +100,6 @@ router.post('/room/:id', function (req, res) {
             });
         }
     });
-
-
-
 });
 
 module.exports = router;
