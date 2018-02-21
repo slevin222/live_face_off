@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
 import axios from 'axios';
+import LobbyList from "./lobbyList";
 
 class LobbyPage extends Component {
     constructor(props) {
@@ -9,9 +10,28 @@ class LobbyPage extends Component {
         this.state = {
             lobbies: [],
             gameType: '',
-            players: '',
+            maxPlayers: '',
             room: ''
-        }
+        };
+
+        //lobbies dummy data
+        this.lobbyData = [
+            {
+                'gameType': 'Deal 52',
+                'maxPlayers': '4',
+                'room': '1'
+            },
+            {
+                'gameType': 'Deal 52',
+                'maxPlayers': '2',
+                'room': '2'
+            },
+            {
+                'gameType': 'Webcam',
+                'maxPlayers': '2',
+                'room': '2'
+            },
+        ]
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -19,11 +39,11 @@ class LobbyPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const { lobbies, gameType, players, room } = this.state;
+        const { lobbies, gameType, maxPlayers, room } = this.state;
         this.setState({
             lobbies: [...lobbies, {
                 'gameType': gameType,
-                'players': players,
+                'maxPlayers': maxPlayers,
                 'room': room
             }],
         });
@@ -58,6 +78,12 @@ class LobbyPage extends Component {
     componentDidMount() {
         $('select').material_select();
         $('select').on('change', this.handleChange);
+
+        //axios call would go here and
+        this.setState({
+            //hobbies: *axios data goes here*
+            lobbies: this.lobbyData
+        })
     }
 
     componentWillUnmount() {
@@ -65,7 +91,7 @@ class LobbyPage extends Component {
     }
 
     render() {
-        const { lobbies, gameType, players, room } = this.state;
+        const { lobbies, gameType, maxPlayers, room } = this.state;
         return (
             <div className='container'>
                 <div className='divider'></div>
@@ -87,7 +113,6 @@ class LobbyPage extends Component {
                 <div className='row'>
                     <div className='col s12'>
                         <h5 className='center-align'>Create a Game</h5>
-
                         <form onSubmit={this.handleSubmit} className='row'>
                             <div className='col s3'>
                                 <div className='input-field col s8 offset-s2'>
@@ -100,7 +125,7 @@ class LobbyPage extends Component {
                             </div>
                             <div className='col s3'>
                                 <div className='input-field col s8 offset-s2'>
-                                    <select value={players} name='players'>
+                                    <select value={maxPlayers} name='maxPlayers'>
                                         <option value='' disabled>Players</option>
                                         <option value='1'>1 Player</option>
                                         <option value='2'>2 Players</option>
@@ -132,46 +157,10 @@ class LobbyPage extends Component {
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <div className='divider'></div>
-                {/*This whole table wil be a separate component*/}
-                <div className='row'>
-                    <div className='col s8 offset-s2'>
-                        <h5 className='center-align'>Lobbies</h5>
-                        <table className='highlight bordered'>
-                            <thead>
-                                <tr>
-                                    <th>Game Type</th>
-                                    <th className='center-align'>Players</th>
-                                    <th className='center-align'>Room Number</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>Deal 52</td>
-                                    <td className='center-align'>1/4</td>
-                                    <td className='center-align'>1</td>
-                                    <td className='right-align '><button className='btn blue-grey darken-2'>Join</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Deal 52</td>
-                                    <td className='center-align'>4/4</td>
-                                    <td className='center-align'>2</td>
-                                    <td className='right-align'><button className='btn blue-grey darken-2'>Join</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Webcam</td>
-                                    <td className='center-align'>2/2</td>
-                                    <td className='center-align'>3</td>
-                                    <td className='right-align'><button className='btn blue-grey darken-2'>Join</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <LobbyList data={lobbies}/>
             </div>
         )
     }
