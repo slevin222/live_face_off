@@ -10,7 +10,6 @@ class TokBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            room: '',
             error: null,
             connection: 'Connecting',
             publishVideo: true,
@@ -20,9 +19,7 @@ class TokBox extends Component {
             camSize: (props.data === "deal52") ? { width: "20vw", height: "30vh" } : { width: "73vw", height: "84vh" }
         };
 
-
         this.publisher = null;
-
 
         this.sessionEventHandlers = {
             sessionConnected: () => {
@@ -48,11 +45,6 @@ class TokBox extends Component {
             },
             streamDestroyed: ({ reason }) => {
                 console.log(`Publisher stream destroyed because: ${reason}`);
-
-                // const body = document.body;
-                // const otRoot = document.querySelector(".OT_root");
-
-                // body.removeChild(otRoot);
             },
         };
 
@@ -88,18 +80,6 @@ class TokBox extends Component {
     toggleVideo = () => {
         this.setState({ publishVideo: !this.state.publishVideo });
     };
-
-    // getRequest() {
-    //     axios.post('/tokbox/room/1')
-    //         .then(res => {
-    //             console.log(res.data);
-    //             this.setState({
-    //                 apiKey: res.data.apiKey,
-    //                 sessionId: res.data.sessionId,
-    //                 token: res.data.token
-    //             });
-    //         });
-    // }
 
     componentWillMount() {
         let sessionInfo = sessionStorage.getItem('gameSession');

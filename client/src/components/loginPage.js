@@ -18,7 +18,6 @@ class LoginPage extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(event) {
-        console.log("We're handling the submit");
         const { form } = this.state;
         event.preventDefault();
         axios.post('/users/login', form)

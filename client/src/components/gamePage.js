@@ -11,7 +11,6 @@ import LobbyPage from './lobbyPage';
 class GamePage extends Component {
     constructor(props) {
         super(props)
-        console.log('Lobby page props: ', props);
     }
     render() {
         const game = "deal52";

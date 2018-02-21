@@ -15,30 +15,11 @@ class LobbyPage extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.createRoom = this.createRoom.bind(this);
-    }
-
-    createRoom() {
-        const { gameType, room } = this.state;
-        console.log('Data sent to server: ', data);
-        axios({
-            method: 'post',
-            url: `/tokbox/room/${room}`,
-            data: {
-                gameType,
-                room
-            }
-        }).then(res => {
-            console.log('Response from server: ', res);
-        });
     }
 
     handleSubmit(event) {
-        console.log('Submitting form', this.state);
-
         event.preventDefault();
         const { lobbies, gameType, players, room } = this.state;
-
         this.setState({
             lobbies: [...lobbies, {
                 'gameType': gameType,
@@ -59,6 +40,7 @@ class LobbyPage extends Component {
             console.log("this is the response", res);
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
+            console.log(JSON.parse(dataFromServer));
             if (res.data.hasOwnProperty('pathname')) {
                 const { origin } = location;
                 location.href = `${origin}${res.data.pathname}`;
@@ -83,7 +65,7 @@ class LobbyPage extends Component {
     }
 
     render() {
-        const { lobbies, gameType, players, room, apiKey, sessionId, token } = this.state;
+        const { lobbies, gameType, players, room } = this.state;
         return (
             <div className='container'>
                 <div className='divider'></div>

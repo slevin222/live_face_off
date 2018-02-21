@@ -58,7 +58,6 @@ import RunGame from './runGame';
 class GameBoard extends Component {
     constructor(props) {
         super(props)
-        console.log("GameBoard props :", props);
     }
     render() {
         return (

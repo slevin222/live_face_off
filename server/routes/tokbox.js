@@ -40,9 +40,10 @@ router.get('/session', function (req, res) {
 /**
  * GET /room/:name
  */
-router.post('/room/:name', function (req, res) {
+router.post('/room/:id', function (req, res) {
     let { gameType } = req.body
-    const room = req.params.id;
+    console.log(req.params.id);
+    let room = req.params.id;
     if (gameType === 'deal52') {
         gameType = 'gamepage';
     } else if (gameType === 'webcam') {
