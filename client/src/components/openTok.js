@@ -92,25 +92,27 @@ class TokBox extends Component {
         console.log('sessionStorage item: ', sessionInfo);
     }
 
-    componentDidMount() {
-        const { camSize } = this.state;
-        console.log('CDM in progress!', OT);
+    // componentDidMount() { 
+    // const { camSize } = this.state;
+    // console.log('CDM in progress!', OT);
 
-        this.publisher = OT.initPublisher('webcontainer');
-        //'webcamContainer', camSize
-        //  example var publisher = OT.initPublisher("publisher-element-id",
-        //   {fitMode: "contain"});
+    // this.publisher = OT.initPublisher('webcontainer');
+    //'webcamContainer', camSize
+    //  example var publisher = OT.initPublisher("publisher-element-id",
+    //   {fitMode: "contain"});
 
-        // this.getRequest();
-    }
+    // this.getRequest();
+    // }
 
     componentWillUnmount() {
         console.log('Open Tok Unmounting');
         this.publisher.disconnect();
     }
 
+
     render() {
         console.log('openTok State:', this.state);
+        console.log("render props :", this.props);
         const { apiKey, sessionId, token, error, connection, publishVideo } = this.state;
         if (!apiKey) {
             return (
@@ -136,14 +138,14 @@ class TokBox extends Component {
                         {publishVideo ? 'Disable' : 'Enable'} Video
           </button>
                     <OTPublisher
-                        properties={{ publishVideo, width: 50, height: 50, }}
+                        properties={{ publishVideo, width: 150, height: 150, }}
                         onPublish={this.onPublish}
                         onError={this.onPublishError}
                         eventHandlers={this.publisherEventHandlers}
                     />
                     <OTStreams>
                         <OTSubscriber
-                            properties={{ width: 100, height: 100 }}
+                            properties={{ width: 200, height: 200 }}
                             onSubscribe={this.onSubscribe}
                             onError={this.onSubscribeError}
                             eventHandlers={this.subscriberEventHandlers}
