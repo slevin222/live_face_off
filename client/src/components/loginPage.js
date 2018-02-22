@@ -25,10 +25,10 @@ class LoginPage extends Component {
         axios.post('/users/login', form)
             .then(res => {
                 console.log("this is the response", res);
-                if (res.data.hasOwnProperty('pathname')) {
-                    const { origin } = location;
-                    location.href = `${origin}${res.data.pathname}`;
-                }
+                // if (res.data.hasOwnProperty('pathname')) {
+                //     const { origin } = location;
+                //     location.href = `${origin}${res.data.pathname}`;
+                // }
                 if (res.data.hasOwnProperty('messages')) {
                     this.setState({
                         messages: res.data.messages

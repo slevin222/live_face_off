@@ -9,7 +9,7 @@ const Navbar = (props) => {
         if(props.auth){
             return (
                 <li>
-                    <button onClick={props.signOut} className='btn green'>Logout</button>
+                    <a onClick={props.signOut}>Logout</a>
                 </li>
             )
         }
