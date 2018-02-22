@@ -14,7 +14,6 @@ module.exports = function (passport) {
             callbackURL: '/auth/google/callback',
             proxy: true
         }, (accessToken, refreshToken, profile, done) => {
-            // console.log(accessToken);
             const image = profile.photos[0].value.substring(0, profile.photos[0].value.indexOf('?'));
             const newUser = {
                 googleID: profile.id,
@@ -23,7 +22,6 @@ module.exports = function (passport) {
                 email: profile.emails[0].value,
                 image: image
             }
-            console.log('New User added: ', newUser);
             //Check for existing user
             User.findOne({
                 googleID: profile.id
