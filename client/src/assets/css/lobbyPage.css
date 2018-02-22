@@ -45,3 +45,7 @@
 .dropdown span:hover {background-color: #ddd}
 
 .show {display:block;}
+
+.userInfo {
+    margin: 0 auto;
+}

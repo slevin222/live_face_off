@@ -7,8 +7,6 @@ export default () => {
             <div className="nav-wrapper ">
                 <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><i className="material-icons">switch_video</i>Live Face Off</Link>
                 <ul className="right">
-                    <li><Link to='/camGame'>Cam2Cam</Link></li>
-                    <li><Link to='/gamepage'>Deal 52</Link></li>
                     <li><Link to='/lobby'>Lobby</Link></li>
                     <li><Link to='/register'>Sign Up</Link></li>
                     <li><Link to='/login'>Login</Link></li>

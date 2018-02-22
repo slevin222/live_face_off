@@ -20,7 +20,11 @@ if (!apiKey || !secret) {
 };
 
 // Load Lobby model
+require('../models/Lobby');
 const Lobby = mongoose.model('lobby');
+
+//Load Google Model
+const User = mongoose.model('googleUsers');
 
 
 const opentok = new OpenTok(apiKey, secret);
@@ -33,6 +37,19 @@ function findRoomFromSessionId(sessionId) {
     return _.findKey(roomToSessionIdDictionary, function (value) { return value === sessionId; });
 };
 
+//Creates a room and checks to see if one has already been used with the same number
+let roomContainer = [];
+let room;
+function createARoom() {
+    room = Math.ceil(Math.random() * 10000);
+    if (roomContainer.indexOf(room) > 0) {
+        createAroom();
+    } else {
+        roomContainer.push(room);
+    }
+    return room;
+}
+
 /**
  * GET /session redirects to /room/session
  */
@@ -43,10 +60,9 @@ router.get('/session', function (req, res) {
 /**
  * GET /room/:name
  */
-router.post('/room/:id', function (req, res) {
+router.post('/room', function (req, res) {
     let { gameType, maxPlayers } = req.body
-    console.log(req.params.id);
-    let room = req.params.id;
+    createARoom();
     if (gameType === 'deal52') {
         gameType = 'gamepage';
     } else if (gameType === 'webcam') {
@@ -85,6 +101,11 @@ router.post('/room/:id', function (req, res) {
                 });
             });
         } else {
+            // if (lobby.maxPlayer === lobby.players.length) {
+            //     return res.json({
+            //         messages: 'Uh oh, that lobby is full!'
+            //     });
+            // };
             lobby.players.push(req.session.user._id);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);
@@ -100,6 +121,15 @@ router.post('/room/:id', function (req, res) {
             });
         }
     });
+});
+
+router.get('/lobby', (req, res) => {
+    if (req.session.user) {
+        res.json({
+            firstName: req.session.user.firstName,
+            lastName: req.session.user.lastName
+        });
+    }
 });
 
 module.exports = router;

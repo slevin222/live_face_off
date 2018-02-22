@@ -18,6 +18,7 @@ router.post('/login', function (req, res, next) {
             return res.json({ messages: 'Not a valid combination, please try a different one!' });
         };
         if (user) {
+            console.log(req.session);
             req.session.user = user;
             res.json({ pathname: '/lobby' });
         }
