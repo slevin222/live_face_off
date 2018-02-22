@@ -29,15 +29,8 @@ const User = mongoose.model('googleUsers');
 
 const opentok = new OpenTok(apiKey, secret);
 
-
-const roomToSessionIdDictionary = {};
-
-// returns the room name, given a session ID that was associated with it
-function findRoomFromSessionId(sessionId) {
-    return _.findKey(roomToSessionIdDictionary, function (value) { return value === sessionId; });
-};
-
 //Creates a room and checks to see if one has already been used with the same number
+//seed the random number
 let roomContainer = [];
 let room;
 function createARoom() {
@@ -51,18 +44,12 @@ function createARoom() {
 }
 
 /**
- * GET /session redirects to /room/session
- */
-router.get('/session', function (req, res) {
-    res.redirect('/room/session');
-});
-
-/**
- * GET /room/:name
+ * GET /room/
  */
 router.post('/room', function (req, res) {
     let { gameType, maxPlayers } = req.body
     createARoom();
+    console.log(req.session);
     if (gameType === 'deal52') {
         gameType = 'gamepage';
     } else if (gameType === 'webcam') {
