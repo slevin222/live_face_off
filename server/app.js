@@ -70,13 +70,6 @@ app.use(session({
     saveUninitialized: false,
 }));
 
-// //Set global vars
-// app.use((req, res, next) => {
-//     res.locals.user = req.user || null;
-//     next();
-// });
-
-
 //Use Routes
 app.use('/auth', auth);
 app.use('/users', users);
@@ -94,6 +87,8 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('typing', data)
     });
 });
+
+io
 
 //Route for all static files from the client side
 app.get('*', (req, res) => {
