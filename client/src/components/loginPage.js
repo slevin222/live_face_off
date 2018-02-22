@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import '../assets/css/homePageStyle.css';
 import DisplayMessages from './errorMessage';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { signIn } from '../actions';
 
 class LoginPage extends Component {
     constructor(props) {
@@ -27,13 +29,15 @@ class LoginPage extends Component {
                     const { origin } = location;
                     location.href = `${origin}${res.data.pathname}`;
                 }
-
                 if (res.data.hasOwnProperty('messages')) {
                     this.setState({
                         messages: res.data.messages
                     });
                 }
             });
+
+        //redux action creator
+        this.props.signIn();
     }
     handleInput(event) {
         const { value, name } = event.target;
@@ -92,4 +96,5 @@ class LoginPage extends Component {
     }
 }
 
-export default LoginPage;
+//redux
+export default connect(null, { signIn: signIn })(LoginPage);
