@@ -1,7 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signOut } from '../actions';
 
-export default () => {
+const Navbar = (props) => {
+
+    function renderLinks(){
+        if(props.auth){
+            return (
+                <li>
+                    <button onClick={props.signOut} className='btn green'>Logout</button>
+                </li>
+            )
+        }
+
+        return [
+            <li key='0'>
+                <Link to='/register'>Sign Up</Link>
+            </li>,
+            <li key='1'>
+                <Link to='/login'>Login</Link>
+            </li>
+        ]
+    }
+
     return (
         <nav className='blue-grey darken-3'>
             <div className="nav-wrapper ">
@@ -10,10 +32,17 @@ export default () => {
                     <li><Link to='/camGame'>Cam2Cam</Link></li>
                     <li><Link to='/gamepage'>Deal 52</Link></li>
                     <li><Link to='/lobby'>Lobby</Link></li>
-                    <li><Link to='/register'>Sign Up</Link></li>
-                    <li><Link to='/login'>Login</Link></li>
+                    {renderLinks()}
                 </ul>
             </div>
         </nav>
     )
 }
+
+function mapStateToProps(state){
+    return {
+        auth: state.user.auth
+    }
+}
+
+export default connect(mapStateToProps, {signOut: signOut})(Navbar);
