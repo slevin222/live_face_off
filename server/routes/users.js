@@ -19,7 +19,7 @@ router.post('/login', function (req, res, next) {
         };
         if (user) {
             req.session.user = user;
-            res.json({ pathname: '/lobby' });
+            // res.json({ pathname: '/lobby' });
         }
     })(req, res, next);
 });
