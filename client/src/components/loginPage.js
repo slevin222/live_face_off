@@ -22,6 +22,7 @@ class LoginPage extends Component {
     handleSubmit(event) {
         const { form } = this.state;
         event.preventDefault();
+        console.log('login submitted');
         axios.post('/users/login', form)
             .then(res => {
                 console.log("this is the response", res);
@@ -31,6 +32,7 @@ class LoginPage extends Component {
                     });
                 } else {
                     //redux action creator
+                    console.log('tesssing')
                     this.props.signIn();
                 }
 

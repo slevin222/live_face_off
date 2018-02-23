@@ -20,7 +20,7 @@ module.exports = function (passport) {
                 lastName: profile.name.familyName,
                 email: profile.emails[0].value,
                 image: image
-            }
+            };
             //Check for existing user
             User.findOne({
                 googleID: profile.id
