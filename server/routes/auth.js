@@ -10,7 +10,7 @@ function tokenForUser(user) {
     return jwt.encode({
         uid: user.id,
         ts: ts
-    }, keys.secretsecret);
+    }, keys.secret);
 };
 
 //GOOGLE ROUTES
@@ -21,7 +21,7 @@ router.get('/google', passport.authenticate('google', {
 router.get('/google/callback', passport.authenticate('google', {
     failureRedirect: '/login'
 }), (req, res) => {
-    res.redirect('/lobby');
+    res.redirect('/login');
 });
 
 //FACEBOOK ROUTES
@@ -38,11 +38,14 @@ router.get('/facebook/callback', passport.authenticate('facebook', {
 // });
 
 router.get('/verify', (req, res) => {
-    console.log(req.user || req.session.user);
+    console.log(req.user);
+    console.log(req.session.user);
+    const token = tokenForUser(req.user.id || req.session.user._id)
+    console.log(token);
     if (req.user || req.session.user) {
         res.json({
             isLoggedIn: true,
-            token: tokenForUser(req.user.id || req.session.user._id)
+            token: token
         });
         console.log(req.user || req.session.user);
     } else {
@@ -54,9 +57,8 @@ router.get('/verify', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
+    req.session = null;
     req.logout();
-    res.send(req.user || req.session.user);
-    // res.redirect('/login');
 });
 
 module.exports = router;
