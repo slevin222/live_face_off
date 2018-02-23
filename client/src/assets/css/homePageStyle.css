@@ -1,11 +1,13 @@
 body{
     user-select: none;
+    background-color: lightgrey;
 }
 
 .signInArea {
     border: 1px solid black;
     width: 70%;
     margin: 10% auto;
+    background-color: ghostwhite;
 }
 
 .homeTitle {

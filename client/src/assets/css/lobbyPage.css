@@ -10,7 +10,9 @@
 /*.dropbtn:hover, .dropbtn:focus {*/
     /*background-color: #2980B9;*/
 /*}*/
-
+.fullbox{
+    background-color: ghostwhite;
+}
 .dropdown {
     position: relative;
     display: inline-block;
