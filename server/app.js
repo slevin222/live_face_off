@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
+const session = require('cookie-session');
 const app = express();
 const server = http.Server(app);
 const io = require('socket.io')(server);
@@ -35,6 +35,7 @@ const tokbox = require('./routes/tokbox');
 const keys = require('./config/keys');
 
 //Passport Config
+require('./config/passport_config');
 require('./config/localPassport')(passport);
 require('./config/googlePassport')(passport);
 require('./config/facebookPassport')(passport);
@@ -48,6 +49,11 @@ mongoose.connect(keys.mongoURI)
         console.log('mongoDB connected')
     })
     .catch(err => console.log(err));
+
+app.use(session({
+    keys: ['PCKS#1217'],
+    maxAge: 30 * 24 * 60 * 60 * 1000
+}));
 
 //Body Parser Middleware
 app.use(bodyParser.urlencoded({
@@ -64,11 +70,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cookieParser());
-app.use(session({
-    secret: 'PCKS#1217',
-    resave: false,
-    saveUninitialized: false,
-}));
 
 //Use Routes
 app.use('/auth', auth);

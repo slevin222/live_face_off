@@ -9,6 +9,9 @@ const LobbySchema = new Schema({
     gameType: {
         type: String
     },
+    roomKey: {
+        type: String
+    },
     sessionId: {
         type: String
     },
