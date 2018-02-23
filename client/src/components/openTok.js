@@ -112,7 +112,7 @@ class TokBox extends Component {
     render() {
         console.log('openTok State:', this.state);
         const { apiKey, sessionId, token, error, connection, publishVideo } = this.state;
-        const vidWidth = (this.props.data === "deal52") ? { width: 200, height: 200 } : { width: 900, height: 900 };
+        const vidWidth = (this.props.data === "deal52") ? { width: 200, height: 200 } : { width: 800, height: 500 };
 
         if (!apiKey) {
             return (
@@ -120,7 +120,7 @@ class TokBox extends Component {
             )
         }
         return (
-            <div className="row col s12">
+            <div className="row col s12 fullscreen">
                 {/* <div>Session Status: {connection}</div>
                 {error ? (
                     <div className="error">
@@ -138,12 +138,12 @@ class TokBox extends Component {
                         {publishVideo ? 'Disable' : 'Enable'} Video
           </button>
                     {/* <div className="container"> */}
-                    <OTPublisher
+                    {/* <OTPublisher
                         properties={{ publishVideo, width: 170, height: 150, }}
                         onPublish={this.onPublish}
                         onError={this.onPublishError}
                         eventHandlers={this.publisherEventHandlers}
-                    />
+                    /> */}
                     {/* </div> */}
                     <OTStreams>
                         <OTSubscriber
@@ -153,7 +153,14 @@ class TokBox extends Component {
                             eventHandlers={this.subscriberEventHandlers}
                         />
                     </OTStreams>
+                    <OTPublisher
+                        properties={{ publishVideo, width: 170, height: 150, }}
+                        onPublish={this.onPublish}
+                        onError={this.onPublishError}
+                        eventHandlers={this.publisherEventHandlers}
+                    />
                 </OTSession>
+
             </div>
         );
     }
