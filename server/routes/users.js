@@ -20,7 +20,7 @@ router.post('/login', function (req, res, next) {
         if (user) {
             console.log('server cookies', req.cookies);
             console.log('This is req.session @ login route', req.session);
-            // req.session.user = user;
+            req.session.user = user;
             res.send(req.session.user);
         }
     })(req, res, next);
