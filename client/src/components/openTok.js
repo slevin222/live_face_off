@@ -162,11 +162,6 @@ class TokBox extends Component {
                     />
                 </OTSession>
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 30ad0d5f8d4f76954435a1245df285720831498f
             </div>
         );
     }
