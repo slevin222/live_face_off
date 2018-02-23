@@ -13,14 +13,15 @@ router.post('/login', function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
         if (err) {
             return next(err);
-        };
+        }
         if (!user) {
             return res.json({ messages: 'Not a valid combination, please try a different one!' });
-        };
+        }
         if (user) {
-            req.session.user = user;
-            console.log('Cookies: ', req.cookies);
-            // res.json({ pathname: '/lobby' });
+            console.log('server cookies', req.cookies);
+            console.log('This is req.session @ login route', req.session);
+            // req.session.user = user;
+            res.send(req.session.user);
         }
     })(req, res, next);
 });
