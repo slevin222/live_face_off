@@ -108,7 +108,7 @@ router.post('/room', ensureAuthenticated, function (req, res) {
     });
 });
 
-router.get('/lobby', ensureAuthenticated, (req, res) => {
+router.get('/lobby', (req, res) => {
     console.log('req.session.user: ', req.session.user);
     console.log('req.user: ', req.user);
     if (req.session.user) {

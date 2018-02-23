@@ -8,7 +8,7 @@ export function signIn(){
             console.log('axiossss sign ined',resp);
 
             if(resp.data.isLoggedIn){
-                localStorage.setItem('token', 'hardCodedToken');
+                localStorage.setItem('token', resp.data.token);
                 dispatch({type: types.SIGN_IN})
             }
         } catch (err){
