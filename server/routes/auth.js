@@ -35,16 +35,22 @@ router.get('/facebook/callback',
     });
 
 router.get('/verify', (req, res) => {
-    if (req.user) {
-        console.log(req.user);
+    if (req.user || req.session.user) {
+        res.json({
+            isLoggedIn: true
+        });
+        console.log(req.user || req.session.user);
     } else {
         console.log("Not Auth");
+        res.json({
+            isLoggedIn: false
+        });
     }
 });
 
 router.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('/');
+    res.redirect('/login');
 });
 
 module.exports = router;
