@@ -75,6 +75,9 @@ router.get('/verify', (req, res) => {
 router.get('/logout', (req, res) => {
     req.logout();
     res.send(req.user || req.session.user);
+    console.log('req.session before setting to null', req.session);
+    req.session = null;
+    console.log('req.session after setting to null', req.session);
 });
 
 module.exports = router;
