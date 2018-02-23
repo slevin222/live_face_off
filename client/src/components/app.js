@@ -16,8 +16,8 @@ const App = () => {
         <div className="mainApp">
             <Navbar />
             <Route exact path='/' component={Homepage} />
-            <Route path="/camGame" component={CamGame} />
-            <Route path='/gamepage' component={GamePage} />
+            <Route path="/camGame" component={authUser(CamGame)} />
+            <Route path='/gamepage' component={authUser(GamePage)} />
             <Route path='/lobby' component={authUser(LobbyPage)} />
             <Route path='/register' component={redirectUser(SignUp, '/login')} />
             <Route path='/login' component={redirectUser(LoginPage, '/lobby')} />

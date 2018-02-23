@@ -7,11 +7,14 @@ const Navbar = (props) => {
 
     function renderLinks(){
         if(props.auth){
-            return (
-                <li>
+            return [
+                <li key='0'>
+                    <Link to='/lobby'>Lobby</Link>
+                </li>,
+                <li key='1'>
                     <a onClick={props.signOut}>Logout</a>
                 </li>
-            )
+            ]
         }
 
         return [
@@ -29,7 +32,6 @@ const Navbar = (props) => {
             <div className="nav-wrapper ">
                 <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><i className="material-icons">switch_video</i>Live Face Off</Link>
                 <ul className="right">
-                    <li><Link to='/lobby'>Lobby</Link></li>
                     {renderLinks()}
                 </ul>
             </div>
