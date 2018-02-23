@@ -19,6 +19,7 @@ router.post('/login', function (req, res, next) {
         };
         if (user) {
             req.session.user = user;
+            console.log('Cookies: ', req.cookies);
             res.json({ pathname: '/lobby' });
         }
     })(req, res, next);
