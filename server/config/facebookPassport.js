@@ -11,38 +11,33 @@ module.exports = function (passport) {
         clientSecret: keys.facebookClientSecret,
         callbackURL: '/auth/facebook/callback',
         proxy: true
-    }, (accessToken, refreshToken, profile, cb) => {
-        console.log(accessToken);
-        const newUser = {
-            facebookID: profile.id,
-            firstName: profile.name.givenName,
-            lastName: profile.name.familyName,
-            email: profile.emails[0].value,
-            token: accessToken
-        }
-        console.log('New User added: ', newUser);
+    }, (accessToken, refreshToken, profile, cb, done) => {
         //Check for existing user
-        User.findOne({
-            facebookID: profile.id
-        }).then(user => {
-            if (user) {
-                // return user
-                done(null, user);
-            } else {
-                //create user
-                new User(newUser)
-                    .save()
-                    .then(user => done(null, user));
-            }
+        process.nextTick(function () {
+            User.findOne({ facebookID: profile.id }, (err, user) => {
+                console.log(profile);
+                if (err) {
+                    return done(err);
+                }
+                if (user) {
+                    return done(null, user);
+                } else {
+                    const newUserConfig = {
+                        facebookID: profile.id,
+                        firstName: profile.name.givenName,
+                        lastName: profile.name.familyName,
+                        email: profile.emails[0].value,
+                        token: accessToken
+                    }
+                    var newUser = new User(newUserConfig);
+                    console.log(newUser);
+                    newUser.save((err) => {
+                        if (err) throw err;
+                        return done(null, newUser);
+                    });
+                }
+            });
         });
     })
     );
-    passport.serializeUser((user, done) => {
-        done(null, user.id);
-    });
-    passport.deserializeUser((id, done) => {
-        User.findById(id).then(user => {
-            done(null, user);
-        })
-    });
 }

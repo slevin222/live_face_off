@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { signOut } from '../actions';
+import { signIn, signOut } from '../actions';
 
-const Navbar = (props) => {
+class Navbar extends Component {
 
-    function renderLinks(){
-        if(props.auth){
-            return (
-                <li>
-                    <button onClick={props.signOut} className='btn green'>Logout</button>
+    componentWillMount(){
+        this.props.signIn();
+    }
+
+    renderLinks(){
+        if(this.props.auth){
+            return [
+                <li key='0'>
+                    <Link to='/lobby'>Lobby</Link>
+                </li>,
+                <li key='1'>
+                    <a onClick={this.props.signOut}>Logout</a>
                 </li>
-            )
+            ]
         }
 
         return [
@@ -24,17 +31,18 @@ const Navbar = (props) => {
         ]
     }
 
-    return (
-        <nav className='blue-grey darken-3'>
-            <div className="nav-wrapper ">
-                <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><i className="material-icons">switch_video</i>Live Face Off</Link>
-                <ul className="right">
-                    <li><Link to='/lobby'>Lobby</Link></li>
-                    {renderLinks()}
-                </ul>
-            </div>
-        </nav>
-    )
+    render(){
+        return (
+            <nav className='blue-grey darken-3'>
+                <div className="nav-wrapper ">
+                    <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><i className="material-icons">switch_video</i>Live Face Off</Link>
+                    <ul className="right">
+                        {this.renderLinks()}
+                    </ul>
+                </div>
+            </nav>
+        )
+    }
 }
 
 function mapStateToProps(state){
@@ -43,4 +51,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {signOut: signOut})(Navbar);
+export default connect(mapStateToProps, {signIn: signIn, signOut: signOut})(Navbar);

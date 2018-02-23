@@ -14,6 +14,7 @@ class LobbyPage extends Component {
             room: '',
             firstName: '',
             lastName: '',
+            roomKey: ''
         };
 
         //lobbies dummy data
@@ -45,6 +46,7 @@ class LobbyPage extends Component {
         ]
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleJoinSubmit = this.handleJoinSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -91,6 +93,30 @@ class LobbyPage extends Component {
         });
     }
 
+    handleJoinSubmit(event) {
+        const { roomKey } = this.state;
+        event.preventDefault();
+        this.setState({
+            roomKey
+        });
+        axios({
+            method: 'post',
+            url: `/tokbox/create`,
+            data: {
+                roomKey
+            }
+        }).then(res => {
+            console.log("this is the response", res);
+            const dataFromServer = JSON.stringify(res.data);
+            sessionStorage.setItem('gameSession', dataFromServer);
+            console.log(JSON.parse(dataFromServer));
+            if (res.data.hasOwnProperty('pathname')) {
+                const { origin } = location;
+                location.href = `${origin}${res.data.pathname}`;
+            }
+        });
+    }
+
     handleChange(event) {
         const { name, value } = event.target;
         this.setState({
@@ -100,12 +126,13 @@ class LobbyPage extends Component {
 
     componentWillMount() {
         this.getUserInfo();
+
+
     }
 
     componentDidMount() {
         $('select').material_select();
         $('select').on('change', this.handleChange);
-
         //axios call would go here and
         this.setState({
             //hobbies: *axios data goes here*
@@ -118,7 +145,7 @@ class LobbyPage extends Component {
     }
 
     render() {
-        const { lobbies, gameType, maxPlayers, firstName, lastName } = this.state;
+        const { lobbies, gameType, maxPlayers, firstName, lastName, roomKey } = this.state;
         return (
             <div className='container'>
                 <div className='divider'></div>
@@ -161,29 +188,29 @@ class LobbyPage extends Component {
                                     </select>
                                 </div>
                             </div>
-                            {/* <div className='col s3'>
-                                <div className='input-field col s8 offset-s2'>
-                                    <select value={room} name='room'>
-                                        <option value='' disabled>Select Room</option>
-                                        <option value='1'>Room 1</option>
-                                        <option value='2'>Room 2</option>
-                                        <option value='3'>Room 3</option>
-                                        <option value='4'>Room 4</option>
-                                        <option value='5'>Room 5</option>
-                                        <option value='6'>Room 6</option>
-                                        <option value='7'>Room 7</option>
-                                        <option value='8'>Room 8</option>
-                                        <option value='9'>Room 9</option>
-                                        <option value='10'>Room 10</option>
-                                    </select>
-                                </div>
-                            </div> */}
                             <div className='col s4'>
                                 <div className='col s8 offset-s2'>
                                     <button className='btn blue-grey darken-2' type="submit" style={{ marginTop: '23px' }}>Start</button>
                                 </div>
                             </div>
                         </form>
+                        <div className='row'>
+                            <div className='col s12'>
+                                <h5 className='center-align'>Or Join a Game</h5>
+                                <form className='row' onSubmit={this.handleJoinSubmit}>
+                                    <div className='col s4'>
+                                        <div className='input-field col s8 offset-s8'>
+                                            <input type="text" className="validate" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Room Key" />
+                                        </div>
+                                    </div>
+                                    <div className='col s6'>
+                                        <div className='col s8 offset-s7'>
+                                            <button className='btn blue-grey darken-2' type="submit" style={{ marginTop: '23px' }}>Join</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className='divider'></div>

@@ -4,6 +4,7 @@ const router = express.Router();
 const OpenTok = require('opentok');
 const _ = require('lodash');
 const path = require('path');
+const crypto = require('crypto');
 const keys = require('../config/keys');
 const apiKey = keys.TOKBOX_API_KEY;
 const secret = keys.TOKBOX_SECRET;
@@ -18,6 +19,12 @@ if (!apiKey || !secret) {
     console.error('=========================================================================================================');
     process.exit();
 };
+
+//Load Helpers
+const {
+    ensureAuthenticated,
+    ensureGuest
+} = require('../helpers/auth');
 
 // Load Lobby model
 require('../models/Lobby');
@@ -34,7 +41,7 @@ const opentok = new OpenTok(apiKey, secret);
 let roomContainer = [];
 let room;
 function createARoom() {
-    room = Math.ceil(Math.random() * 10000);
+    room = Math.ceil(Math.random() * (new Date()));
     if (roomContainer.indexOf(room) > 0) {
         createAroom();
     } else {
@@ -42,14 +49,22 @@ function createARoom() {
     }
     return room;
 }
+let roomKey;
+function createHash() {
+    var current_date = (new Date()).valueOf().toString();
+    var random = Math.random().toString();
+    roomKey = crypto.createHash('sha1').update(current_date + random).digest('hex');
+    roomKey = roomKey.slice(1, 11);
+    return roomKey;
+}
 
 /**
  * GET /room/
  */
-router.post('/room', function (req, res) {
+router.post('/room', ensureAuthenticated, function (req, res) {
     let { gameType, maxPlayers } = req.body
     createARoom();
-    console.log(req.session);
+    createHash();
     if (gameType === 'deal52') {
         gameType = 'gamepage';
     } else if (gameType === 'webcam') {
@@ -70,10 +85,12 @@ router.post('/room', function (req, res) {
                 const lobby = new Lobby({
                     roomNumber: room,
                     gameType: gameType,
+                    roomKey: roomKey,
                     sessionId: session.sessionId,
-                    players: [req.session.user._id],
+                    players: [req.session.user._id || req.user.googleID],
                     maxPlayer: maxPlayers
                 });
+                console.log('This is a lobby after it is created: ', lobby);
                 lobby.save((err) => {
                     if (err) return next(err);
                 });
@@ -87,12 +104,38 @@ router.post('/room', function (req, res) {
                     pathname: `/${gameType}`
                 });
             });
+        }
+    });
+});
+
+router.get('/lobby', ensureAuthenticated, (req, res) => {
+    console.log('req.session.user: ', req.session.user);
+    console.log('req.user: ', req.user);
+    if (req.session.user) {
+        res.json({
+            firstName: req.session.user.firstName,
+            lastName: req.session.user.lastName
+        });
+    } else if (req.user) {
+        res.json({
+            firstName: req.user.firstName,
+            lastName: req.user.lastName
+        });
+    }
+});
+
+router.post('/create', ensureAuthenticated, (req, res) => {
+    let { roomKey } = req.body;
+    Lobby.findOne({ roomKey: roomKey }, (err, lobby) => {
+        if (err) return next(err);
+        if (!lobby) {
+            res.json({ messages: 'That lobby does not exist!' });
         } else {
-            // if (lobby.maxPlayer === lobby.players.length) {
-            //     return res.json({
-            //         messages: 'Uh oh, that lobby is full!'
-            //     });
-            // };
+            if (lobby.maxPlayer === lobby.players.length) {
+                return res.json({
+                    messages: 'Uh oh, that lobby is full!'
+                });
+            };
             lobby.players.push(req.session.user._id);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);
@@ -104,19 +147,11 @@ router.post('/room', function (req, res) {
                 apiKey: apiKey,
                 sessionId: lobby.sessionId,
                 token: token,
-                pathname: `/${gameType}`
+                roomKey: roomKey,
+                pathname: `/${lobby.gameType}`
             });
         }
-    });
-});
-
-router.get('/lobby', (req, res) => {
-    if (req.session.user) {
-        res.json({
-            firstName: req.session.user.firstName,
-            lastName: req.session.user.lastName
-        });
-    }
+    })
 });
 
 module.exports = router;
