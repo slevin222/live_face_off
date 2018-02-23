@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-import '../assets/css/homePageStyle.css';
+import '../assets/css/login.css';
 import DisplayMessages from './errorMessage';
 import axios from 'axios';
 import { connect } from 'react-redux';
