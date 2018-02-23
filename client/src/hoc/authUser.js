@@ -5,7 +5,7 @@ export default function(WrappedComponent){
     class Auth extends Component {
 
         componentDidMount(){
-            console.log('is user authorized',this.props.auth)
+            console.log('is user authorized',this.props.auth);
 
             if(!this.props.auth){
                 this.props.history.push('/');

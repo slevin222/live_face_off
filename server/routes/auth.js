@@ -51,7 +51,6 @@ router.get('/verify', (req, res) => {
 router.get('/logout', (req, res) => {
     req.logout();
     res.send(req.user || req.session.user);
-    // res.redirect('/login');
 });
 
 module.exports = router;

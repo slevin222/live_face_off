@@ -4,11 +4,6 @@ import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions';
 
 class Navbar extends Component {
-
-    componentWillMount(){
-        this.props.signIn();
-    }
-
     renderLinks(){
         if(this.props.auth){
             return [
