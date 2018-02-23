@@ -6,13 +6,10 @@ body{
 .signInArea {
     border: 1px solid black;
     width: 70%;
-    margin: 10% auto;
+    margin: 5% auto;
     background-color: ghostwhite;
 }
 
-.homeTitle {
-
-}
 
 .top{
     height: 30%;
@@ -35,7 +32,7 @@ body{
 /*}*/
 
 .inputFieldCentering {
-    width: 35%;
+    width: 42%;
     margin: 0 auto;
 }
 
@@ -48,9 +45,9 @@ body{
 }
 
 .facebookBtn {
-    margin-right: 10px;
+    margin-left:1%;
 }
 
 .googleBtn {
-    margin-left: 10px;
+    margin-left: 1%;
 }
