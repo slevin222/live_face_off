@@ -126,6 +126,8 @@ class LobbyPage extends Component {
 
     componentWillMount() {
         this.getUserInfo();
+
+
     }
 
     componentDidMount() {

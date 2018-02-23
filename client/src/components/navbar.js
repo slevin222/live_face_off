@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { signOut } from '../actions';
+import { signIn, signOut } from '../actions';
 
-const Navbar = (props) => {
+class Navbar extends Component {
 
-    function renderLinks(){
-        if(props.auth){
+    componentWillMount(){
+        this.props.signIn();
+    }
+
+    renderLinks(){
+        if(this.props.auth){
             return [
                 <li key='0'>
                     <Link to='/lobby'>Lobby</Link>
                 </li>,
                 <li key='1'>
-                    <a onClick={props.signOut}>Logout</a>
+                    <a onClick={this.props.signOut}>Logout</a>
                 </li>
             ]
         }
@@ -27,16 +31,18 @@ const Navbar = (props) => {
         ]
     }
 
-    return (
-        <nav className='blue-grey darken-3'>
-            <div className="nav-wrapper ">
-                <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><i className="material-icons">switch_video</i>Live Face Off</Link>
-                <ul className="right">
-                    {renderLinks()}
-                </ul>
-            </div>
-        </nav>
-    )
+    render(){
+        return (
+            <nav className='blue-grey darken-3'>
+                <div className="nav-wrapper ">
+                    <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><i className="material-icons">switch_video</i>Live Face Off</Link>
+                    <ul className="right">
+                        {this.renderLinks()}
+                    </ul>
+                </div>
+            </nav>
+        )
+    }
 }
 
 function mapStateToProps(state){
@@ -45,4 +51,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {signOut: signOut})(Navbar);
+export default connect(mapStateToProps, {signIn: signIn, signOut: signOut})(Navbar);
