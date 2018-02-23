@@ -39,7 +39,7 @@ class LoginPage extends Component {
                 }
             }).catch(error => {
                 console.log('catcherrr', error)
-        });
+            });
     }
     handleInput(event) {
         const { value, name } = event.target;
@@ -78,16 +78,17 @@ class LoginPage extends Component {
 
                             <div className="row">
                                 <div className='buttonArea col s12'>
-                                    <Link className='logInBtn waves-effect waves-light btn' to='/register'>Register</Link>
-                                    <button type="submit" className='logInBtn waves-effect waves-light btn'>Log In</button>
+                                    <Link className='logInBtn waves-effect waves-light btn blue-grey darken-2' to='/register'>Register</Link>
+                                    <button type="submit" className='logInBtn waves-effect waves-light btn blue-grey darken-2'>Log In</button>
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className='buttonAreaTwo col s12 center-align'>
-                                    <p className='center-align'>----------------------- or login with -----------------------</p>
-                                    <a className="facebookBtn waves-effect waves-light btn light-blue darken-3" href="/auth/facebook">Facebook</a>
-                                    <a className="googleBtn waves-effect waves-light btn deep-orange darken-2" href="/auth/google">Google</a>
+                                    <h5 className='center-align'>Or login with</h5>
+                                    <br />
+                                    <a className="facebookBtn waves-effect waves-light btn light-blue darken-4" href="/auth/facebook">Facebook</a>
+                                    <a className="googleBtn waves-effect waves-light btn deep-orange darken-4" href="/auth/google">Google</a>
                                 </div>
                             </div>
                         </form>
