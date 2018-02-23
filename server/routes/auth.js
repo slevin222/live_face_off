@@ -38,7 +38,8 @@ router.get('/facebook/callback', passport.authenticate('facebook', {
 // });
 
 router.get('/verify', (req, res) => {
-    console.log(req.user || req.session.user);
+    console.log(req.user);
+    console.log(req.session.user);
     const token = tokenForUser(req.user.id || req.session.user._id)
     console.log(token);
     if (req.user || req.session.user) {
@@ -56,8 +57,8 @@ router.get('/verify', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
+    req.session = null;
     req.logout();
-    res.send(req.user || req.session.user);
 });
 
 module.exports = router;
