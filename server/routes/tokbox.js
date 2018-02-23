@@ -20,6 +20,12 @@ if (!apiKey || !secret) {
     process.exit();
 };
 
+//Load Helpers
+const {
+    ensureAuthenticated,
+    ensureGuest
+} = require('../helpers/auth');
+
 // Load Lobby model
 require('../models/Lobby');
 const Lobby = mongoose.model('lobby');
@@ -55,7 +61,7 @@ function createHash() {
 /**
  * GET /room/
  */
-router.post('/room', function (req, res) {
+router.post('/room', ensureAuthenticated, function (req, res) {
     let { gameType, maxPlayers } = req.body
     createARoom();
     createHash();
@@ -102,7 +108,7 @@ router.post('/room', function (req, res) {
     });
 });
 
-router.get('/lobby', (req, res) => {
+router.get('/lobby', ensureAuthenticated, (req, res) => {
     console.log('req.session.user: ', req.session.user);
     console.log('req.user: ', req.user);
     if (req.session.user) {
@@ -118,7 +124,7 @@ router.get('/lobby', (req, res) => {
     }
 });
 
-router.post('/create', (req, res) => {
+router.post('/create', ensureAuthenticated, (req, res) => {
     let { roomKey } = req.body;
     Lobby.findOne({ roomKey: roomKey }, (err, lobby) => {
         if (err) return next(err);

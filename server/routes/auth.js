@@ -1,6 +1,17 @@
 const express = require('express');
 const passport = require('passport');
+const jwt = require('jwt-simple');
 const router = express.Router();
+const keys = require('../config/keys_dev');
+
+//Generate a token
+function tokenForUser(user) {
+    const ts = new Date().getTime();
+    return jwt.encode({
+        uid: user.id,
+        ts: ts
+    }, keys.secretsecret);
+};
 
 //GOOGLE ROUTES
 router.get('/google', passport.authenticate('google', {
@@ -8,36 +19,30 @@ router.get('/google', passport.authenticate('google', {
 }));
 
 router.get('/google/callback', passport.authenticate('google', {
-    // failureRedirect: 'http://localhost:5000/login'
     failureRedirect: '/login'
 }), (req, res) => {
-    //Successful authentication, redirect home. if you redirect  res.redirect('http://localhost:3000/gamepage' will go to game page
-    // res.redirect('http://localhost:5000/gamepage');
-    //When deploying on same server
     res.redirect('/lobby');
 });
 
 //FACEBOOK ROUTES
-router.get('/facebook',
-    passport.authenticate('facebook', {
-        scope: ['profile', 'email']
-    }));
+router.get('/facebook', passport.authenticate('facebook', {
+    scope: ['public_profile', 'email']
+}));
 
-router.get('/facebook/callback',
-    passport.authenticate('facebook', {
-        // failureRedirect: 'http://localhost:5000/login'
-        failureRedirect: '/login'
-    }),
-    (req, res) => {
-        // Successful authentication, redirect home.
-        // res.redirect('http://localhost:5000/gamepage');
-        res.redirect('/lobby');
-    });
+router.get('/facebook/callback', passport.authenticate('facebook', {
+    failureRedirect: '/login',
+    successRedirect: '/lobby'
+}));
+// }), (req, res) => {
+//     res.redirect('/lobby');
+// });
 
 router.get('/verify', (req, res) => {
+    console.log(req.user || req.session.user);
     if (req.user || req.session.user) {
         res.json({
-            isLoggedIn: true
+            isLoggedIn: true,
+            token: tokenForUser(req.user.id || req.session.user._id)
         });
         console.log(req.user || req.session.user);
     } else {
