@@ -121,12 +121,12 @@ class TokBox extends Component {
         }
         return (
             <div className="row col s12">
-                <div>Session Status: {connection}</div>
+                {/* <div>Session Status: {connection}</div>
                 {error ? (
                     <div className="error">
                         <strong>Error:</strong> {error}
                     </div>
-                ) : null}
+                ) : null} */}
                 <OTSession
                     apiKey={apiKey}
                     sessionId={sessionId}
@@ -137,12 +137,14 @@ class TokBox extends Component {
                     <button className="btn btn grey" onClick={this.toggleVideo}>
                         {publishVideo ? 'Disable' : 'Enable'} Video
           </button>
+                    {/* <div className="container"> */}
                     <OTPublisher
                         properties={{ publishVideo, width: 170, height: 150, }}
                         onPublish={this.onPublish}
                         onError={this.onPublishError}
                         eventHandlers={this.publisherEventHandlers}
                     />
+                    {/* </div> */}
                     <OTStreams>
                         <OTSubscriber
                             properties={vidWidth}

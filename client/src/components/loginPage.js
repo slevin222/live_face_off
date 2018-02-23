@@ -53,7 +53,7 @@ class LoginPage extends Component {
         return (
             <div className='container'>
                 <DisplayMessages messages={messages} />
-                <div className='signInArea'>
+                <div className='signInArea z-depth-5'>
                     <div className='row'>
                         <div className="col s12 homeTitle center-align">
                             <h1>Live Face Off</h1>
