@@ -19,6 +19,7 @@ class LoginPage extends Component {
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleSubmit(event) {
         const { form } = this.state;
         event.preventDefault();
