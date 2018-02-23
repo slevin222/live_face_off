@@ -18,6 +18,7 @@ export function signIn(){
 }
 
 export function signOut(){
+    console.log('asdsadsa');
     return async dispatch => {
         try {
             const resp = await axios.get('/auth/logout');

@@ -5,10 +5,10 @@ const router = express.Router();
 const keys = require('../config/keys_dev');
 
 //Generate a token
-function tokenForUser(user) {
+function tokenForUser(id) {
     const ts = new Date().getTime();
     return jwt.encode({
-        uid: user.id,
+        uid: id,
         ts: ts
     }, keys.secret);
 };
@@ -21,7 +21,7 @@ router.get('/google', passport.authenticate('google', {
 router.get('/google/callback', passport.authenticate('google', {
     failureRedirect: '/login'
 }), (req, res) => {
-    res.redirect('/login');
+    res.redirect('/lobby');
 });
 
 //FACEBOOK ROUTES
@@ -38,16 +38,32 @@ router.get('/facebook/callback', passport.authenticate('facebook', {
 // });
 
 router.get('/verify', (req, res) => {
-    console.log(req.user);
-    console.log(req.session.user);
-    const token = tokenForUser(req.user.id || req.session.user._id)
-    console.log(token);
-    if (req.user || req.session.user) {
-        res.json({
-            isLoggedIn: true,
-            token: token
-        });
-        console.log(req.user || req.session.user);
+    let user = null;
+    if (req.hasOwnProperty('user')){
+        user = req.user;
+    } else if (req.hasOwnProperty('session') && req.session.hasOwnProperty('user')){
+        user = req.session.user;
+        user.id = user._id;
+    }
+    let id = null;
+    if (user.hasOwnProperty('id')){
+        id = user.id;
+    } else if (user.hasOwnProperty('googleID')){
+        id = user.googleID;
+    } else if (user.hasOwnProperty('facebookID')){
+        id = user.facebookID;
+    }
+    const token = tokenForUser(id);
+    if (user) {
+        // if (req.xhr){
+            res.json({
+                isLoggedIn: true,
+                token: token
+            });
+        // } else {
+        //     res.redirect('/lobby')
+        // }
+
     } else {
         console.log("Not Auth");
         res.json({
@@ -57,8 +73,8 @@ router.get('/verify', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    req.session = null;
     req.logout();
+    res.send(req.user || req.session.user);
 });
 
 module.exports = router;
