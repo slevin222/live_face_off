@@ -136,14 +136,15 @@ class TokBox extends Component {
                 >
                     <button className="btn btn grey" onClick={this.toggleVideo}>
                         {publishVideo ? 'Disable' : 'Enable'} Video
-          </button>
+
+                </button>
                     {/* <div className="container"> */}
-                    <OTPublisher
+                    {/* <OTPublisher
                         properties={{ publishVideo, width: 170, height: 150, }}
                         onPublish={this.onPublish}
                         onError={this.onPublishError}
                         eventHandlers={this.publisherEventHandlers}
-                    />
+                    /> */}
                     {/* </div> */}
                     <OTStreams>
                         <OTSubscriber
@@ -153,7 +154,16 @@ class TokBox extends Component {
                             eventHandlers={this.subscriberEventHandlers}
                         />
                     </OTStreams>
+                    <OTPublisher
+                        properties={{ publishVideo, width: 170, height: 150, }}
+                        onPublish={this.onPublish}
+                        onError={this.onPublishError}
+                        eventHandlers={this.publisherEventHandlers}
+                    />
                 </OTSession>
+
+
+
             </div>
         );
     }

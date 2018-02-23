@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class Homepage extends Component {
-    render(){
+    render() {
         return (
             <div className='container'>
                 <h1>Live Face Off Homepage</h1>
