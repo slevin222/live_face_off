@@ -21,7 +21,6 @@ class GamePage extends Component {
                 <div className="row col s12 gameCards">
                     <Chat />
                     <GameBoard />
-                    <RunGame />
                 </div>
             </div>
         )

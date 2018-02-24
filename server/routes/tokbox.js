@@ -99,7 +99,8 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     apiKey: apiKey,
                     sessionId: session.sessionId,
                     token: token,
-                    roomKey: roomKey
+                    roomKey: roomKey,
+                    pathname: `/${gameType}`
                 });
             });
         }
@@ -140,7 +141,8 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                 apiKey: apiKey,
                 sessionId: lobby.sessionId,
                 token: token,
-                roomKey: roomKey
+                roomKey: roomKey,
+                pathname: `/${gameType}`
             });
         }
     })

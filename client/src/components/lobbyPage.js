@@ -103,10 +103,10 @@ class LobbyPage extends Component {
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
             console.log(JSON.parse(dataFromServer));
-            // if (res.data.hasOwnProperty('pathname')) {
-            //     const { origin } = location;
-            //     location.href = `${origin}${res.data.pathname}`;
-            // }
+            if (res.data.hasOwnProperty('pathname')) {
+                const { origin } = location;
+                location.href = `${origin}${res.data.pathname}`;
+            }
         });
     }
 
