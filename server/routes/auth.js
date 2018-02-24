@@ -33,51 +33,35 @@ router.get('/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/login',
     successRedirect: '/lobby'
 }));
-// }), (req, res) => {
-//     res.redirect('/lobby');
-// });
+
 
 router.get('/verify', (req, res) => {
-    let user = null;
-    if (req.hasOwnProperty('user')){
-        user = req.user;
-    } else if (req.hasOwnProperty('session') && req.session.hasOwnProperty('user')){
-        user = req.session.user;
-        user.id = user._id;
+    if (!req.user) {
+        console.log("Not Authorized: ", req.user);
+        return res.json({
+            isLoggedIn: false
+        });
     }
     let id = null;
-    if (user.hasOwnProperty('id')){
-        id = user.id;
-    } else if (user.hasOwnProperty('googleID')){
-        id = user.googleID;
-    } else if (user.hasOwnProperty('facebookID')){
-        id = user.facebookID;
+    if (req.user.hasOwnProperty('id')) {
+        id = req.user.id;
+    } else if (req.user.hasOwnProperty('googleID')) {
+        id = req.user.googleID;
+    } else if (req.user.hasOwnProperty('facebookID')) {
+        id = req.user.facebookID;
     }
     const token = tokenForUser(id);
-    if (user) {
-        // if (req.xhr){
-            res.json({
-                isLoggedIn: true,
-                token: token
-            });
-        // } else {
-        //     res.redirect('/lobby')
-        // }
-
-    } else {
-        console.log("Not Auth");
+    if (req.user) {
         res.json({
-            isLoggedIn: false
+            isLoggedIn: true,
+            token: token
         });
     }
 });
 
 router.get('/logout', (req, res) => {
     req.logout();
-    res.send(req.user || req.session.user);
-    console.log('req.session before setting to null', req.session);
-    req.session = null;
-    console.log('req.session after setting to null', req.session);
+    res.send(req.user);
 });
 
 module.exports = router;
