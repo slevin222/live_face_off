@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
 import axios from 'axios';
-import LobbyList from "./lobbyList";
+import LobbyList from './lobbyList';
+import CreateGameModal from './createGameModal';
 
 class LobbyPage extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ class LobbyPage extends Component {
             room: '',
             firstName: '',
             lastName: '',
-            roomKey: ''
+            roomKey: '',
+            displayModal: false
         };
 
         //lobbies dummy data
@@ -213,6 +215,7 @@ class LobbyPage extends Component {
                 </div>
                 <div className='divider'></div>
                 <LobbyList data={lobbies} />
+                <CreateGameModal/>
             </div>
         )
     }
