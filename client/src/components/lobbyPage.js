@@ -119,9 +119,7 @@ class LobbyPage extends Component {
     handleJoinSubmit(event) {
         const { roomKey } = this.state;
         event.preventDefault();
-        this.setState({
-            roomKey
-        });
+        console.log(roomKey);
         axios({
             method: 'post',
             url: `/tokbox/create`,
@@ -136,6 +134,8 @@ class LobbyPage extends Component {
             if (res.data.hasOwnProperty('pathname')) {
                 const { origin } = location;
                 location.href = `${origin}${res.data.pathname}`;
+
+                console.log(res.data.pathname);
             }
             if (res.data.hasOwnProperty('messages')) {
                 this.setState({

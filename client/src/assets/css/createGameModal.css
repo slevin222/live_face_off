@@ -12,6 +12,7 @@
 }
 
 .createGameContent {
+    user-select: text;
     background-color: whitesmoke;
     margin: 10% auto;
     padding: 20px;
