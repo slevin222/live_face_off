@@ -111,8 +111,8 @@ router.post('/room', ensureAuthenticated, function (req, res) {
 router.get('/lobby', (req, res) => {
     if (req.user) {
         res.json({
-            firstName: user.firstName,
-            lastName: user.lastName
+            firstName: req.user.firstName,
+            lastName: req.user.lastName
         });
     }
 });
