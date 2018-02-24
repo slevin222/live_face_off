@@ -198,7 +198,7 @@ class LobbyPage extends Component {
                                 <form className='row' onSubmit={this.handleJoinSubmit}>
                                     <div className='col s4'>
                                         <div className='input-field col s8 offset-s8'>
-                                            <input type="text" className="validate" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Room Key" />
+                                            <input type="text" className="validate roomKey" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Room Key" />
                                         </div>
                                     </div>
                                     <div className='col s6'>
