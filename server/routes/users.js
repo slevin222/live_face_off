@@ -18,10 +18,12 @@ router.post('/login', function (req, res, next) {
             return res.json({ messages: 'Not a valid combination, please try a different one!' });
         }
         if (user) {
-            console.log('server cookies', req.cookies);
-            console.log('This is req.session @ login route', req.session);
-            // req.session.user = user;
-            res.send(req.session.user);
+            req.logIn(user, function (err) {
+                if (err) {
+                    return next(err);
+                }
+                res.send(user);
+            });
         }
     })(req, res, next);
 });
