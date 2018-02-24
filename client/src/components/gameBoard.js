@@ -6,8 +6,6 @@ class GameBoard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-
-            discardPile: [],
             currentPlayer: null,
             players: [1, 2, 3, 4],
             roundCounter: 1,
@@ -17,13 +15,15 @@ class GameBoard extends Component {
             playerHand2: [],
             playerHand3: [],
             playerHand4: [],
-            discardPile: []
         }
 
         this.dealInitialHand = this.dealInitialHand.bind(this);
         this.cardsToDiscard = this.cardsToDiscard.bind(this);
+        this.discardCardBtn = this.discardCardBtn.bind(this);
 
         this.deck = [];
+        this.discardPile = [];
+        this.discardArr = [];
     }
 
     componentDidMount() {
@@ -99,32 +99,30 @@ class GameBoard extends Component {
         }
     };
 
-    cardsToDiscard() {
-        console.log("Inside cards to discard :", this);
-        // let cardPosition = parseInt(cardClass.slice(-1));
+    cardsToDiscard(event) {
+        let cardPosition = parseInt((event.target.className).slice(-1));
+        this.discardArr.push(cardPosition);
+        console.log(this.discardArr);
         // push(cardPosition);
 
 
     };
 
     discardCardBtn() {
-        this.discardCards(cardsToDelete);
-        cardsToDelete = [];
-
+        console.log(this.discardArr);
+        this.discardCards(this.discardArr);
     };
 
     discardCards(deleteIndexArray) {
         if (deleteIndexArray.length > 3 || deleteIndexArray.length < 1) {
             return console.error('You can only discard 1 to 3 cards per turn');
         }
-        if (this.state.deckOfCards.length < deleteIndexArray.length) {
-            for (let discardPileIndex = 0; discardPileIndex < this.state.discardPile.length; discardPileIndex++) {
-                this.state.deckOfCards.push(this.state.discardPile[discardPileIndex]);
+        if (this.deck.length < deleteIndexArray.length) {
+            for (let discardPileIndex = 0; discardPileIndex < this.discardPile.length; discardPileIndex++) {
+                this.deck.push(this.discardPile[discardPileIndex]);
             }
             this.shuffleDeck();
-            this.setState({
-                discardPile: []
-            })
+
         }
 
         //////////start here
@@ -144,29 +142,28 @@ class GameBoard extends Component {
             this.roundCounter++;
             this.runGame();
         }
-
+        this.discardPile.push(this.discardArr);
+        this.discardArr = [];
     };
 
     render() {
         const { playerHand1, playerHand2, playerHand3, playerHand4, deckOfCards } = this.state;
         console.log("state in render :", this.state);
         console.log("deck in render: ", this.deck);
-        debugger;
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
             return (
                 <div>
-                    <button onClick={this.dealInitialHand} className="btn discardBtn green-accent-3" type="submit">Start Game</button>
+                    <button onClick={this.dealInitialHand} className="waves-effect waves-light btn blue-grey darken-2" type="submit">Start Game</button>
                 </div>
             )
         }
-        debugger;
         return (
             <div className="gameArea">
-                <div onClick={this.cardsToDiscard} className="playerCard0" style={{ backgroundImage: "url(" + playerHand1[0].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard1" style={{ backgroundImage: "url(" + playerHand1[1].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard2" style={{ backgroundImage: "url(" + playerHand1[2].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard3" style={{ backgroundImage: "url(" + playerHand1[3].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard4" style={{ backgroundImage: "url(" + playerHand1[4].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard0 z-depth-4" style={{ backgroundImage: "url(" + playerHand1[0].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard1 z-depth-4" style={{ backgroundImage: "url(" + playerHand1[1].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard2 z-depth-4" style={{ backgroundImage: "url(" + playerHand1[2].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard3 z-depth-4" style={{ backgroundImage: "url(" + playerHand1[3].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard4 z-depth-4" style={{ backgroundImage: "url(" + playerHand1[4].image + ")" }} ></div>
                 <div className="bottomInfo">
                     <div className="bottom0">{playerHand1[0].value}</div>
                     <div className="bottom1">{playerHand1[1].value}</div>
@@ -175,7 +172,7 @@ class GameBoard extends Component {
                     <div className="bottom4">{playerHand1[4].value}</div>
                 </div>
                 <div className="footer">
-                    <button className="btn discardBtn blue-accent-3" type="submit">Discard Cards</button>
+                    <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2" type="submit">Discard Cards</button>
                 </div>
             </div >
         );
