@@ -58,9 +58,7 @@ function createHash() {
     return roomKey;
 }
 
-/**
- * GET /room/
- */
+//This route generates a room/hash and creates the lobby in the database, then sends the information back to the user
 router.post('/room', ensureAuthenticated, function (req, res) {
     let { gameType, maxPlayers } = req.body
     createARoom();
@@ -70,6 +68,7 @@ router.post('/room', ensureAuthenticated, function (req, res) {
     } else if (gameType === 'webcam') {
         gameType = 'camGame';
     }
+    console.log('This is the has from the new room: ', roomKey);
     console.log('attempting to create a session associated with the room: ' + room);
     // if the room name is associated with a session ID, fetch that
     Lobby.findOne({ roomNumber: room }, 'players sessionId', (err, lobby) => {
@@ -90,7 +89,6 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     players: [req.user.id],
                     maxPlayer: maxPlayers
                 });
-                console.log('This is a lobby after it is created: ', lobby);
                 lobby.save((err) => {
                     if (err) return next(err);
                 });
@@ -101,13 +99,14 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     apiKey: apiKey,
                     sessionId: session.sessionId,
                     token: token,
-                    pathname: `/${gameType}`
+                    roomKey: roomKey
                 });
             });
         }
     });
 });
 
+//Get User information to display correctly on the Lobby Page
 router.get('/lobby', (req, res) => {
     if (req.user) {
         res.json({
@@ -117,6 +116,7 @@ router.get('/lobby', (req, res) => {
     }
 });
 
+//Use roomKey to Join a room. Room key is given to the user when they hit the start button
 router.post('/create', ensureAuthenticated, (req, res) => {
     let { roomKey } = req.body;
     Lobby.findOne({ roomKey: roomKey }, (err, lobby) => {
@@ -140,8 +140,7 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                 apiKey: apiKey,
                 sessionId: lobby.sessionId,
                 token: token,
-                roomKey: roomKey,
-                pathname: `/${lobby.gameType}`
+                roomKey: roomKey
             });
         }
     })

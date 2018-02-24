@@ -27,14 +27,12 @@ module.exports = function (passport) {
             }).then(user => {
                 if (user) {
                     // return user
-                    console.log('Existing Google User login: ', user);
                     done(null, user);
                 } else {
                     //create user
                     new User(newUser)
                         .save()
                         .then(user => {
-                            console.log('New Google User login: ', user)
                             done(null, user);
                         });
                 }
