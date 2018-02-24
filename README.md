@@ -1,4 +1,4 @@
-#cLive Face Off
+# Live Face Off
 
 > Connect with your friends and family and enjoy some time with each other.
 
