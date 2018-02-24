@@ -130,6 +130,7 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                     messages: 'Uh oh, that lobby is full!'
                 });
             };
+            console.log('Lobby: ', lobby);
             lobby.players.push(req.user.id);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);
@@ -142,7 +143,7 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                 sessionId: lobby.sessionId,
                 token: token,
                 roomKey: roomKey,
-                pathname: `/${gameType}`
+                pathname: `/${lobby.gameType}`
             });
         }
     })
