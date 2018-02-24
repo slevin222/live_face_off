@@ -105,7 +105,6 @@ class TokBox extends Component {
 
     componentWillUnmount() {
         console.log('Open Tok Unmounting');
-        this.publisher.disconnect();
     }
 
 
