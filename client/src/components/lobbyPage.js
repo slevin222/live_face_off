@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
 import axios from 'axios';
 import LobbyList from "./lobbyList";
-import { connect } from 'react-redux';
-import { signIn } from '../actions';
-
 
 class LobbyPage extends Component {
     constructor(props) {
@@ -128,8 +125,6 @@ class LobbyPage extends Component {
     }
 
     componentWillMount() {
-        this.props.signIn();
-
         this.getUserInfo();
     }
 
@@ -223,4 +218,4 @@ class LobbyPage extends Component {
     }
 }
 
-export default connect(null, { signIn: signIn })(LobbyPage);
+export default LobbyPage;

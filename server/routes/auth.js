@@ -21,7 +21,7 @@ router.get('/google', passport.authenticate('google', {
 router.get('/google/callback', passport.authenticate('google', {
     failureRedirect: '/login'
 }), (req, res) => {
-    res.redirect('/lobby');
+    res.redirect('/login');
 });
 
 //FACEBOOK ROUTES
