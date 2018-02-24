@@ -1,82 +1,181 @@
 import React, { Component } from 'react';
 import '../assets/css/gameBoard.css';
-import twoH from '../assets/images/2H.png';
-import twoD from '../assets/images/2D.png';
-import twoC from '../assets/images/2C.png';
-import twoS from '../assets/images/2S.png';
-import threeH from '../assets/images/3H.png';
-import threeD from '../assets/images/3D.png';
-import threeC from '../assets/images/3C.png';
-import threeS from '../assets/images/3S.png';
-import fourH from '../assets/images/4H.png';
-import fourD from '../assets/images/4D.png';
-import fourC from '../assets/images/4C.png';
-import fourS from '../assets/images/4S.png';
-import fiveH from '../assets/images/5H.png';
-import fiveD from '../assets/images/5D.png';
-import fiveC from '../assets/images/5C.png';
-import fiveS from '../assets/images/5S.png';
-import sixH from '../assets/images/6H.png';
-import sixD from '../assets/images/6D.png';
-import sixC from '../assets/images/6C.png';
-import sixS from '../assets/images/6S.png';
-import sevenH from '../assets/images/7H.png';
-import sevenD from '../assets/images/7D.png';
-import sevenC from '../assets/images/7C.png';
-import sevenS from '../assets/images/7S.png';
-import eightH from '../assets/images/8H.png';
-import eightD from '../assets/images/8D.png';
-import eightC from '../assets/images/8C.png';
-import eightS from '../assets/images/8S.png';
-import nineH from '../assets/images/9H.png';
-import nineD from '../assets/images/9D.png';
-import nineC from '../assets/images/9C.png';
-import nineS from '../assets/images/9S.png';
-import tenH from '../assets/images/10H.png';
-import tenD from '../assets/images/10D.png';
-import tenC from '../assets/images/10C.png';
-import tenS from '../assets/images/10S.png';
-import jackH from '../assets/images/JH.png';
-import jackD from '../assets/images/JD.png';
-import jackC from '../assets/images/JC.png';
-import jackS from '../assets/images/JS.png';
-import queenH from '../assets/images/QH.png';
-import queenD from '../assets/images/QD.png';
-import queenC from '../assets/images/QC.png';
-import queenS from '../assets/images/QS.png';
-import kingH from '../assets/images/KH.png';
-import kingD from '../assets/images/KD.png';
-import kingC from '../assets/images/KC.png';
-import kingS from '../assets/images/KS.png';
-import aceH from '../assets/images/AH.png';
-import aceD from '../assets/images/AD.png';
-import aceC from '../assets/images/AC.png';
-import aceS from '../assets/images/AS.png';
-import RunGame from './runGame';
-
+import deck from './deck';
 
 class GameBoard extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+
+            discardPile: [],
+            currentPlayer: null,
+            players: [1, 2, 3, 4],
+            roundCounter: 1,
+            currentPlayer: 1,
+            roundCounter: 1,
+            playerHand1: [],
+            playerHand2: [],
+            playerHand3: [],
+            playerHand4: [],
+            discardPile: []
+        }
+
+        this.dealInitialHand = this.dealInitialHand.bind(this);
+        this.cardsToDiscard = this.cardsToDiscard.bind(this);
+
+        this.deck = [];
     }
+
+    componentDidMount() {
+        this.shuffleDeck();
+    }
+
+
+    shuffleDeck() {
+        this.deck = deck.sort(function () { return 0.5 - Math.random(); });
+    }
+
+    // deal() {
+    //     const p1hand = [];
+    //     const p2hand = [];
+    //     console.log("deal shift :", this.state.deckOfCards);
+    //     // this.shuffleDeck(deck);
+    //     // currentPlayer.hand.push(this.deck.cards.shift());
+    //     p1hand.push(this.state.deckOfCards.shift());
+    //     console.log("p1 hand in deal: ", p1hand);
+    //     this.setState({
+    //         player1Hand: p1hand,
+
+    //     });
+    // }
+
+
+    dealInitialHand() {
+
+        const numOfPlayers = this.state.players.length;
+        const hand1 = [];
+        const hand2 = [];
+        const hand3 = [];
+        const hand4 = [];
+
+        let cardCounter = 5;
+        for (let cardCountIndex = 0; cardCountIndex < cardCounter; cardCountIndex++) {
+            hand1.push(this.deck.shift());
+            hand2.push(this.deck.shift());
+            hand3.push(this.deck.shift());
+            hand4.push(this.deck.shift());
+            // this.deal(this.state.players[playersIndex]);
+            // }
+        }
+        this.setState({
+            playerHand1: [...hand1],
+            playerHand2: [...hand2],
+            playerHand3: [...hand3],
+            playerHand4: [...hand4]
+        });
+    }
+
+    runGame() {
+        const currentHands = this.state.playerHands;
+
+        if (this.roundCounter < 2) {
+            this.showHand(this.currentPlayer);
+        } else {
+            let winningValue = 100;
+            let winningPlayer = '';
+            for (let playerIndex = 0; playerIndex < this.state.players.length; playerIndex++) {
+                let currentValue = null;
+                for (let cardIndex = 0; cardIndex < tcurrentHands[playerIndex].length; cardIndex++) {
+                    // currentValue += this.players[playerIndex].hand[cardIndex].value;
+                    currentValue += currentHands[playerIndex].value;
+                }
+                console.log('Player ' + (playerIndex + 1) + ' is ' + currentValue);
+                if (currentValue < winningValue) {
+                    winningValue = currentValue;
+                    winningPlayer = this.players[playerIndex].name;
+                }
+            }
+            console.log(winningPlayer + ' won with a value of ' + winningValue);
+        }
+    };
+
+    cardsToDiscard() {
+        console.log("Inside cards to discard :", this);
+        // let cardPosition = parseInt(cardClass.slice(-1));
+        // push(cardPosition);
+
+
+    };
+
+    discardCardBtn() {
+        this.discardCards(cardsToDelete);
+        cardsToDelete = [];
+
+    };
+
+    discardCards(deleteIndexArray) {
+        if (deleteIndexArray.length > 3 || deleteIndexArray.length < 1) {
+            return console.error('You can only discard 1 to 3 cards per turn');
+        }
+        if (this.state.deckOfCards.length < deleteIndexArray.length) {
+            for (let discardPileIndex = 0; discardPileIndex < this.state.discardPile.length; discardPileIndex++) {
+                this.state.deckOfCards.push(this.state.discardPile[discardPileIndex]);
+            }
+            this.shuffleDeck();
+            this.setState({
+                discardPile: []
+            })
+        }
+
+        //////////start here
+        deleteIndexArray.sort(function (a, b) { return b - a });
+        let currentPlayersHand = this.state.playerHands[0];
+        for (let cardIndex = 0; cardIndex < deleteIndexArray.length; cardIndex++) {
+            let currentCard = currentPlayersHand.splice(deleteIndexArray[cardIndex], 1);
+            this.state.discardPile.push(currentCard[0]);
+            this.deal(this.players[this.currentPlayer]);
+        }
+        console.log(this.players[this.currentPlayer].hand);
+        if (this.currentPlayer < this.playerCount - 1) {
+            this.currentPlayer++;
+            this.showHand(this.currentPlayer);
+        } else {
+            this.currentPlayer = 0;
+            this.roundCounter++;
+            this.runGame();
+        }
+
+    };
+
     render() {
+        const { playerHand1, playerHand2, playerHand3, playerHand4, deckOfCards } = this.state;
+        console.log("state in render :", this.state);
+        console.log("deck in render: ", this.deck);
+        debugger;
+        if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
+            return (
+                <div>
+                    <button onClick={this.dealInitialHand} className="btn discardBtn green-accent-3" type="submit">Start Game</button>
+                </div>
+            )
+        }
+        debugger;
         return (
             <div className="gameArea">
-
-                <div className="playerCard0" style={{ backgroundImage: "url(" + nineS + ")" }}></div>
-                <div className="playerCard1" style={{ backgroundImage: "url(" + sevenS + ")" }}></div>
-                <div className="playerCard2" style={{ backgroundImage: "url(" + jackC + ")" }}></div>
-                <div className="playerCard3" style={{ backgroundImage: "url(" + twoH + ")" }}></div>
-                <div className="playerCard4" style={{ backgroundImage: "url(" + threeC + ")" }}></div>
+                <div onClick={this.cardsToDiscard} className="playerCard0" style={{ backgroundImage: "url(" + playerHand1[0].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard1" style={{ backgroundImage: "url(" + playerHand1[1].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard2" style={{ backgroundImage: "url(" + playerHand1[2].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard3" style={{ backgroundImage: "url(" + playerHand1[3].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard4" style={{ backgroundImage: "url(" + playerHand1[4].image + ")" }} ></div>
                 <div className="bottomInfo">
-                    <div className="bottom0">9 Points</div>
-                    <div className="bottom1">10 Points</div>
-                    <div className="bottom2">10 Points</div>
-                    <div className="bottom3">2 Points</div>
-                    <div className="bottom4">3 Points</div>
+                    <div className="bottom0">{playerHand1[0].value}</div>
+                    <div className="bottom1">{playerHand1[1].value}</div>
+                    <div className="bottom2">{playerHand1[2].value}</div>
+                    <div className="bottom3">{playerHand1[3].value}</div>
+                    <div className="bottom4">{playerHand1[4].value}</div>
                 </div>
                 <div className="footer">
-                    <button className="btn discardBtn green-accent-3" type="submit">Discard Cards</button>
+                    <button className="btn discardBtn blue-accent-3" type="submit">Discard Cards</button>
                 </div>
             </div >
         );
