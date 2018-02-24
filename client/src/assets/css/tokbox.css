@@ -21,11 +21,15 @@
 div.OTPublisherContainer {
     /* float: left; */
     position: absolute;
-    top: 5%;
-    left: 0;
+    top: 10%;
+    left: 29%;
 
 }
 
 .error {
     color: red;
 }
+/* #camBtn{
+    position: absolute;
+    top: 10%;
+} */

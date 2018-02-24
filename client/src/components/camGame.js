@@ -11,29 +11,14 @@ class CamGame extends Component {
     render() {
         return (
             <div className="webpage row s12">
-                <div className="col s3 score container">
-                    <div className="center-align" >
-                        <div className="row">
-                            <h5 className="col s6">Team 1</h5>
-                            <div className="input-field col s6 ">
-                                <input type="number" placeholder="Enter Score" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="center-align" >
-                        <div className="row">
-                            <h5 className="col s6">Team 2</h5>
-                            <div className="input-field col s6 ">
-                                <input type="number" placeholder="Enter Score" />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <Chat />
-                    </div>
+                <div className="col s3">
+                    {/* <button className="waves-effect waves-light btn blue darken-2" >Finish Game</button> */}
+                    <Chat />
                 </div>
                 <div className="col s9" id="webcamContainer" >
-                    <TokBox />
+                    <div className="col s9 score container">
+                        <TokBox />
+                    </div>
                 </div>
             </div>
         )
