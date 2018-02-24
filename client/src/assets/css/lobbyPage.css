@@ -51,3 +51,7 @@
 .userInfo {
     margin: 0 auto;
 }
+
+::placeholder{
+    color: darkgrey;
+}

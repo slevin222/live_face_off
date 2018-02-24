@@ -112,7 +112,7 @@ class TokBox extends Component {
     render() {
         console.log('openTok State:', this.state);
         const { apiKey, sessionId, token, error, connection, publishVideo } = this.state;
-        const vidWidth = (this.props.data === "deal52") ? { width: 200, height: 200 } : { width: 875, height: 550 };
+        const vidWidth = (this.props.data === "deal52") ? { width: 200, height: 200 } : { width: 875, height: 575 };
 
         if (!apiKey) {
             return (
