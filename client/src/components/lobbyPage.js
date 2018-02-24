@@ -10,19 +10,18 @@ class LobbyPage extends Component {
         super(props);
         this.state = {
             lobbies: [],
-            gameType: '',
-            maxPlayers: '',
+            gameType: 'webcam',
+            maxPlayers: '2',
             room: '',
             firstName: '',
             lastName: '',
             roomKey: '',
             displayModal: false,
-            messages: null
+            messages: null,
 
+            //roomKey that is used in the Modal
+            roomKeyFromServer: ''
         };
-
-        //roomKey that is used in the Modal
-        this.roomKeyFromServer;
 
         //lobbies dummy data
         this.lobbyData = [
@@ -59,7 +58,9 @@ class LobbyPage extends Component {
 
 
     setDisplayModal(){
-
+        this.setState({
+            displayModal: true
+        })
     }
 
 
@@ -98,15 +99,19 @@ class LobbyPage extends Component {
             }
         }).then(res => {
             console.log("this is the response", res);
-            this.roomKeyFromServer = res.data.roomKey;
-            console.log(this.roomKeyFromServer);
+            this.setState({
+                roomKeyFromServer: res.data.roomKey
+            });
+            console.log(this.state.roomKeyFromServer);
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
             console.log(JSON.parse(dataFromServer));
-            if (res.data.hasOwnProperty('pathname')) {
-                const { origin } = location;
-                location.href = `${origin}${res.data.pathname}`;
-            }
+
+            this.setDisplayModal();
+            // if (res.data.hasOwnProperty('pathname')) {
+            //     const { origin } = location;
+            //     location.href = `${origin}${res.data.pathname}`;
+            // }
         });
     }
 
@@ -149,6 +154,9 @@ class LobbyPage extends Component {
 
     componentWillMount() {
         this.getUserInfo();
+        this.setState({
+            displayModal: false
+        })
     }
 
     componentDidMount() {
@@ -166,7 +174,7 @@ class LobbyPage extends Component {
     }
 
     render() {
-        const { lobbies, gameType, maxPlayers, firstName, lastName, roomKey, displayModal, messages } = this.state;
+        const { lobbies, gameType, firstName, lastName, roomKey, displayModal, messages, roomKeyFromServer } = this.state;
 
         return (
             <div className='container'>
@@ -193,8 +201,7 @@ class LobbyPage extends Component {
                         <form onSubmit={this.handleSubmit} className='row'>
                             <div className='col s4'>
                                 <div className='input-field col s8 offset-s2'>
-                                    <select value={gameType} name='gameType'>
-                                        <option value='' disabled>Game Type</option>
+                                    <select name='gameType'>
                                         <option value='webcam'>Webcam</option>
                                         <option value='deal52'>Deal 52</option>
                                     </select>
@@ -202,9 +209,7 @@ class LobbyPage extends Component {
                             </div>
                             <div className='col s4'>
                                 <div className='input-field col s8 offset-s2'>
-                                    <select value={maxPlayers} name='maxPlayers'>
-                                        <option value='' disabled>Players</option>
-                                        <option value='1'>1 Player</option>
+                                    <select name='maxPlayers'>
                                         <option value='2'>2 Players</option>
                                         <option value='3'>3 Players</option>
                                         <option value='4'>4 Players</option>
@@ -238,7 +243,7 @@ class LobbyPage extends Component {
                 </div>
                 <div className='divider'></div>
                 <LobbyList data={lobbies} />
-                <CreateGameModal/>
+                <CreateGameModal gameType={gameType} roomKey={roomKeyFromServer} display={displayModal}/>
             </div>
         )
     }
