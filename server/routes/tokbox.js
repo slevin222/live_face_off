@@ -70,6 +70,7 @@ router.post('/room', ensureAuthenticated, function (req, res) {
     } else if (gameType === 'webcam') {
         gameType = 'camGame';
     }
+    console.log('This is the has from the new room: ', roomKey);
     console.log('attempting to create a session associated with the room: ' + room);
     // if the room name is associated with a session ID, fetch that
     Lobby.findOne({ roomNumber: room }, 'players sessionId', (err, lobby) => {
