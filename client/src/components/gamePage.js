@@ -4,7 +4,6 @@ import GameBoard from './gameBoard';
 import Chat from './chat';
 import '../assets/css/gamePage.css';
 import TokBox from './openTok';
-import RunGame from './runGame'
 import LobbyPage from './lobbyPage';
 
 
@@ -22,7 +21,6 @@ class GamePage extends Component {
                 <div className="row col s12 gameCards">
                     <Chat />
                     <GameBoard />
-                    <RunGame />
                 </div>
             </div>
         )

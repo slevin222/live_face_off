@@ -1,31 +1,8 @@
-/* .OT_subscriber {
-    float: left;
-    margin-left: 1em;
-   
-}
-.OT_publisher {
-    float: left;
-
-/* }
-.error {
-    color: red;
-/* } */ 
-
-.OT_subscriber {
-    /* float: left; */
-    margin-left: 1em;
-    position: absolute;
-
-   
-}
-div.OTPublisherContainer {
-    /* float: left; */
-    position: absolute;
-    top: 5%;
-    left: 0;
-
-}
 
 .error {
     color: red;
 }
+/* #camBtn{
+    position: absolute;
+    top: 10%;
+} */

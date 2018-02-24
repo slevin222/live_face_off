@@ -112,7 +112,7 @@ class TokBox extends Component {
     render() {
         console.log('openTok State:', this.state);
         const { apiKey, sessionId, token, error, connection, publishVideo } = this.state;
-        const vidWidth = (this.props.data === "deal52") ? { width: 200, height: 200 } : { width: 800, height: 500 };
+        const vidWidth = (this.props.data === "deal52") ? { width: 200, height: 200 } : { width: 875, height: 575 };
 
         if (!apiKey) {
             return (
@@ -134,18 +134,10 @@ class TokBox extends Component {
                     onError={this.onSessionError}
                     eventHandlers={this.sessionEventHandlers}
                 >
-                    <button className="waves-effect waves-light btn blue-grey darken-2" onClick={this.toggleVideo}>
+                    {/* <button className="waves-effect waves-light btn blue-grey darken-2" id="camBtn" onClick={this.toggleVideo}>
                         {publishVideo ? 'Disable' : 'Enable'} Video
 
-                </button>
-                    {/* <div className="container"> */}
-                    {/* <OTPublisher
-                        properties={{ publishVideo, width: 170, height: 150, }}
-                        onPublish={this.onPublish}
-                        onError={this.onPublishError}
-                        eventHandlers={this.publisherEventHandlers}
-                    /> */}
-                    {/* </div> */}
+                </button> */}
                     <OTStreams>
                         <OTSubscriber
                             properties={vidWidth}
@@ -161,7 +153,10 @@ class TokBox extends Component {
                         eventHandlers={this.publisherEventHandlers}
                     />
                 </OTSession>
+                {/* <button className="waves-effect waves-light btn blue-grey darken-2" id="camBtn" onClick={this.toggleVideo}>
+                    {publishVideo ? 'Disable' : 'Enable'} Video
 
+                </button> */}
             </div>
         );
     }
