@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
 import axios from 'axios';
-import LobbyList from './lobbyList';
 import CreateGameModal from './createGameModal';
+import LobbyList from "./lobbyList";
+import DisplayMessages from './errorMessage';
 
 class LobbyPage extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             lobbies: [],
             gameType: '',
@@ -16,8 +16,13 @@ class LobbyPage extends Component {
             firstName: '',
             lastName: '',
             roomKey: '',
-            displayModal: false
+            displayModal: false,
+            messages: null
+
         };
+
+        //roomKey that is used in the Modal
+        this.roomKeyFromServer;
 
         //lobbies dummy data
         this.lobbyData = [
@@ -52,10 +57,13 @@ class LobbyPage extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+
     setDisplayModal(){
 
     }
 
+
+    //route that grabs user's information from the server
     getUserInfo() {
         axios({
             method: 'get',
@@ -68,6 +76,7 @@ class LobbyPage extends Component {
         });
     }
 
+    //attached to the start button, sends info the server to create the lobby, then receives the key used for people to join with.
     handleSubmit(event) {
         event.preventDefault();
         const { lobbies, gameType, maxPlayers, room } = this.state;
@@ -89,16 +98,19 @@ class LobbyPage extends Component {
             }
         }).then(res => {
             console.log("this is the response", res);
+            this.roomKeyFromServer = res.data.roomKey;
+            console.log(this.roomKeyFromServer);
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
             console.log(JSON.parse(dataFromServer));
-            if (res.data.hasOwnProperty('pathname')) {
-                const { origin } = location;
-                location.href = `${origin}${res.data.pathname}`;
-            }
+            // if (res.data.hasOwnProperty('pathname')) {
+            //     const { origin } = location;
+            //     location.href = `${origin}${res.data.pathname}`;
+            // }
         });
     }
 
+    //checks the roomKey that was entered against any in the database, then joins if there is a match.
     handleJoinSubmit(event) {
         const { roomKey } = this.state;
         event.preventDefault();
@@ -119,6 +131,11 @@ class LobbyPage extends Component {
             if (res.data.hasOwnProperty('pathname')) {
                 const { origin } = location;
                 location.href = `${origin}${res.data.pathname}`;
+            }
+            if (res.data.hasOwnProperty('messages')) {
+                this.setState({
+                    messages: res.data.messages
+                });
             }
         });
     }
@@ -149,10 +166,11 @@ class LobbyPage extends Component {
     }
 
     render() {
-        const { lobbies, gameType, maxPlayers, firstName, lastName, roomKey, displayModal } = this.state;
+        const { lobbies, gameType, maxPlayers, firstName, lastName, roomKey, displayModal, messages } = this.state;
+
         return (
             <div className='container'>
-                <button>Open Modal</button>
+                <DisplayMessages messages={messages} />
                 <div className='divider'></div>
                 <div className='row' style={{ marginTop: '20px' }}>
                     <div className='col s6'>
@@ -205,7 +223,7 @@ class LobbyPage extends Component {
                                 <form className='row' onSubmit={this.handleJoinSubmit}>
                                     <div className='col s4'>
                                         <div className='input-field col s8 offset-s8'>
-                                            <input type="text" className="validate" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Room Key" />
+                                            <input type="text" className="validate roomKey" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Room Key" />
                                         </div>
                                     </div>
                                     <div className='col s6'>
