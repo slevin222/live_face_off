@@ -32,6 +32,7 @@ router.get('/facebook', passport.authenticate('facebook', {
 router.get('/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/login'
 }), (req, res) => {
+    console.log('Successfully logged with the facebook server');
     res.redirect('/login');
 });
 
