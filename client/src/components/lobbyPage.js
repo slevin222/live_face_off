@@ -52,6 +52,10 @@ class LobbyPage extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    setDisplayModal(){
+
+    }
+
     getUserInfo() {
         axios({
             method: 'get',
@@ -145,9 +149,10 @@ class LobbyPage extends Component {
     }
 
     render() {
-        const { lobbies, gameType, maxPlayers, firstName, lastName, roomKey } = this.state;
+        const { lobbies, gameType, maxPlayers, firstName, lastName, roomKey, displayModal } = this.state;
         return (
             <div className='container'>
+                <button>Open Modal</button>
                 <div className='divider'></div>
                 <div className='row' style={{ marginTop: '20px' }}>
                     <div className='col s6'>
