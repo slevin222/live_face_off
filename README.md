@@ -1,7 +1,7 @@
-#Live Face Off
+#cLive Face Off
 
 > Connect with your friends and family and enjoy some time with each other.
 
-#Developers
+# Developers
 
 >Khaleel Younis, Shawn Levin, Paul Lee, Crystal Navarro
