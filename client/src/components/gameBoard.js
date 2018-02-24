@@ -13,6 +13,7 @@ class GameBoard extends Component {
             playerHand2: [],
             playerHand3: [],
             playerHand4: [],
+            player1Total: null,
         }
 
         this.dealInitialHand = this.dealInitialHand.bind(this);
@@ -33,21 +34,6 @@ class GameBoard extends Component {
     shuffleDeck() {
         this.deck = deck.sort(function () { return 0.5 - Math.random(); });
     }
-
-    // deal() {
-    //     const p1hand = [];
-    //     const p2hand = [];
-    //     console.log("deal shift :", this.state.deckOfCards);
-    //     // this.shuffleDeck(deck);
-    //     // currentPlayer.hand.push(this.deck.cards.shift());
-    //     p1hand.push(this.state.deckOfCards.shift());
-    //     console.log("p1 hand in deal: ", p1hand);
-    //     this.setState({
-    //         player1Hand: p1hand,
-
-    //     });
-    // }
-
 
     dealInitialHand() {
 
@@ -87,8 +73,6 @@ class GameBoard extends Component {
         this.discardArr.push(cardPosition);
         console.log(this.discardArr);
 
-
-
     };
 
     discardCards(deleteIndexArray) {
@@ -98,9 +82,10 @@ class GameBoard extends Component {
         }
         // debugger;
         if (this.deck.length < deleteIndexArray.length) {
+            debugger;
+            // for (let discardPileIndex = 0; discardPileIndex < this.discardPile.length; discardPileIndex++) {
             for (let discardPileIndex = 0; discardPileIndex < this.discardPile.length; discardPileIndex++) {
                 this.deck.push(this.discardPile[discardPileIndex]);
-                debugger;
             }
             this.shuffleDeck();
 
@@ -128,20 +113,20 @@ class GameBoard extends Component {
         this.setState({
             playerHand1: currentPlayersHand
         })
-        this.discardPile.push(this.discardArr);
+        // this.discardPile.push(this.discardArr);
         this.discardArr = [];
         this.roundCounter++;
         this.runGame();
     };
 
     runGame() {
-        if (this.roundCounter < 10) {
+        if (this.roundCounter < 25) {
             return;
         } else {
             debugger;
             let winningValue = 100;
             let winningPlayer = '';
-            let currentValue = null;
+            let currentValue = this.state.player1Total;
             let playerhandTotal = this.state.playerHand1;
             for (let playerIndex = 0; playerIndex < 1; playerIndex++) {
                 for (let cardIndex = 0; cardIndex < 5; cardIndex++) {
@@ -149,6 +134,9 @@ class GameBoard extends Component {
                     // currentValue += this.players[playerIndex].hand[cardIndex].value;
                     currentValue += playerhandTotal[cardIndex].value;
                 }
+                this.setState({
+                    player1Total: currentValue
+                });
                 console.log('Player 1 :' + currentValue);
                 // if (currentValue < winningValue) {
                 //     winningValue = currentValue;
@@ -160,7 +148,7 @@ class GameBoard extends Component {
     };
 
     render() {
-        const { playerHand1, playerHand2, playerHand3, playerHand4, deckOfCards } = this.state;
+        const { playerHand1, playerHand2, playerHand3, playerHand4, deckOfCards, player1Total } = this.state;
         console.log("state in render :", this.state);
         console.log("deck in render: ", this.deck);
         // debugger;
@@ -173,7 +161,7 @@ class GameBoard extends Component {
         }
         return (
             <div className="gameArea">
-                <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard0 " style={{ backgroundImage: "url(" + playerHand1[0].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard0" style={{ backgroundImage: "url(" + playerHand1[0].image + ")" }} ></div>
                 <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard1" style={{ backgroundImage: "url(" + playerHand1[1].image + ")" }} ></div>
                 <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard2" style={{ backgroundImage: "url(" + playerHand1[2].image + ")" }} ></div>
                 <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard3" style={{ backgroundImage: "url(" + playerHand1[3].image + ")" }} ></div>
@@ -186,11 +174,27 @@ class GameBoard extends Component {
                     <div className="bottom4">{playerHand1[4].value}</div>
                 </div>
                 <div className="footer">
+                    {/* <div><h6>Final Points {player1Total}</h6> */}
                     <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2" type="submit">Discard Cards</button>
                 </div>
+                {/* </div> */}
             </div >
         );
     }
 }
 
 export default GameBoard;
+
+// deal() {
+    //     const p1hand = [];
+    //     const p2hand = [];
+    //     console.log("deal shift :", this.state.deckOfCards);
+    //     // this.shuffleDeck(deck);
+    //     // currentPlayer.hand.push(this.deck.cards.shift());
+    //     p1hand.push(this.state.deckOfCards.shift());
+    //     console.log("p1 hand in deal: ", p1hand);
+    //     this.setState({
+    //         player1Hand: p1hand,
+
+    //     });
+    // } 
