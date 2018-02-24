@@ -134,7 +134,7 @@ class TokBox extends Component {
                     onError={this.onSessionError}
                     eventHandlers={this.sessionEventHandlers}
                 >
-                    <button className="btn btn grey" onClick={this.toggleVideo}>
+                    <button className="waves-effect waves-light btn blue-grey darken-2" onClick={this.toggleVideo}>
                         {publishVideo ? 'Disable' : 'Enable'} Video
 
                 </button>
