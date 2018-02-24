@@ -37,3 +37,20 @@ video{
     height: 70%;
     display: flex;
 }
+
+
+.OT_subscriber {
+    float: left; 
+    margin-left: 1em;
+    /* position: absolute;
+    margin-left: 5%; */
+
+   
+}
+div.OTPublisherContainer {
+    float: left;
+    /* position: absolute;
+    top: 10%;
+    left: 33%; */
+
+}

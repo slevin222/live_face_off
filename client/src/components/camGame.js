@@ -35,7 +35,7 @@ class CamGame extends Component {
                         <Chat />
                     </div>
                 </div>
-                <div className="col s8" id="webcamContainer" >
+                <div className="col s8" >
                     <TokBox />
                 </div>
             </div>
