@@ -87,7 +87,7 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     gameType: gameType,
                     roomKey: roomKey,
                     sessionId: session.sessionId,
-                    players: [req.session.user._id || req.user.googleID],
+                    players: [req.user.id],
                     maxPlayer: maxPlayers
                 });
                 console.log('This is a lobby after it is created: ', lobby);
@@ -109,14 +109,7 @@ router.post('/room', ensureAuthenticated, function (req, res) {
 });
 
 router.get('/lobby', (req, res) => {
-    console.log('req.session.user: ', req.session.user);
-    console.log('req.user: ', req.user);
-    if (req.session.user) {
-        res.json({
-            firstName: req.session.user.firstName,
-            lastName: req.session.user.lastName
-        });
-    } else if (req.user) {
+    if (req.user) {
         res.json({
             firstName: req.user.firstName,
             lastName: req.user.lastName
@@ -136,7 +129,7 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                     messages: 'Uh oh, that lobby is full!'
                 });
             };
-            lobby.players.push(req.session.user._id);
+            lobby.players.push(req.user.id);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);
             });
