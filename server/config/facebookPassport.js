@@ -10,10 +10,9 @@ module.exports = function (passport) {
         clientID: keys.facebookClientID,
         clientSecret: keys.facebookClientSecret,
         callbackURL: '/auth/facebook/callback',
-        passReqToCallback: true,
-        profileFields: ['id', 'displayName', 'email'],
+        profileFields: ['id', 'displayName', 'name', 'email'],
         proxy: true
-    }, (accessToken, refreshToken, profile, cb, done) => {
+    }, function (accessToken, refreshToken, profile, done) {
         //Check for existing user
         process.nextTick(function () {
             User.findOne({ facebookID: profile.id }, (err, user) => {
