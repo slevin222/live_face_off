@@ -1,1 +1,7 @@
-Family Game in production, created by Khaleel Younis, Shawn Levin, Paul Lee, and Crystal Navarro.
+#Live Face Off
+
+> Connect with your friends and family and enjoy some time with each other.
+
+#Developers
+
+>Khaleel Younis, Shawn Levin, Paul Lee, Crystal Navarro
