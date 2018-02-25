@@ -82,10 +82,10 @@ class GameBoard extends Component {
         }
         // debugger;
         if (this.deck.length < deleteIndexArray.length) {
-            debugger;
             // for (let discardPileIndex = 0; discardPileIndex < this.discardPile.length; discardPileIndex++) {
-            for (let discardPileIndex = 0; discardPileIndex < this.discardPile.length; discardPileIndex++) {
-                this.deck.push(this.discardPile[discardPileIndex]);
+            for (let discardPileIndex = 0; 0 <= this.discardPile.length; discardPileIndex++) {
+                let oldCard = this.discardPile.pop();
+                this.deck.push(oldCard);
             }
             this.shuffleDeck();
 
