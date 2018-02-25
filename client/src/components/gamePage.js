@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GameBoard from './gameBoard';
 import Chat from './chat';
-import '../assets/css/gamePage.css';
 import TokBox from './openTok';
+import '../assets/css/gamePage.css';
 import LobbyPage from './lobbyPage';
 
 

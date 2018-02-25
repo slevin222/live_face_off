@@ -5,6 +5,7 @@ body{
     user-select: none;
 }
 
+
 .gameArea{
     height: 100%;
     width: 100%;
@@ -90,3 +91,4 @@ body{
     font-size: 3vmin;
     justify-content: center;
 }
+
