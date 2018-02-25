@@ -21,6 +21,7 @@ class SignUp extends Component {
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleSubmit(event) {
         console.log("We're handling the submit");
         const { form } = this.state;
@@ -40,6 +41,7 @@ class SignUp extends Component {
                 }
             });
     }
+
     handleInput(event) {
         const { value, name } = event.target;
         const { form } = this.state;
@@ -48,6 +50,7 @@ class SignUp extends Component {
             form: { ...form }
         });
     }
+
     render() {
         const { handleInput, handleSubmit } = this;
         const { firstName, lastName, email, password, password2, messages } = this.state;

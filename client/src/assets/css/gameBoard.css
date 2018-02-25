@@ -18,21 +18,22 @@ body{
     margin: 0;
 }
 .playerHand{
-    height: 60%;
+    height: 68%;
     width: 100%;
     display: flex;
     background-color: lightslategrey;
 } 
 
 .playerCard0{
-    height: 60%;
-    width: 17%;
+    height: 72%;
+    width: 19%;
     display: inline-flex;
     flex-wrap: wrap;
     cursor: pointer;
     background-size: cover;
-    border-radius: 1%;
+    border-radius: 1.5%;
     margin: .5%;
+    
    
 }
 
@@ -40,14 +41,15 @@ body{
 .playerCard2,
 .playerCard3,
 .playerCard4{
-    height: 60%;
-    width: 17%;
+    height: 72%;
+    width: 19%;
     display: inline-flex;
     flex-wrap: wrap;
     cursor: pointer;
     background-size: cover;
-    border-radius: 1%;
+    border-radius: 1.5%;
     margin: .5%;
+
    
 } 
 

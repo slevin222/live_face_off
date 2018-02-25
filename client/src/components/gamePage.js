@@ -26,4 +26,5 @@ class GamePage extends Component {
         )
     }
 }
+
 export default GamePage;

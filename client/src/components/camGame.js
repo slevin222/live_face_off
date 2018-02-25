@@ -35,7 +35,7 @@ class CamGame extends Component {
                         <Chat />
                     </div>
                 </div>
-                <div className="col s8" >
+                <div className="col s9" >
                     <TokBox />
                 </div>
             </div>
