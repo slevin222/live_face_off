@@ -39,18 +39,18 @@
 }
 
 
-.OT_subscriber {
+/* .OT_subscriber {
     float: left; 
     margin-left: 1em;
-    /* position: absolute;
-    margin-left: 5%; */
+    position: absolute;
+    margin-left: 5%;
 
    
 }
 div.OTPublisherContainer {
-    /* float: left; */
+    float: left;
     position: relative;
     top: 0;
     left: 2%;
 
-}
+} */
