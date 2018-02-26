@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../assets/css/tokbox.css';
 import axios from 'axios';
 import GamePage from './gamePage';
+import { relative } from 'path';
 const OT = require('@opentok/client');
 
 class TokBox extends Component {
