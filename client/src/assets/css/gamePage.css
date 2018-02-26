@@ -13,10 +13,10 @@
     margin: 0;
 }
 
-video{
+/* video{
     height: 98%;
     width: 98%;
-}
+} */
 .cam{
     height: 100%;
     text-align: center;
@@ -39,18 +39,18 @@ video{
 }
 
 
-.OT_subscriber {
+/* .OT_subscriber {
     float: left; 
     margin-left: 1em;
-    /* position: absolute;
-    margin-left: 5%; */
+    position: absolute;
+    margin-left: 5%;
 
    
 }
 div.OTPublisherContainer {
     float: left;
-    /* position: absolute;
-    top: 10%;
-    left: 33%; */
+    position: relative;
+    top: 0;
+    left: 2%;
 
-}
+} */

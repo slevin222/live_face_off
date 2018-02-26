@@ -100,5 +100,5 @@ class LoginPage extends Component {
     }
 }
 
-//redux
+
 export default connect(null, { signIn: signIn })(LoginPage);

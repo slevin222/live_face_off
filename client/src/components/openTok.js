@@ -91,18 +91,6 @@ class TokBox extends Component {
         console.log('sessionStorage item: ', sessionInfo);
     }
 
-    // componentDidMount() { 
-    // const { camSize } = this.state;
-    // console.log('CDM in progress!', OT);
-
-    // this.publisher = OT.initPublisher('webcontainer');
-    //'webcamContainer', camSize
-    //  example var publisher = OT.initPublisher("publisher-element-id",
-    //   {fitMode: "contain"});
-
-    // this.getRequest();
-    // }
-
     componentWillUnmount() {
         console.log('Open Tok Unmounting');
     }
@@ -111,7 +99,7 @@ class TokBox extends Component {
     render() {
         console.log('openTok State:', this.state);
         const { apiKey, sessionId, token, error, connection, publishVideo } = this.state;
-        const vidWidth = (this.props.data === "deal52") ? { width: 200, height: 200 } : { width: 875, height: 575 };
+        const vidWidth = (this.props.data === "deal52") ? { width: "23%", height: "25%" } : { width: "65%", height: "85%" };
 
         if (!apiKey) {
             return (
@@ -146,7 +134,7 @@ class TokBox extends Component {
                         />
                     </OTStreams>
                     <OTPublisher
-                        properties={{ publishVideo, width: 170, height: 150, }}
+                        properties={{ publishVideo, width: "23%", height: "25%", }}
                         onPublish={this.onPublish}
                         onError={this.onPublishError}
                         eventHandlers={this.publisherEventHandlers}
@@ -162,3 +150,15 @@ class TokBox extends Component {
 }
 
 export default TokBox;
+
+ // componentDidMount() { 
+    // const { camSize } = this.state;
+    // console.log('CDM in progress!', OT);
+
+    // this.publisher = OT.initPublisher('webcontainer');
+    //'webcamContainer', camSize
+    //  example var publisher = OT.initPublisher("publisher-element-id",
+    //   {fitMode: "contain"});
+
+    // this.getRequest();
+    // }
