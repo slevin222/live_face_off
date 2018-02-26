@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
 import axios from 'axios';
 import CreateGameModal from './createGameModal';
-import LobbyList from "./lobbyList";
+import Leaderboard from './leaderboard';
 import DisplayMessages from './errorMessage';
 
 class LobbyPage extends Component {
@@ -10,6 +10,7 @@ class LobbyPage extends Component {
         super(props);
         this.state = {
             lobbies: [],
+            leaderboardData: [],
             gameType: 'webcam',
             maxPlayers: '2',
             room: '',
@@ -23,32 +24,26 @@ class LobbyPage extends Component {
             roomKeyFromServer: ''
         };
 
-        //lobbies dummy data
-        this.lobbyData = [
+        //leaderboard dummy data
+        this.leaderboardDummyData = [
             {
+                'rank': '1',
+                'teamName': 'Horde',
                 'gameType': 'Deal 52',
-                'currentPlayers': '4',
-                'maxPlayers': '4',
-                'room': 'Khaleel\'s Room'
+                'wins': '3'
             },
             {
+                'rank': '2',
+                'teamName': 'Alliance',
                 'gameType': 'Deal 52',
-                'currentPlayers': '3',
-                'maxPlayers': '4',
-                'room': 'Shawn\'s Room'
+                'wins': '2'
             },
             {
-                'gameType': 'Webcam',
-                'currentPlayers': '1',
-                'maxPlayers': '2',
-                'room': 'Crystal\'s Room'
-            },
-            {
-                'gameType': 'Webcam',
-                'currentPlayers': '1',
-                'maxPlayers': '2',
-                'room': 'Pauls\'s Room'
-            },
+                'rank': '3',
+                'teamName': 'Legion',
+                'gameType': 'Deal 52',
+                'wins': '12'
+            }
         ]
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,13 +51,11 @@ class LobbyPage extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-
     setDisplayModal(){
         this.setState({
             displayModal: true
         })
     }
-
 
     //route that grabs user's information from the server
     getUserInfo() {
@@ -105,13 +98,10 @@ class LobbyPage extends Component {
             console.log(this.state.roomKeyFromServer);
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
+            sessionStorage.setItem('roomKey', res.data.roomKey);
             console.log(JSON.parse(dataFromServer));
 
             this.setDisplayModal();
-            // if (res.data.hasOwnProperty('pathname')) {
-            //     const { origin } = location;
-            //     location.href = `${origin}${res.data.pathname}`;
-            // }
         });
     }
 
@@ -164,8 +154,8 @@ class LobbyPage extends Component {
         $('select').on('change', this.handleChange);
         //axios call would go here and
         this.setState({
-            //hobbies: *axios data goes here*
-            lobbies: this.lobbyData
+            //leaderboardData: *axios data goes here*
+            leaderboardData: this.leaderboardDummyData
         })
     }
 
@@ -174,7 +164,7 @@ class LobbyPage extends Component {
     }
 
     render() {
-        const { lobbies, gameType, firstName, lastName, roomKey, displayModal, messages, roomKeyFromServer } = this.state;
+        const { leaderboardData, gameType, firstName, lastName, roomKey, displayModal, messages, roomKeyFromServer } = this.state;
 
         return (
             <div className='container'>
@@ -242,7 +232,7 @@ class LobbyPage extends Component {
                     </div>
                 </div>
                 <div className='divider'></div>
-                <LobbyList data={lobbies} />
+                <Leaderboard data={leaderboardData}/>
                 <CreateGameModal gameType={gameType} roomKey={roomKeyFromServer} display={displayModal}/>
             </div>
         )

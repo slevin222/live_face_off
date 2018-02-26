@@ -24,6 +24,7 @@ export function signOut() {
             console.log('axiossss signed out', resp);
 
             localStorage.removeItem('token');
+            sessionStorage.clear();
             dispatch({ type: types.SIGN_OUT })
         } catch (err) {
             console.log('signOuterror', err.message)

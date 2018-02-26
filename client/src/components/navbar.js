@@ -32,6 +32,7 @@ class Navbar extends Component {
                 <div className="nav-wrapper ">
                     <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><i className="material-icons">switch_video</i>Live Face Off</Link>
                     <ul className="right">
+                        <li><Link to='/about'>About</Link></li>
                         {this.renderLinks()}
                     </ul>
                 </div>

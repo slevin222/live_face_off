@@ -3,6 +3,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Navbar from './navbar';
 import Homepage from './homepage';
+import About from './about';
 import SignUp from './signUp';
 import LoginPage from './loginPage';
 import LobbyPage from './lobbyPage';
@@ -16,6 +17,7 @@ const App = () => {
         <div className="mainApp">
             <Navbar />
             <Route exact path='/' component={Homepage} />
+            <Route path='/about' component={About} />
             <Route path="/camGame" component={authUser(CamGame)} />
             <Route path='/gamepage' component={authUser(GamePage)} />
             <Route path='/lobby' component={authUser(LobbyPage)} />
