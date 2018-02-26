@@ -98,6 +98,7 @@ class LobbyPage extends Component {
             console.log(this.state.roomKeyFromServer);
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
+            sessionStorage.setItem('roomKey', res.data.roomKey);
             console.log(JSON.parse(dataFromServer));
 
             this.setDisplayModal();
