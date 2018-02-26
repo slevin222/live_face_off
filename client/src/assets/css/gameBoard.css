@@ -4,7 +4,6 @@ body{
     user-select: none;
 }
 
-
 .gameArea{
     height: 100%;
     width: 100%;
@@ -13,9 +12,11 @@ body{
     padding: 0;
     background-color: lightgrey;
 }
+
 .gameCards{
     margin: 0;
 }
+
 .playerHand{
     height: 60%;
     width: 100%;
