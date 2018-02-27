@@ -11,6 +11,13 @@ class GamePage extends Component {
     constructor(props) {
         super(props)
     }
+
+    // componentDidMount() {
+    //     let newPosition = document.getElementsByClassName("OTPublisherContainer");
+    //     console.log(newPosition);
+    //     newPosition.style.position = "relative";
+    // }
+
     render() {
         const game = "deal52";
         const roomKeyId = sessionStorage.getItem("roomKey");

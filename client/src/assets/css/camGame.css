@@ -3,27 +3,27 @@
 
 }
 
-::placeholder{
+.score ::placeholder{
     color: darkgrey;
     text-align: center;
 }
 
-.OT_subscriber {
-    /* float: left; */
-    /* margin-left: 1em; */
+/* .OT_subscriber {  
+     float: left; 
+    margin-left: 1em;
     position: absolute;
     margin-left: 2%;
 
    
 }
 div.OTPublisherContainer {
-    /* float: left; */
+    float: left;
     position: absolute;
-    /* top: 8%; */
+    top: 8%;
     left: 70%;
 
 }
-
+*/
 #lituation-chat{
     margin-left: 1%;
  
