@@ -30,13 +30,11 @@ class GameBoard extends Component {
         this.shuffleDeck();
     }
 
-
     shuffleDeck() {
         this.deck = deck.sort(function () { return 0.5 - Math.random(); });
     }
 
     dealInitialHand() {
-
         const numOfPlayers = this.state.players.length;
         const hand1 = [];
         const hand2 = [];
@@ -51,11 +49,14 @@ class GameBoard extends Component {
             hand4.push(this.deck.shift());
         }
 
+        let player1Total = this.currentPointTotal(hand1);
+
         this.setState({
             playerHand1: [...hand1],
             playerHand2: [...hand2],
             playerHand3: [...hand3],
-            playerHand4: [...hand4]
+            playerHand4: [...hand4],
+            player1Total
         });
     }
 
@@ -97,51 +98,36 @@ class GameBoard extends Component {
             currentPlayersHand.push(newCard);
             console.log(currentPlayersHand);
         }
-        // if (this.currentPlayer < this.playerCount - 1) {
-        //     this.currentPlayer++;
-        //     this.showHand(this.currentPlayer);
-        // } else {
-        //     this.currentPlayer = 0;
-        // }
+
+        this.roundCounter++;
+        let player1Total = this.currentPointTotal(this.state.playerHand1);
         this.setState({
-            playerHand1: currentPlayersHand
-        })
+            playerHand1: currentPlayersHand,
+            player1Total
+        });
 
         this.discardArr = [];
-        this.roundCounter++;
-        this.runGame();
+        if (this.roundCounter === 15) {
+            this.endGame();
+        }
+
     };
 
-    runGame() {
-        if (this.roundCounter < 25) {
-            return;
-        } else {
-            debugger;
-            let winningValue = 100;
-            let winningPlayer = '';
-            let currentValue = this.state.player1Total;
-            let playerhandTotal = this.state.playerHand1;
-            for (let playerIndex = 0; playerIndex < 1; playerIndex++) {
-                for (let cardIndex = 0; cardIndex < 5; cardIndex++) {
-                    currentValue += playerhandTotal[cardIndex].value;
-                }
-
-                this.setState({
-                    player1Total: currentValue
-                });
-                // if (currentValue < winningValue) {
-                //     winningValue = currentValue;
-                //     winningPlayer = this.players[playerIndex].name;
-                // }
-            }
-            console.log(winningPlayer + ' won with a value of ' + winningValue);
+    currentPointTotal(currentHand) {
+        let currentPointTotal = 0;
+        for (let cardIndex = 0; cardIndex < 5; cardIndex++) {
+            currentPointTotal += currentHand[cardIndex].value;
         }
+        return currentPointTotal;
+    }
+
+    endGame() {
+        console.log("Game Over");
     };
 
     render() {
-        const { playerHand1, playerHand2, playerHand3, playerHand4, deckOfCards, player1Total } = this.state;
+        const { playerHand1, player1Total } = this.state;
         console.log("state in render :", this.state);
-        console.log("deck in render: ", this.deck);
 
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
             return (
@@ -160,6 +146,7 @@ class GameBoard extends Component {
                 <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard4" style={{ backgroundImage: "url(" + playerHand1[4].image + ")" }} ></div>
                 <div className="bottomInfo">
                     <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2" type="submit">Discard Cards</button>
+                    <p>Current Round : {this.roundCounter} / 15 Total Points : {player1Total}</p>
                 </div>
             </div>
         );
@@ -168,16 +155,3 @@ class GameBoard extends Component {
 
 export default GameBoard;
 
-// deal() {
-    //     const p1hand = [];
-    //     const p2hand = [];
-    //     console.log("deal shift :", this.state.deckOfCards);
-    //     // this.shuffleDeck(deck);
-    //     // currentPlayer.hand.push(this.deck.cards.shift());
-    //     p1hand.push(this.state.deckOfCards.shift());
-    //     console.log("p1 hand in deal: ", p1hand);
-    //     this.setState({
-    //         player1Hand: p1hand,
-
-    //     });
-    // } 

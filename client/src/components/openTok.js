@@ -152,6 +152,16 @@ class TokBox extends Component {
 
 export default TokBox;
 
+{/* <div style="position: relative">
+  <mainVideoStream style="position: static"></mainVideoStream>
+  
+  <subscriberStreamContainer style="position: absolute">
+    <subscriberStream style="float: right"></subscriberStream>
+    <subscriberStream style="float: right"></subscriberStream>
+    <subscriberStream style="float: right"></subscriberStream>
+  </subscriberStreamContainer>
+</div> */}
+
  // componentDidMount() { 
     // const { camSize } = this.state;
     // console.log('CDM in progress!', OT);
