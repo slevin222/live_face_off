@@ -121,9 +121,8 @@ router.get('/lobby', (req, res) => {
 //Post route to grab info from gamepages before they load
 router.post('/sockets', (req, res, next) => {
     let room = req.body.room;
-    let players = [];
+    let players;
     Lobby.findOne({ roomKey: room }, (err, lobby) => {
-        console.log('lobby in post call: ', lobby);
         if (err) return next(err);
         if (lobby) {
             players = lobby.players
@@ -148,7 +147,7 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                 });
             };
             console.log('Lobby: ', lobby);
-            lobby.players.push(req.user.id);
+            lobby.players.push(req.user.firstName);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);
             });
