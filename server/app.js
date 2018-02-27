@@ -82,8 +82,10 @@ io.on('connection', function (socket) {
 
     socket.on('chat', function (data) {
         console.log(data);
-        data = data.message
-        socket.emit('chat', `${socket.username}: ${data}`);
+        let message = data.message
+        let room = data.room;
+        console.log('data.room', room);
+        io.to(room).emit('chat', `${socket.username}: ${message}`);
     });
 
     //socket.io for rooms
@@ -101,6 +103,7 @@ io.on('connection', function (socket) {
 
     //let's all clients know when a user disconnects
     socket.on('disconnect', function (data) {
+        console.log('data in disconnect: ', data);
         socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has disconnected to the room`);
         socket.leave(socket.room);
     });

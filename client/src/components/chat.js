@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/css/chat.css';
-import io from 'socket.io-client';
+import openSocket from 'socket.io-client';
 import ChatHistory from './chatHistory';
 import axios from 'axios';
 
@@ -16,13 +16,14 @@ class Chat extends Component {
             players: []
         };
 
-        this.socket = io('/');
+        this.socket = openSocket('https://livefaceoff.com:5000');
 
         this.socket.on('chat', (data) => {
-            console.log('data on socket.on(chat): ', data);
+            console.log('data in client: ', data);
             this.setState({
-                messages: [...this.state.messages, data.message || data],
-            })
+                messages: [...this.state.messages, data]
+            });
+            console.log('this.state.messages: ', this.state.messages);
         });
 
         this.socket.on('adduser', (data) => {
@@ -32,7 +33,8 @@ class Chat extends Component {
         this.sendMessage = (event) => {
             event.preventDefault();
             this.socket.emit('chat', {
-                message: this.state.message
+                message: this.state.message,
+                room: this.state.room
             });
             this.setState({
                 message: ''
@@ -67,10 +69,6 @@ class Chat extends Component {
         this.setState({
             message: value
         });
-    }
-
-    displayMessage(message) {
-
     }
     render() {
         const { message, output, messages } = this.state;
