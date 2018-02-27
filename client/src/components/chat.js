@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../assets/css/chat.css';
 import openSocket from 'socket.io-client';
 import ChatHistory from './chatHistory';
+import axios from 'axios';
 
 class Chat extends Component {
     constructor(props) {
@@ -9,10 +10,10 @@ class Chat extends Component {
         this.state = {
             message: "",
             output: '',
-            messages: []
+            messages: [],
+            room: ''
         };
         this.socket = openSocket('/');
-
         this.socket.on('chat', (data) => {
             this.setState({
                 messages: [...this.state.messages, data.message]
@@ -20,6 +21,39 @@ class Chat extends Component {
 
         });
     }
+    componentWillMount() {
+        let sessionInfo = sessionStorage.getItem('gameSession');
+        sessionInfo = JSON.parse(sessionInfo);
+        console.log('sessionInfo in componentWillMount: ', sessionInfo);
+        this.setState({
+            room: sessionInfo.roomKey
+        });
+        console.log('this is the state after componentwillmount', this.state);
+        this.socket.on('connection', (socket) => {
+            console.log('Made socket connection.', socket.id);
+        });
+    }
+    componentDidMount() {
+        this.connectUsers();
+    }
+
+    connectUsers() {
+        console.log('this is the state in connectUsers', this.state);
+        const { room } = this.state;
+        console.log('room in connectUsers', room);
+        this.socket.emit('adduser', () => {
+            axios({
+                method: 'post',
+                url: 'tokbox/sockets',
+                data: {
+                    room
+                }
+            }).then(response => {
+                console.log('response from connectUsers axios call: ', response);
+            });
+        });
+    }
+
     sendMessage() {
         this.socket.emit('chat', {
             message: this.state.message,
@@ -37,18 +71,9 @@ class Chat extends Component {
         });
     }
 
-    // message.addEventListener('keypress', function(){
-    //     socket.emit('typing', handle.value);
-    // })
-
     displayMessage(message) {
 
     }
-
-    // socket.on('typing', function(data){
-    //     feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
-    // });
-
     render() {
         const { message, output, messages } = this.state;
         return (

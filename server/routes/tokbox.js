@@ -86,7 +86,7 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     gameType: gameType,
                     roomKey: roomKey,
                     sessionId: session.sessionId,
-                    players: [req.user.id],
+                    players: [req.user.firstName],
                     maxPlayer: maxPlayers
                 });
                 lobby.save((err) => {
@@ -115,6 +115,23 @@ router.get('/lobby', (req, res) => {
             lastName: req.user.lastName
         });
     }
+});
+
+//Socket.io chat setup with user names and room attached to
+//Post route to grab info from gamepages before they load
+router.post('/sockets', (req, res, next) => {
+    let room = req.body.room;
+    let players = [];
+    Lobby.findOne({ roomKey: room }, (err, lobby) => {
+        console.log('lobby in post call: ', lobby);
+        if (err) return next(err);
+        if (lobby) {
+            players = lobby.players
+        }
+        res.json({
+            players
+        });
+    });
 });
 
 //Use roomKey to Join a room. Room key is given to the user when they hit the start button

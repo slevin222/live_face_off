@@ -5,6 +5,7 @@ import Chat from './chat';
 import TokBox from './openTok';
 import '../assets/css/gamePage.css';
 import LobbyPage from './lobbyPage';
+import axios from 'axios';
 
 
 class GamePage extends Component {
