@@ -13,13 +13,17 @@ class GamePage extends Component {
     }
     render() {
         const game = "deal52";
+        const roomKeyId = sessionStorage.getItem("roomKey");
         return (
             <div className="fullPage">
                 <div className="row col s12 webcams" id="webcamContainer">
                     <TokBox data={game} />
                 </div>
                 <div className="row col s12 gameCards">
-                    <Chat />
+                    <div>
+                        <p>Room Key : {roomKeyId}</p>
+                        <Chat />
+                    </div>
                     <GameBoard />
                 </div>
             </div>

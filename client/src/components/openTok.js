@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../assets/css/tokbox.css';
 import axios from 'axios';
 import GamePage from './gamePage';
+import { relative } from 'path';
 const OT = require('@opentok/client');
 
 class TokBox extends Component {
@@ -150,6 +151,16 @@ class TokBox extends Component {
 }
 
 export default TokBox;
+
+{/* <div style="position: relative">
+  <mainVideoStream style="position: static"></mainVideoStream>
+  
+  <subscriberStreamContainer style="position: absolute">
+    <subscriberStream style="float: right"></subscriberStream>
+    <subscriberStream style="float: right"></subscriberStream>
+    <subscriberStream style="float: right"></subscriberStream>
+  </subscriberStreamContainer>
+</div> */}
 
  // componentDidMount() { 
     // const { camSize } = this.state;

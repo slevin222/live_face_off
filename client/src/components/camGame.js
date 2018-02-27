@@ -8,29 +8,34 @@ import LobbyPage from './lobbyPage';
 class CamGame extends Component {
     constructor(props) {
         super(props)
+
+
+        this.displayWinner = this.displayWinner.bind(this);
+    }
+
+    displayWinner() {
+
     }
 
     render() {
+        const roomKeyId = sessionStorage.getItem("roomKey");
         return (
             <div className="webpage row s12">
                 <div className="col s3 score container">
+                    <p>Room Key : {roomKeyId}</p>
                     <div className="center-align" >
                         <div className="row">
-                            <div className="col s3">
+                            <div className="col s5">
                                 <h6>Team 1</h6>
                                 <input type="number" placeholder="Enter Score" />
                             </div>
-                        </div>
-                    </div>
-                    <div className="center-align" >
-                        <div className="row">
-                            <div className="col s3">
+                            <div className="col s5">
                                 <h6>Team 2</h6>
                                 <input type="number" placeholder="Enter Score" />
                             </div>
                         </div>
                     </div>
-                    <button className='btn blue-grey darken-2 center-align' id="winnerBtn">Display Winner</button>
+                    <button onClick={this.displayWinner} className='btn blue-grey darken-2 center-align' id="winnerBtn">Display Winner</button>
                     <div>
                         <Chat />
                     </div>
