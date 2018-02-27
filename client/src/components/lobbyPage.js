@@ -42,7 +42,7 @@ class LobbyPage extends Component {
                 'rank': '3',
                 'teamName': 'Legion',
                 'gameType': 'Deal 52',
-                'wins': '12'
+                'wins': '1'
             }
         ]
 
