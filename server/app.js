@@ -101,9 +101,6 @@ io.on('connection', function (socket) {
 
     //let's all clients know when a user disconnects
     socket.on('disconnect', function (data) {
-        let usernames = data.players
-        usernames.splice(socket.username, 1);
-        // io.sockets.emit('updateusers', usernames);
         socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has disconnected to the room`);
         socket.leave(socket.room);
     });
