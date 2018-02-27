@@ -82,34 +82,31 @@ io.on('connection', function (socket) {
 
     socket.on('chat', function (data) {
         console.log(data);
-        io.sockets.emit('chat', data);
+        data = data.message
+        socket.emit('chat', `${socket.username}: ${data}`);
     });
-
-    // socket.on('typing', function (data) {
-    //     socket.broadcast.emit('typing', data)
-    // });
 
     //socket.io for rooms
     //lets user know when it is connected to the room 
-    socket.on('adduser', function (username) {
-        socket.username = username;
-        usernames[username] = username;
-        //need to make join room dynamic
-        socket.join('room1');
-        socket.emit('updatechat', 'Admin: ', 'you have connected to room1.');
-        socket.broadcast.to('room1').emit('updatechat', 'Admin: ', username + 'has connected to this room');
-        socket.emit('updaterooms', rooms, 'room1');
+    socket.on('adduser', function (data) {
+        console.log('this is the console.log in the adduser on the server', data);
+        let usernames = data.players
+        socket.username = usernames[usernames.length - 1];
+        console.log('data.room: ', data.room);
+        socket.join(data.room);
+        socket.emit('chat', `Admin: You have connected to room: ${data.room}.`);
+        console.log('socket.username on server: ', socket.username);
+        socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has connected to the room`);
     });
 
     //let's all clients know when a user disconnects
-    socket.on('disconnect', function () {
-        delete usernames[socket.username];
-        io.sockets.emit('updateusers', usernames);
-        socket.broadcast.emit('updatechat', 'Admin: ', socket.username + ' has left the room.');
+    socket.on('disconnect', function (data) {
+        let usernames = data.players
+        usernames.splice(socket.username, 1);
+        // io.sockets.emit('updateusers', usernames);
+        socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has disconnected to the room`);
         socket.leave(socket.room);
     });
-    //req.user fb + goog 
-    //req.session.user
 });
 
 //Route for all static files from the client side
