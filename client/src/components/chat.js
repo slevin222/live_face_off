@@ -1,32 +1,64 @@
 import React, { Component } from 'react';
 import '../assets/css/chat.css';
-import openSocket from 'socket.io-client';
+import io from 'socket.io-client';
 import ChatHistory from './chatHistory';
+import axios from 'axios';
 
 class Chat extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            message: "",
+            message: '',
             output: '',
-            messages: []
+            messages: [],
+            room: '',
+            players: []
         };
-        this.socket = openSocket('/');
+
+        this.socket = io('http://localhost:5000');
 
         this.socket.on('chat', (data) => {
+            console.log('data on socket.on(chat): ', data);
             this.setState({
-                messages: [...this.state.messages, data.message]
+                messages: [...this.state.messages, data.message || data],
             })
+        });
 
-        });
+        this.socket.on('adduser', (data) => {
+            console.log('data on socket.on(adduser):', data);
+        })
+
+        this.sendMessage = (event) => {
+            event.preventDefault();
+            this.socket.emit('chat', {
+                message: this.state.message
+            });
+            this.setState({
+                message: ''
+            });
+        }
     }
-    sendMessage() {
-        this.socket.emit('chat', {
-            message: this.state.message,
-            // handle: handle.value
-        });
-        this.setState({
-            message: ''
+
+    async componentWillMount() {
+        let sessionInfo = sessionStorage.getItem('gameSession');
+        sessionInfo = JSON.parse(sessionInfo);
+        await axios({
+            method: 'post',
+            url: 'tokbox/sockets',
+            data: {
+                room: sessionInfo.roomKey
+            }
+        }).then(response => {
+            console.log('response from connectUsers axios call: ', response);
+            this.setState({
+                players: [...response.data.players],
+                room: sessionInfo.roomKey
+            });
+            this.socket.emit('adduser', {
+                room: sessionInfo.roomKey,
+                players: response.data.players
+            });
         });
     }
 
@@ -37,18 +69,9 @@ class Chat extends Component {
         });
     }
 
-    // message.addEventListener('keypress', function(){
-    //     socket.emit('typing', handle.value);
-    // })
-
     displayMessage(message) {
 
     }
-
-    // socket.on('typing', function(data){
-    //     feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
-    // });
-
     render() {
         const { message, output, messages } = this.state;
         return (

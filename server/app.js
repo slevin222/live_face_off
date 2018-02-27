@@ -21,10 +21,10 @@ const {
 } = require('./helpers/auth');
 
 //Load Models
-require('./models/GoogleUsers');
-require('./models/Users');
-require('./models/FacebookUsers');
-require('./models/Lobby');
+const GoogleUser = require('./models/GoogleUsers');
+const User = require('./models/Users');
+const FacebookUser = require('./models/FacebookUsers');
+const Lobby = require('./models/Lobby');
 
 //Load Routes
 const auth = require('./routes/auth');
@@ -76,20 +76,41 @@ app.use('/auth', auth);
 app.use('/users', users);
 app.use('/tokbox', tokbox);
 
-
-//socket.io for chat 
+//socket.io for chat & game
 io.on('connection', function (socket) {
-    console.log('Made socket connection.', socket.id)
+    console.log('Made socket connection.', socket.id);
+
     socket.on('chat', function (data) {
         console.log(data);
         io.sockets.emit('chat', data);
     });
-    socket.on('typing', function (data) {
-        socket.broadcast.emit('typing', data)
-    });
-});
 
-io
+    // socket.on('typing', function (data) {
+    //     socket.broadcast.emit('typing', data)
+    // });
+
+    //socket.io for rooms
+    //lets user know when it is connected to the room 
+    socket.on('adduser', function (username) {
+        socket.username = username;
+        usernames[username] = username;
+        //need to make join room dynamic
+        socket.join('room1');
+        socket.emit('updatechat', 'Admin: ', 'you have connected to room1.');
+        socket.broadcast.to('room1').emit('updatechat', 'Admin: ', username + 'has connected to this room');
+        socket.emit('updaterooms', rooms, 'room1');
+    });
+
+    //let's all clients know when a user disconnects
+    socket.on('disconnect', function () {
+        delete usernames[socket.username];
+        io.sockets.emit('updateusers', usernames);
+        socket.broadcast.emit('updatechat', 'Admin: ', socket.username + ' has left the room.');
+        socket.leave(socket.room);
+    });
+    //req.user fb + goog 
+    //req.session.user
+});
 
 //Route for all static files from the client side
 app.get('*', (req, res) => {
