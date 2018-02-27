@@ -100,7 +100,8 @@ class TokBox extends Component {
     render() {
         console.log('openTok State:', this.state);
         const { apiKey, sessionId, token, error, connection, publishVideo } = this.state;
-        const vidWidth = (this.props.data === "deal52") ? { width: "23%", height: "25%" } : { width: "65%", height: "85%" };
+        console.log("OT props in render :", OTPublisher)
+        const vidSize = (this.props.data === "deal52") ? { width: "23vw", height: "25vh" } : { width: "67vw", height: "85vh" };
 
         if (!apiKey) {
             return (
@@ -122,54 +123,30 @@ class TokBox extends Component {
                     onError={this.onSessionError}
                     eventHandlers={this.sessionEventHandlers}
                 >
-                    {/* <button className="waves-effect waves-light btn blue-grey darken-2" id="camBtn" onClick={this.toggleVideo}>
-                        {publishVideo ? 'Disable' : 'Enable'} Video
-
-                </button> */}
                     <OTStreams>
                         <OTSubscriber
-                            properties={vidWidth}
+                            properties={vidSize}
                             onSubscribe={this.onSubscribe}
                             onError={this.onSubscribeError}
                             eventHandlers={this.subscriberEventHandlers}
                         />
                     </OTStreams>
                     <OTPublisher
-                        properties={{ publishVideo, width: "23%", height: "25%", }}
+                        properties={{ publishVideo, width: "23vw", height: "25vh", }}
                         onPublish={this.onPublish}
                         onError={this.onPublishError}
                         eventHandlers={this.publisherEventHandlers}
                     />
                 </OTSession>
+
                 {/* <button className="waves-effect waves-light btn blue-grey darken-2" id="camBtn" onClick={this.toggleVideo}>
                     {publishVideo ? 'Disable' : 'Enable'} Video
 
                 </button> */}
-            </div>
+            </div >
         );
     }
 }
 
 export default TokBox;
 
-{/* <div style="position: relative">
-  <mainVideoStream style="position: static"></mainVideoStream>
-  
-  <subscriberStreamContainer style="position: absolute">
-    <subscriberStream style="float: right"></subscriberStream>
-    <subscriberStream style="float: right"></subscriberStream>
-    <subscriberStream style="float: right"></subscriberStream>
-  </subscriberStreamContainer>
-</div> */}
-
- // componentDidMount() { 
-    // const { camSize } = this.state;
-    // console.log('CDM in progress!', OT);
-
-    // this.publisher = OT.initPublisher('webcontainer');
-    //'webcamContainer', camSize
-    //  example var publisher = OT.initPublisher("publisher-element-id",
-    //   {fitMode: "contain"});
-
-    // this.getRequest();
-    // }
