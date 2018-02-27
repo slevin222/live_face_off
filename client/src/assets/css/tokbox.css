@@ -6,3 +6,30 @@
     position: absolute;
     top: 10%;
 } */
+/* .camDisplays{
+    position: relative;
+} */
+/* 
+.publisherCam{
+    position: static;
+}
+
+.subscriberCams{
+    position: absolute;
+}
+*/
+.OT_subscriber {  
+    float: left; 
+    margin-left: 1em;
+    /* position: absolute; */
+    margin-left: 2%;
+
+  
+} 
+div.OTPublisherContainer {
+    float: left;
+    position: absolute; 
+    /* top: 8%; */
+    left: 69%; 
+
+}

@@ -27,11 +27,11 @@ class CamGame extends Component {
                         <div className="row">
                             <div className="col s5">
                                 <h6>Team 1</h6>
-                                <input type="number" placeholder="Enter Score" />
+                                <input className="score" type="number" placeholder="Enter Score" />
                             </div>
                             <div className="col s5">
                                 <h6>Team 2</h6>
-                                <input type="number" placeholder="Enter Score" />
+                                <input className="score" type="number" placeholder="Enter Score" />
                             </div>
                         </div>
                     </div>
