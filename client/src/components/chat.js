@@ -1,66 +1,64 @@
 import React, { Component } from 'react';
 import '../assets/css/chat.css';
-import openSocket from 'socket.io-client';
+import io from 'socket.io-client';
 import ChatHistory from './chatHistory';
 import axios from 'axios';
 
 class Chat extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            message: "",
+            message: '',
             output: '',
             messages: [],
-            room: ''
+            room: '',
+            players: []
         };
-        this.socket = openSocket('/');
-        this.socket.on('chat', (data) => {
-            this.setState({
-                messages: [...this.state.messages, data.message]
-            })
 
+        this.socket = io('http://localhost:5000');
+
+        this.socket.on('chat', (data) => {
+            console.log('data on socket.on(chat): ', data);
+            this.setState({
+                messages: [...this.state.messages, data.message || data],
+            })
         });
+
+        this.socket.on('adduser', (data) => {
+            console.log('data on socket.on(adduser):', data);
+        })
+
+        this.sendMessage = (event) => {
+            event.preventDefault();
+            this.socket.emit('chat', {
+                message: this.state.message
+            });
+            this.setState({
+                message: ''
+            });
+        }
     }
-    componentWillMount() {
+
+    async componentWillMount() {
         let sessionInfo = sessionStorage.getItem('gameSession');
         sessionInfo = JSON.parse(sessionInfo);
-        console.log('sessionInfo in componentWillMount: ', sessionInfo);
-        this.setState({
-            room: sessionInfo.roomKey
-        });
-        console.log('this is the state after componentwillmount', this.state);
-        this.socket.on('connection', (socket) => {
-            console.log('Made socket connection.', socket.id);
-        });
-    }
-    componentDidMount() {
-        this.connectUsers();
-    }
-
-    connectUsers() {
-        console.log('this is the state in connectUsers', this.state);
-        const { room } = this.state;
-        console.log('room in connectUsers', room);
-        this.socket.emit('adduser', () => {
-            axios({
-                method: 'post',
-                url: 'tokbox/sockets',
-                data: {
-                    room
-                }
-            }).then(response => {
-                console.log('response from connectUsers axios call: ', response);
+        await axios({
+            method: 'post',
+            url: 'tokbox/sockets',
+            data: {
+                room: sessionInfo.roomKey
+            }
+        }).then(response => {
+            console.log('response from connectUsers axios call: ', response);
+            this.setState({
+                players: [...response.data.players],
+                room: sessionInfo.roomKey
             });
-        });
-    }
-
-    sendMessage() {
-        this.socket.emit('chat', {
-            message: this.state.message,
-            // handle: handle.value
-        });
-        this.setState({
-            message: ''
+            this.socket.emit('adduser', {
+                room: sessionInfo.roomKey,
+                players: response.data.players
+            });
         });
     }
 
