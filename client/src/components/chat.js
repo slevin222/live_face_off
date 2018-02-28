@@ -84,7 +84,7 @@ class Chat extends Component {
     render() {
         const { message, output, messages } = this.state;
         return (
-            <div className="lituation-chat" >
+            <div className="lituation-chat z-depth-5" >
                 <form className="form-chat">
                     <div id="chat-window">
                         <div id="output">
@@ -93,7 +93,7 @@ class Chat extends Component {
                         <div id="feedback"></div>
                     </div>
                     <input value={this.state.message} onChange={this.handleInputChange.bind(this)} id="message" type="text" placeholder="Type Message" />
-                    <button className="waves-effect waves-light btn blue-grey darken-2" onClick={this.sendMessage.bind(this)} id="send">Send</button>
+                    <button className="chatBtn waves-effect waves-light btn blue-grey darken-2" onClick={this.sendMessage.bind(this)} id="send">Send</button>
                 </form>
             </div>
         )
