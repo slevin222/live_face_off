@@ -21,6 +21,7 @@ class GameBoard extends Component {
         this.discardPile = [];
         this.discardArr = [];
         this.roundCounter = 1;
+        this.finalScore = [];
 
         this.dealInitialHand = this.dealInitialHand.bind(this);
         this.cardsToDiscard = this.cardsToDiscard.bind(this);
@@ -128,7 +129,10 @@ class GameBoard extends Component {
     }
 
     endGame() {
+        const finalScore = this.state.player1Total;
+        this.finalScore.push(finalScore);
         console.log("Game Over");
+
         this.setState({
             gameMessage: `Your final score is ${this.state.player1Total} `
         })
