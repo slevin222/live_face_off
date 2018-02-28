@@ -69,9 +69,7 @@ class GameBoard extends Component {
     };
 
     cardsToDiscard(event) {
-        // callback();
         var oldClickedCards = this.state.clickedCards.slice();
-        console.log("oldCardsClicked :", oldClickedCards);
         let cardPosition = parseInt((event.target.className).slice(-1));
         oldClickedCards[cardPosition] = true;
         this.discardArr.push(cardPosition);
@@ -183,8 +181,8 @@ class GameBoard extends Component {
                         <button className="waves-effect waves-light btn blue-grey darken-2" type="submit">Game Info</button>
                     </div>
                     <div className="col s3">
-                        <h6 className="right-align">Current Round : {this.roundCounter} / 10 </h6>
-                        <h6 className="right-align">Total Points : {player1Total}</h6>
+                        <h6 className="right-align gameTotals">Current Round : {this.roundCounter}/10 </h6>
+                        <h6 className="right-align gameTotals">Total Points : {player1Total}</h6>
                     </div>
                 </div>
             </div>

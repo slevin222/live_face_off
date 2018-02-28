@@ -42,6 +42,10 @@
     display: block;
 }
 
+.leaderBoard, .createGame, .playerCard{
+    background-color: ghostwhite;
+}
+
 .dropdown a:hover {background-color: #ddd}
 
 .dropdown span:hover {background-color: #ddd}
@@ -52,5 +56,5 @@
     margin: 0 auto;
 }
 ::placeholder{
-    color: darkgrey;
+    color:black;
 }

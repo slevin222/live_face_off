@@ -43,13 +43,13 @@ class CamGame extends Component {
         })
     }
 
-    displayInfo(){
+    displayInfo() {
         this.setState({
             displayInfoModal: true,
         })
     }
 
-    closeInfoModal(){
+    closeInfoModal() {
         this.setState({
             displayInfoModal: false,
         })
@@ -85,7 +85,7 @@ class CamGame extends Component {
                     </div>
                     <div className="center-align">
                         <button onClick={this.displayInfo} className='btn blue-grey darken-2 camGameBtn'>Game Info</button>
-                        <button onClick={this.displayWinner} className='btn blue-grey darken-2 camGameBtn' style={{marginLeft: '8px'}}>Display Winner</button>
+                        <button onClick={this.displayWinner} className='btn blue-grey darken-2 camGameBtn' style={{ marginLeft: '8px' }}>Display Winner</button>
                     </div>
                     <div className="col s12 chatCam">
                         <Chat />
@@ -94,7 +94,7 @@ class CamGame extends Component {
                 <div className="col s9">
                     <TokBox />
                 </div>
-                <GameInfoModal display={displayInfoModal} close={this.closeInfoModal} gameType='webcam' roomKey={this.roomKeyId}/>
+                <GameInfoModal display={displayInfoModal} close={this.closeInfoModal} gameType='webcam' roomKey={this.roomKeyId} />
                 <CamGameWinModal display={displayModal} close={this.closeWinModal} gameResult={winningTeam} teamOneScore={teamOneScore} teamTwoScore={teamTwoScore} />
             </div>
         )
