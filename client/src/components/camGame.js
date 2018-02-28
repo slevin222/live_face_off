@@ -51,8 +51,7 @@ class CamGame extends Component {
 
         return (
             <div className="webpage row s12">
-                <div className="col s3 score container">
-                    <p>Room Key : {roomKeyId}</p>
+                <div className="col s3 score">
                     <div className="center-align" >
                         <div className="row">
                             <div className="col s5">
@@ -66,11 +65,11 @@ class CamGame extends Component {
                         </div>
                     </div>
                     <button onClick={this.displayWinner} className='btn blue-grey darken-2 center-align' id="winnerBtn">Display Winner</button>
-                    <div>
+                    <div className="col s11 chatCam">
                         <Chat />
                     </div>
                 </div>
-                <div className="col s9" >
+                <div className="col s9">
                     <TokBox />
                 </div>
                 <CamGameWinModal display={displayModal} close={this.closeWinModal} gameResult={winningTeam} teamOneScore={teamOneScore} teamTwoScore={teamTwoScore}/>
