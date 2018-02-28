@@ -28,7 +28,7 @@ class Navbar extends Component {
 
     render(){
         return (
-            <nav className='blue-grey darken-3'>
+            <nav className='grey darken-4'>
                 <div className="nav-wrapper ">
                     <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><i className="material-icons">switch_video</i>Live Face Off</Link>
                     <ul className="right">
