@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions';
+import LFOlogoSM from '../assets/images/LFOlogoSM.png'
 
 class Navbar extends Component {
     renderLinks(){
@@ -30,7 +31,7 @@ class Navbar extends Component {
         return (
             <nav className='grey darken-4'>
                 <div className="nav-wrapper ">
-                    <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><i className="material-icons">switch_video</i>Live Face Off</Link>
+                    <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><img src={LFOlogoSM}/></Link>
                     <ul className="right">
                         <li><Link to='/about'>About</Link></li>
                         {this.renderLinks()}
