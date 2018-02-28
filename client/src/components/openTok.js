@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../assets/css/tokbox.css';
 import axios from 'axios';
 import GamePage from './gamePage';
+import { relative } from 'path';
 const OT = require('@opentok/client');
 
 class TokBox extends Component {
@@ -91,28 +92,16 @@ class TokBox extends Component {
         console.log('sessionStorage item: ', sessionInfo);
     }
 
-    // componentDidMount() { 
-    // const { camSize } = this.state;
-    // console.log('CDM in progress!', OT);
-
-    // this.publisher = OT.initPublisher('webcontainer');
-    //'webcamContainer', camSize
-    //  example var publisher = OT.initPublisher("publisher-element-id",
-    //   {fitMode: "contain"});
-
-    // this.getRequest();
-    // }
-
     componentWillUnmount() {
         console.log('Open Tok Unmounting');
-        this.publisher.disconnect();
     }
 
 
     render() {
         console.log('openTok State:', this.state);
         const { apiKey, sessionId, token, error, connection, publishVideo } = this.state;
-        const vidWidth = (this.props.data === "deal52") ? { width: 200, height: 200 } : { width: 800, height: 500 };
+        console.log("OT props in render :", OTPublisher)
+        const vidSize = (this.props.data === "deal52") ? { width: "23vw", height: "25vh" } : { width: "67vw", height: "85vh" };
 
         if (!apiKey) {
             return (
@@ -134,37 +123,30 @@ class TokBox extends Component {
                     onError={this.onSessionError}
                     eventHandlers={this.sessionEventHandlers}
                 >
-                    <button className="waves-effect waves-light btn blue-grey darken-2" onClick={this.toggleVideo}>
-                        {publishVideo ? 'Disable' : 'Enable'} Video
-
-                </button>
-                    {/* <div className="container"> */}
-                    {/* <OTPublisher
-                        properties={{ publishVideo, width: 170, height: 150, }}
-                        onPublish={this.onPublish}
-                        onError={this.onPublishError}
-                        eventHandlers={this.publisherEventHandlers}
-                    /> */}
-                    {/* </div> */}
                     <OTStreams>
                         <OTSubscriber
-                            properties={vidWidth}
+                            properties={vidSize}
                             onSubscribe={this.onSubscribe}
                             onError={this.onSubscribeError}
                             eventHandlers={this.subscriberEventHandlers}
                         />
                     </OTStreams>
                     <OTPublisher
-                        properties={{ publishVideo, width: 170, height: 150, }}
+                        properties={{ publishVideo, width: "23vw", height: "25vh", }}
                         onPublish={this.onPublish}
                         onError={this.onPublishError}
                         eventHandlers={this.publisherEventHandlers}
                     />
                 </OTSession>
 
-            </div>
+                {/* <button className="waves-effect waves-light btn blue-grey darken-2" id="camBtn" onClick={this.toggleVideo}>
+                    {publishVideo ? 'Disable' : 'Enable'} Video
+
+                </button> */}
+            </div >
         );
     }
 }
 
 export default TokBox;
+

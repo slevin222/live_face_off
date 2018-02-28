@@ -18,9 +18,10 @@ router.post('/login', function (req, res, next) {
             return res.json({ messages: 'Not a valid combination, please try a different one!' });
         }
         if (user) {
-            if (user === req.user) {
-                res.json({ messages: 'User is already logged in, please try another account or sign up!' });
-            }
+            // if (user === req.user) {
+            //     res.json({ messages: 'User is already logged in, please try another account or sign up!' });
+            // }
+
             req.logIn(user, function (err) {
                 if (err) {
                     return next(err);

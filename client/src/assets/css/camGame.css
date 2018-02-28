@@ -1,24 +1,35 @@
-.OT_subscriber {
-    /* float: left; */
+.scoreInput{
+    margin-top: 0;
+
+}
+
+.score ::placeholder{
+    color: darkgrey;
+    text-align: center;
+}
+
+/* .OT_subscriber {  
+     float: left; 
     margin-left: 1em;
     position: absolute;
+    margin-left: 2%;
 
    
 }
 div.OTPublisherContainer {
-    /* float: left; */
+    float: left;
     position: absolute;
-    top: 5%;
-    left: 0;
+    top: 8%;
+    left: 70%;
+
+}
+*/
+#lituation-chat{
+    margin-left: 1%;
+ 
 
 }
 
-.error {
-    color: red;
-}
-.fullscreen{
-    position: relative;
-}
-.webpage{
-    position: relative;
+#winnerBtn{
+    margin-left: 3%;
 }

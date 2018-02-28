@@ -1,58 +1,60 @@
 import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
 import axios from 'axios';
-import LobbyList from "./lobbyList";
+import CreateGameModal from './createGameModal';
+import Leaderboard from './leaderboard';
 import DisplayMessages from './errorMessage';
-
 
 class LobbyPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             lobbies: [],
-            gameType: '',
-            maxPlayers: '',
+            leaderboardData: [],
+            gameType: 'webcam',
+            maxPlayers: '2',
             room: '',
             firstName: '',
             lastName: '',
             roomKey: '',
-            messages: null
+            displayModal: false,
+            messages: null,
+
+            //roomKey that is used in the Modal
+            roomKeyFromServer: ''
         };
 
-        //roomKey that is used in the Modal
-        this.roomKeyFromServer;
-
-        //lobbies dummy data
-        this.lobbyData = [
+        //leaderboard dummy data
+        this.leaderboardDummyData = [
             {
+                'rank': '1',
+                'teamName': 'Horde',
                 'gameType': 'Deal 52',
-                'currentPlayers': '4',
-                'maxPlayers': '4',
-                'room': 'Khaleel\'s Room'
+                'wins': '3'
             },
             {
+                'rank': '2',
+                'teamName': 'Alliance',
                 'gameType': 'Deal 52',
-                'currentPlayers': '3',
-                'maxPlayers': '4',
-                'room': 'Shawn\'s Room'
+                'wins': '2'
             },
             {
-                'gameType': 'Webcam',
-                'currentPlayers': '1',
-                'maxPlayers': '2',
-                'room': 'Crystal\'s Room'
-            },
-            {
-                'gameType': 'Webcam',
-                'currentPlayers': '1',
-                'maxPlayers': '2',
-                'room': 'Pauls\'s Room'
-            },
+                'rank': '3',
+                'teamName': 'Legion',
+                'gameType': 'Deal 52',
+                'wins': '1'
+            }
         ]
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleJoinSubmit = this.handleJoinSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    setDisplayModal(){
+        this.setState({
+            displayModal: true
+        })
     }
 
     //route that grabs user's information from the server
@@ -90,15 +92,16 @@ class LobbyPage extends Component {
             }
         }).then(res => {
             console.log("this is the response", res);
-            this.roomKeyFromServer = res.data.roomKey;
-            console.log(this.roomKeyFromServer);
+            this.setState({
+                roomKeyFromServer: res.data.roomKey
+            });
+            console.log(this.state.roomKeyFromServer);
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
+            sessionStorage.setItem('roomKey', res.data.roomKey);
             console.log(JSON.parse(dataFromServer));
-            // if (res.data.hasOwnProperty('pathname')) {
-            //     const { origin } = location;
-            //     location.href = `${origin}${res.data.pathname}`;
-            // }
+
+            this.setDisplayModal();
         });
     }
 
@@ -106,9 +109,7 @@ class LobbyPage extends Component {
     handleJoinSubmit(event) {
         const { roomKey } = this.state;
         event.preventDefault();
-        this.setState({
-            roomKey
-        });
+        console.log(roomKey);
         axios({
             method: 'post',
             url: `/tokbox/create`,
@@ -123,6 +124,8 @@ class LobbyPage extends Component {
             if (res.data.hasOwnProperty('pathname')) {
                 const { origin } = location;
                 location.href = `${origin}${res.data.pathname}`;
+
+                console.log(res.data.pathname);
             }
             if (res.data.hasOwnProperty('messages')) {
                 this.setState({
@@ -141,6 +144,9 @@ class LobbyPage extends Component {
 
     componentWillMount() {
         this.getUserInfo();
+        this.setState({
+            displayModal: false
+        })
     }
 
     componentDidMount() {
@@ -148,8 +154,8 @@ class LobbyPage extends Component {
         $('select').on('change', this.handleChange);
         //axios call would go here and
         this.setState({
-            //hobbies: *axios data goes here*
-            lobbies: this.lobbyData
+            //leaderboardData: *axios data goes here*
+            leaderboardData: this.leaderboardDummyData
         })
     }
 
@@ -158,7 +164,8 @@ class LobbyPage extends Component {
     }
 
     render() {
-        const { lobbies, gameType, maxPlayers, firstName, lastName, roomKey, messages } = this.state;
+        const { leaderboardData, gameType, firstName, lastName, roomKey, displayModal, messages, roomKeyFromServer } = this.state;
+
         return (
             <div className='container'>
                 <DisplayMessages messages={messages} />
@@ -184,8 +191,7 @@ class LobbyPage extends Component {
                         <form onSubmit={this.handleSubmit} className='row'>
                             <div className='col s4'>
                                 <div className='input-field col s8 offset-s2'>
-                                    <select value={gameType} name='gameType'>
-                                        <option value='' disabled>Game Type</option>
+                                    <select name='gameType'>
                                         <option value='webcam'>Webcam</option>
                                         <option value='deal52'>Deal 52</option>
                                     </select>
@@ -193,9 +199,7 @@ class LobbyPage extends Component {
                             </div>
                             <div className='col s4'>
                                 <div className='input-field col s8 offset-s2'>
-                                    <select value={maxPlayers} name='maxPlayers'>
-                                        <option value='' disabled>Players</option>
-                                        <option value='1'>1 Player</option>
+                                    <select name='maxPlayers'>
                                         <option value='2'>2 Players</option>
                                         <option value='3'>3 Players</option>
                                         <option value='4'>4 Players</option>
@@ -228,7 +232,8 @@ class LobbyPage extends Component {
                     </div>
                 </div>
                 <div className='divider'></div>
-                <LobbyList data={lobbies} />
+                <Leaderboard data={leaderboardData}/>
+                <CreateGameModal gameType={gameType} roomKey={roomKeyFromServer} display={displayModal}/>
             </div>
         )
     }

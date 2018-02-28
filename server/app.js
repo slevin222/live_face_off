@@ -21,10 +21,10 @@ const {
 } = require('./helpers/auth');
 
 //Load Models
-require('./models/GoogleUsers');
-require('./models/Users');
-require('./models/FacebookUsers');
-require('./models/Lobby');
+const GoogleUser = require('./models/GoogleUsers');
+const User = require('./models/Users');
+const FacebookUser = require('./models/FacebookUsers');
+const Lobby = require('./models/Lobby');
 
 //Load Routes
 const auth = require('./routes/auth');
@@ -76,20 +76,38 @@ app.use('/auth', auth);
 app.use('/users', users);
 app.use('/tokbox', tokbox);
 
-
-//socket.io for chat 
+//socket.io for chat & game
 io.on('connection', function (socket) {
-    console.log('Made socket connection.', socket.id)
+    console.log('Made socket connection.', socket.id);
+
     socket.on('chat', function (data) {
         console.log(data);
-        io.sockets.emit('chat', data);
+        let message = data.message
+        let room = data.room;
+        console.log('data.room', room);
+        io.to(room).emit('chat', `${socket.username}: ${message}`);
     });
-    socket.on('typing', function (data) {
-        socket.broadcast.emit('typing', data)
+
+    //socket.io for rooms
+    //lets user know when it is connected to the room 
+    socket.on('adduser', function (data) {
+        console.log('this is the console.log in the adduser on the server', data);
+        let usernames = data.players
+        socket.username = usernames[usernames.length - 1];
+        console.log('data.room: ', data.room);
+        socket.join(data.room);
+        socket.emit('chat', `Admin: You have connected to room: ${data.room}.`);
+        console.log('socket.username on server: ', socket.username);
+        socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has connected to the room`);
+    });
+
+    //let's all clients know when a user disconnects
+    socket.on('disconnect', function (data) {
+        console.log('data in disconnect: ', data);
+        socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has disconnected to the room`);
+        socket.leave(socket.room);
     });
 });
-
-io
 
 //Route for all static files from the client side
 app.get('*', (req, res) => {

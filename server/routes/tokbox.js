@@ -86,7 +86,7 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     gameType: gameType,
                     roomKey: roomKey,
                     sessionId: session.sessionId,
-                    players: [req.user.id],
+                    players: [req.user.firstName],
                     maxPlayer: maxPlayers
                 });
                 lobby.save((err) => {
@@ -99,7 +99,8 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     apiKey: apiKey,
                     sessionId: session.sessionId,
                     token: token,
-                    roomKey: roomKey
+                    roomKey: roomKey,
+                    pathname: `/${gameType}`
                 });
             });
         }
@@ -116,6 +117,22 @@ router.get('/lobby', (req, res) => {
     }
 });
 
+//Socket.io chat setup with user names and room attached to
+//Post route to grab info from gamepages before they load
+router.post('/sockets', (req, res, next) => {
+    let room = req.body.room;
+    let players;
+    Lobby.findOne({ roomKey: room }, (err, lobby) => {
+        if (err) return next(err);
+        if (lobby) {
+            players = lobby.players
+        }
+        res.json({
+            players
+        });
+    });
+});
+
 //Use roomKey to Join a room. Room key is given to the user when they hit the start button
 router.post('/create', ensureAuthenticated, (req, res) => {
     let { roomKey } = req.body;
@@ -129,7 +146,8 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                     messages: 'Uh oh, that lobby is full!'
                 });
             };
-            lobby.players.push(req.user.id);
+            console.log('Lobby: ', lobby);
+            lobby.players.push(req.user.firstName);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);
             });
@@ -140,7 +158,8 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                 apiKey: apiKey,
                 sessionId: lobby.sessionId,
                 token: token,
-                roomKey: roomKey
+                roomKey: roomKey,
+                pathname: `/${lobby.gameType}`
             });
         }
     })
