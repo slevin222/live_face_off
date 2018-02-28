@@ -28,13 +28,14 @@ class GamePage extends Component {
                     <TokBox data={game} />
                 </div>
                 <div className="row col s12 gameCards">
-                    <div>
-                        <p>Room Key : {roomKeyId}</p>
+                    <div className="col s3">
                         <Chat />
                     </div>
-                    <GameBoard />
-                </div>
-            </div>
+                    <div className="col s9">
+                        <GameBoard />
+                    </div>
+                </div >
+            </div >
         )
     }
 }

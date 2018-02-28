@@ -8,6 +8,18 @@
     text-align: center;
 }
 
+.score{
+
+    height: 70%;
+  
+} 
+
+.chatCam{
+    height: 90vh;
+}
+.webpage{
+    height: 100vh;
+}
 /* .OT_subscriber {  
      float: left; 
     margin-left: 1em;
