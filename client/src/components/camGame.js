@@ -67,11 +67,11 @@ class CamGame extends Component {
                     </div>
                     <button onClick={this.displayWinner} className='btn blue-grey darken-2 center-align' id="winnerBtn">Display Winner</button>
                     <div>
-                        {/*<Chat />*/}
+                        <Chat />
                     </div>
                 </div>
                 <div className="col s9" >
-                    {/*<TokBox />*/}
+                    <TokBox />
                 </div>
                 <CamGameWinModal display={displayModal} close={this.closeWinModal} gameResult={winningTeam} teamOneScore={teamOneScore} teamTwoScore={teamTwoScore}/>
             </div>

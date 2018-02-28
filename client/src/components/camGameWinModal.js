@@ -10,7 +10,7 @@ class CamGameWinModal extends Component {
 
         return (
             <div className='camGameWinModal' style={displayModal}>
-                <div className='camGameWinModalContent'>
+                <div className='camGameWinModalContent center-align'>
                     <h1>{this.props.gameResult}</h1>
                     <h4>Final Score</h4>
                     <h4>{this.props.teamOneScore} to {this.props.teamTwoScore}</h4>
