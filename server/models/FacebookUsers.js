@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Create Schema
+//Create Facebook Schema
 const FacebookUserSchema = new Schema({
     facebookID: {
         type: String,

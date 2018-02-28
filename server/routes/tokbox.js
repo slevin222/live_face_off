@@ -9,17 +9,6 @@ const keys = require('../config/keys');
 const apiKey = keys.TOKBOX_API_KEY;
 const secret = keys.TOKBOX_SECRET;
 
-if (!apiKey || !secret) {
-    console.error('=========================================================================================================');
-    console.error('');
-    console.error('Missing TOKBOX_API_KEY or TOKBOX_SECRET');
-    console.error('Find the appropriate values for these by logging into your TokBox Dashboard at: https://tokbox.com/account/#/');
-    console.error('Then add them to ', path.resolve('.env'), 'or as environment variables');
-    console.error('');
-    console.error('=========================================================================================================');
-    process.exit();
-};
-
 //Load Helpers
 const {
     ensureAuthenticated,
@@ -33,13 +22,15 @@ const Lobby = mongoose.model('lobby');
 //Load Google Model
 const User = mongoose.model('googleUsers');
 
-
+//Initiate new OpenTok instance
 const opentok = new OpenTok(apiKey, secret);
 
-//Creates a room and checks to see if one has already been used with the same number
-//seed the random number
+//Local global variables needed to create and access lobbies
 let roomContainer = [];
 let room;
+let roomKey;
+
+//Creates a room and checks to see if one has already been used with the same number
 function createARoom() {
     room = Math.ceil(Math.random() * (new Date()));
     if (roomContainer.indexOf(room) > 0) {
@@ -49,7 +40,8 @@ function createARoom() {
     }
     return room;
 }
-let roomKey;
+
+//Creates a room key with a crypto hash and is given to the user to allow people to join their room.
 function createHash() {
     var current_date = (new Date()).valueOf().toString();
     var random = Math.random().toString();
@@ -68,8 +60,6 @@ router.post('/room', ensureAuthenticated, function (req, res) {
     } else if (gameType === 'webcam') {
         gameType = 'camGame';
     }
-    console.log('This is the has from the new room: ', roomKey);
-    console.log('attempting to create a session associated with the room: ' + room);
     // if the room name is associated with a session ID, fetch that
     Lobby.findOne({ roomNumber: room }, 'players sessionId', (err, lobby) => {
         if (err) return next(err);
@@ -162,6 +152,20 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                 pathname: `/${lobby.gameType}`
             });
         }
+    })
+});
+
+//Use room (roomKey) to delete the user who disconnected from the lobby, and then resave the lobby in the database.
+router.post('/delete', ensureAuthenticated, (req, res) => {
+    let { room } = req.body;
+    Lobby.findOne({ roomKey: room }, (err, lobby) => {
+        if (err) return next(err);
+        if (lobby) {
+            lobby.players.splice(req.user.firstName, 1);
+            lobby.save(function (err, updatedLobby) {
+                if (err) return next(err);
+            });
+        };
     })
 });
 

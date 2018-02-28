@@ -5,6 +5,7 @@ const keys = require('./keys');
 //Load user model
 const User = mongoose.model('facebookUsers');
 
+//Facebook Strategy configuration
 module.exports = function (passport) {
     passport.use(new FacebookStrategy({
         clientID: keys.facebookClientID,
@@ -30,7 +31,6 @@ module.exports = function (passport) {
                         token: accessToken
                     }
                     var newUser = new User(newUserConfig);
-                    console.log(newUser);
                     newUser.save((err) => {
                         if (err) throw err;
                         return done(null, newUser);

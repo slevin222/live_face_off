@@ -64,6 +64,17 @@ class Chat extends Component {
         });
     }
 
+    componentWillUnmount() {
+        const { room } = this.state;
+        axios({
+            method: 'post',
+            url: '/tokbox/delete',
+            data: {
+                room
+            }
+        })
+    }
+
     handleInputChange(event) {
         const { value } = event.target;
         this.setState({
