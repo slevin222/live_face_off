@@ -13,6 +13,7 @@ class GameBoard extends Component {
             playerHand3: [],
             playerHand4: [],
             player1Total: null,
+            gameMessage: 'Click on up to 3 cards to discard'
         }
 
         this.deck = [];
@@ -76,7 +77,12 @@ class GameBoard extends Component {
     discardCards(deleteIndexArray) {
 
         if (deleteIndexArray.length > 3 || deleteIndexArray.length < 1) {
-            return console.error('You can only discard 1 to 3 cards per turn');
+            const newMessage = 'You must only discard 1 to 3 cards per turn';
+            this.setState({
+                gameMessage: newMessage
+            });
+            this.discardArr = [];
+            return;
         }
 
         if (this.deck.length < deleteIndexArray.length) {
@@ -103,11 +109,12 @@ class GameBoard extends Component {
         let player1Total = this.currentPointTotal(this.state.playerHand1);
         this.setState({
             playerHand1: currentPlayersHand,
-            player1Total
+            player1Total,
+            gameMessage: 'Click on up to 3 cards to discard'
         });
 
         this.discardArr = [];
-        if (this.roundCounter === 15) {
+        if (this.roundCounter === 10) {
             this.endGame();
         }
 
@@ -126,12 +133,22 @@ class GameBoard extends Component {
     };
 
     render() {
-        const { playerHand1, player1Total } = this.state;
+        const { playerHand1, player1Total, gameMessage } = this.state;
         console.log("state in render :", this.state);
+        console.log("message :", this.state.gameMessage);
 
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
             return (
-                <div>
+                <div className="instructions">
+                    <h3>Deal 52</h3>
+                    <ul>Instructions
+                    <li>Deal 52 is a 5 card per hand game where lowest point total wins after 10 rounds</li>
+                        <li>When each hand is delt you must discard at least 1 card per round but not more than 3 cards</li>
+                        <li>The point total per each card the value on the face with Jacks, Queens and Kings all having a 10 point value</li>
+                        <li>Ace is the best card with a 1 point value</li>
+                        <li>Once your hand is delt click on the high value cards you would like to discard</li>
+                        <li>Then click the discard button below for those cards to be replaced</li>
+                    </ul>
                     <button onClick={this.dealInitialHand} className="waves-effect waves-light btn blue-grey darken-2" type="submit">Start Game</button>
                 </div>
             )
@@ -139,14 +156,15 @@ class GameBoard extends Component {
 
         return (
             <div className="gameArea">
-                <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard0" style={{ backgroundImage: "url(" + playerHand1[0].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard1" style={{ backgroundImage: "url(" + playerHand1[1].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard2" style={{ backgroundImage: "url(" + playerHand1[2].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard3" style={{ backgroundImage: "url(" + playerHand1[3].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="z-depth-4 playerCard4" style={{ backgroundImage: "url(" + playerHand1[4].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard0" style={{ backgroundImage: "url(" + playerHand1[0].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard1" style={{ backgroundImage: "url(" + playerHand1[1].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard2" style={{ backgroundImage: "url(" + playerHand1[2].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard3" style={{ backgroundImage: "url(" + playerHand1[3].image + ")" }} ></div>
+                <div onClick={this.cardsToDiscard} className="playerCard4" style={{ backgroundImage: "url(" + playerHand1[4].image + ")" }} ></div>
                 <div className="bottomInfo">
+                    <p>Current Round : {this.roundCounter} / 10 Total Points : {player1Total}</p>
+                    <p>{gameMessage}</p>
                     <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2" type="submit">Discard Cards</button>
-                    <p>Current Round : {this.roundCounter} / 15 Total Points : {player1Total}</p>
                 </div>
             </div>
         );
