@@ -10,8 +10,8 @@ import axios from 'axios';
 
 class GamePage extends Component {
     constructor(props) {
-        super(props)
-        this.roomKeyId = sessionStorage.getItem("roomKey");
+        super(props);
+        this.roomKeyId = sessionStorage.getItem('roomKey');
     }
     render() {
         const game = "deal52";
