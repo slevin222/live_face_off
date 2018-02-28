@@ -21,6 +21,7 @@ class GameBoard extends Component {
         this.discardPile = [];
         this.discardArr = [];
         this.roundCounter = 1;
+        this.finalScore = [];
 
         this.dealInitialHand = this.dealInitialHand.bind(this);
         this.cardsToDiscard = this.cardsToDiscard.bind(this);
@@ -29,6 +30,8 @@ class GameBoard extends Component {
 
     componentDidMount() {
         this.shuffleDeck();
+        this.dealInitialHand();
+
     }
 
     shuffleDeck() {
@@ -128,7 +131,10 @@ class GameBoard extends Component {
     }
 
     endGame() {
+        const finalScore = this.state.player1Total;
+        this.finalScore.push(finalScore);
         console.log("Game Over");
+
         this.setState({
             gameMessage: `Your final score is ${this.state.player1Total} `
         })
@@ -166,10 +172,20 @@ class GameBoard extends Component {
         return (
             <div className="gameArea">
                 {this.renderCards(5)}
-                <div className="bottomInfo">
-                    <p>Current Round : {this.roundCounter} / 10 Total Points : {player1Total}</p>
-                    <p>{gameMessage}</p>
-                    <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2" type="submit">Discard Cards</button>
+                <div className="bottomInfo col s12">
+                    <div className="col s4 left-align">
+                        <h5>{gameMessage}</h5>
+                    </div>
+                    <div className="col s3 center-align">
+                        <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2 center-align" type="submit">Discard Cards</button>
+                    </div>
+                    <div className="col s2">
+                        <button className="waves-effect waves-light btn blue-grey darken-2" type="submit">Game Info</button>
+                    </div>
+                    <div className="col s3">
+                        <h6 className="right-align">Current Round : {this.roundCounter} / 10 </h6>
+                        <h6 className="right-align">Total Points : {player1Total}</h6>
+                    </div>
                 </div>
             </div>
         );
