@@ -4,6 +4,14 @@ import '../assets/css/createGameModal.css';
 
 class createGameModal extends Component {
 
+    buttonRoute(redirect){
+        if(this.props.routingFromLobby === true){
+            return <Link to={redirect} className='btn blue-grey darken-2'>Join Room</Link>
+        } else {
+            return <button className='btn blue-grey darken-2' onClick={this.props.close}>Close</button>
+        }
+    }
+
     render(){
         let redirect = null,
             gameName = null,
@@ -36,20 +44,22 @@ class createGameModal extends Component {
         return (
             <div className="createGameModal" style={displayModal}>
                 <div className="createGameContent" style={contentHeight}>
-                    <div className='center-align'>
-                        <h5>{gameName}</h5>
+                    <div>
+                        <div className='center-align'>
+                            <h5>{gameName}</h5>
+                            <div className='divider'></div>
+                            <h6>How to play</h6>
+                            <p>{info}</p>
+                        </div>
                         <div className='divider'></div>
-                        <h6>How to play</h6>
-                        <p>{info}</p>
-                    </div>
-                    <div className='divider'></div>
-                    <div className='center-align'>
-                        <h5>Unique room key</h5>
-                        <div style={{margin: '16px 0'}}><span className='roomKeyStyle'>{this.props.roomKey}</span></div>
-                        <h6>Share this key with your friends and family!</h6>
-                    </div>
-                    <div className='center-align' style={{marginTop: '18px'}}>
-                        <Link to={redirect} className='btn blue-grey darken-2'>Join Room</Link>
+                        <div className='center-align'>
+                            <h5>Unique room key</h5>
+                            <div style={{margin: '16px 0'}}><span className='roomKeyStyle'>{this.props.roomKey}</span></div>
+                            <h6>Share this key with your friends and family!</h6>
+                        </div>
+                        <div className='center-align' style={{marginTop: '18px'}}>
+                            <Link to={redirect} className='btn blue-grey darken-2'>Join Room</Link>
+                        </div>
                     </div>
                 </div>
             </div>

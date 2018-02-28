@@ -66,7 +66,6 @@ class CamGame extends Component {
 
     render() {
         const { displayModal, displayInfoModal, teamOneScore, teamTwoScore, winningTeam } = this.state;
-        const roomKeyId = sessionStorage.getItem("roomKey");
 
         return (
             <div className="webpage row s12">

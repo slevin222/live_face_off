@@ -11,9 +11,12 @@
 }
 
 .createGameContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     user-select: text;
     background-color: whitesmoke;
-    margin: 10% auto;
+    margin: 8% auto;
     padding: 20px 30px;
     border: 1px solid black;
     box-shadow: 10px 10px 18px 0px rgba(0,0,0,0.75);

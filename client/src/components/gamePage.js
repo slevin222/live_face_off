@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import GameBoard from './gameBoard';
 import Chat from './chat';
 import TokBox from './openTok';
 import '../assets/css/gamePage.css';
-import LobbyPage from './lobbyPage';
-import axios from 'axios';
-
 
 class GamePage extends Component {
     constructor(props) {
         super(props);
         this.roomKeyId = sessionStorage.getItem('roomKey');
     }
+
     render() {
         const game = "deal52";
         return (

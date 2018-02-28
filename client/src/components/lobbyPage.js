@@ -73,36 +73,37 @@ class LobbyPage extends Component {
     //attached to the start button, sends info the server to create the lobby, then receives the key used for people to join with.
     handleSubmit(event) {
         event.preventDefault();
-        const { lobbies, gameType, maxPlayers, room } = this.state;
-        this.setState({
-            lobbies: [...lobbies, {
-                'gameType': gameType,
-                'maxPlayers': maxPlayers,
-                'room': room
-            }],
-        });
-        const data = { gameType, maxPlayers };
-        console.log('Data sent to server: ', data);
-        axios({
-            method: 'post',
-            url: `/tokbox/room`,
-            data: {
-                gameType,
-                maxPlayers
-            }
-        }).then(res => {
-            console.log("this is the response", res);
-            this.setState({
-                roomKeyFromServer: res.data.roomKey
-            });
-            console.log(this.state.roomKeyFromServer);
-            const dataFromServer = JSON.stringify(res.data);
-            sessionStorage.setItem('gameSession', dataFromServer);
-            sessionStorage.setItem('roomKey', res.data.roomKey);
-            console.log(JSON.parse(dataFromServer));
-
-            this.setDisplayModal();
-        });
+        this.setDisplayModal();
+        // const { lobbies, gameType, maxPlayers, room } = this.state;
+        // this.setState({
+        //     lobbies: [...lobbies, {
+        //         'gameType': gameType,
+        //         'maxPlayers': maxPlayers,
+        //         'room': room
+        //     }],
+        // });
+        // const data = { gameType, maxPlayers };
+        // console.log('Data sent to server: ', data);
+        // axios({
+        //     method: 'post',
+        //     url: `/tokbox/room`,
+        //     data: {
+        //         gameType,
+        //         maxPlayers
+        //     }
+        // }).then(res => {
+        //     console.log("this is the response", res);
+        //     this.setState({
+        //         roomKeyFromServer: res.data.roomKey
+        //     });
+        //     console.log(this.state.roomKeyFromServer);
+        //     const dataFromServer = JSON.stringify(res.data);
+        //     sessionStorage.setItem('gameSession', dataFromServer);
+        //     sessionStorage.setItem('roomKey', res.data.roomKey);
+        //     console.log(JSON.parse(dataFromServer));
+        //
+        //     this.setDisplayModal();
+        // });
     }
 
     //checks the roomKey that was entered against any in the database, then joins if there is a match.
