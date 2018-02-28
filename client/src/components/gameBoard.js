@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import '../assets/css/gameBoard.css';
 import deck from './deck';
+import CardClicked from './cardClicked';
 
 class GameBoard extends Component {
     constructor(props) {
+        console.log("GameBoard props :", props);
         super(props)
         this.state = {
             players: [1, 2, 3, 4],
@@ -12,15 +14,15 @@ class GameBoard extends Component {
             playerHand2: [],
             playerHand3: [],
             playerHand4: [],
+            clickedCards: [false, false, false, false, false],
             player1Total: null,
-            gameMessage: 'Click on up to 3 cards to discard'
+            gameMessage: 'Click on up to 3 cards to discard',
         }
 
         this.deck = [];
         this.discardPile = [];
         this.discardArr = [];
         this.roundCounter = 1;
-
         this.dealInitialHand = this.dealInitialHand.bind(this);
         this.cardsToDiscard = this.cardsToDiscard.bind(this);
         this.discardCardBtn = this.discardCardBtn.bind(this);
@@ -62,24 +64,28 @@ class GameBoard extends Component {
     }
 
     discardCardBtn() {
-        console.log(this.discardArr);
         this.discardCards(this.discardArr);
     };
 
-    cardsToDiscard(event) {
-        console.log("eTerget : ", event.target.className);
+    cardsToDiscard(event, callback) {
+        console.log('card got clicked')
+        callback();
+        var oldClickedCards = this.state.clickedCards.slice();
+
         let cardPosition = parseInt((event.target.className).slice(-1));
-        console.log("card position ", cardPosition);
+        oldClickedCards[cardPosition] = true;
         this.discardArr.push(cardPosition);
-        console.log(this.discardArr);
+        this.setState({
+            clickedCards: oldClickedCards
+        })
     };
 
     discardCards(deleteIndexArray) {
-
         if (deleteIndexArray.length > 3 || deleteIndexArray.length < 1) {
             const newMessage = 'You must only discard 1 to 3 cards per turn';
             this.setState({
-                gameMessage: newMessage
+                gameMessage: newMessage,
+                clickedCards: [false, false, false, false, false]
             });
             this.discardArr = [];
             return;
@@ -93,16 +99,12 @@ class GameBoard extends Component {
         }
 
         deleteIndexArray.sort(function (a, b) { return b - a });
-        //////need conditional to see whos turn it is for correct player hand
         let currentPlayersHand = this.state.playerHand1;
         for (let cardIndex = 0; cardIndex < deleteIndexArray.length; cardIndex++) {
             let currentCard = currentPlayersHand.splice(deleteIndexArray[cardIndex], 1);
             this.discardPile.push(currentCard[0]);
             let newCard = this.deck.pop();
-            console.log(newCard);
-            console.log(this.deck);
             currentPlayersHand.push(newCard);
-            console.log(currentPlayersHand);
         }
 
         this.roundCounter++;
@@ -110,14 +112,14 @@ class GameBoard extends Component {
         this.setState({
             playerHand1: currentPlayersHand,
             player1Total,
-            gameMessage: 'Click on up to 3 cards to discard'
+            gameMessage: 'Click on up to 3 cards to discard',
+            clickedCards: [false, false, false, false, false]
         });
 
         this.discardArr = [];
         if (this.roundCounter === 10) {
             this.endGame();
         }
-
     };
 
     currentPointTotal(currentHand) {
@@ -131,11 +133,18 @@ class GameBoard extends Component {
     endGame() {
         console.log("Game Over");
     };
-
+    renderCards(count) {
+        debugger;
+        let cards = [];
+        for (let index = 0; index < count; index++) {
+            cards.push(<CardClicked key={index} handleClick={this.cardsToDiscard} className={'playerCard' + index} style={this.state.playerHand1[index].image} clickedStatus={this.state.clickedCards[index]} />)
+        }
+        return cards;
+    }
     render() {
+
         const { playerHand1, player1Total, gameMessage } = this.state;
         console.log("state in render :", this.state);
-        console.log("message :", this.state.gameMessage);
 
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
             return (
@@ -154,13 +163,10 @@ class GameBoard extends Component {
             )
         }
 
+
         return (
             <div className="gameArea">
-                <div onClick={this.cardsToDiscard} className="playerCard0" style={{ backgroundImage: "url(" + playerHand1[0].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard1" style={{ backgroundImage: "url(" + playerHand1[1].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard2" style={{ backgroundImage: "url(" + playerHand1[2].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard3" style={{ backgroundImage: "url(" + playerHand1[3].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard4" style={{ backgroundImage: "url(" + playerHand1[4].image + ")" }} ></div>
+                {this.renderCards(5)}
                 <div className="bottomInfo">
                     <p>Current Round : {this.roundCounter} / 10 Total Points : {player1Total}</p>
                     <p>{gameMessage}</p>

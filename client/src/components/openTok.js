@@ -96,11 +96,8 @@ class TokBox extends Component {
         console.log('Open Tok Unmounting');
     }
 
-
     render() {
-        console.log('openTok State:', this.state);
         const { apiKey, sessionId, token, error, connection, publishVideo } = this.state;
-        console.log("OT props in render :", OTPublisher)
         const vidSize = (this.props.data === "deal52") ? { width: "23vw", height: "25vh" } : { width: "67vw", height: "85vh" };
 
         if (!apiKey) {
