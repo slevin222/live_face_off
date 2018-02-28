@@ -171,7 +171,7 @@ class LobbyPage extends Component {
                 <DisplayMessages messages={messages} />
                 <div className='divider'></div>
                 <div className='row' style={{ marginTop: '20px' }}>
-                    <div className='col s6'>
+                    <div className='col s6 offset-s3'>
                         <ul className='collection'>
                             <li className='collection-item avatar'>
                                 <i className='material-icons circle green'>insert_chart</i>
