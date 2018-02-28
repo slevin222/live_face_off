@@ -20,7 +20,7 @@ class CamGame extends Component {
         this.handleScoreInput = this.handleScoreInput.bind(this);
     }
 
-    handleScoreInput(event){
+    handleScoreInput(event) {
         const { name, value } = event.target;
 
         this.setState({
@@ -30,7 +30,7 @@ class CamGame extends Component {
 
     displayWinner() {
         const { teamOneScore, teamTwoScore } = this.state;
-        let msg = (teamOneScore === teamTwoScore) ? 'Tie game!' : (teamOneScore > teamTwoScore) ? 'Team 1 wins!': 'Team 2 wins!';
+        let msg = (teamOneScore === teamTwoScore) ? 'Tie game!' : (teamOneScore > teamTwoScore) ? 'Team 1 wins!' : 'Team 2 wins!';
 
         this.setState({
             displayModal: true,
@@ -38,7 +38,7 @@ class CamGame extends Component {
         })
     }
 
-    closeWinModal(){
+    closeWinModal() {
         this.setState({
             displayModal: false,
             winningTeam: ''
@@ -54,25 +54,27 @@ class CamGame extends Component {
                 <div className="col s3 score">
                     <div className="center-align" >
                         <div className="row">
-                            <div className="col s5">
-                                <h6>Team 1</h6>
-                                <input id='teamOneScore' onChange={this.handleScoreInput} name='teamOneScore' value={teamOneScore} className="score" type="number" placeholder="Enter Scoreee" />
+                            <div className="col s6">
+                                <h5>Team 1</h5>
+                                <input id='teamOneScore' onChange={this.handleScoreInput} name='teamOneScore' value={teamOneScore} className="score" type="number" placeholder="Enter Score" />
                             </div>
-                            <div className="col s5">
-                                <h6>Team 2</h6>
+                            <div className="col s6">
+                                <h5>Team 2</h5>
                                 <input id='teamTwoScore' onChange={this.handleScoreInput} name='teamTwoScore' value={teamTwoScore} className="score" type="number" placeholder="Enter Score" />
                             </div>
                         </div>
                     </div>
-                    <button onClick={this.displayWinner} className='btn blue-grey darken-2 center-align' id="winnerBtn">Display Winner</button>
-                    <div className="col s11 chatCam">
+                    <div className="center-align">
+                        <button onClick={this.displayWinner} className='btn blue-grey darken-2' id="winnerBtn">Display Winner</button>
+                    </div>
+                    <div className="col s12 chatCam">
                         <Chat />
                     </div>
                 </div>
                 <div className="col s9">
                     <TokBox />
                 </div>
-                <CamGameWinModal display={displayModal} close={this.closeWinModal} gameResult={winningTeam} teamOneScore={teamOneScore} teamTwoScore={teamTwoScore}/>
+                <CamGameWinModal display={displayModal} close={this.closeWinModal} gameResult={winningTeam} teamOneScore={teamOneScore} teamTwoScore={teamTwoScore} />
             </div>
         )
     }

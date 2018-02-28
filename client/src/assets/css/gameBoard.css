@@ -4,6 +4,7 @@ body{
     user-select: none;
 }
 
+
 .gameArea{
     height: 100%;
     width: 100%;
@@ -57,3 +58,7 @@ body{
     height: 8%;
     display: flex;
 }
+/* 
+.cardClick{
+    opacity: 0.5;
+} */

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions';
 
 class Navbar extends Component {
-    renderLinks(){
-        if(this.props.auth){
+    renderLinks() {
+        if (this.props.auth) {
             return [
                 <li key='0'>
                     <Link to='/lobby'>Lobby</Link>
@@ -26,7 +26,7 @@ class Navbar extends Component {
         ]
     }
 
-    render(){
+    render() {
         return (
             <nav className='blue-grey darken-3'>
                 <div className="nav-wrapper ">
@@ -41,10 +41,10 @@ class Navbar extends Component {
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         auth: state.user.auth
     }
 }
 
-export default connect(mapStateToProps, {signIn: signIn, signOut: signOut})(Navbar);
+export default connect(mapStateToProps, { signIn: signIn, signOut: signOut })(Navbar);
