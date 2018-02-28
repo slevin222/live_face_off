@@ -32,7 +32,7 @@ const users = require('./routes/users');
 const tokbox = require('./routes/tokbox');
 
 //Load Keys file
-const keys = require('./config/keys');
+const keys = require('./config/keys_dev');
 
 //Passport Config
 require('./config/passport_config');
