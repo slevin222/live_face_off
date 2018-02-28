@@ -9,7 +9,6 @@ class GameBoard extends Component {
         super(props)
         this.state = {
             players: [1, 2, 3, 4],
-            currentPlayer: 1,
             playerHand1: [],
             playerHand2: [],
             playerHand3: [],
@@ -18,15 +17,14 @@ class GameBoard extends Component {
             player1Total: null,
             gameMessage: 'Click on up to 3 cards to discard',
         }
-
         this.deck = [];
         this.discardPile = [];
         this.discardArr = [];
         this.roundCounter = 1;
+
         this.dealInitialHand = this.dealInitialHand.bind(this);
         this.cardsToDiscard = this.cardsToDiscard.bind(this);
         this.discardCardBtn = this.discardCardBtn.bind(this);
-
     }
 
     componentDidMount() {
@@ -67,11 +65,10 @@ class GameBoard extends Component {
         this.discardCards(this.discardArr);
     };
 
-    cardsToDiscard(event, callback) {
-        console.log('card got clicked')
-        callback();
+    cardsToDiscard(event) {
+        // callback();
         var oldClickedCards = this.state.clickedCards.slice();
-
+        console.log("oldCardsClicked :", oldClickedCards);
         let cardPosition = parseInt((event.target.className).slice(-1));
         oldClickedCards[cardPosition] = true;
         this.discardArr.push(cardPosition);
@@ -132,15 +129,19 @@ class GameBoard extends Component {
 
     endGame() {
         console.log("Game Over");
+        this.setState({
+            gameMessage: `Your final score is ${this.state.player1Total} `
+        })
     };
+
     renderCards(count) {
-        debugger;
         let cards = [];
         for (let index = 0; index < count; index++) {
             cards.push(<CardClicked key={index} handleClick={this.cardsToDiscard} className={'playerCard' + index} style={this.state.playerHand1[index].image} clickedStatus={this.state.clickedCards[index]} />)
         }
         return cards;
     }
+
     render() {
 
         const { playerHand1, player1Total, gameMessage } = this.state;
@@ -162,8 +163,6 @@ class GameBoard extends Component {
                 </div>
             )
         }
-
-
         return (
             <div className="gameArea">
                 {this.renderCards(5)}

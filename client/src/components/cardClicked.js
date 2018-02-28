@@ -8,13 +8,9 @@ class CardClicked extends Component {
         console.log('clicked status is ' + props.clickedStatus)
     }
 
-    toggleState() {
-
-    }
-
     render() {
         return (
-            <div onClick={(event) => this.props.handleClick(event, this.toggleState.bind(this))} className={this.props.className} style={{ backgroundImage: "url(" + this.props.style + ")", opacity: this.props.clickedStatus ? .4 : 1 }} ></div>
+            <div onClick={(event) => this.props.handleClick(event)} className={this.props.className} style={{ backgroundImage: "url(" + this.props.style + ")", opacity: this.props.clickedStatus ? .4 : 1 }} ></div>
         )
     }
 }

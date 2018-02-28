@@ -98,7 +98,7 @@ class TokBox extends Component {
 
     render() {
         const { apiKey, sessionId, token, error, connection, publishVideo } = this.state;
-        const vidSize = (this.props.data === "deal52") ? { width: "23vw", height: "25vh" } : { width: "67vw", height: "85vh" };
+        const vidSize = (this.props.data === "deal52") ? { width: "24vw", height: "26vh" } : { width: "71vw", height: "85vh" };
 
         if (!apiKey) {
             return (
@@ -129,7 +129,7 @@ class TokBox extends Component {
                         />
                     </OTStreams>
                     <OTPublisher
-                        properties={{ publishVideo, width: "23vw", height: "25vh", }}
+                        properties={{ publishVideo, width: "24vw", height: "26vh", }}
                         onPublish={this.onPublish}
                         onError={this.onPublishError}
                         eventHandlers={this.publisherEventHandlers}
