@@ -17,7 +17,7 @@ class SignUp extends Component {
     }
 
     handleSubmitForm(formValues) {
-        console.log("We're handling the submit");
+        document.getElementById('submitButton').disabled = true;
 
         axios.post('/users/register', formValues)
             .then(res => {
@@ -31,6 +31,7 @@ class SignUp extends Component {
                     this.setState({
                         messages: res.data.messages
                     });
+                    document.getElementById('submitButton').disabled = false;
                 }
             });
     }
@@ -57,7 +58,7 @@ class SignUp extends Component {
                             <div className="row rowlines">
                                 <div className='col s12 center-align'>
                                     <Link className='logInBtn waves-effect waves-light btn blue-grey darken-2' to='/login'>Go Back</Link>
-                                    <button type="submit" className='signUpBtn waves-effect waves-light btn blue-grey darken-2'>Sign Up</button>
+                                    <button id='submitButton' type="submit" className='signUpBtn waves-effect waves-light btn blue-grey darken-2'>Sign Up</button>
                                 </div>
                             </div>
                         </form>
@@ -71,12 +72,24 @@ class SignUp extends Component {
 function validate(values){
     const error = {};
 
+    if(!values.firstName){
+        error.firstName = 'Please enter your first name.'
+    }
+
+    if(!values.lastName){
+        error.lastName = 'Please enter your last name.'
+    }
+
     if(!values.email){
-        error.email = 'Please enter an email'
+        error.email = 'Please enter an email.'
+    }
+
+    if(!values.email){
+        error.email = 'Please enter an email.'
     }
 
     if(!values.password){
-        error.password = 'Please enter a password'
+        error.password = 'Please enter a password.'
     }
 
     if(values.password !== values.password2){

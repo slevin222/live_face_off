@@ -4,14 +4,6 @@ import '../assets/css/createGameModal.css';
 
 class createGameModal extends Component {
 
-    buttonRoute(redirect){
-        if(this.props.routingFromLobby === true){
-            return <Link to={redirect} className='btn blue-grey darken-2'>Join Room</Link>
-        } else {
-            return <button className='btn blue-grey darken-2' onClick={this.props.close}>Close</button>
-        }
-    }
-
     render(){
         let redirect = null,
             gameName = null,
@@ -58,7 +50,7 @@ class createGameModal extends Component {
                             <h6>Share this key with your friends and family!</h6>
                         </div>
                         <div className='center-align' style={{marginTop: '18px'}}>
-                            <Link to={redirect} className='btn blue-grey darken-2'>Join Room</Link>
+                            <Link to={redirect} className='btn blue-grey darken-2 waves-effect waves-light'>Join Room</Link>
                         </div>
                     </div>
                 </div>

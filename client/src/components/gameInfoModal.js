@@ -46,7 +46,7 @@ class GameInfoModal extends Component {
                             <h6>Share this key with your friends and family!</h6>
                         </div>
                         <div className='center-align' style={{marginTop: '18px'}}>
-                            <button className='btn blue-grey darken-2' onClick={this.props.close}>Close</button>
+                            <button className='btn blue-grey darken-2 waves-effect waves-light' onClick={this.props.close}>Close</button>
                         </div>
                     </div>
                 </div>
