@@ -15,10 +15,10 @@ class Leaderboard extends Component {
         });
 
         return (
-            <div className='row z-depth-5 leaderBoard'>
+            <div className='row z-depth-5 leaderBoard contentBorder'>
                 <div className='col s8 offset-s2'>
-                    <h5 className='center-align'>Top 10 Leaderboard</h5>
-                    <table className='highlight bordered centered'>
+                    <h5 className='center-align lobbyHeaders'>Top 10 Leaderboard</h5>
+                    <table className='highlight bordered centered tableMargin'>
                         <thead>
                             <tr>
                                 <th>Rank</th>

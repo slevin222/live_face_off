@@ -4,6 +4,7 @@ import axios from 'axios';
 import CreateGameModal from './createGameModal';
 import Leaderboard from './leaderboard';
 import DisplayMessages from './errorMessage';
+import dummyData from './dummyData';
 
 class LobbyPage extends Component {
     constructor(props) {
@@ -23,28 +24,8 @@ class LobbyPage extends Component {
             //roomKey that is used in the Modal
             roomKeyFromServer: ''
         };
-
         //leaderboard dummy data
-        this.leaderboardDummyData = [
-            {
-                'rank': '1',
-                'teamName': 'Horde',
-                'gameType': 'Deal 52',
-                'wins': '3'
-            },
-            {
-                'rank': '2',
-                'teamName': 'Alliance',
-                'gameType': 'Deal 52',
-                'wins': '2'
-            },
-            {
-                'rank': '3',
-                'teamName': 'Legion',
-                'gameType': 'Deal 52',
-                'wins': '1'
-            }
-        ]
+        this.leaderboardDummyData = dummyData;
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleJoinSubmit = this.handleJoinSubmit.bind(this);
@@ -75,6 +56,7 @@ class LobbyPage extends Component {
     handleSubmit(event) {
         document.getElementById('startButton').disabled = true;
         event.preventDefault();
+
         const { lobbies, gameType, maxPlayers, room } = this.state;
         this.setState({
             lobbies: [...lobbies, {
@@ -192,8 +174,8 @@ class LobbyPage extends Component {
                 </div>
                 <div className='divider'></div>
                 <div className='row'>
-                    <div className='col s12 z-depth-5 createGame'>
-                        <h5 className='center-align'>Create a Game</h5>
+                    <div className='col s12 z-depth-5 createGame contentBorder'>
+                        <h5 className='center-align lobbyHeaders'>Create a Game</h5>
                         <form onSubmit={this.handleSubmit} className='row'>
                             <div className='col s4'>
                                 <div className='input-field col s8 offset-s2'>
