@@ -18,7 +18,7 @@ class GamePage extends Component {
                     <TokBox data={game} />
                 </div>
                 <div className="row col s12 gameCards">
-                    <div className="col s3">
+                    <div className="col s3 camChat">
                         <Chat />
                     </div>
                     <div className="col s9">

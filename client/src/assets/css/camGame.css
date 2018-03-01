@@ -1,11 +1,6 @@
 .scoreInput{
     margin-top: 0;
-
-}
-
-.score ::placeholder{
-    color: darkgrey;
-    text-align: center;
+    font-size: 3rem;
 }
 
 .score{

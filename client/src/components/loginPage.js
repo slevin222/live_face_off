@@ -59,7 +59,7 @@ class LoginPage extends Component {
                 <div className='signInArea z-depth-5'>
                     <div className='row'>
                         <div className="col s12 homeTitle center-align">
-                            <h1>Live Face Off</h1>
+                            <h2>Live Face Off</h2>
                         </div>
                     </div>
                     <div className="row">
@@ -83,16 +83,16 @@ class LoginPage extends Component {
                                 </div>
                             </div>
 
-                            <div className="row">
+                            <div className="row googleFB">
                                 <div className='buttonAreaTwo col s12 center-align'>
-                                    <h5 className='center-align'>Or login with</h5>
+                                    <h5 className='center-align'>Or direct login with</h5>
                                     <br />
                                     <a className="facebookBtn waves-effect waves-light btn light-blue darken-4" href="/auth/facebook">Facebook</a>
                                     <a className="googleBtn waves-effect waves-light btn deep-orange darken-4" href="/auth/google">Google</a>
                                 </div>
                             </div>
                             <br />
-                            <div className="row">
+                            <div className="row googleFB">
                                 <span>Don't have an account yet?</span><Link className='signInBtn waves-effect waves-light btn blue-grey darken-2' to='/register'>Sign Up</Link>
                             </div>
                         </form>
