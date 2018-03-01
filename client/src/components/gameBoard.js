@@ -15,7 +15,7 @@ class GameBoard extends Component {
             playerHand4: [],
             clickedCards: [false, false, false, false, false],
             player1Total: null,
-            gameMessage: 'Click on up to 3 cards to discard',
+            gameMessage: 'Click on up to 3 cards then discard',
         }
         this.deck = [];
         this.discardPile = [];
