@@ -35,10 +35,6 @@
                      4px 4px #ce794f, 
                      5px 5px #ce794f, 
                      6px 6px #ce794f;
-    -webkit-transition: all 0.12s ease-out;
-    -moz-transition:    all 0.12s ease-out;
-    -ms-transition:     all 0.12s ease-out;
-    -o-transition:      all 0.12s ease-out;
 }
 
 @keyframes floating {
@@ -61,3 +57,9 @@ to   { transform: translate(0, -0px); }
     margin-top: 5%;
 }
 
+.photos{
+    border: 2px solid black;
+    height: 10%;
+    
+
+}
