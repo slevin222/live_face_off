@@ -11,7 +11,7 @@
 > Materialize CSS, 
 > Axios, 
 > Socket.io-client, 
-> TokBox Web Cam API, 
+> TokBox Web Cam API (WebRTC Technology) 
 
 ### Backend
 
@@ -22,7 +22,7 @@
 > Passport.js (Google / Facebook / Local), 
 > Socket.io, 
 > Jwt, 
-> TokBox Web Cam API
+> TokBox Web Cam API (WebRTC Technology)
 
 ## To run the app locally
 
