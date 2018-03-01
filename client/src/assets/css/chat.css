@@ -18,7 +18,7 @@
 
 #chat-window{
     height: 90%;
-    overflow: wrap;
+    overflow: auto;
     word-wrap: break-word;
     background: #EBEBEB;
 }
