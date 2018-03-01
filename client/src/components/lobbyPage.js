@@ -105,6 +105,7 @@ class LobbyPage extends Component {
             console.log("this is the response", res);
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
+            sessionStorage.setItem('roomKey', res.data.roomKey);
             console.log(JSON.parse(dataFromServer));
             if (res.data.hasOwnProperty('pathname')) {
                 const { origin } = location;

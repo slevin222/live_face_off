@@ -16,7 +16,8 @@ class GameInfoModal extends Component {
             contentHeight = null;
         if (this.props.gameType === 'webcam') {
             gameName = 'Webcam';
-            info = 'This is an interactive room where you can do anything your heart desires.';
+            info = 'This is an interactive webcam room where 2 players can interact with each other ' +
+                'and play their own home games such as Charades or Pictionary over webcam.';
             contentHeight = {
                 height: '52%'
             }
@@ -54,7 +55,7 @@ class GameInfoModal extends Component {
                                 <p>Share this key with your friends and family!</p>
                             </div>
                             <div className='center-align' style={{marginTop: '18px'}}>
-                                <button className='btn blue-grey darken-2 waves-effect waves-light' onClick={this.props.close}>Close</button>
+                                <button className='btn brown darken-4 waves-effect waves-light' onClick={this.props.close}>Close</button>
                             </div>
                         </div>
                     </div>

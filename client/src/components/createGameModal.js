@@ -12,7 +12,8 @@ class createGameModal extends Component {
         if(this.props.gameType === 'webcam'){
             redirect = '/camGame';
             gameName = 'Webcam';
-            info = 'This is an interactive room where you can do anything your heart desires.';
+            info = 'This is an interactive webcam room where 2 players can interact with each other ' +
+                'and play their own home games such as Charades or Pictionary over webcam.';
             contentHeight = {
                 height: '52%'
             }
@@ -51,7 +52,7 @@ class createGameModal extends Component {
                                 <p>Share this key with your friends and family!</p>
                             </div>
                             <div className='center-align' style={{marginTop: '18px'}}>
-                                <Link to={redirect} className='btn blue-grey darken-2 waves-effect waves-light'>Join Room</Link>
+                                <Link to={redirect} className='btn brown darken-4 waves-effect waves-light'>Join Room</Link>
                             </div>
                         </div>
                     </div>
