@@ -66,7 +66,6 @@ class CamGame extends Component {
 
     render() {
         const { displayModal, displayInfoModal, teamOneScore, teamTwoScore, winningTeam } = this.state;
-        const roomKeyId = sessionStorage.getItem("roomKey");
 
         return (
             <div className="webpage row s12">
@@ -84,8 +83,8 @@ class CamGame extends Component {
                         </div>
                     </div>
                     <div className="center-align">
-                        <button onClick={this.displayInfo} className='btn blue-grey darken-2 camGameBtn'>Game Info</button>
-                        <button onClick={this.displayWinner} className='btn blue-grey darken-2 camGameBtn' style={{ marginLeft: '8px' }}>Display Winner</button>
+                        <button onClick={this.displayInfo} className='btn blue-grey darken-2 camGameBtn waves-effect waves-light'>Info</button>
+                        <button onClick={this.displayWinner} className='btn blue-grey darken-2 camGameBtn waves-effect waves-light' style={{marginLeft: '8px'}}>Display Winner</button>
                     </div>
                     <div className="col s12 chatCam">
                         <Chat />

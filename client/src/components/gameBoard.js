@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../assets/css/gameBoard.css';
 import deck from './deck';
 import CardClicked from './cardClicked';
+import GameInfoModal from './gameInfoModal';
+import EndGameModal from "./endGameModal";
 
 class GameBoard extends Component {
     constructor(props) {
@@ -15,17 +17,49 @@ class GameBoard extends Component {
             playerHand4: [],
             clickedCards: [false, false, false, false, false],
             player1Total: null,
-            gameMessage: 'Click on up to 3 cards then discard',
+            gameMessage: 'Click on up to 3 cards to discard',
+            displayEndGameModal: false,
+            displayInfoModal: false
         }
+
+        this.roomKeyId = sessionStorage.getItem('roomKey');
         this.deck = [];
         this.discardPile = [];
         this.discardArr = [];
         this.roundCounter = 1;
         this.finalScore = [];
 
+        this.displayEndGame = this.displayEndGame.bind(this);
+        this.closeEndGameModal = this.closeEndGameModal.bind(this);
         this.dealInitialHand = this.dealInitialHand.bind(this);
         this.cardsToDiscard = this.cardsToDiscard.bind(this);
         this.discardCardBtn = this.discardCardBtn.bind(this);
+        this.displayInfo = this.displayInfo.bind(this);
+        this.closeInfoModal = this.closeInfoModal.bind(this);
+    }
+
+    displayEndGame(){
+        this.setState({
+            displayEndGameModal: true
+        })
+    }
+
+    closeEndGameModal(){
+        this.setState({
+            displayEndGameModal: false
+        })
+    }
+
+    displayInfo(){
+        this.setState({
+            displayInfoModal: true
+        })
+    }
+
+    closeInfoModal(){
+        this.setState({
+            displayInfoModal: false
+        })
     }
 
     componentDidMount() {
@@ -131,11 +165,13 @@ class GameBoard extends Component {
     endGame() {
         const finalScore = this.state.player1Total;
         this.finalScore.push(finalScore);
-        console.log("Game Over");
 
-        this.setState({
-            gameMessage: `Your final score is ${this.state.player1Total} `
-        })
+        this.displayEndGame();
+        // console.log("Game Over");
+        //
+        // this.setState({
+        //     gameMessage: `Your final score is ${this.state.player1Total} `
+        // })
     };
 
     renderCards(count) {
@@ -148,7 +184,7 @@ class GameBoard extends Component {
 
     render() {
 
-        const { playerHand1, player1Total, gameMessage } = this.state;
+        const { playerHand1, player1Total, gameMessage, displayInfoModal, displayEndGameModal } = this.state;
         console.log("state in render :", this.state);
 
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
@@ -178,13 +214,15 @@ class GameBoard extends Component {
                         <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2 center-align" type="submit">Discard Cards</button>
                     </div>
                     <div className="col s2">
-                        <button className="waves-effect waves-light btn blue-grey darken-2" type="submit">Game Info</button>
+                        <button onClick={this.displayInfo} className="waves-effect waves-light btn blue-grey darken-2" type="button">Info</button>
                     </div>
                     <div className="col s3">
                         <h6 className="right-align gameTotals">Current Round : {this.roundCounter}/10 </h6>
                         <h6 className="right-align gameTotals">Total Points : {player1Total}</h6>
                     </div>
                 </div>
+                <EndGameModal display={displayEndGameModal} close={this.closeEndGameModal} points={player1Total}/>
+                <GameInfoModal gameType='deal52' display={displayInfoModal} close={this.closeInfoModal} roomKey={this.roomKeyId}/>
             </div>
         );
     }

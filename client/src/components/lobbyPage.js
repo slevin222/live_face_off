@@ -72,6 +72,7 @@ class LobbyPage extends Component {
 
     //attached to the start button, sends info the server to create the lobby, then receives the key used for people to join with.
     handleSubmit(event) {
+        document.getElementById('startButton').disabled = true;
         event.preventDefault();
         const { lobbies, gameType, maxPlayers, room } = this.state;
         this.setState({
@@ -107,9 +108,10 @@ class LobbyPage extends Component {
 
     //checks the roomKey that was entered against any in the database, then joins if there is a match.
     handleJoinSubmit(event) {
+        document.getElementById('joinButton').disabled = true;
         const { roomKey } = this.state;
         event.preventDefault();
-        console.log(roomKey);
+
         axios({
             method: 'post',
             url: `/tokbox/create`,
@@ -131,6 +133,7 @@ class LobbyPage extends Component {
                 this.setState({
                     messages: res.data.messages
                 });
+                document.getElementById('joinButton').disabled = false;
             }
         });
     }
@@ -208,7 +211,7 @@ class LobbyPage extends Component {
                             </div>
                             <div className='col s4'>
                                 <div className='col s8 offset-s2'>
-                                    <button className='btn blue-grey darken-2' type="submit" style={{ marginTop: '23px' }}>Start</button>
+                                    <button id='startButton' className='btn blue-grey darken-2 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
                                 </div>
                             </div>
                         </form>
@@ -223,7 +226,7 @@ class LobbyPage extends Component {
                                     </div>
                                     <div className='col s6'>
                                         <div className='col s8 offset-s7'>
-                                            <button className='btn blue-grey darken-2' type="submit" style={{ marginTop: '23px' }}>Join</button>
+                                            <button id='joinButton' className='btn blue-grey darken-2 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Join</button>
                                         </div>
                                     </div>
                                 </form>
