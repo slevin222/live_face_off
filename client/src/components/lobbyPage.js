@@ -170,7 +170,7 @@ class LobbyPage extends Component {
             <div className='container'>
                 <DisplayMessages messages={messages} />
                 <div className='divider'></div>
-                <div className='row' style={{ marginTop: '20px' }}>
+                <div className='row userCard'>
                     <div className='col s4 offset-s4'>
                         <ul className='collection z-depth-5 center-align'>
                             <li className='collection-item avatar'>
@@ -218,7 +218,7 @@ class LobbyPage extends Component {
                                 <form className='row' onSubmit={this.handleJoinSubmit}>
                                     <div className='col s4'>
                                         <div className='input-field col s8 offset-s8'>
-                                            <input type="text" className="validate roomKey" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Room Key" />
+                                            <input type="text" className="validate roomKey" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Enter Room Key" />
                                         </div>
                                     </div>
                                     <div className='col s6'>

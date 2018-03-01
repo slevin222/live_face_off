@@ -1,12 +1,10 @@
-
+import React, { Component } from 'react';
 
 class CardDeck extends Component() {
     constructor(props) {
         super(props);
-        this.cards = [];
 
     }
-
 
 
     card(value, name, suit, image) {
@@ -18,7 +16,7 @@ class CardDeck extends Component() {
 
 
     deck() {
-        this.names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+        this.names = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'tem', 'jack', 'queen', 'king'];
         this.suits = ['H', 'D', 'S', 'C'];
 
         for (let s = 0; s < this.suits.length; s++) {
@@ -30,7 +28,7 @@ class CardDeck extends Component() {
                 this.cards.push(allCards);
             }
         }
-        return this.cards;
+        return cardDeck;
     }
 
 }
