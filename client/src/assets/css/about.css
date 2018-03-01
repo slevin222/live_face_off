@@ -4,7 +4,7 @@
 }
 
 .title {
-    font-size: 3vmax;
+    font-size: 5vmin;
 }
 
 .imageRow > .imageContainer > .aboutUsImage {
@@ -13,11 +13,11 @@
 
 .aboutUsNames {
     font-weight: 600;
-    font-size: 1.5vmax;
+    font-size: 3vmin;
 }
 
 .frontAndBack {
-    font-size: 2vmax;
+    font-size: 4vmin;
 }
 
 span {

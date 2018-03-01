@@ -18,9 +18,9 @@ h2{
 
 #chat-window{
     height: 90%;
-    overflow: auto;
+    overflow: wrap;
+    word-wrap: break-word;
     background: #EBEBEB;
-    /* background: ghostwhite; */
 }
 
 #output p{

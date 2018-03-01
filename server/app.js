@@ -52,7 +52,7 @@ mongoose.connect(keys.mongoURI)
 
 //cookie-session middleware
 app.use(session({
-    keys: ['PCKS#1217'],
+    keys: [keys.sessionKey],
     maxAge: 30 * 24 * 60 * 60 * 1000
 }));
 
@@ -83,29 +83,23 @@ io.on('connection', function (socket) {
     console.log('Made socket connection.', socket.id);
 
     socket.on('chat', function (data) {
-        console.log(data);
         let message = data.message
         let room = data.room;
-        console.log('data.room', room);
         io.to(room).emit('chat', `${socket.username}: ${message}`);
     });
 
     //socket.io for rooms
     //lets user know when it is connected to the room 
     socket.on('adduser', function (data) {
-        console.log('this is the console.log in the adduser on the server', data);
         let usernames = data.players
         socket.username = usernames[usernames.length - 1];
-        console.log('data.room: ', data.room);
         socket.join(data.room);
         socket.emit('chat', `Admin: You have connected to room: ${data.room}.`);
-        console.log('socket.username on server: ', socket.username);
         socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has connected to the room`);
     });
 
     //let's all clients know when a user disconnects
     socket.on('disconnect', function (data) {
-        console.log('data in disconnect: ', data);
         socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has disconnected to the room`);
         socket.leave(socket.room);
     });
