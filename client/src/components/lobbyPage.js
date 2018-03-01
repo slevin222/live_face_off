@@ -158,8 +158,8 @@ class LobbyPage extends Component {
                 <div className='divider'></div>
                 <div className='row userCard'>
                     <div className='col s4 offset-s4 l4 offset-l4'>
-                        <ul className='collection z-depth-5 center-align'>
-                            <li className='collection-item'>
+                        <ul className='collection z-depth-5 center-align contentBorder'>
+                            <li className='collection-item contentBorder'>
                                 <li className="">
                                     <i className="userIcon far fa-user-circle"></i>
                                 </li>
