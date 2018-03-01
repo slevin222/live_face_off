@@ -29,9 +29,9 @@ class Navbar extends Component {
 
     render() {
         return (
-            <nav className='grey darken-4'>
+            <nav className='brown darken-4'>
                 <div className="nav-wrapper ">
-                    <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><img src={LFOlogoSM}/></Link>
+                    <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><img src={LFOlogoSM} />Live Face Off</Link>
                     <ul className="right">
                         <li><Link to='/about'>About</Link></li>
                         {this.renderLinks()}

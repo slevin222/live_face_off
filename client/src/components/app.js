@@ -11,10 +11,18 @@ import GamePage from './gamePage';
 import CamGame from './camGame';
 import redirectUser from '../hoc/redirectUser';
 import authUser from '../hoc/authUser';
+import LandingBG from '../assets/images/gameBG3.png'
+
+
+var styles = {
+    backgroundSize: 'contain',
+    backgroundImage: 'url(' + LandingBG + ')'
+};
+
 
 const App = () => {
     return (
-        <div className="mainApp">
+        <div className="mainApp" style={styles}>
             <Navbar />
             <Route exact path='/' component={Homepage} />
             <Route path='/about' component={About} />

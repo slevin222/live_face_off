@@ -57,8 +57,8 @@ class SignUp extends Component {
                             <Field component={formInput} id="signUpPassword2" icon='work' name='password2' placeholder='Confirm Password' type='password' />
                             <div className="row rowlines">
                                 <div className='col s12 center-align'>
-                                    <Link className='logInBtn waves-effect waves-light btn blue-grey darken-2' to='/login'>Go Back</Link>
-                                    <button id='submitButton' type="submit" className='signUpBtn waves-effect waves-light btn blue-grey darken-2'>Sign Up</button>
+                                    <Link className='logInBtn waves-effect waves-light btn brown darken-4' to='/login'>Go Back</Link>
+                                    <button id='submitButton' type="submit" className='signUpBtn waves-effect waves-light btn brown darken-4'>Sign Up</button>
                                 </div>
                             </div>
                         </form>
@@ -72,19 +72,19 @@ class SignUp extends Component {
 function validate(values) {
     const error = {};
 
-    if(!values.firstName){
+    if (!values.firstName) {
         error.firstName = 'Please enter your first name.'
     }
 
-    if(!values.lastName){
+    if (!values.lastName) {
         error.lastName = 'Please enter your last name.'
     }
 
-    if(!values.email){
+    if (!values.email) {
         error.email = 'Please enter an email.'
     }
 
-    if(!values.password){
+    if (!values.password) {
         error.password = 'Please enter a password.'
     }
 

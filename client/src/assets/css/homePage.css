@@ -61,3 +61,7 @@ to   { transform: translate(0, -0px); }
     margin-top: 5%;
 }
 
+.mainApp{
+    height: 100vh;
+}
+
