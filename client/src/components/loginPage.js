@@ -21,9 +21,10 @@ class LoginPage extends Component {
     }
 
     handleSubmit(event) {
+        document.getElementById('localLoginBtn').disabled = true;
         const { form } = this.state;
         event.preventDefault();
-        console.log('login submitted');
+
         axios.post('/users/login', form)
             .then(res => {
                 console.log("this is the response", res);
@@ -31,9 +32,8 @@ class LoginPage extends Component {
                     this.setState({
                         messages: res.data.messages
                     });
+                    document.getElementById('localLoginBtn').disabled = false;
                 } else {
-                    //redux action creator
-                    console.log('tesssing')
                     this.props.signIn();
                 }
 
@@ -79,7 +79,7 @@ class LoginPage extends Component {
 
                             <div className="row">
                                 <div className='buttonArea col s12'>
-                                    <button type="submit" className='logInBtn waves-effect waves-light btn blue-grey darken-2'>Log In</button>
+                                    <button id='localLoginBtn' type="submit" className='logInBtn waves-effect waves-light btn blue-grey darken-2'>Log In</button>
                                 </div>
                             </div>
 

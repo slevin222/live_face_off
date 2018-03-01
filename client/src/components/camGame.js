@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import TokBox from './openTok';
 import '../assets/css/camGame.css';
 import Chat from './chat';
-import CamGameWinModal from "./camGameWinModal";
+import CamGameWinModal from './camGameWinModal';
+import GameInfoModal from './gameInfoModal';
 
 class CamGame extends Component {
     constructor(props) {
@@ -10,11 +11,15 @@ class CamGame extends Component {
 
         this.state = {
             displayModal: false,
+            displayInfoModal: false,
             teamOneScore: 0,
             teamTwoScore: 0,
             winningTeam: ''
         }
 
+        this.roomKeyId = sessionStorage.getItem('roomKey');
+        this.displayInfo = this.displayInfo.bind(this);
+        this.closeInfoModal = this.closeInfoModal.bind(this);
         this.displayWinner = this.displayWinner.bind(this);
         this.closeWinModal = this.closeWinModal.bind(this);
         this.handleScoreInput = this.handleScoreInput.bind(this);
@@ -38,16 +43,29 @@ class CamGame extends Component {
         })
     }
 
+    displayInfo() {
+        this.setState({
+            displayInfoModal: true,
+        })
+    }
+
+    closeInfoModal() {
+        this.setState({
+            displayInfoModal: false,
+        })
+    }
+
     closeWinModal() {
         this.setState({
             displayModal: false,
-            winningTeam: ''
+            winningTeam: '',
+            teamOneScore: 0,
+            teamTwoScore: 0,
         })
     }
 
     render() {
-        const { displayModal, teamOneScore, teamTwoScore, winningTeam } = this.state;
-        const roomKeyId = sessionStorage.getItem("roomKey");
+        const { displayModal, displayInfoModal, teamOneScore, teamTwoScore, winningTeam } = this.state;
 
         return (
             <div className="webpage row s12">
@@ -65,7 +83,8 @@ class CamGame extends Component {
                         </div>
                     </div>
                     <div className="center-align">
-                        <button onClick={this.displayWinner} className='btn blue-grey darken-2' id="winnerBtn">Display Winner</button>
+                        <button onClick={this.displayInfo} className='btn blue-grey darken-2 camGameBtn waves-effect waves-light'>Info</button>
+                        <button onClick={this.displayWinner} className='btn blue-grey darken-2 camGameBtn waves-effect waves-light' style={{marginLeft: '8px'}}>Display Winner</button>
                     </div>
                     <div className="col s12 chatCam">
                         <Chat />
@@ -74,6 +93,7 @@ class CamGame extends Component {
                 <div className="col s9">
                     <TokBox />
                 </div>
+                <GameInfoModal display={displayInfoModal} close={this.closeInfoModal} gameType='webcam' roomKey={this.roomKeyId} />
                 <CamGameWinModal display={displayModal} close={this.closeWinModal} gameResult={winningTeam} teamOneScore={teamOneScore} teamTwoScore={teamTwoScore} />
             </div>
         )

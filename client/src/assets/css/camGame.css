@@ -14,7 +14,7 @@
 } 
 
 .chatCam{
-    height: 70vh;
+    height: 75%;
 }
 .webpage{
     height: 85vh;
@@ -25,6 +25,6 @@
     text-align: center;
 }
 
-#winnerBtn{
-    margin-bottom: 3px;
+.camGameBtn{
+    margin-bottom: 5vh;
 }

@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import '../assets/css/createGameModal.css';
+import '../assets/css/gameInfoModal.css';
 
-class createGameModal extends Component {
+class GameInfoModal extends Component {
 
     render(){
-        let redirect = null,
+        let info = null,
             gameName = null,
-            info = null,
             contentHeight = null;
         if(this.props.gameType === 'webcam'){
-            redirect = '/camGame';
             gameName = 'Webcam';
             info = 'This is an interactive room where you can do anything your heart desires.';
             contentHeight = {
                 height: '52%'
             }
         } else {
-            redirect = '/gamepage';
             gameName = 'Deal 52';
             info = 'Deal 52 is a 5 card per hand game where lowest point total wins after 10 rounds. ' +
                 'When each hand is delt you must discard at least 1 card per round but not more than 3 cards. ' +
@@ -34,8 +30,8 @@ class createGameModal extends Component {
         };
 
         return (
-            <div className="createGameModal" style={displayModal}>
-                <div className="createGameContent" style={contentHeight}>
+            <div className="gameInfoModal" style={displayModal}>
+                <div className="gameInfoContent" style={contentHeight}>
                     <div>
                         <div className='center-align'>
                             <h5>{gameName}</h5>
@@ -50,7 +46,7 @@ class createGameModal extends Component {
                             <h6>Share this key with your friends and family!</h6>
                         </div>
                         <div className='center-align' style={{marginTop: '18px'}}>
-                            <Link to={redirect} className='btn blue-grey darken-2 waves-effect waves-light'>Join Room</Link>
+                            <button className='btn blue-grey darken-2 waves-effect waves-light' onClick={this.props.close}>Close</button>
                         </div>
                     </div>
                 </div>
@@ -59,4 +55,4 @@ class createGameModal extends Component {
     }
 }
 
-export default createGameModal;
+export default GameInfoModal;
