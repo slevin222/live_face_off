@@ -2,6 +2,40 @@
 
 > Connect with your friends and family and enjoy some time with each other.
 
+*********************************
+
+# Technologies Used
+
+## Frontend
+
+> ReactJS
+> Materialize CSS
+> Axios
+> Socket.io-client
+> TokBox Web Cam Api
+
+*********************************
+
+## Backend
+
+> Node.js
+> MongoDB (mlab)
+> Mongoose
+> Express
+> Passport.js (Google / Facebook / Local)
+> Socket.io
+> Jwt
+> TokBox Web Cam Api
+
+*********************************
+
+# To run the app locally
+
+> Clone the git repository
+> Navigate to the server folder in your command line
+> Run the command "npm install"
+> Run the command "npm run dev" to star both the front and backend up
+
 # Developers
 
 >Khaleel Younis, Shawn Levin, Paul Lee, Crystal Navarro
