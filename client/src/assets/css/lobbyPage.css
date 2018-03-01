@@ -54,3 +54,7 @@
 ::placeholder{
     color:black;
 }
+
+.userIcon {
+    font-size: 2vmax;
+}

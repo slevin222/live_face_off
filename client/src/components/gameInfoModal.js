@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import '../assets/css/gameInfoModal.css';
 
 class GameInfoModal extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            value: '',
+            copied: false
+        }
+    }
 
-    render(){
+    render() {
         let info = null,
             gameName = null,
             contentHeight = null;
-        if(this.props.gameType === 'webcam'){
+        if (this.props.gameType === 'webcam') {
             gameName = 'Webcam';
             info = 'This is an interactive room where you can do anything your heart desires.';
             contentHeight = {
@@ -42,10 +49,12 @@ class GameInfoModal extends Component {
                         <div className='divider'></div>
                         <div className='center-align'>
                             <h5>Unique room key</h5>
-                            <div style={{margin: '16px 0'}}><span className='roomKeyStyle'>{this.props.roomKey}</span></div>
+                            <div style={{ margin: '16px 0' }}>
+                                <span className='roomKeyStyle'>{this.props.roomKey}</span>
+                            </div>
                             <h6>Share this key with your friends and family!</h6>
                         </div>
-                        <div className='center-align' style={{marginTop: '18px'}}>
+                        <div className='center-align' style={{ marginTop: '18px' }}>
                             <button className='btn blue-grey darken-2 waves-effect waves-light' onClick={this.props.close}>Close</button>
                         </div>
                     </div>
