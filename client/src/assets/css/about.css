@@ -1,0 +1,31 @@
+.aboutUs {
+    height: 80vh;
+    width: 100vw;
+}
+
+.title {
+    font-size: 3vmax;
+}
+
+.imageRow > .imageContainer > .aboutUsImage {
+    padding: 0;
+} 
+
+.aboutUsNames {
+    font-weight: 600;
+    font-size: 1.5vmax;
+}
+
+.frontAndBack {
+    font-size: 2vmax;
+}
+
+span {
+    font-weight: 500;
+}
+
+.contactIcon {
+    font-size: 3vmax;
+    padding: 2%;
+    color: black;
+}
