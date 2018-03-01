@@ -55,13 +55,14 @@ body{
 
 .bottomInfo{
     height: 10%;
-    /* display: flex; */
 }
 
 .gameTotals{
     margin-top: 0;
 }
-/* 
-.cardClick{
-    opacity: 0.5;
-} */
+
+.gameMessage{
+    font-weight: bold;
+}
+
+
