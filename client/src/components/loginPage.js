@@ -5,6 +5,16 @@ import DisplayMessages from './errorMessage';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { signIn } from '../actions';
+import bgLogin from '../assets/images/LFObg_orange.png'
+
+var loginStyle = {
+    backgroundSize: 'contain',
+    height: '100vh',
+    width: '100vw',
+    // backgroundRepeat: 'no-repeat',
+    backgroundImage: 'url('+bgLogin+')'
+};
+
 
 class LoginPage extends Component {
     constructor(props) {
@@ -54,7 +64,7 @@ class LoginPage extends Component {
         const { handleInput, handleSubmit } = this;
         const { email, password, messages } = this.state;
         return (
-            <div className='container'>
+            <div className='container' style={loginStyle}>
                 <DisplayMessages messages={messages} />
                 <div className='signInArea z-depth-5'>
                     <div className='row'>

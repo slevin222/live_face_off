@@ -4,6 +4,15 @@ import axios from 'axios';
 import CreateGameModal from './createGameModal';
 import Leaderboard from './leaderboard';
 import DisplayMessages from './errorMessage';
+import bgLobby from '../assets/images/LFObg_browngreen.jpg'
+
+var lobbyStyle = {
+    backgroundSize: 'contain',
+    height: '100vh',
+    width: '100vw',
+    backgroundImage: 'url('+bgLobby+')'
+};
+
 
 class LobbyPage extends Component {
     constructor(props) {
@@ -167,7 +176,7 @@ class LobbyPage extends Component {
         const { leaderboardData, gameType, firstName, lastName, roomKey, displayModal, messages, roomKeyFromServer } = this.state;
 
         return (
-            <div className='container'>
+            <div className='container' style ={lobbyStyle}>
                 <DisplayMessages messages={messages} />
                 <div className='divider'></div>
                 <div className='row' style={{ marginTop: '20px' }}>

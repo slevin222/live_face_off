@@ -6,6 +6,16 @@ import { formInput } from '../helpers';
 import '../assets/css/signUpStyle.css';
 import DisplayMessages from './errorMessage';
 import axios from 'axios';
+import bgSignUp from '../assets/images/LFObg_orange.png'
+
+var signUpStyle = {
+    backgroundSize: 'contain',
+    height: '100vh',
+    width: '100vw',
+    // backgroundRepeat: 'no-repeat',
+    backgroundImage: 'url('+bgSignUp+')'
+};
+
 
 class SignUp extends Component {
     constructor(props) {
@@ -41,7 +51,7 @@ class SignUp extends Component {
         const { messages } = this.state;
 
         return (
-            <div className="container">
+            <div className="container" style={signUpStyle}>
                 <DisplayMessages messages={messages} />
                 <div className="col s6 l6 fullform z-depth-5">
                     <div className="row s6">
