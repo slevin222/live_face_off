@@ -62,7 +62,7 @@
 input::-webkit-input-placeholder, 
 handle::-webkit-input-placeholder {
     font-family: 'Work Sans', sans-serif;
-    text-align: center;
+
     color: darkgrey;
 
 }

@@ -59,6 +59,7 @@ body{
 
 .gameTotals{
     margin-top: 0;
+    font-weight: bold;
 }
 
 .gameMessage{
