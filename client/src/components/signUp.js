@@ -6,16 +6,6 @@ import { formInput } from '../helpers';
 import '../assets/css/signUpStyle.css';
 import DisplayMessages from './errorMessage';
 import axios from 'axios';
-import bgSignUp from '../assets/images/LFObg_orange.png'
-
-var signUpStyle = {
-    backgroundSize: 'contain',
-    height: '100vh',
-    width: '100vw',
-    // backgroundRepeat: 'no-repeat',
-    backgroundImage: 'url('+bgSignUp+')'
-};
-
 
 class SignUp extends Component {
     constructor(props) {
@@ -27,7 +17,7 @@ class SignUp extends Component {
     }
 
     handleSubmitForm(formValues) {
-        console.log("We're handling the submit");
+        document.getElementById('submitButton').disabled = true;
 
         axios.post('/users/register', formValues)
             .then(res => {
@@ -41,6 +31,7 @@ class SignUp extends Component {
                     this.setState({
                         messages: res.data.messages
                     });
+                    document.getElementById('submitButton').disabled = false;
                 }
             });
     }
@@ -51,7 +42,7 @@ class SignUp extends Component {
         const { messages } = this.state;
 
         return (
-            <div className="container" style={signUpStyle}>
+            <div className="container">
                 <DisplayMessages messages={messages} />
                 <div className="col s6 l6 fullform z-depth-5">
                     <div className="row s6">
@@ -59,15 +50,15 @@ class SignUp extends Component {
                             <div className='col s12'>
                                 <h4>Sign Up</h4>
                             </div>
-                            <Field component={formInput} id="signUpFirstName" icon='mood' name='firstName' placeholder='First Name' type='text'/>
-                            <Field component={formInput} id="signUpLastName" icon='mood' name='lastName' placeholder='Last Name' type='text'/>
-                            <Field component={formInput} id="signUpEmail" icon='mail_outline' name='email' placeholder='Email' type='email'/>
-                            <Field component={formInput} id="signUpPassword" icon='work' name='password' placeholder='Password' type='password'/>
-                            <Field component={formInput} id="signUpPassword2" icon='work' name='password2' placeholder='Confirm Password' type='password'/>
+                            <Field component={formInput} id="signUpFirstName" icon='mood' name='firstName' placeholder='First Name' type='text' />
+                            <Field component={formInput} id="signUpLastName" icon='mood' name='lastName' placeholder='Last Name' type='text' />
+                            <Field component={formInput} id="signUpEmail" icon='mail_outline' name='email' placeholder='Email' type='email' />
+                            <Field component={formInput} id="signUpPassword" icon='work' name='password' placeholder='Password' type='password' />
+                            <Field component={formInput} id="signUpPassword2" icon='work' name='password2' placeholder='Confirm Password' type='password' />
                             <div className="row rowlines">
                                 <div className='col s12 center-align'>
-                                    <button type="submit" className='signUpBtn waves-effect waves-light btn blue-grey darken-2'>Sign Up</button>
-                                    <Link className='logInBtn waves-effect waves-light btn blue-grey darken-2' to='/'>Go Back</Link>
+                                    <Link className='logInBtn waves-effect waves-light btn blue-grey darken-2' to='/login'>Go Back</Link>
+                                    <button id='submitButton' type="submit" className='signUpBtn waves-effect waves-light btn blue-grey darken-2'>Sign Up</button>
                                 </div>
                             </div>
                         </form>
@@ -78,18 +69,26 @@ class SignUp extends Component {
     }
 }
 
-function validate(values){
+function validate(values) {
     const error = {};
 
+    if(!values.firstName){
+        error.firstName = 'Please enter your first name.'
+    }
+
+    if(!values.lastName){
+        error.lastName = 'Please enter your last name.'
+    }
+
     if(!values.email){
-        error.email = 'Please enter an email'
+        error.email = 'Please enter an email.'
     }
 
     if(!values.password){
-        error.password = 'Please enter a password'
+        error.password = 'Please enter a password.'
     }
 
-    if(values.password !== values.password2){
+    if (values.password !== values.password2) {
         error.password2 = 'Passwords do not match'
     }
 

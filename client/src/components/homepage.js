@@ -15,8 +15,8 @@ class Homepage extends Component {
             <div className= 'row '>
                  <div className='landing col s12'>
                      <div className='mainDiv'>
-                            <h1 className ="gameTitle center center-align">Live Face</h1>
-                            <h1 className ="gameTitle center center-align">Off</h1>
+                            <h1 className ="gameTitle home center center-align">Live Face</h1>
+                            <h1 className ="gameTitle  home center center-align">Off</h1>
                             <div className="divider brown"></div>
                      </div>
                 </div>

@@ -32,7 +32,7 @@ const users = require('./routes/users');
 const tokbox = require('./routes/tokbox');
 
 //Load Keys file
-const keys = require('./config/keys_dev');
+const keys = require('./config/keys');
 
 //Passport Config
 require('./config/passport_config');
@@ -50,6 +50,7 @@ mongoose.connect(keys.mongoURI)
     })
     .catch(err => console.log(err));
 
+//cookie-session middleware
 app.use(session({
     keys: ['PCKS#1217'],
     maxAge: 30 * 24 * 60 * 60 * 1000
@@ -69,6 +70,7 @@ app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 
+//CookieParser middleware
 app.use(cookieParser());
 
 //Use Routes
@@ -121,6 +123,7 @@ app.use((req, res, next) => {
     next(err);
 });
 
+//Port depending on where it is listening
 const port = process.env.PORT || 5000;
 
 server.listen(port, () => {

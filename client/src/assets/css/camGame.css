@@ -1,47 +1,25 @@
 .scoreInput{
     margin-top: 0;
-
-}
-
-.score ::placeholder{
-    color: darkgrey;
-    text-align: center;
+    font-size: 3rem;
 }
 
 .score{
-
-    height: 70%;
+    height: 100%;
   
 } 
 
 .chatCam{
-    height: 90vh;
+    height: 75%;
 }
 .webpage{
-    height: 100vh;
-}
-/* .OT_subscriber {  
-     float: left; 
-    margin-left: 1em;
-    position: absolute;
-    margin-left: 2%;
-
-   
-}
-div.OTPublisherContainer {
-    float: left;
-    position: absolute;
-    top: 8%;
-    left: 70%;
-
-}
-*/
-#lituation-chat{
-    margin-left: 1%;
- 
-
+    height: 85vh;
+    margin: 0;
 }
 
-#winnerBtn{
-    margin-left: 3%;
+#teamOneScore, #teamTwoScore{
+    text-align: center;
+}
+
+.camGameBtn{
+    margin-bottom: 5vh;
 }

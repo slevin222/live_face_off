@@ -1,12 +1,14 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 
+//Creates a user object and allows the serialize and deserialize to work depending on the type of user login.
 const User = {
     local: mongoose.model('users'),
     facebook: mongoose.model('facebookUsers'),
     google: mongoose.model('googleUsers')
 }
 
+//Used for every method that a user can log in with.
 passport.serializeUser((user, done) => {
     let userType = 'local';
     if (user.googleID) {

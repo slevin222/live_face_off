@@ -4,7 +4,7 @@ const jwt = require('jwt-simple');
 const router = express.Router();
 const keys = require('../config/keys_dev');
 
-//Generate a token
+//Generates a token for a user when they login
 function tokenForUser(id) {
     const ts = new Date().getTime();
     return jwt.encode({
@@ -32,14 +32,13 @@ router.get('/facebook', passport.authenticate('facebook', {
 router.get('/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/login'
 }), (req, res) => {
-    console.log('Successfully logged with the facebook server');
     res.redirect('/login');
 });
 
-
+//Route that the front end uses to verify the user is logged in and creates a token which is sent back to the frontend
+//along side isLoggedIn
 router.get('/verify', (req, res) => {
     if (!req.user) {
-        console.log("Not Authorized: ", req.user);
         return res.json({
             isLoggedIn: false
         });
@@ -61,6 +60,7 @@ router.get('/verify', (req, res) => {
     }
 });
 
+//Logout route, also lets the front know to delete the token stored on the client
 router.get('/logout', (req, res) => {
     req.logout();
     res.send(req.user);
