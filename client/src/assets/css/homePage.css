@@ -11,7 +11,7 @@
 }
 
 .landing {
-   height: 80vh;
+   height: 20%;
    width: 98vw;
    padding: 0;
    margin-left: 0; 
@@ -23,8 +23,12 @@
 
 .gameTitle{
     font-family: crewniverse;
-    font-size: 150px;
+    font-size: 10vmax;
     color: rgba(0,0,0,0.8);
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
     text-shadow: 1px 1px #ce794f, 
                      2px 2px #ce794f, 
                      3px 3px #ce794f, 
@@ -37,6 +41,13 @@
     -o-transition:      all 0.12s ease-out;
 }
 
+@keyframes floating {
+from { transform: translate(0,  0px); }
+65%  { transform: translate(0, 15px); }
+to   { transform: translate(0, -0px); }
+
+}
+
 .featureImg {
     padding: 0;
     margin: 0; 
@@ -46,5 +57,7 @@
     margin-bottom: 0;
 }
 
-
+.mainDiv{
+    margin-top: 5%;
+}
 

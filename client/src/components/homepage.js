@@ -13,26 +13,24 @@ class Homepage extends Component {
         return (
          <div className='pageContainer' style={ styles }>
             <div className= 'row '>
-                 <div className='landing col s12'>
+                 <div className='landing col s6'>
                      <div className='mainDiv'>
-                            <h1 className ="gameTitle home center center-align">Live Face</h1>
-                            <h1 className ="gameTitle  home center center-align">Off</h1>
-                            <div className="divider brown"></div>
+                            <h1 className ="gameTitle home center center-align">Live Face Off </h1>
+                            <h1 className ="gameTitle  home center center-align"></h1>
+                         
                      </div>
                 </div>
-            </div>
-             <div className='qualityRow row'>
-                 <div className='titleLine col s12 center center-align'>
-                         <h1>Spend some quality time</h1>
-                  </div>
-                </div>
-                <div className='row'>
-                 <div className="qualityTimeDesc col s12">
+            <div className = 'row'>
+                <div className='col s6 center center-align'>
+                         <h3 className='title'>What is Live Face Off?</h3>
+                         <p>Want to reconnect with a family member overseas? Need a place to hangout with buddies after a long day of work?  Live Face Off is the platform where you can easily spend some time with someone close within a few easy steps. </p>
+                     </div>
+                <div className='col s6 center center-align'>
+                         <h3 className='title'>Features</h3>
                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non viverra turpis. Nam eu porttitor dolor. Nulla aliquet, sapien a posuere finibus, mauris felis lacinia augue, a auctor turpis nunc at urna. Donec elementum velit vitae neque viverra, id tincidunt enim rhoncus. Vivamus scelerisque ante metus. Proin ac sodales ligula. Aliquam bibendum vestibulum accumsan. Morbi malesuada dignissim est, et gravida augue ultrices nec. Fusce tincidunt vel turpis et tempus. Donec convallis augue quis imperdiet scelerisque. Quisque ut orci venenatis, lobortis velit sed, elementum mi. Praesent volutpat malesuada ultrices.</p>
                      </div>
-                 </div>
-
-
+                     <div className="divider brown"></div>
+            </div>
             <div className='row'>
                 <div className='titleLine col s10 offset-s1'>
                      <h1 className='center center-align'> Features </h1>
@@ -64,7 +62,8 @@ class Homepage extends Component {
             </div>
             <div className='row'>
            
-            </div>
+                </div>
+             </div>
         </div>
         )
     }
