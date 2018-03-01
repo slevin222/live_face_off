@@ -64,6 +64,17 @@ class Chat extends Component {
         });
     }
 
+    componentWillUnmount() {
+        const { room } = this.state;
+        axios({
+            method: 'post',
+            url: '/tokbox/delete',
+            data: {
+                room
+            }
+        })
+    }
+
     handleInputChange(event) {
         const { value } = event.target;
         this.setState({
@@ -73,15 +84,17 @@ class Chat extends Component {
     render() {
         const { message, output, messages } = this.state;
         return (
-            <div id="lituation-chat">
-                <div id="chat-window">
-                    <div id="output">
-                        <ChatHistory data={messages} />
+            <div className="lituation-chat z-depth-5" >
+                <form className="form-chat">
+                    <div id="chat-window">
+                        <div id="output">
+                            <ChatHistory data={messages} />
+                        </div>
+                        <div id="feedback"></div>
                     </div>
-                    <div id="feedback"></div>
-                </div>
-                <input value={this.state.message} onChange={this.handleInputChange.bind(this)} id="message" type="text" placeholder="Type Message" />
-                <button className="waves-effect waves-light btn blue-grey darken-2" onClick={this.sendMessage.bind(this)} id="send">Send</button>
+                    <input value={this.state.message} onChange={this.handleInputChange.bind(this)} id="message" type="text" placeholder="Type Message" />
+                    <button className="chatBtn waves-effect waves-light btn blue-grey darken-2" onClick={this.sendMessage.bind(this)} id="send">Send</button>
+                </form>
             </div>
         )
     }

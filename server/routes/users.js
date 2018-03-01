@@ -8,7 +8,7 @@ const router = express.Router();
 require('../models/Users');
 const User = mongoose.model('users');
 
-// Login Form POST
+// Login Form POST for local logging in
 router.post('/login', function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
         if (err) {
@@ -18,10 +18,6 @@ router.post('/login', function (req, res, next) {
             return res.json({ messages: 'Not a valid combination, please try a different one!' });
         }
         if (user) {
-            // if (user === req.user) {
-            //     res.json({ messages: 'User is already logged in, please try another account or sign up!' });
-            // }
-
             req.logIn(user, function (err) {
                 if (err) {
                     return next(err);
@@ -32,7 +28,7 @@ router.post('/login', function (req, res, next) {
     })(req, res, next);
 });
 
-// Register Form POST
+// Register Form POST for local signing up
 router.post('/register', (req, res) => {
     User.findOne({
         email: req.body.email
@@ -54,7 +50,6 @@ router.post('/register', (req, res) => {
                         newUser.password = hash;
                         newUser.save()
                             .then(user => {
-                                console.log('You may now login!')
                                 res.json({ pathname: '/login' });
                             })
                             .catch(err => {

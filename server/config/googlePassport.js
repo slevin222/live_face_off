@@ -5,6 +5,7 @@ const keys = require('./keys');
 //Load user model
 const User = mongoose.model('googleUsers');
 
+//Google Strategy configuration
 module.exports = function (passport) {
     passport.use(
         new GoogleStrategy({

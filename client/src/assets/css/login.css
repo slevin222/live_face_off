@@ -1,6 +1,7 @@
 body{
     user-select: none;
     background-color: lightgrey;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .signInArea {
@@ -9,7 +10,6 @@ body{
     margin: 3% auto;
     background-color: ghostwhite;
 }
-
 
 .top{
     height: 30%;
@@ -23,24 +23,17 @@ body{
     padding: 0;
 }
 
-/*#password{*/
-    /*width: 40%;*/
-/*}*/
-
-/*#username{*/
-    /*width: 40%;*/
-/*}*/
-
 .inputFieldCentering {
     width: 42%;
     margin: 0 auto;
 }
 
-/* .signUpBtn {
-    margin-right: 5px;
-} */
-
 .logInBtn {
+    margin-left: 10px;
+    width: 25%;
+}
+
+.signInBtn {
     margin-left: 10px;
 }
 

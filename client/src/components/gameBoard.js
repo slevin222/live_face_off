@@ -1,34 +1,71 @@
 import React, { Component } from 'react';
 import '../assets/css/gameBoard.css';
 import deck from './deck';
+import CardClicked from './cardClicked';
+import GameInfoModal from './gameInfoModal';
+import EndGameModal from "./endGameModal";
 
 class GameBoard extends Component {
     constructor(props) {
+        console.log("GameBoard props :", props);
         super(props)
         this.state = {
             players: [1, 2, 3, 4],
-            currentPlayer: 1,
             playerHand1: [],
             playerHand2: [],
             playerHand3: [],
             playerHand4: [],
+            clickedCards: [false, false, false, false, false],
             player1Total: null,
-            gameMessage: 'Click on up to 3 cards to discard'
+            gameMessage: 'Click on up to 3 cards to discard',
+            displayEndGameModal: false,
+            displayInfoModal: false
         }
 
+        this.roomKeyId = sessionStorage.getItem('roomKey');
         this.deck = [];
         this.discardPile = [];
         this.discardArr = [];
         this.roundCounter = 1;
+        this.finalScore = [];
 
+        this.displayEndGame = this.displayEndGame.bind(this);
+        this.closeEndGameModal = this.closeEndGameModal.bind(this);
         this.dealInitialHand = this.dealInitialHand.bind(this);
         this.cardsToDiscard = this.cardsToDiscard.bind(this);
         this.discardCardBtn = this.discardCardBtn.bind(this);
+        this.displayInfo = this.displayInfo.bind(this);
+        this.closeInfoModal = this.closeInfoModal.bind(this);
+    }
 
+    displayEndGame(){
+        this.setState({
+            displayEndGameModal: true
+        })
+    }
+
+    closeEndGameModal(){
+        this.setState({
+            displayEndGameModal: false
+        })
+    }
+
+    displayInfo(){
+        this.setState({
+            displayInfoModal: true
+        })
+    }
+
+    closeInfoModal(){
+        this.setState({
+            displayInfoModal: false
+        })
     }
 
     componentDidMount() {
         this.shuffleDeck();
+        this.dealInitialHand();
+
     }
 
     shuffleDeck() {
@@ -62,24 +99,25 @@ class GameBoard extends Component {
     }
 
     discardCardBtn() {
-        console.log(this.discardArr);
         this.discardCards(this.discardArr);
     };
 
     cardsToDiscard(event) {
-        console.log("eTerget : ", event.target.className);
+        var oldClickedCards = this.state.clickedCards.slice();
         let cardPosition = parseInt((event.target.className).slice(-1));
-        console.log("card position ", cardPosition);
+        oldClickedCards[cardPosition] = true;
         this.discardArr.push(cardPosition);
-        console.log(this.discardArr);
+        this.setState({
+            clickedCards: oldClickedCards
+        })
     };
 
     discardCards(deleteIndexArray) {
-
         if (deleteIndexArray.length > 3 || deleteIndexArray.length < 1) {
             const newMessage = 'You must only discard 1 to 3 cards per turn';
             this.setState({
-                gameMessage: newMessage
+                gameMessage: newMessage,
+                clickedCards: [false, false, false, false, false]
             });
             this.discardArr = [];
             return;
@@ -93,16 +131,12 @@ class GameBoard extends Component {
         }
 
         deleteIndexArray.sort(function (a, b) { return b - a });
-        //////need conditional to see whos turn it is for correct player hand
         let currentPlayersHand = this.state.playerHand1;
         for (let cardIndex = 0; cardIndex < deleteIndexArray.length; cardIndex++) {
             let currentCard = currentPlayersHand.splice(deleteIndexArray[cardIndex], 1);
             this.discardPile.push(currentCard[0]);
             let newCard = this.deck.pop();
-            console.log(newCard);
-            console.log(this.deck);
             currentPlayersHand.push(newCard);
-            console.log(currentPlayersHand);
         }
 
         this.roundCounter++;
@@ -110,14 +144,14 @@ class GameBoard extends Component {
         this.setState({
             playerHand1: currentPlayersHand,
             player1Total,
-            gameMessage: 'Click on up to 3 cards to discard'
+            gameMessage: 'Click on up to 3 cards to discard',
+            clickedCards: [false, false, false, false, false]
         });
 
         this.discardArr = [];
         if (this.roundCounter === 10) {
             this.endGame();
         }
-
     };
 
     currentPointTotal(currentHand) {
@@ -129,13 +163,29 @@ class GameBoard extends Component {
     }
 
     endGame() {
-        console.log("Game Over");
+        const finalScore = this.state.player1Total;
+        this.finalScore.push(finalScore);
+
+        this.displayEndGame();
+        // console.log("Game Over");
+        //
+        // this.setState({
+        //     gameMessage: `Your final score is ${this.state.player1Total} `
+        // })
     };
 
+    renderCards(count) {
+        let cards = [];
+        for (let index = 0; index < count; index++) {
+            cards.push(<CardClicked key={index} handleClick={this.cardsToDiscard} className={'playerCard' + index} style={this.state.playerHand1[index].image} clickedStatus={this.state.clickedCards[index]} />)
+        }
+        return cards;
+    }
+
     render() {
-        const { playerHand1, player1Total, gameMessage } = this.state;
+
+        const { playerHand1, player1Total, gameMessage, displayInfoModal, displayEndGameModal } = this.state;
         console.log("state in render :", this.state);
-        console.log("message :", this.state.gameMessage);
 
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
             return (
@@ -153,19 +203,26 @@ class GameBoard extends Component {
                 </div>
             )
         }
-
         return (
             <div className="gameArea">
-                <div onClick={this.cardsToDiscard} className="playerCard0" style={{ backgroundImage: "url(" + playerHand1[0].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard1" style={{ backgroundImage: "url(" + playerHand1[1].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard2" style={{ backgroundImage: "url(" + playerHand1[2].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard3" style={{ backgroundImage: "url(" + playerHand1[3].image + ")" }} ></div>
-                <div onClick={this.cardsToDiscard} className="playerCard4" style={{ backgroundImage: "url(" + playerHand1[4].image + ")" }} ></div>
-                <div className="bottomInfo">
-                    <p>Current Round : {this.roundCounter} / 10 Total Points : {player1Total}</p>
-                    <p>{gameMessage}</p>
-                    <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2" type="submit">Discard Cards</button>
+                {this.renderCards(5)}
+                <div className="bottomInfo col s12">
+                    <div className="col s4 left-align">
+                        <h5>{gameMessage}</h5>
+                    </div>
+                    <div className="col s3 center-align">
+                        <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2 center-align" type="submit">Discard Cards</button>
+                    </div>
+                    <div className="col s2">
+                        <button onClick={this.displayInfo} className="waves-effect waves-light btn blue-grey darken-2" type="button">Info</button>
+                    </div>
+                    <div className="col s3">
+                        <h6 className="right-align gameTotals">Current Round : {this.roundCounter}/10 </h6>
+                        <h6 className="right-align gameTotals">Total Points : {player1Total}</h6>
+                    </div>
                 </div>
+                <EndGameModal display={displayEndGameModal} close={this.closeEndGameModal} points={player1Total}/>
+                <GameInfoModal gameType='deal52' display={displayInfoModal} close={this.closeInfoModal} roomKey={this.roomKeyId}/>
             </div>
         );
     }
