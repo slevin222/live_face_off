@@ -51,7 +51,7 @@ class LobbyPage extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    setDisplayModal(){
+    setDisplayModal() {
         this.setState({
             displayModal: true
         })
@@ -173,11 +173,11 @@ class LobbyPage extends Component {
             <div className='container'>
                 <DisplayMessages messages={messages} />
                 <div className='divider'></div>
-                <div className='row' style={{ marginTop: '20px' }}>
-                    <div className='col s6 offset-s3'>
-                        <ul className='collection'>
+                <div className='row userCard'>
+                    <div className='col s4 offset-s4'>
+                        <ul className='collection z-depth-5 center-align'>
                             <li className='collection-item avatar'>
-                                <i className='material-icons circle green'>insert_chart</i>
+                                <i className='large material-icons circle blue'>insert_chart</i>
                                 <h5 style={{ marginTop: 0 }}><span>{firstName || 'Elton'} {lastName || 'John'}</span></h5>
                                 <p>Team Name: blue<br />
                                     Last Login: Yesterday<br />
@@ -189,7 +189,7 @@ class LobbyPage extends Component {
                 </div>
                 <div className='divider'></div>
                 <div className='row'>
-                    <div className='col s12'>
+                    <div className='col s12 z-depth-5 createGame'>
                         <h5 className='center-align'>Create a Game</h5>
                         <form onSubmit={this.handleSubmit} className='row'>
                             <div className='col s4'>
@@ -221,7 +221,7 @@ class LobbyPage extends Component {
                                 <form className='row' onSubmit={this.handleJoinSubmit}>
                                     <div className='col s4'>
                                         <div className='input-field col s8 offset-s8'>
-                                            <input type="text" className="validate roomKey" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Room Key" />
+                                            <input type="text" className="validate roomKey" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Enter Room Key" />
                                         </div>
                                     </div>
                                     <div className='col s6'>
@@ -235,8 +235,8 @@ class LobbyPage extends Component {
                     </div>
                 </div>
                 <div className='divider'></div>
-                <Leaderboard data={leaderboardData}/>
-                <CreateGameModal gameType={gameType} roomKey={roomKeyFromServer} display={displayModal}/>
+                <Leaderboard data={leaderboardData} />
+                <CreateGameModal gameType={gameType} roomKey={roomKeyFromServer} display={displayModal} />
             </div>
         )
     }

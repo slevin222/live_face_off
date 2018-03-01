@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Leaderboard extends Component {
 
-    render(){
+    render() {
         const list = this.props.data.map((item, index) => {
             return (
                 <tr key={index}>
@@ -15,20 +15,20 @@ class Leaderboard extends Component {
         });
 
         return (
-            <div className='row'>
+            <div className='row z-depth-5 leaderBoard'>
                 <div className='col s8 offset-s2'>
                     <h5 className='center-align'>Top 10 Leaderboard</h5>
                     <table className='highlight bordered centered'>
                         <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Team Name</th>
-                            <th>Game Type</th>
-                            <th>Wins</th>
-                        </tr>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Team Name</th>
+                                <th>Game Type</th>
+                                <th>Wins</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {list}
+                            {list}
                         </tbody>
                     </table>
                 </div>

@@ -43,13 +43,13 @@ class CamGame extends Component {
         })
     }
 
-    displayInfo(){
+    displayInfo() {
         this.setState({
             displayInfoModal: true,
         })
     }
 
-    closeInfoModal(){
+    closeInfoModal() {
         this.setState({
             displayInfoModal: false,
         })
@@ -93,7 +93,7 @@ class CamGame extends Component {
                 <div className="col s9">
                     <TokBox />
                 </div>
-                <GameInfoModal display={displayInfoModal} close={this.closeInfoModal} gameType='webcam' roomKey={this.roomKeyId}/>
+                <GameInfoModal display={displayInfoModal} close={this.closeInfoModal} gameType='webcam' roomKey={this.roomKeyId} />
                 <CamGameWinModal display={displayModal} close={this.closeWinModal} gameResult={winningTeam} teamOneScore={teamOneScore} teamTwoScore={teamTwoScore} />
             </div>
         )
