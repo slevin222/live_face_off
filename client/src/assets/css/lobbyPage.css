@@ -72,7 +72,10 @@
     color:black;
 }
 
+.userIcon {
+    font-size: 2vmax;
+}
+
 .googleFB {
     margin-bottom: 0;
 }
-

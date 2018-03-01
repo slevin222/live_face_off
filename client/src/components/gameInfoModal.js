@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import '../assets/css/gameInfoModal.css';
 
 class GameInfoModal extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            value: '',
+            copied: false
+        }
+    }
 
-    render(){
+    render() {
         let info = null,
             gameName = null,
             contentHeight = null;
-        if(this.props.gameType === 'webcam'){
+        if (this.props.gameType === 'webcam') {
             gameName = 'Webcam';
             info = 'This is an interactive room where you can do anything your heart desires.';
             contentHeight = {
