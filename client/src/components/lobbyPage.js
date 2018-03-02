@@ -201,7 +201,7 @@ class LobbyPage extends Component {
                                 </div>
                             </div>
                         </form>
-                        <div className='row'>
+                        <div className='row homepageLastRow'>
                             <div className='col s12'>
                                 <h5 className='center-align'>Or Join a Game</h5>
                                 <form className='row' onSubmit={this.handleJoinSubmit}>

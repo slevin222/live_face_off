@@ -1,0 +1,14 @@
+.mainApp {
+    position: absolute;
+    background-repeat: repeat;
+    background-image: url('../images/background-tile.png');
+    height: 100%;
+    width: 100%;
+}
+
+.gradientStyle {
+    position: absolute;
+    background: linear-gradient(45deg, rgba(176,145,64,.4), rgba(244,32,171,.7));
+    height: 100%;
+    width: 100%;
+}

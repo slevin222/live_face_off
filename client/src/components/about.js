@@ -3,8 +3,15 @@ import '../assets/css/about.css';
 import familyphoto from '../assets/images/familyphoto.jpg'
 import github from '../assets/images/github.svg'
 import portfolio from '../assets/images/portfolio.png'
+// import LandingBG from '../assets/images/gameBG3.png'
+
+// let style = {
+//     backgroundSize: 'contain',
+//     backgroundImage: `url(${LandingBG})`
+// }
 
 export default (props) => {
+
     return (
         <div className='aboutUs'>
             <div className="row">

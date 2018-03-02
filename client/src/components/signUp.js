@@ -57,8 +57,8 @@ class SignUp extends Component {
                             <Field component={formInput} id="signUpPassword2" icon='work' name='password2' placeholder='Confirm Password' type='password' />
                             <div className="row rowlines">
                                 <div className='col s12 center-align'>
-                                    <Link className='logInBtn waves-effect waves-light btn brown darken-4' to='/login'>Go Back</Link>
-                                    <button id='submitButton' type="submit" className='signUpBtn waves-effect waves-light btn brown darken-4'>Sign Up</button>
+                                    <Link className='logInBtn waves-effect waves-light btn orange lighten-1' to='/login'>Go Back</Link>
+                                    <button id='submitButton' type="submit" className='signUpBtn waves-effect waves-light btn orange lighten-1'>Sign Up</button>
                                 </div>
                             </div>
                         </form>

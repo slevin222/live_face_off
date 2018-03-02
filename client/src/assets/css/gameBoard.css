@@ -1,10 +1,7 @@
 body{
-    height: 100vh;
     margin: 0;
     user-select: none;
-
 }
-
 
 .gameArea{
     height: 100%;
@@ -12,8 +9,6 @@ body{
     display: flex;
     flex-wrap: wrap;
     padding: 0;
-    /* background-color: lightgrey; */
-    background-color: #ffdfba; 
 }
 
 .gameCards{

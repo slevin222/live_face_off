@@ -29,9 +29,9 @@ class Navbar extends Component {
 
     render() {
         return (
-            <nav className='brown darken-4'>
+            <nav className='orange lighten-1'>
                 <div className="nav-wrapper ">
-                    <Link style={{ marginLeft: '4%' }} to='/' className='brand-logo left'><img style={{ position: 'absolute', left: '-28%', top: '7%' }} src={LFOlogoSM} /><span>Live Face Off</span></Link>
+                    <Link style={{ marginLeft: '4%' }} to='/' className='brand-logo left'><img style={{ position: 'absolute', left: '-28%', top: '8%', width: '26%' }} src={LFOlogoSM} /><span>Live Face Off</span></Link>
                     <ul className="right">
                         <li><Link to='/about'>About</Link></li>
                         {this.renderLinks()}
