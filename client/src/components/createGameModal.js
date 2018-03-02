@@ -4,12 +4,12 @@ import '../assets/css/createGameModal.css';
 
 class createGameModal extends Component {
 
-    render(){
+    render() {
         let redirect = null,
             gameName = null,
             info = null,
             contentHeight = null;
-        if(this.props.gameType === 'webcam'){
+        if (this.props.gameType === 'webcam') {
             redirect = '/camGame';
             gameName = 'Webcam';
             info = 'This is an interactive webcam room where 2 players can interact with each other ' +
@@ -36,7 +36,7 @@ class createGameModal extends Component {
 
         return (
             <div className="createGameModal" style={displayModal}>
-                <div className="createGameContent" style={contentHeight}>
+                <div className="createGameContent contentBorder" style={contentHeight}>
                     <div className='row'>
                         <div className='col s12'>
                             <div className='center-align'>
@@ -48,11 +48,11 @@ class createGameModal extends Component {
                             <div className='divider'></div>
                             <div className='center-align'>
                                 <h5>Unique room key</h5>
-                                <div style={{margin: '16px 0'}}><span className='roomKeyStyle'>{this.props.roomKey}</span></div>
+                                <div style={{ margin: '16px 0' }}><span className='roomKeyStyle'>{this.props.roomKey}</span></div>
                                 <p>Share this key with your friends and family!</p>
                             </div>
-                            <div className='center-align' style={{marginTop: '18px'}}>
-                                <Link to={redirect} className='btn brown darken-4 waves-effect waves-light'>Join Room</Link>
+                            <div className='center-align' style={{ marginTop: '18px' }}>
+                                <Link to={redirect} className='btn green accent-4 waves-effect waves-light'>Join Room</Link>
                             </div>
                         </div>
                     </div>
