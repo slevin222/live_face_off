@@ -21,7 +21,7 @@ const App = () => {
         <div className="mainApp">
             <div className="gradientStyle">
                 <Navbar />
-                <Route exact path='/' component={Homepage} />
+                <Route exact path='/' component={redirectUser(Homepage, '/lobby')} />
                 <Route path='/about' component={About} />
                 <Route path="/camGame" component={authUser(CamGame)} />
                 <Route path='/gamepage' component={authUser(GamePage)} />
