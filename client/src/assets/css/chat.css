@@ -21,6 +21,7 @@
     overflow: auto;
     word-wrap: break-word;
     background: #EBEBEB;
+    text-align: left;
 }
 
 #output p{
