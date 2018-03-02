@@ -44,18 +44,6 @@ to   { transform: translate(0, -0px); }
 
 }
 
-/* .featureImg {
-    padding: 0;
-    margin: 0; 
-    max-width: 100%;
-    max-height: 100%;
-} */
-
-
-/* .homeRow{
-    margin-bottom: 0;
-} */
-
 .mainDiv{
     margin-top: 10%;
 }
@@ -70,9 +58,12 @@ to   { transform: translate(0, -0px); }
     6px 6px #ce794f;
 }
 
-
 #fam{
     max-width: 100%;
     max-height: 100%;
+}
+
+.gameImage {
+    height: 55vh;
 }
 
