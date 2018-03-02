@@ -31,7 +31,7 @@ class Navbar extends Component {
         return (
             <nav className='brown darken-4'>
                 <div className="nav-wrapper ">
-                    <Link style={{ marginLeft: '10px' }} to='/' className='brand-logo left'><img src={LFOlogoSM} />Live Face Off</Link>
+                    <Link style={{ marginLeft: '4%' }} to='/' className='brand-logo left'><img style={{ position: 'absolute', left: '-28%', top: '7%' }} src={LFOlogoSM} /><span>Live Face Off</span></Link>
                     <ul className="right">
                         <li><Link to='/about'>About</Link></li>
                         {this.renderLinks()}

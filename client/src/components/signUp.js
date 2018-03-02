@@ -42,7 +42,7 @@ class SignUp extends Component {
         const { messages } = this.state;
 
         return (
-            <div className="container">
+            <div className="container signUpContainer">
                 <DisplayMessages messages={messages} />
                 <div className="col s6 l6 fullform z-depth-5">
                     <div className="row s6">
