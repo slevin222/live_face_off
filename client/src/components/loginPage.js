@@ -54,7 +54,7 @@ class LoginPage extends Component {
         const { handleInput, handleSubmit } = this;
         const { email, password, messages } = this.state;
         return (
-            <div className='container loginContainer valign-wrapper' >
+            <div className='container loginContainer'>
                 <DisplayMessages messages={messages} />
                 <div className='signInArea contentBorder z-depth-5'>
                     <div className='row'>
