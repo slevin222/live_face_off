@@ -1,4 +1,5 @@
 import 'materialize-css/dist/css/materialize.min.css';
+import '../assets/css/mediaQueries.css';
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Navbar from './navbar';
@@ -31,6 +32,12 @@ const App = () => {
             <Route path='/lobby' component={authUser(LobbyPage)} />
             <Route path='/register' component={redirectUser(SignUp, '/login')} />
             <Route path='/login' component={redirectUser(LoginPage, '/lobby')} />
+            <div className="noMobileSupportModal screenTooSmall">
+                <div className="noMobileSupportModalContent">
+                    <p>Support for mobile devices and small tablets is currently in development.</p>
+                    <p>Please visit our website on a laptop or desktop platform.</p>
+                </div>
+            </div>
         </div>
     )
 }

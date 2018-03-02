@@ -39,6 +39,7 @@ class Chat extends Component {
             this.setState({
                 message: ''
             });
+            this.keepScrollHeightAtText();
         }
     }
 
@@ -81,6 +82,12 @@ class Chat extends Component {
             message: value
         });
     }
+
+    keepScrollHeightAtText() {
+        let element = document.getElementById('chat-window');
+        element.scrollTop = element.scrollHeight;
+    }
+
     render() {
         const { message, output, messages } = this.state;
         return (

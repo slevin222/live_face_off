@@ -14,7 +14,7 @@ class GameBoard extends Component {
             players: [1],
             playerHand1: [],
             clickedCards: [false, false, false, false, false],
-            player1Total: null,
+            player1Total: 0,
             gameMessage: 'Click on up to 3 cards then discard',
             displayEndGameModal: false,
             displayInfoModal: false
@@ -44,15 +44,20 @@ class GameBoard extends Component {
     }
 
     closeEndGameModal() {
-        this.roundCounter = 1;
+        this.deck = [];
+        this.discardPile = [];
         this.discardArr = [];
+        this.roundCounter = 1;
         this.setState({
-            displayEndGameModal: false,
+            players: [1],
             playerHand1: [],
-            player1Total: null,
-            gameMessage: 'Click on up to 3 cards then discard'
+            clickedCards: [false, false, false, false, false],
+            player1Total: 0,
+            gameMessage: 'Click on up to 3 cards then discard',
+            displayEndGameModal: false,
+            displayInfoModal: false
         }, () => {
-            debugger;
+            this.shuffleDeck();
             this.dealInitialHand();
         });
     }
@@ -75,7 +80,7 @@ class GameBoard extends Component {
     }
 
     shuffleDeck() {
-        this.deck = deck.sort(function () { return 0.5 - Math.random(); });
+        this.deck = deck.slice().sort(function () { return 0.5 - Math.random(); });
     }
 
     dealInitialHand() {
@@ -121,13 +126,13 @@ class GameBoard extends Component {
             return;
         }
 
-        if (this.deck.length < deleteIndexArray.length) {
-            debugger;
-            for (let discardPileIndex = 0; 0 <= this.discardPile.length; discardPileIndex++) {
-                let oldCard = this.discardPile.pop();
-                this.deck.push(oldCard);
-            }
-        }
+        // if (this.deck.length < deleteIndexArray.length) {
+        //     let currentDiscardPile = this.discardPile.length;
+        //     for (let discardPileIndex = 0; 0 < currentDiscardPile; discardPileIndex++) {
+        //         let oldCard = this.discardPile.pop();
+        //         this.deck.push(oldCard);
+        //     }
+        // }
 
         deleteIndexArray.sort(function (a, b) { return b - a });
         let currentPlayersHand = this.state.playerHand1;
@@ -142,7 +147,7 @@ class GameBoard extends Component {
         let player1Total = this.currentPointTotal(this.state.playerHand1);
         this.setState({
             playerHand1: currentPlayersHand,
-            player1Total,
+            player1Total: player1Total,
             gameMessage: 'Click on up to 3 cards to discard',
             clickedCards: [false, false, false, false, false]
         });
@@ -214,8 +219,9 @@ class GameBoard extends Component {
                         <button onClick={this.displayInfo} className="waves-effect waves-light btn brown darken-4" type="button">Game Info</button>
                     </div>
                     <div className="col s3">
-                        <h6 className="right-align gameTotals">Current Round : {this.roundCounter}/10 </h6>
                         <h6 className="right-align gameTotals">Total Points : {player1Total}</h6>
+                        <h6 className="right-align gameTotals">Current Round : {this.roundCounter} / 10 </h6>
+
                     </div>
                 </div>
                 <EndGameModal display={displayEndGameModal} close={this.closeEndGameModal} points={player1Total} />

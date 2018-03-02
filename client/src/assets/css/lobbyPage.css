@@ -1,16 +1,31 @@
-
-.fullbox{
+.fullbox {
     background-color: ghostwhite;
 }
-.dropdown{
+.dropdown {
     position: relative;
     display: inline-block;
 }
 
-.userCard{
+.userCard {
     margin-bottom: 0;
- 
 }
+
+#profileCard {
+    background-color: ghostwhite;
+}
+
+.contentBorder {
+    border-radius: 25px;
+}
+
+.tableMargin {
+    margin-bottom: 1.5rem;
+}
+
+.lobbyHeaders {
+    margin-top: 1.8rem;
+}
+
 .dropdownContent {
     display: none;
     position: absolute;
@@ -42,6 +57,7 @@
 .leaderBoard{
     margin-bottom: 0;
 }
+
 .dropdown a:hover {background-color: #ddd}
 
 .dropdown span:hover {background-color: #ddd}
@@ -51,10 +67,15 @@
 .userInfo {
     margin: 0 auto;
 }
-::placeholder{
+
+::placeholder {
     color:black;
 }
 
-.googleFB{
+.userIcon {
+    font-size: 2vmax;
+}
+
+.googleFB {
     margin-bottom: 0;
 }
