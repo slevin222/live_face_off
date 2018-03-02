@@ -8,11 +8,6 @@ export default (props) => {
 
     return (
         <div className='aboutUs'>
-            <div className="row">
-                <div className="col s6 offset-s3">
-                    <h3 className="title center center-align">Meet the Team!</h3>
-                </div>
-            </div>
             <div className="row imageRow valign-wrapper">
                 <div className="col l3 s6">
                     <div className="row">
@@ -56,6 +51,7 @@ export default (props) => {
                     </div>
                 </div>
                 <div className="imageContainer col l6 s12">
+                    <h3 className="title center center-align">Meet the Team!</h3>
                     <img src={familyphoto} className="aboutUsImage col s12 z-depth-5" />
                     <p className="figCaptionText center center-align"><strong>From left to right:</strong> Paul Lee, Khaleel Younis, Shawn Levin, Crystal Navarro</p>
                 </div>
