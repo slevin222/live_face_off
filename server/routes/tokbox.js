@@ -101,8 +101,8 @@ router.post('/room', ensureAuthenticated, function (req, res) {
 router.get('/lobby', (req, res) => {
     if (req.user) {
         res.json({
-            firstName: req.user.firstName,
-            lastName: req.user.lastName
+            firstName: req.user.firstName.charAt(0).toUpperCase() + req.user.firstName.slice(1),
+            lastName: req.user.lastName.charAt(0).toUpperCase() + req.user.lastName.slice(1)
         });
     }
 });
@@ -163,8 +163,13 @@ router.post('/delete', ensureAuthenticated, (req, res) => {
         if (lobby) {
             lobby.players.splice(req.user.firstName, 1);
             lobby.save(function (err, updatedLobby) {
-                if (err) return next(err);
+                if (err) return err.message;
             });
+            if (lobby.players.length === 0) {
+                lobby.remove({ roomKey: room }, (err) => {
+                    if (err) return err.message;
+                });
+            }
         };
     })
 });

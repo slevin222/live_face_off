@@ -24,7 +24,7 @@
 .stats{
     width: 20%;
     height: 68%;
-    background-color: lightgray;
+    background-color: #ffdfba; 
     display: inline-flex;
 }
 
@@ -33,3 +33,4 @@
     height: 70%;
     display: flex;
 }
+

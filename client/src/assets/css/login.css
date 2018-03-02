@@ -1,7 +1,12 @@
 body{
     user-select: none;
-    background-color: lightgrey;
+    background-color: #ffdfba; 
     font-family: 'Josefin Sans', sans-serif;
+}
+
+.loginContainer {
+    height: 88vh;
+    width: 100vw;
 }
 
 .signInArea {

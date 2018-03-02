@@ -54,12 +54,12 @@ class LoginPage extends Component {
         const { handleInput, handleSubmit } = this;
         const { email, password, messages } = this.state;
         return (
-            <div className='container'>
+            <div className='container loginContainer' >
                 <DisplayMessages messages={messages} />
                 <div className='signInArea z-depth-5'>
                     <div className='row'>
                         <div className="col s12 homeTitle center-align">
-                            <h1>Live Face Off</h1>
+                            <h2>Live Face Off</h2>
                         </div>
                     </div>
                     <div className="row">
@@ -79,21 +79,21 @@ class LoginPage extends Component {
 
                             <div className="row">
                                 <div className='buttonArea col s12'>
-                                    <button id='localLoginBtn' type="submit" className='logInBtn waves-effect waves-light btn blue-grey darken-2'>Log In</button>
+                                    <button id='localLoginBtn' type="submit" className='logInBtn waves-effect waves-light btn brown darken-4'>Log In</button>
                                 </div>
                             </div>
 
-                            <div className="row">
+                            <div className="row googleFB">
                                 <div className='buttonAreaTwo col s12 center-align'>
-                                    <h5 className='center-align'>Or login with</h5>
+                                    <h5 className='center-align'>Or direct login with</h5>
                                     <br />
                                     <a className="facebookBtn waves-effect waves-light btn light-blue darken-4" href="/auth/facebook">Facebook</a>
                                     <a className="googleBtn waves-effect waves-light btn deep-orange darken-4" href="/auth/google">Google</a>
                                 </div>
                             </div>
                             <br />
-                            <div className="row">
-                                <span>Don't have an account yet?</span><Link className='signInBtn waves-effect waves-light btn blue-grey darken-2' to='/register'>Sign Up</Link>
+                            <div className="row googleFB">
+                                <span>Don't have an account yet?</span><Link className='signInBtn waves-effect waves-light btn brown darken-4' to='/register'>Sign Up</Link>
                             </div>
                         </form>
                     </div>

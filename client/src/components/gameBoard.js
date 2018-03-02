@@ -4,20 +4,18 @@ import deck from './deck';
 import CardClicked from './cardClicked';
 import GameInfoModal from './gameInfoModal';
 import EndGameModal from "./endGameModal";
+import LandingBG from '../assets/images/gameBG3.png';
 
 class GameBoard extends Component {
     constructor(props) {
         console.log("GameBoard props :", props);
         super(props)
         this.state = {
-            players: [1, 2, 3, 4],
+            players: [1],
             playerHand1: [],
-            playerHand2: [],
-            playerHand3: [],
-            playerHand4: [],
             clickedCards: [false, false, false, false, false],
-            player1Total: null,
-            gameMessage: 'Click on up to 3 cards to discard',
+            player1Total: 0,
+            gameMessage: 'Click on up to 3 cards then discard',
             displayEndGameModal: false,
             displayInfoModal: false
         }
@@ -38,25 +36,39 @@ class GameBoard extends Component {
         this.closeInfoModal = this.closeInfoModal.bind(this);
     }
 
-    displayEndGame(){
+    displayEndGame() {
         this.setState({
-            displayEndGameModal: true
+            displayEndGameModal: true,
         })
+
     }
 
-    closeEndGameModal(){
+    closeEndGameModal() {
+        this.deck = [];
+        this.discardPile = [];
+        this.discardArr = [];
+        this.roundCounter = 1;
         this.setState({
-            displayEndGameModal: false
-        })
+            players: [1],
+            playerHand1: [],
+            clickedCards: [false, false, false, false, false],
+            player1Total: 0,
+            gameMessage: 'Click on up to 3 cards then discard',
+            displayEndGameModal: false,
+            displayInfoModal: false
+        }, () => {
+            this.shuffleDeck();
+            this.dealInitialHand();
+        });
     }
 
-    displayInfo(){
+    displayInfo() {
         this.setState({
             displayInfoModal: true
         })
     }
 
-    closeInfoModal(){
+    closeInfoModal() {
         this.setState({
             displayInfoModal: false
         })
@@ -65,35 +77,26 @@ class GameBoard extends Component {
     componentDidMount() {
         this.shuffleDeck();
         this.dealInitialHand();
-
     }
 
     shuffleDeck() {
-        this.deck = deck.sort(function () { return 0.5 - Math.random(); });
+        this.deck = deck.slice().sort(function () { return 0.5 - Math.random(); });
     }
 
     dealInitialHand() {
+
         const numOfPlayers = this.state.players.length;
         const hand1 = [];
-        const hand2 = [];
-        const hand3 = [];
-        const hand4 = [];
         let cardCounter = 5;
 
         for (let cardCountIndex = 0; cardCountIndex < cardCounter; cardCountIndex++) {
             hand1.push(this.deck.shift());
-            hand2.push(this.deck.shift());
-            hand3.push(this.deck.shift());
-            hand4.push(this.deck.shift());
         }
 
         let player1Total = this.currentPointTotal(hand1);
 
         this.setState({
             playerHand1: [...hand1],
-            playerHand2: [...hand2],
-            playerHand3: [...hand3],
-            playerHand4: [...hand4],
             player1Total
         });
     }
@@ -123,12 +126,13 @@ class GameBoard extends Component {
             return;
         }
 
-        if (this.deck.length < deleteIndexArray.length) {
-            for (let discardPileIndex = 0; 0 <= this.discardPile.length; discardPileIndex++) {
-                let oldCard = this.discardPile.pop();
-                this.deck.push(oldCard);
-            }
-        }
+        // if (this.deck.length < deleteIndexArray.length) {
+        //     let currentDiscardPile = this.discardPile.length;
+        //     for (let discardPileIndex = 0; 0 < currentDiscardPile; discardPileIndex++) {
+        //         let oldCard = this.discardPile.pop();
+        //         this.deck.push(oldCard);
+        //     }
+        // }
 
         deleteIndexArray.sort(function (a, b) { return b - a });
         let currentPlayersHand = this.state.playerHand1;
@@ -143,7 +147,7 @@ class GameBoard extends Component {
         let player1Total = this.currentPointTotal(this.state.playerHand1);
         this.setState({
             playerHand1: currentPlayersHand,
-            player1Total,
+            player1Total: player1Total,
             gameMessage: 'Click on up to 3 cards to discard',
             clickedCards: [false, false, false, false, false]
         });
@@ -165,13 +169,7 @@ class GameBoard extends Component {
     endGame() {
         const finalScore = this.state.player1Total;
         this.finalScore.push(finalScore);
-
         this.displayEndGame();
-        // console.log("Game Over");
-        //
-        // this.setState({
-        //     gameMessage: `Your final score is ${this.state.player1Total} `
-        // })
     };
 
     renderCards(count) {
@@ -184,8 +182,12 @@ class GameBoard extends Component {
 
     render() {
 
+        let styles = {
+            backgroundSize: 'contain',
+            backgroundImage: 'url(' + LandingBG + ')'
+        };
+
         const { playerHand1, player1Total, gameMessage, displayInfoModal, displayEndGameModal } = this.state;
-        console.log("state in render :", this.state);
 
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
             return (
@@ -204,25 +206,26 @@ class GameBoard extends Component {
             )
         }
         return (
-            <div className="gameArea">
+            <div className="gameArea" style={styles} >
                 {this.renderCards(5)}
                 <div className="bottomInfo col s12">
                     <div className="col s4 left-align">
-                        <h5>{gameMessage}</h5>
+                        <h6 className="gameMessage">{gameMessage}</h6>
                     </div>
                     <div className="col s3 center-align">
-                        <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2 center-align" type="submit">Discard Cards</button>
+                        <button onClick={this.discardCardBtn} className="waves-effect waves-light btn brown darken-4 center-align" type="submit">Discard Cards</button>
                     </div>
                     <div className="col s2">
-                        <button onClick={this.displayInfo} className="waves-effect waves-light btn blue-grey darken-2" type="button">Info</button>
+                        <button onClick={this.displayInfo} className="waves-effect waves-light btn brown darken-4" type="button">Game Info</button>
                     </div>
                     <div className="col s3">
-                        <h6 className="right-align gameTotals">Current Round : {this.roundCounter}/10 </h6>
                         <h6 className="right-align gameTotals">Total Points : {player1Total}</h6>
+                        <h6 className="right-align gameTotals">Current Round : {this.roundCounter} / 10 </h6>
+
                     </div>
                 </div>
-                <EndGameModal display={displayEndGameModal} close={this.closeEndGameModal} points={player1Total}/>
-                <GameInfoModal gameType='deal52' display={displayInfoModal} close={this.closeInfoModal} roomKey={this.roomKeyId}/>
+                <EndGameModal display={displayEndGameModal} close={this.closeEndGameModal} points={player1Total} />
+                <GameInfoModal gameType='deal52' display={displayInfoModal} close={this.closeInfoModal} roomKey={this.roomKeyId} />
             </div>
         );
     }

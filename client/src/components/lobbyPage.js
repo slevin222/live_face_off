@@ -4,6 +4,7 @@ import axios from 'axios';
 import CreateGameModal from './createGameModal';
 import Leaderboard from './leaderboard';
 import DisplayMessages from './errorMessage';
+import dummyData from './dummyData';
 
 class LobbyPage extends Component {
     constructor(props) {
@@ -19,32 +20,12 @@ class LobbyPage extends Component {
             roomKey: '',
             displayModal: false,
             messages: null,
-
+            teamName: '',
             //roomKey that is used in the Modal
             roomKeyFromServer: ''
         };
-
         //leaderboard dummy data
-        this.leaderboardDummyData = [
-            {
-                'rank': '1',
-                'teamName': 'Horde',
-                'gameType': 'Deal 52',
-                'wins': '3'
-            },
-            {
-                'rank': '2',
-                'teamName': 'Alliance',
-                'gameType': 'Deal 52',
-                'wins': '2'
-            },
-            {
-                'rank': '3',
-                'teamName': 'Legion',
-                'gameType': 'Deal 52',
-                'wins': '1'
-            }
-        ]
+        this.leaderboardDummyData = dummyData;
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleJoinSubmit = this.handleJoinSubmit.bind(this);
@@ -65,7 +46,8 @@ class LobbyPage extends Component {
         }).then(res => {
             this.setState({
                 firstName: res.data.firstName,
-                lastName: res.data.lastName
+                lastName: res.data.lastName,
+                teamName: `${res.data.firstName}'s Team`
             });
         });
     }
@@ -74,6 +56,7 @@ class LobbyPage extends Component {
     handleSubmit(event) {
         document.getElementById('startButton').disabled = true;
         event.preventDefault();
+
         const { lobbies, gameType, maxPlayers, room } = this.state;
         this.setState({
             lobbies: [...lobbies, {
@@ -122,6 +105,7 @@ class LobbyPage extends Component {
             console.log("this is the response", res);
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
+            sessionStorage.setItem('roomKey', res.data.roomKey);
             console.log(JSON.parse(dataFromServer));
             if (res.data.hasOwnProperty('pathname')) {
                 const { origin } = location;
@@ -167,19 +151,21 @@ class LobbyPage extends Component {
     }
 
     render() {
-        const { leaderboardData, gameType, firstName, lastName, roomKey, displayModal, messages, roomKeyFromServer } = this.state;
+        const { leaderboardData, gameType, firstName, lastName, roomKey, displayModal, messages, roomKeyFromServer, teamName } = this.state;
 
         return (
             <div className='container'>
                 <DisplayMessages messages={messages} />
                 <div className='divider'></div>
                 <div className='row userCard'>
-                    <div className='col s4 offset-s4'>
-                        <ul className='collection z-depth-5 center-align'>
-                            <li className='collection-item avatar'>
-                                <i className='large material-icons circle blue'>insert_chart</i>
-                                <h5 style={{ marginTop: 0 }}><span>{firstName || 'Elton'} {lastName || 'John'}</span></h5>
-                                <p>Team Name: blue<br />
+                    <div className='col s4 offset-s4 l4 offset-l4'>
+                        <ul className='collection z-depth-5 center-align contentBorder'>
+                            <li className='collection-item contentBorder'>
+                                <li className="">
+                                    <i className="userIcon far fa-user-circle"></i>
+                                </li>
+                                <h5 style={{ marginTop: '5%' }}><span>{firstName || 'Elton'} {lastName || 'John'}</span></h5>
+                                <p>Team Name: {teamName || 'blue'}<br />
                                     Last Login: Yesterday<br />
                                     Games Played: 1
                                 </p>
@@ -189,8 +175,8 @@ class LobbyPage extends Component {
                 </div>
                 <div className='divider'></div>
                 <div className='row'>
-                    <div className='col s12 z-depth-5 createGame'>
-                        <h5 className='center-align'>Create a Game</h5>
+                    <div className='col s12 z-depth-5 createGame contentBorder'>
+                        <h5 className='center-align lobbyHeaders'>Create a Game</h5>
                         <form onSubmit={this.handleSubmit} className='row'>
                             <div className='col s4'>
                                 <div className='input-field col s8 offset-s2'>
@@ -211,7 +197,7 @@ class LobbyPage extends Component {
                             </div>
                             <div className='col s4'>
                                 <div className='col s8 offset-s2'>
-                                    <button id='startButton' className='btn blue-grey darken-2 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
+                                    <button id='startButton' className='btn brown darken-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
                                 </div>
                             </div>
                         </form>
@@ -226,7 +212,7 @@ class LobbyPage extends Component {
                                     </div>
                                     <div className='col s6'>
                                         <div className='col s8 offset-s7'>
-                                            <button id='joinButton' className='btn blue-grey darken-2 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Join</button>
+                                            <button id='joinButton' className='btn brown darken-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Join</button>
                                         </div>
                                     </div>
                                 </form>

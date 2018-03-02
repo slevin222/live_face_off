@@ -2,6 +2,7 @@ body{
     height: 100vh;
     margin: 0;
     user-select: none;
+
 }
 
 
@@ -11,7 +12,8 @@ body{
     display: flex;
     flex-wrap: wrap;
     padding: 0;
-    background-color: lightgrey;
+    /* background-color: lightgrey; */
+    background-color: #ffdfba; 
 }
 
 .gameCards{
@@ -22,7 +24,8 @@ body{
     height: 68%;
     width: 100%;
     display: flex;
-    background-color: lightslategrey;
+    /* background-color: lightslategrey; */
+    background-color: #ffdfba; 
 } 
 
 .playerCard0{
@@ -55,13 +58,15 @@ body{
 
 .bottomInfo{
     height: 10%;
-    /* display: flex; */
 }
 
 .gameTotals{
     margin-top: 0;
+    font-weight: bold;
 }
-/* 
-.cardClick{
-    opacity: 0.5;
-} */
+
+.gameMessage{
+    font-weight: bold;
+}
+
+

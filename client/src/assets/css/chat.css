@@ -1,9 +1,9 @@
 
-h2{
+/* h2{
     font-size: 18px;
     padding: 10px 20px;
     color: #575ed8;
-}
+} */
 
 .lituation-chat{
     width: 100%;
@@ -19,8 +19,8 @@ h2{
 #chat-window{
     height: 90%;
     overflow: auto;
+    word-wrap: break-word;
     background: #EBEBEB;
-    /* background: ghostwhite; */
 }
 
 #output p{
@@ -62,4 +62,7 @@ h2{
 input::-webkit-input-placeholder, 
 handle::-webkit-input-placeholder {
     font-family: 'Work Sans', sans-serif;
+
+    color: darkgrey;
+
 }

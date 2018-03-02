@@ -11,10 +11,12 @@ class CamGameWinModal extends Component {
         return (
             <div className='camGameWinModal' style={displayModal}>
                 <div className='camGameWinModalContent center-align'>
-                    <h1>{this.props.gameResult}</h1>
-                    <h4>Final Score</h4>
-                    <h4>{this.props.teamOneScore} to {this.props.teamTwoScore}</h4>
-                    <button className='btn blue-grey darken-2 waves-effect waves-light' onClick={this.props.close}>Reset</button>
+                    <div>
+                        <h3>{this.props.gameResult}</h3>
+                        <h4>Final Score</h4>
+                        <h4>{this.props.teamOneScore} - {this.props.teamTwoScore}</h4>
+                        <button className='btn brown darken-4 waves-effect waves-light' onClick={this.props.close}>Reset</button>
+                    </div>
                 </div>
             </div>
         )
