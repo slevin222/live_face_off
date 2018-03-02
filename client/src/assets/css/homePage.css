@@ -23,7 +23,7 @@
 
 .gameTitle{
     font-family: crewniverse;
-    font-size: 10vmax;
+    font-size: 20vmin;
     color: rgba(0,0,0,0.8);
     animation-name: floating;
     animation-duration: 3s;
@@ -44,22 +44,35 @@ to   { transform: translate(0, -0px); }
 
 }
 
-.featureImg {
+/* .featureImg {
     padding: 0;
     margin: 0; 
-}
+    max-width: 100%;
+    max-height: 100%;
+} */
 
-.homeRow{
+
+/* .homeRow{
     margin-bottom: 0;
-}
+} */
 
 .mainDiv{
-    margin-top: 5%;
+    margin-top: 10%;
 }
 
-.photos{
-    border: 2px solid black;
-    height: 10%;
-    
-
+.feature {
+    font-size: 10vmin; 
+    text-shadow: 1px 1px #ce794f, 
+    2px 2px #ce794f, 
+    3px 3px #ce794f, 
+    4px 4px #ce794f, 
+    5px 5px #ce794f, 
+    6px 6px #ce794f;
 }
+
+
+#fam{
+    max-width: 100%;
+    max-height: 100%;
+}
+

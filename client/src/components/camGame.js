@@ -83,8 +83,8 @@ class CamGame extends Component {
                         </div>
                     </div>
                     <div className="center-align">
-                        <button onClick={this.displayInfo} className='btn blue-grey darken-2 camGameBtn waves-effect waves-light'>Info</button>
-                        <button onClick={this.displayWinner} className='btn blue-grey darken-2 camGameBtn waves-effect waves-light' style={{marginLeft: '8px'}}>Display Winner</button>
+                        <button onClick={this.displayInfo} className='btn brown darken-4 camGameBtn waves-effect waves-light'>Info</button>
+                        <button onClick={this.displayWinner} className='btn brown darken-4 camGameBtn waves-effect waves-light' style={{ marginLeft: '8px' }}>Display Winner</button>
                     </div>
                     <div className="col s12 chatCam">
                         <Chat />

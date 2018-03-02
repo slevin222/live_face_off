@@ -4,6 +4,7 @@ import deck from './deck';
 import CardClicked from './cardClicked';
 import GameInfoModal from './gameInfoModal';
 import EndGameModal from "./endGameModal";
+import LandingBG from '../assets/images/gameBG3.png';
 
 class GameBoard extends Component {
     constructor(props) {
@@ -176,6 +177,11 @@ class GameBoard extends Component {
 
     render() {
 
+        let styles = {
+            backgroundSize: 'contain',
+            backgroundImage: 'url(' + LandingBG + ')'
+        };
+
         const { playerHand1, player1Total, gameMessage, displayInfoModal, displayEndGameModal } = this.state;
 
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
@@ -195,17 +201,17 @@ class GameBoard extends Component {
             )
         }
         return (
-            <div className="gameArea">
+            <div className="gameArea" style={styles} >
                 {this.renderCards(5)}
                 <div className="bottomInfo col s12">
                     <div className="col s4 left-align">
                         <h6 className="gameMessage">{gameMessage}</h6>
                     </div>
                     <div className="col s3 center-align">
-                        <button onClick={this.discardCardBtn} className="waves-effect waves-light btn blue-grey darken-2 center-align" type="submit">Discard Cards</button>
+                        <button onClick={this.discardCardBtn} className="waves-effect waves-light btn brown darken-4 center-align" type="submit">Discard Cards</button>
                     </div>
                     <div className="col s2">
-                        <button onClick={this.displayInfo} className="waves-effect waves-light btn blue-grey darken-2" type="button">Game Info</button>
+                        <button onClick={this.displayInfo} className="waves-effect waves-light btn brown darken-4" type="button">Game Info</button>
                     </div>
                     <div className="col s3">
                         <h6 className="right-align gameTotals">Current Round : {this.roundCounter}/10 </h6>
