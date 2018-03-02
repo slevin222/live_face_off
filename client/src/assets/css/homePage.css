@@ -2,7 +2,9 @@
     font-family: 'crewniverse';
     src: url('../fonts/crewniverse_font.ttf')
 }
-
+.nainApp{
+    height: 100vh;
+}
 .pageContainer{
     background-color: #ffdfba; 
     overflow-x: none;
