@@ -197,7 +197,7 @@ class LobbyPage extends Component {
                             </div>
                             <div className='col s4'>
                                 <div className='col s8 offset-s2'>
-                                    <button id='startButton' className='btn blue-grey darken-2 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
+                                    <button id='startButton' className='btn brown darken-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
                                 </div>
                             </div>
                         </form>
@@ -212,7 +212,7 @@ class LobbyPage extends Component {
                                     </div>
                                     <div className='col s6'>
                                         <div className='col s8 offset-s7'>
-                                            <button id='joinButton' className='btn blue-grey darken-2 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Join</button>
+                                            <button id='joinButton' className='btn brown darken-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Join</button>
                                         </div>
                                     </div>
                                 </form>

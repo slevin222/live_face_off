@@ -54,7 +54,7 @@ class LoginPage extends Component {
         const { handleInput, handleSubmit } = this;
         const { email, password, messages } = this.state;
         return (
-            <div className='container'>
+            <div className='container' >
                 <DisplayMessages messages={messages} />
                 <div className='signInArea z-depth-5'>
                     <div className='row'>
@@ -79,7 +79,7 @@ class LoginPage extends Component {
 
                             <div className="row">
                                 <div className='buttonArea col s12'>
-                                    <button id='localLoginBtn' type="submit" className='logInBtn waves-effect waves-light btn blue-grey darken-2'>Log In</button>
+                                    <button id='localLoginBtn' type="submit" className='logInBtn waves-effect waves-light btn brown darken-4'>Log In</button>
                                 </div>
                             </div>
 
@@ -93,7 +93,7 @@ class LoginPage extends Component {
                             </div>
                             <br />
                             <div className="row googleFB">
-                                <span>Don't have an account yet?</span><Link className='signInBtn waves-effect waves-light btn blue-grey darken-2' to='/register'>Sign Up</Link>
+                                <span>Don't have an account yet?</span><Link className='signInBtn waves-effect waves-light btn brown darken-4' to='/register'>Sign Up</Link>
                             </div>
                         </form>
                     </div>
