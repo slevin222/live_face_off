@@ -39,7 +39,7 @@ class GameInfoModal extends Component {
 
         return (
             <div className="gameInfoModal" style={displayModal}>
-                <div className="gameInfoContent" style={contentHeight}>
+                <div className="gameInfoContent contentBorder" style={contentHeight}>
                     <div className='row'>
                         <div className='col s12'>
                             <div className='center-align'>
@@ -51,11 +51,11 @@ class GameInfoModal extends Component {
                             <div className='divider'></div>
                             <div className='center-align'>
                                 <h5>Unique room key</h5>
-                                <div style={{margin: '16px 0'}}><span className='roomKeyStyle'>{this.props.roomKey}</span></div>
+                                <div style={{ margin: '16px 0' }}><span className='roomKeyStyle'>{this.props.roomKey}</span></div>
                                 <p>Share this key with your friends and family!</p>
                             </div>
-                            <div className='center-align' style={{marginTop: '18px'}}>
-                                <button className='btn brown darken-4 waves-effect waves-light' onClick={this.props.close}>Close</button>
+                            <div className='center-align' style={{ marginTop: '18px' }}>
+                                <button className='btn green accent-4 waves-effect waves-light' onClick={this.props.close}>Close</button>
                             </div>
                         </div>
                     </div>

@@ -5,14 +5,13 @@
 
 .score{
     height: 100%;
-  
 } 
 
 .chatCam{
-    height: 75%;
+    height: 60vh;
 }
 .webpage{
-    height: 90vh;
+    height: 98vh;
     margin: 0;
 }
 

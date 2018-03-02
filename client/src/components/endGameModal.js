@@ -14,7 +14,7 @@ class EndGameModal extends Component {
                     <div className='center-align'>
                         <h3>Final Score</h3>
                         <h3>{this.props.points}</h3>
-                        <button onClick={this.props.close} className="waves-effect waves-light btn brown darken-4">Play Again</button>
+                        <button onClick={this.props.close} className="waves-effect waves-light btn red accent-4">Play Again</button>
                     </div>
                 </div>
             </div>
