@@ -1,21 +1,6 @@
-.aboutUs {
-    height: 92vh;
-    width: 100vw;
-}
-
-.title {
-    text-shadow: 1px 1px #ce794f, 
-                     2px 2px #ce794f, 
-                     3px 3px #ce794f, 
-                     4px 4px #ce794f, 
-                     5px 5px #ce794f, 
-                     6px 6px #ce794f;
-    font-size: 5vmin;
-}
-
 .imageRow > .imageContainer > .aboutUsImage {
     padding: 0;
-} 
+}
 
 .aboutUsNames {
     font-weight: 600;

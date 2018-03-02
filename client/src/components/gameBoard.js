@@ -4,7 +4,6 @@ import deck from './deck';
 import CardClicked from './cardClicked';
 import GameInfoModal from './gameInfoModal';
 import EndGameModal from "./endGameModal";
-import LandingBG from '../assets/images/gameBG3.png';
 
 class GameBoard extends Component {
     constructor(props) {
@@ -126,14 +125,6 @@ class GameBoard extends Component {
             return;
         }
 
-        // if (this.deck.length < deleteIndexArray.length) {
-        //     let currentDiscardPile = this.discardPile.length;
-        //     for (let discardPileIndex = 0; 0 < currentDiscardPile; discardPileIndex++) {
-        //         let oldCard = this.discardPile.pop();
-        //         this.deck.push(oldCard);
-        //     }
-        // }
-
         deleteIndexArray.sort(function (a, b) { return b - a });
         let currentPlayersHand = this.state.playerHand1;
         for (let cardIndex = 0; cardIndex < deleteIndexArray.length; cardIndex++) {
@@ -181,12 +172,6 @@ class GameBoard extends Component {
     }
 
     render() {
-
-        let styles = {
-            backgroundSize: 'contain',
-            backgroundImage: 'url(' + LandingBG + ')'
-        };
-
         const { playerHand1, player1Total, gameMessage, displayInfoModal, displayEndGameModal } = this.state;
 
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
@@ -206,17 +191,17 @@ class GameBoard extends Component {
             )
         }
         return (
-            <div className="gameArea" style={styles} >
+            <div className="gameArea">
                 {this.renderCards(5)}
                 <div className="bottomInfo col s12">
                     <div className="col s4 left-align">
                         <h6 className="gameMessage">{gameMessage}</h6>
                     </div>
                     <div className="col s3 center-align">
-                        <button onClick={this.discardCardBtn} className="waves-effect waves-light btn brown darken-4 center-align" type="submit">Discard Cards</button>
+                        <button onClick={this.discardCardBtn} className="waves-effect waves-light btn red accent-4 center-align" type="submit">Discard Cards</button>
                     </div>
                     <div className="col s2">
-                        <button onClick={this.displayInfo} className="waves-effect waves-light btn brown darken-4" type="button">Game Info</button>
+                        <button onClick={this.displayInfo} className="waves-effect waves-light btn light-blue accent-4" type="button">Info</button>
                     </div>
                     <div className="col s3">
                         <h6 className="right-align gameTotals">Total Points : {player1Total}</h6>

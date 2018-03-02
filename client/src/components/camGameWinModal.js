@@ -3,14 +3,14 @@ import '../assets/css/camGameWinModal.css';
 
 class CamGameWinModal extends Component {
 
-    render(){
+    render() {
         let displayModal = {
             display: this.props.display ? 'block' : 'none'
         };
 
         return (
             <div className='camGameWinModal' style={displayModal}>
-                <div className='camGameWinModalContent center-align'>
+                <div className='camGameWinModalContent contentBorder center-align'>
                     <div>
                         <h3>{this.props.gameResult}</h3>
                         <h4>Final Score</h4>
