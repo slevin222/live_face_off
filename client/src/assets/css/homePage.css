@@ -2,21 +2,15 @@
     font-family: 'crewniverse';
     src: url('../fonts/crewniverse_font.ttf')
 }
-.nainApp{
-    height: 100vh;
-}
-.pageContainer{
-    background-color: #ffdfba; 
-    overflow-x: none;
-    padding: 0;
-    margin: 0;
-}
 
-.landing {
-   height: 20%;
-   width: 98vw;
-   padding: 0;
-   margin-left: 0; 
+.title {
+    color: rgba(0,181,161,1); 
+    text-shadow: 1px 1px #008894, 
+                     2px 2px #008894, 
+                     3px 3px #008894, 
+                     4px 4px #008894, 
+                     5px 5px #008894, 
+                     6px 6px #008894;
 }
 
 .titleLine{
@@ -26,17 +20,17 @@
 .gameTitle{
     font-family: crewniverse;
     font-size: 20vmin;
-    color: rgba(0,0,0,0.8);
+    color: rgba(0,181,161,1);
     animation-name: floating;
     animation-duration: 3s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
-    text-shadow: 1px 1px #ce794f, 
-                     2px 2px #ce794f, 
-                     3px 3px #ce794f, 
-                     4px 4px #ce794f, 
-                     5px 5px #ce794f, 
-                     6px 6px #ce794f;
+    text-shadow: 1px 1px #008894, 
+                     2px 2px #008894, 
+                     3px 3px #008894, 
+                     4px 4px #008894, 
+                     5px 5px #008894, 
+                     6px 6px #008894;
 }
 
 @keyframes floating {
@@ -51,13 +45,14 @@ to   { transform: translate(0, -0px); }
 }
 
 .feature {
-    font-size: 10vmin; 
-    text-shadow: 1px 1px #ce794f, 
-    2px 2px #ce794f, 
-    3px 3px #ce794f, 
-    4px 4px #ce794f, 
-    5px 5px #ce794f, 
-    6px 6px #ce794f;
+    font-size: 10vmin;
+    color: rgba(0,181,161,1); 
+    text-shadow: 1px 1px #008894, 
+                     2px 2px #008894, 
+                     3px 3px #008894, 
+                     4px 4px #008894, 
+                     5px 5px #008894, 
+                     6px 6px #008894;
 }
 
 #fam{
@@ -67,5 +62,20 @@ to   { transform: translate(0, -0px); }
 
 .gameImage {
     height: 55vh;
+}
+
+.homepageLastRow {
+    margin-bottom: 0;
+}
+
+.homepageSpan {
+    font-weight: 600;
+    font-size: 2.5vmin;
+    margin-right: 2%;
+}
+
+.paragraphInHomePage {
+    font-weight: 800;
+    font-size: 2.25vmin;
 }
 

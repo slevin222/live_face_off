@@ -1,12 +1,7 @@
 body{
     user-select: none;
-    background-color: #ffdfba; 
     font-family: 'Josefin Sans', sans-serif;
-}
-
-.loginContainer {
-    height: 88vh;
-    width: 100vw;
+    margin: 0;
 }
 
 .signInArea {
@@ -31,6 +26,10 @@ body{
 .inputFieldCentering {
     width: 42%;
     margin: 0 auto;
+}
+
+.loginContainer {
+    height: 92.6vh;
 }
 
 .logInBtn {

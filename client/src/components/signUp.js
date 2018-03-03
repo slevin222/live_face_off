@@ -42,9 +42,9 @@ class SignUp extends Component {
         const { messages } = this.state;
 
         return (
-            <div className="container signUpContainer">
+            <div className="container signUpContainer valign-wrapper">
                 <DisplayMessages messages={messages} />
-                <div className="col s6 l6 fullform z-depth-5">
+                <div className="col s6 l6 fullform contentBorder z-depth-5">
                     <div className="row s6">
                         <form className="col s10 center-align push-s1 " onSubmit={handleSubmit(handleSubmitForm)}>
                             <div className='col s12'>
@@ -57,8 +57,8 @@ class SignUp extends Component {
                             <Field component={formInput} id="signUpPassword2" icon='work' name='password2' placeholder='Confirm Password' type='password' />
                             <div className="row rowlines">
                                 <div className='col s12 center-align'>
-                                    <Link className='logInBtn waves-effect waves-light btn brown darken-4' to='/login'>Go Back</Link>
-                                    <button id='submitButton' type="submit" className='signUpBtn waves-effect waves-light btn brown darken-4'>Sign Up</button>
+                                    <Link className='logInBtn waves-effect waves-light btn red accent-4' to='/login'>Go Back</Link>
+                                    <button id='submitButton' type="submit" className='signUpBtn waves-effect waves-light btn green accent-4'>Sign Up</button>
                                 </div>
                             </div>
                         </form>

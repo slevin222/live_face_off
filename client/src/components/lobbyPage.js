@@ -197,11 +197,11 @@ class LobbyPage extends Component {
                             </div>
                             <div className='col s4'>
                                 <div className='col s8 offset-s2'>
-                                    <button id='startButton' className='btn brown darken-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
+                                    <button id='startButton' className='btn green accent-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
                                 </div>
                             </div>
                         </form>
-                        <div className='row'>
+                        <div className='row homepageLastRow'>
                             <div className='col s12'>
                                 <h5 className='center-align'>Or Join a Game</h5>
                                 <form className='row' onSubmit={this.handleJoinSubmit}>
@@ -212,7 +212,7 @@ class LobbyPage extends Component {
                                     </div>
                                     <div className='col s6'>
                                         <div className='col s8 offset-s7'>
-                                            <button id='joinButton' className='btn brown darken-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Join</button>
+                                            <button id='joinButton' className='btn orange accent-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Join</button>
                                         </div>
                                     </div>
                                 </form>

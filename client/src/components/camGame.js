@@ -68,26 +68,37 @@ class CamGame extends Component {
         const { displayModal, displayInfoModal, teamOneScore, teamTwoScore, winningTeam } = this.state;
 
         return (
-            <div className="webpage row s12">
+            <div className="webpage row">
                 <div className="col s3 score">
-                    <div className="center-align" >
-                        <div className="row">
-                            <div className="col s6">
-                                <h5>Team 1</h5>
-                                <input id='teamOneScore' onChange={this.handleScoreInput} name='teamOneScore' value={teamOneScore} className="score" type="number" placeholder="Enter Score" />
+                    <div className="row">
+                        <div className="col s12 center-align">
+                            <div className="card contentBorder">
+                                <div className="card-content">
+                                    <div className="row">
+                                        <div className="col s6">
+                                            <h5>Team 1</h5>
+                                            <input id='teamOneScore' onChange={this.handleScoreInput} name='teamOneScore' value={teamOneScore} className="score" type="number" placeholder="Enter Score" />
+                                        </div>
+                                        <div className="col s6">
+                                            <h5>Team 2</h5>
+                                            <input id='teamTwoScore' onChange={this.handleScoreInput} name='teamTwoScore' value={teamTwoScore} className="score" type="number" placeholder="Enter Score" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col s6 center-align">
+                                        <button onClick={this.displayInfo} className='btn light-blue accent-4 camGameBtn waves-effect waves-light'>Info</button>
+                                    </div>
+                                    <div className="col s6">
+                                        <button onClick={this.displayWinner} className='btn red accent-4 camGameBtn waves-effect waves-light' style={{ marginLeft: '8px' }}>End Game</button>
+                                    </div>
+
+                                </div>
                             </div>
-                            <div className="col s6">
-                                <h5>Team 2</h5>
-                                <input id='teamTwoScore' onChange={this.handleScoreInput} name='teamTwoScore' value={teamTwoScore} className="score" type="number" placeholder="Enter Score" />
+                            <div className="col s12 chatCam">
+                                <Chat />
                             </div>
                         </div>
-                    </div>
-                    <div className="center-align">
-                        <button onClick={this.displayInfo} className='btn brown darken-4 camGameBtn waves-effect waves-light'>Info</button>
-                        <button onClick={this.displayWinner} className='btn brown darken-4 camGameBtn waves-effect waves-light' style={{ marginLeft: '8px' }}>Display Winner</button>
-                    </div>
-                    <div className="col s12 chatCam">
-                        <Chat />
                     </div>
                 </div>
                 <div className="col s9">

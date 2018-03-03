@@ -12,30 +12,27 @@ import GamePage from './gamePage';
 import CamGame from './camGame';
 import redirectUser from '../hoc/redirectUser';
 import authUser from '../hoc/authUser';
-import LandingBG from '../assets/images/gameBG3.png'
-
-
-var styles = {
-    backgroundSize: 'contain',
-    backgroundImage: 'url(' + LandingBG + ')'
-};
+import '../assets/css/app.css'
+import LandingBG from '../assets/images/background-tile.png'
 
 
 const App = () => {
     return (
-        <div className="mainApp" style={styles}>
-            <Navbar />
-            <Route exact path='/' component={Homepage} />
-            <Route path='/about' component={About} />
-            <Route path="/camGame" component={authUser(CamGame)} />
-            <Route path='/gamepage' component={authUser(GamePage)} />
-            <Route path='/lobby' component={authUser(LobbyPage)} />
-            <Route path='/register' component={redirectUser(SignUp, '/login')} />
-            <Route path='/login' component={redirectUser(LoginPage, '/lobby')} />
-            <div className="noMobileSupportModal screenTooSmall">
-                <div className="noMobileSupportModalContent">
-                    <p>Support for mobile devices and small tablets is currently in development.</p>
-                    <p>Please visit our website on a laptop or desktop platform.</p>
+        <div className="mainApp">
+            <div className="gradientStyle">
+                <Navbar />
+                <Route exact path='/' component={Homepage} />
+                <Route path='/about' component={About} />
+                <Route path="/camGame" component={authUser(CamGame)} />
+                <Route path='/gamepage' component={authUser(GamePage)} />
+                <Route path='/lobby' component={authUser(LobbyPage)} />
+                <Route path='/register' component={redirectUser(SignUp, '/login')} />
+                <Route path='/login' component={redirectUser(LoginPage, '/lobby')} />
+                <div className="noMobileSupportModal screenTooSmall">
+                    <div className="noMobileSupportModalContent">
+                        <p>Support for mobile devices and small tablets is currently in development.</p>
+                        <p>Please visit our website on a laptop or desktop platform.</p>
+                    </div>
                 </div>
             </div>
         </div>
