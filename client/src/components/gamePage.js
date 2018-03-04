@@ -14,18 +14,18 @@ class GamePage extends Component {
         const game = "deal52";
         return (
             <div className="fullPage">
-                <div className="row col s12 webcams" id="webcamContainer">
-                    <TokBox data={game} />
+                <div className="row webcams">
+                    <div className="col s12" id="webcamContainer">
+                        <TokBox data={game} />
+                    </div>
                 </div>
-                <div className="row col s12 gameCards">
+                <div className="row gameCards">
                     <div className="col s3 camChat">
                         <Chat />
                     </div>
-                    <div className="col s9">
-                        <GameBoard />
-                    </div>
+                    <GameBoard />
                 </div >
-            </div >
+            </div>
         )
     }
 }

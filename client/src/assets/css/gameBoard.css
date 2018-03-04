@@ -1,28 +1,25 @@
 .gameArea{
     height: 100%;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
     padding: 0;
 }
 
 .gameCards{
     margin: 0;
 }
-
-.playerHand{
-    height: 68%;
+.cardsArea{
+    height:80%;
     width: 100%;
-    display: flex;
-    /* background-color: lightslategrey; */
-    background-color: #ffdfba; 
+    margin-bottom: 0;
+}
+.playerHand{
+    height: 100%;
+    display: inline-flex; 
+    flex-wrap: wrap; 
 } 
 
 .playerCard0{
-    height: 69%;
+    height: 100%;
     width: 19%;
-    display: inline-flex;
-    flex-wrap: wrap;
     cursor: pointer;
     background-size: 100%;
     border-radius: 1.5%;
@@ -34,10 +31,8 @@
 .playerCard2,
 .playerCard3,
 .playerCard4{
-    height: 69%;
+    height: 100%;
     width: 19%;
-    display: inline-flex;
-    flex-wrap: wrap;
     cursor: pointer;
     background-size: 100%;
     border-radius: 1.5%;
