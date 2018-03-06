@@ -8,10 +8,14 @@
 } 
 
 .chatCam{
-    height: 60vh;
+    height: 55vh;
+
+}
+#camChat{
+    padding: 0;
 }
 .webpage{
-    height: 98vh;
+    height: 91vh;
     margin: 0;
 }
 
@@ -19,6 +23,16 @@
     text-align: center;
 }
 
-.camGameBtn{
-    margin-bottom: 5vh;
+
+.scoreInfo{
+    height: 30vh;
+}
+
+#scoreRow{
+    height: 89vh;
+    margin: 0;
+}
+
+#cardContainer{
+    padding: 5%;
 }

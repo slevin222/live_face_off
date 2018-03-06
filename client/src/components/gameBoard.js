@@ -191,23 +191,23 @@ class GameBoard extends Component {
             )
         }
         return (
-            <div className="col s9 gameArea">
+            <div className="col l9 s12 gameArea">
                 <div className="row cardsArea">
                     <div className="col s12 playerHand">
                         {this.renderCards(5)}
                     </div>
                 </div>
                 <div className="row bottomInfo">
-                    <div className="col s4">
+                    <div className="col s4 l4">
                         <h6 className="gameMessage">{gameMessage}</h6>
                     </div>
-                    <div className="col s3">
+                    <div className="col s4 l3">
                         <button onClick={this.discardCardBtn} className="waves-effect waves-light btn red accent-4 center-align" type="submit">Discard Cards</button>
                     </div>
-                    <div className="col s2">
+                    <div className="col s4 l2">
                         <button onClick={this.displayInfo} className="waves-effect waves-light btn light-blue accent-4" type="button">Info</button>
                     </div>
-                    <div className="col s3">
+                    <div className="col s12 l3">
                         <h6 className="right-align gameTotals">Total Points : {player1Total}</h6>
                         <h6 className="right-align gameTotals">Current Round : {this.roundCounter} / 10 </h6>
                     </div>

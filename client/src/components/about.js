@@ -9,7 +9,7 @@ export default (props) => {
     return (
         <div className='aboutUs'>
             <div className="row">
-                <div className="col l8 s6 offset-l2">
+                <div className="col l8 s8 offset-l2 offset-s2">
                     <h3 className="title center center-align">Meet the Team!</h3>
                     <img src={familyphoto} className="aboutUsImage col s12 z-depth-5" id="aboutUsImage" />
                     <p className="figCaptionText center center-align"><strong>From left to right:</strong> Paul Lee, Khaleel Younis, Shawn Levin, Crystal Navarro</p>
@@ -17,17 +17,17 @@ export default (props) => {
             </div>
             <div className="row">
                 <div className="col l12 s12">
-                    <div className="frontEnd col s6">
+                    <div className="frontEnd col s6 l6">
                         <h2 className="frontAndBack center center-align">Front End Developers</h2>
                     </div>
-                    <div className="backEnd col s6">
+                    <div className="backEnd col s6 l6">
                         <h2 className="frontAndBack center center-align">Back End Developers</h2>
                     </div>
                 </div>
             </div>
             <div className="row">
                 <div className="col s12 l12">
-                    <div className="aboutUsText col s3">
+                    <div className="aboutUsText col s6 l3 ">
                         <div className="card contentBorder">
                             <div className="card-content">
                                 <h4 className="aboutUsNames center center-align">Shawn Levin</h4>
@@ -41,7 +41,7 @@ export default (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="aboutUsText col s3">
+                    <div className="aboutUsText col s6 l3">
                         <div className="card contentBorder">
                             <div className="card-content">
                                 <h4 className="aboutUsNames center center-align">Paul Lee</h4>
@@ -55,7 +55,7 @@ export default (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="aboutUsText col s3">
+                    <div className="aboutUsText col s6 l3">
                         <div className="card contentBorder">
                             <div className="card-content">
                                 <h4 className="aboutUsNames center center-align">Khaleel Younis</h4>
@@ -69,7 +69,7 @@ export default (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="aboutUsText col s3">
+                    <div className="aboutUsText col s6 l3">
                         <div className="card contentBorder">
                             <div className="card-content">
                                 <h4 className="aboutUsNames center center-align">Crystal Navarro</h4>
