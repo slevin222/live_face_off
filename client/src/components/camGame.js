@@ -92,7 +92,6 @@ class CamGame extends Component {
                                     <div className="col s6">
                                         <button onClick={this.displayWinner} className='btn red accent-4 camGameBtn waves-effect waves-light' style={{ marginLeft: '8px' }}>End Game</button>
                                     </div>
-
                                 </div>
                             </div>
                             <div className="col s12 chatCam">

@@ -1,7 +1,9 @@
 .imageRow > .imageContainer > .aboutUsImage {
     padding: 0;
 }
-
+#aboutUsImage {
+    padding: 0;
+}
 .aboutUsNames {
     font-weight: 600;
     font-size: 3vmin;
@@ -19,4 +21,14 @@ span {
     font-size: 3vmax;
     padding: 2%;
     color: black;
+}
+
+.frontEnd, .backEnd{
+    color: rgba(0,181,161,1); 
+    text-shadow: 1px 1px #008894, 
+                     2px 2px #008894, 
+                     3px 3px #008894, 
+                     4px 4px #008894, 
+                     5px 5px #008894, 
+                     6px 6px #008894;
 }
