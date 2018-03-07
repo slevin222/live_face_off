@@ -36,3 +36,12 @@
 #cardContainer{
     padding: 5%;
 }
+
+.teamText{
+    font-size: 2.3vmin;
+}
+
+.camGameBtn{
+    font-size: 1.3vmin;
+    padding: 0 1.5rem;
+}
