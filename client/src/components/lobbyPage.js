@@ -156,9 +156,9 @@ class LobbyPage extends Component {
         return (
             <div className='container'>
                 <DisplayMessages messages={messages} />
-                <div className='divider'></div>
-                <div className='row userCard'>
-                    <div className='col s4 offset-s4 l4 offset-l4'>
+
+                <div className='row'>
+                    <div className='col s4'>
                         <ul className='collection z-depth-5 center-align contentBorder'>
                             <li className='collection-item contentBorder'>
                                 <li className="">
@@ -172,14 +172,12 @@ class LobbyPage extends Component {
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div className='divider'></div>
-                <div className='row'>
-                    <div className='col s12 z-depth-5 createGame contentBorder'>
+
+                    <div className='col s8 z-depth-5 createGame contentBorder'>
                         <h5 className='center-align lobbyHeaders'>Create a Game</h5>
                         <form onSubmit={this.handleSubmit} className='row'>
                             <div className='col s4'>
-                                <div className='input-field col s8 offset-s2'>
+                                <div className='input-field col s8 offset-s3'>
                                     <select name='gameType'>
                                         <option value='webcam'>Webcam</option>
                                         <option value='deal52'>Deal 52</option>
@@ -219,8 +217,13 @@ class LobbyPage extends Component {
                             </div>
                         </div>
                     </div>
+
                 </div>
-                <div className='divider'></div>
+
+                <div className='row'>
+
+                </div>
+
                 <Leaderboard data={leaderboardData} />
                 <CreateGameModal gameType={gameType} roomKey={roomKeyFromServer} display={displayModal} />
             </div>
