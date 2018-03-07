@@ -10,7 +10,7 @@ export default (props) => {
         <div className='aboutUs'>
             <div className="row">
                 <div className="col l8 s8 offset-l2 offset-s2">
-                    <h3 className="title center center-align">Meet the Team!</h3>
+                    <h3 className="aboutTitle center center-align">Meet the Team!</h3>
                     <img src={familyphoto} className="aboutUsImage col s12 z-depth-5" id="aboutUsImage" />
                     <p className="figCaptionText center center-align"><strong>From left to right:</strong> Crystal Navarro, Khaleel Younis, Paul Lee, Shawn Levin</p>
                 </div>
@@ -26,11 +26,11 @@ export default (props) => {
                                 <div className="card-content">
                                     <h4 className="aboutUsNames center center-align">Crystal Navarro</h4>
                                     <p>During this project, I had the wonderful opportunity to learn and implement: Node.js, Express, Mongo DB, Socket.io, and a bit of React. Working with these guys was a great experience because individuality did not exist. We all worked collectively and learned a vast amount of concepts from the front to the back end. My greatest challenge was learning how the technologies in the MERN stack tied in together. Overcoming our bugs and walls was such a great pay off. There is no other way I would have wanted to learn.</p>
-                                    <div className="row">
-                                        <div className="icons center center-align col s12">
-                                            <a href="https://github.com/xoxocrystyle" target="_blank"><i className="contactIcon fab fa-github"></i></a>
-                                            <a href="https://crystalnavarro.com" target="_blank"><i className="contactIcon fas fa-id-card"></i></a>
-                                        </div>
+                                </div>
+                                <div className="row">
+                                    <div className="icons center center-align col s12">
+                                        <a href="https://github.com/xoxocrystyle" target="_blank"><i className="contactIcon fab fa-github"></i></a>
+                                        <a href="https://crystalnavarro.com" target="_blank"><i className="contactIcon fas fa-id-card"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -73,11 +73,11 @@ export default (props) => {
                                 <div className="card-content">
                                     <h4 className="aboutUsNames center center-align">Shawn Levin</h4>
                                     <p>On this project, I was most excited to utilize more modern technologies such as React and Materialize CSS. The most challenging portion was implementing the web cam on each of the game modes seperately. We utilized a WebRTC api from TokBox, that worked especially well with React. Paul and I worked diligently together on the frontend splitting the workload, but also helping each other along the way.</p>
-                                    <div className="row">
-                                        <div className="icons center center-align col s12">
-                                            <a href="https://github.com/slevin222" target="_blank"><i className="contactIcon fab fa-github"></i></a>
-                                            <a href="https://shawndlevin.com" target="_blank"><i className="contactIcon fas fa-id-card"></i></a>
-                                        </div>
+                                </div>
+                                <div className="row">
+                                    <div className="icons center center-align col s12">
+                                        <a href="https://github.com/slevin222" target="_blank"><i className="contactIcon fab fa-github"></i></a>
+                                        <a href="https://shawndlevin.com" target="_blank"><i className="contactIcon fas fa-id-card"></i></a>
                                     </div>
                                 </div>
                             </div>
