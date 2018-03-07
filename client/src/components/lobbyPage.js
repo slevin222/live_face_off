@@ -158,62 +158,64 @@ class LobbyPage extends Component {
                 <DisplayMessages messages={messages} />
 
                 <div className='row'>
-                    <div className='col s4'>
-                        <ul className='collection z-depth-5 center-align contentBorder'>
-                            <li className='collection-item contentBorder'>
-                                <li className="">
-                                    <i className="userIcon far fa-user-circle"></i>
-                                </li>
-                                <h5 style={{ marginTop: '5%' }}><span>{firstName || 'Elton'} {lastName || 'John'}</span></h5>
-                                <p>Team Name: {teamName || 'blue'}<br />
-                                    Last Login: Yesterday<br />
-                                    Games Played: 1
-                                </p>
-                            </li>
-                        </ul>
+                    <div className='col l3 s6 offset-s3 z-depth-5 contentBorder center-align profileCard'>
+                        <div>
+                            <div className='userIconPos'>
+                                <i className="userIcon far fa-user-circle"></i>
+                            </div>
+                            <h5 style={{ marginTop: '5%' }}><span>{firstName || 'Elton'} {lastName || 'John'}</span></h5>
+                            <ul className='profileInfo'>
+                                <li>Team Name: {teamName || 'blue'}</li>
+                                <li>Last Login: Yesterday</li>
+                                <li>Deal 52 Total Score: 21</li>
+                                <li>Deal 52 Wins: 3</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div className='col s8 z-depth-5 createGame contentBorder'>
-                        <h5 className='center-align lobbyHeaders'>Create a Game</h5>
-                        <form onSubmit={this.handleSubmit} className='row'>
-                            <div className='col s4'>
-                                <div className='input-field col s8 offset-s3'>
-                                    <select name='gameType'>
-                                        <option value='webcam'>Webcam</option>
-                                        <option value='deal52'>Deal 52</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className='col s4'>
-                                <div className='input-field col s8 offset-s2'>
-                                    <select name='maxPlayers'>
-                                        <option value='2'>2 Players</option>
-                                        <option value='3'>3 Players</option>
-                                        <option value='4'>4 Players</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className='col s4'>
-                                <div className='col s8 offset-s2'>
-                                    <button id='startButton' className='btn green accent-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
-                                </div>
-                            </div>
-                        </form>
-                        <div className='row homepageLastRow'>
-                            <div className='col s12'>
-                                <h5 className='center-align'>Or Join a Game</h5>
-                                <form className='row' onSubmit={this.handleJoinSubmit}>
-                                    <div className='col s4'>
-                                        <div className='input-field col s8 offset-s8'>
-                                            <input type="text" className="validate roomKey" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Enter Room Key" />
-                                        </div>
+                    <div className='col l8 s12 offset-l1 z-depth-5 createGame contentBorder'>
+                        <div style={{width: '100%'}}>
+                            <h5 className='center-align lobbyHeaders'>Create a Game</h5>
+                            <form onSubmit={this.handleSubmit} className='row'>
+                                <div className='col s4'>
+                                    <div className='input-field col s8 offset-s3'>
+                                        <select name='gameType'>
+                                            <option value='webcam'>Webcam</option>
+                                            <option value='deal52'>Deal 52</option>
+                                        </select>
                                     </div>
-                                    <div className='col s6'>
-                                        <div className='col s8 offset-s7'>
-                                            <button id='joinButton' className='btn orange accent-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Join</button>
-                                        </div>
+                                </div>
+                                <div className='col s4'>
+                                    <div className='input-field col s8 offset-s2'>
+                                        <select name='maxPlayers'>
+                                            <option value='2'>2 Players</option>
+                                            <option value='3'>3 Players</option>
+                                            <option value='4'>4 Players</option>
+                                        </select>
                                     </div>
-                                </form>
+                                </div>
+                                <div className='col s4'>
+                                    <div className='col s8 offset-s2'>
+                                        <button id='startButton' className='btn green accent-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div className='row homepageLastRow'>
+                                <div className='col s12'>
+                                    <h5 className='center-align joinTitle'>Or Join a Game</h5>
+                                    <form className='row' onSubmit={this.handleJoinSubmit}>
+                                        <div className='col s4'>
+                                            <div className='input-field col s8 offset-s8'>
+                                                <input type="text" className="validate roomKey" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Enter Room Key" />
+                                            </div>
+                                        </div>
+                                        <div className='col s6'>
+                                            <div className='col s8 offset-s7'>
+                                                <button id='joinButton' className='btn orange accent-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Join</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
