@@ -42,12 +42,13 @@ class Homepage extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='row'>
+                {/* <div className='row'>
                     <div className='col s6 offset-s3'>
                         <h1 className="feature center center-align">Features</h1>
                     </div>
-                </div>
-                <div className='row homepageLastRow valign-wrapper'>
+                </div> */}
+                {/* valign-wrapper */}
+                <div className='row homepageLastRow'>
                     <div className='col s3'>
                         <div className='row'>
                             <div className='col s12'>
@@ -73,6 +74,7 @@ class Homepage extends Component {
                         </div>
                     </div>
                     <div className="imageContainer col s6">
+                        <h1 className="feature center center-align">Features</h1>
                         <img src={homepage} className="gameImage col s12" />
                     </div>
                     <div className='col s3'>

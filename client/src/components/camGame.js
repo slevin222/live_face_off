@@ -69,11 +69,11 @@ class CamGame extends Component {
 
         return (
             <div className="webpage row">
-                <div className="col s3 score">
-                    <div className="row">
+                <div className="col l3 s4 score">
+                    <div className="row" id="scoreRow">
                         <div className="col s12 center-align">
-                            <div className="card contentBorder">
-                                <div className="card-content">
+                            <div className="card contentBorder scoreInfo">
+                                <div className="card-content" id="cardContainer">
                                     <div className="row">
                                         <div className="col s6">
                                             <h5>Team 1</h5>
@@ -92,16 +92,15 @@ class CamGame extends Component {
                                     <div className="col s6">
                                         <button onClick={this.displayWinner} className='btn red accent-4 camGameBtn waves-effect waves-light' style={{ marginLeft: '8px' }}>End Game</button>
                                     </div>
-
                                 </div>
                             </div>
-                            <div className="col s12 chatCam">
+                            <div className="col s12 chatCam" id="camChat">
                                 <Chat />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="col s9">
+                <div className="col l9 s8">
                     <TokBox />
                 </div>
                 <GameInfoModal display={displayInfoModal} close={this.closeInfoModal} gameType='webcam' roomKey={this.roomKeyId} />
