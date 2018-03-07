@@ -4,10 +4,12 @@ import deck from './deck';
 import CardClicked from './cardClicked';
 import GameInfoModal from './gameInfoModal';
 import EndGameModal from "./endGameModal";
+// import CardDeck from './cardDeck';
 
 class GameBoard extends Component {
     constructor(props) {
         console.log("GameBoard props :", props);
+        debugger;
         super(props)
         this.state = {
             players: [1],
