@@ -10,7 +10,7 @@ class CardClicked extends Component {
 
     render() {
         return (
-            <div onClick={(event) => this.props.handleClick(event)} className={this.props.className} style={{ backgroundImage: "url(" + this.props.style + ")", opacity: this.props.clickedStatus ? 0 : 1 }} ></div>
+            <div onClick={(event) => this.props.handleClick(event)} className={this.props.className} style={{ backgroundImage: "url(" + this.props.style + ")", display: this.props.clickedStatus ? "none" : "initial" }} ></div>
 
         )
     }
