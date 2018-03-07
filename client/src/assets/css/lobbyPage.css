@@ -1,21 +1,40 @@
 .fullbox {
     background-color: ghostwhite;
 }
+
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-.userCard {
-    margin-bottom: 0;
+.profileCard, .createGame {
+    margin-top: 3%;
+    height: 40vh;
 }
 
-#profileCard {
+.profileCard {
     background-color: ghostwhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileInfo {
+    list-style: none;
+}
+
+.createGame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contentBorder {
     border-radius: 25px;
+}
+
+.joinTitle {
+    margin-top: 0;
 }
 
 .tableMargin {
@@ -73,9 +92,26 @@
 }
 
 .userIcon {
-    font-size: 2vmax;
+    font-size: 6vmin;
+}
+
+.userIconPos {
+    margin-bottom: 15px;
 }
 
 .googleFB {
     margin-bottom: 0;
 }
+
+@media only screen and (min-width: 993px) {
+    .row .col.offset-l1 {
+        margin-left: 4.3333333333%;
+    }
+}
+
+@media only screen and (min-width: 993px){
+    .row .col.l8 {
+        width: 70.6666666667%;
+    }
+}
+
