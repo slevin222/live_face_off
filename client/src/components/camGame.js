@@ -75,12 +75,12 @@ class CamGame extends Component {
                             <div className="card contentBorder scoreInfo">
                                 <div className="card-content" id="cardContainer">
                                     <div className="row">
-                                        <div className="col s6">
-                                            <h5>Team 1</h5>
+                                        <div className="col l6 s6">
+                                            <h5 className="teamText">Team 1</h5>
                                             <input id='teamOneScore' onChange={this.handleScoreInput} name='teamOneScore' value={teamOneScore} className="score" type="number" placeholder="Enter Score" />
                                         </div>
-                                        <div className="col s6">
-                                            <h5>Team 2</h5>
+                                        <div className="col l6 s6">
+                                            <h5 className="teamText">Team 2</h5>
                                             <input id='teamTwoScore' onChange={this.handleScoreInput} name='teamTwoScore' value={teamTwoScore} className="score" type="number" placeholder="Enter Score" />
                                         </div>
                                     </div>
@@ -89,8 +89,8 @@ class CamGame extends Component {
                                     <div className="col s6 center-align">
                                         <button onClick={this.displayInfo} className='btn light-blue accent-4 camGameBtn waves-effect waves-light'>Info</button>
                                     </div>
-                                    <div className="col s6">
-                                        <button onClick={this.displayWinner} className='btn red accent-4 camGameBtn waves-effect waves-light' style={{ marginLeft: '8px' }}>End Game</button>
+                                    <div className="col s6 center-align">
+                                        <button onClick={this.displayWinner} className="btn red accent-4 camGameBtn waves-effect waves-light">End Game</button>
                                     </div>
                                 </div>
                             </div>
