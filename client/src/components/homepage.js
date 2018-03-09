@@ -6,12 +6,12 @@ import fam from '../assets/images/itlitfam.png';
 import homepage from '../assets/images/homepage.jpg'
 
 class Homepage extends Component {
-    switchLinks(){
-        if(this.props.auth){
-            return <Link id='toLobby' className='btn green accent-4 waves-effect waves-light btn-large' to='/lobby' style={{ margin: '2%' }}>Go To Lobby</Link>
+    switchLinks() {
+        if (this.props.auth) {
+            return <Link id='toLobby' className='btn teal accent-4 waves-effect waves-light btn-large' to='/lobby' style={{ margin: '2%' }}>Go To Lobby</Link>
         } else {
             return [
-                <Link key='0' id='loginHomepage' className='btn green accent-4 waves-effect waves-light btn-large' to='/login' style={{ margin: '2%' }}>Login</Link>,
+                <Link key='0' id='loginHomepage' className='btn teal accent-4 waves-effect waves-light btn-large' to='/login' style={{ margin: '2%' }}>Login</Link>,
                 <Link key='1' id='signUpAcc' className='btn orange accent-4 waves-effect waves-light btn-large' to='/register' style={{ margin: '2%' }} >Sign Up</Link>
             ]
         }
