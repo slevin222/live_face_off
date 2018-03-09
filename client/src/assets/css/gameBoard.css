@@ -7,7 +7,7 @@
     margin: 0;
 }
 .cardsArea{
-    height:80%;
+    height:75%;
     width: 100%;
     margin-bottom: 0;
 }
@@ -42,16 +42,23 @@
 
 
 .bottomInfo{
-    height: 10%;
+    height: 17%;
+    margin:0;
 }
 
 .gameTotals{
     margin-top: 0;
     font-weight: bold;
+    font-size: 1.6vmin;
 }
 
 .gameMessage{
     font-weight: bold;
+    font-size: 1.8vmin;
 }
 
-
+.bottomCard{
+    margin: 0;
+    height: 100%;
+    border-radius: 10px;
+}

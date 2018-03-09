@@ -48,7 +48,7 @@ class SignUp extends Component {
                     <div className="row s6">
                         <form className="col s10 center-align push-s1 " onSubmit={handleSubmit(handleSubmitForm)}>
                             <div className='col s12'>
-                                <h4>Sign Up</h4>
+                                <h4 className="signUpText">Sign Up</h4>
                             </div>
                             <Field component={formInput} id="signUpFirstName" icon='mood' name='firstName' placeholder='First Name' type='text' />
                             <Field component={formInput} id="signUpLastName" icon='mood' name='lastName' placeholder='Last Name' type='text' />
@@ -57,8 +57,8 @@ class SignUp extends Component {
                             <Field component={formInput} id="signUpPassword2" icon='work' name='password2' placeholder='Confirm Password' type='password' />
                             <div className="row rowlines">
                                 <div className='col s12 center-align'>
-                                    <Link className='logInBtn waves-effect waves-light btn red accent-4' to='/login'>Go Back</Link>
-                                    <button id='submitButton' type="submit" className='signUpBtn waves-effect waves-light btn green accent-4'>Sign Up</button>
+                                    <Link className='logInBtn waves-effect waves-light btn red accent-4' to='/login'>Back</Link>
+                                    <button id='submitButton' type="submit" className='signUpBtn waves-effect waves-light btn teal accent-4'>Sign Up</button>
                                 </div>
                             </div>
                         </form>

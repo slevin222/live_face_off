@@ -6,7 +6,7 @@ body{
 
 .signInArea {
     border: 1px solid black;
-    width: 70%;
+    width: 60%;
     margin: 3% auto;
     background-color: ghostwhite;
 }
@@ -24,7 +24,7 @@ body{
 }
 
 .inputFieldCentering {
-    width: 42%;
+    width: 55%;
     margin: 0 auto;
 }
 
@@ -47,4 +47,9 @@ body{
 
 .googleBtn {
     margin-left: 1%;
+}
+
+.signInText{
+    color: rgba(0,181,161,1); 
+    text-shadow: 2px 2px 4px #008894; 
 }

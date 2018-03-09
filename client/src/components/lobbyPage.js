@@ -167,7 +167,7 @@ class LobbyPage extends Component {
                         </div>
                     </div>
                     <div className='col l8 s12 offset-l1 z-depth-5 createGame contentBorder'>
-                        <div style={{width: '100%'}}>
+                        <div style={{ width: '100%' }}>
                             <h5 className='center-align lobbyHeaders'>Create a Game</h5>
                             <form onSubmit={this.handleSubmit} className='row'>
                                 <div className='col s4'>
@@ -189,21 +189,21 @@ class LobbyPage extends Component {
                                 </div>
                                 <div className='col s4'>
                                     <div className='col s8 offset-s2'>
-                                        <button id='startButton' className='btn green accent-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
+                                        <button id='startButton' className='btn teal accent-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Start</button>
                                     </div>
                                 </div>
                             </form>
-                            <div className='row homepageLastRow'>
-                                <div className='col s12'>
-                                    <h5 className='center-align joinTitle'>Or Join a Game</h5>
+                            <div className='row'>
+                                <div className='col s8 offset-s2 center-align'>
+                                    <h5 className='joinTitle'>Or Join a Game</h5>
                                     <form className='row' onSubmit={this.handleJoinSubmit}>
-                                        <div className='col s4'>
-                                            <div className='input-field col s8 offset-s8'>
+                                        <div className='col s6'>
+                                            <div className='input-field col l12 center-align'>
                                                 <input type="text" className="validate roomKey" onChange={this.handleChange} value={roomKey} name="roomKey" placeholder="Enter Room Key" />
                                             </div>
                                         </div>
                                         <div className='col s6'>
-                                            <div className='col s8 offset-s7'>
+                                            <div className='col s8 offset-s2'>
                                                 <button id='joinButton' className='btn orange accent-4 waves-effect waves-light' type="submit" style={{ marginTop: '23px' }}>Join</button>
                                             </div>
                                         </div>

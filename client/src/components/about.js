@@ -9,10 +9,14 @@ export default (props) => {
     return (
         <div className='aboutUs'>
             <div className="row">
-                <div className="col l8 s8 offset-l2 offset-s2">
+                <div className="col l6 s6 offset-l3 offset-s3">
                     <h3 className="aboutTitle center center-align">Meet the Team!</h3>
-                    <img src={familyphoto} className="aboutUsImage col s12 z-depth-5" id="aboutUsImage" />
-                    <p className="figCaptionText center center-align"><strong>From left to right:</strong> Crystal Navarro, Khaleel Younis, Paul Lee, Shawn Levin</p>
+                    <div className="card contentBorder">
+                        <div className="card-content">
+                            <img src={familyphoto} className="aboutUsImage col s12 z-depth-5" id="aboutUsImage" />
+                            <h6 className="figCaptionText center center-align"><strong>From left to right:</strong> Crystal Navarro, Khaleel Younis, Paul Lee, Shawn Levin</h6>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="row">

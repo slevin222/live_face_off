@@ -3,6 +3,7 @@
 }
 #aboutUsImage {
     padding: 0;
+    margin-bottom: 2%;
 }
 .aboutUsNames {
     font-weight: 600;
@@ -25,19 +26,16 @@ span {
 
 .frontEnd, .backEnd, .aboutTitle{
     color: rgba(0,181,161,1); 
-    text-shadow: 1px 1px #008894, 
-                     2px 2px #008894, 
-                     3px 3px #008894, 
-                     4px 4px #008894, 
-                     5px 5px #008894, 
-                     6px 6px #008894;
+    text-shadow: 2px 2px 4px #008894; 
 
-   /* color:black; 
-   text-shadow: 1px 1px rgba(0,181,161,1),
-                    2px 2px rgba(0,181,161,1), 
-                    3px 3px rgba(0,181,161,1), 
-                    4px 4px rgba(0,181,161,1), 
-                    5px 5px rgba(0,181,161,1), 
-                    6px 6px rgba(0,181,161,1);               */
+  
 }
 
+.figCaptionText{
+    color: rgba(0,181,161,1); 
+    text-shadow: 1px 1px 1px #008894;
+    padding-top: 1%; 
+    font-size: 2vmin;
+
+  
+}

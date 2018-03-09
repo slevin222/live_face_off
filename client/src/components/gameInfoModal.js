@@ -11,27 +11,27 @@ class GameInfoModal extends Component {
         }
     }
 
-    switchBtn(redirect){
-        if(this.props.fromLobby === true){
-            return <Link to={redirect} className='btn green accent-4 waves-effect waves-light'>Join Room</Link>
+    switchBtn(redirect) {
+        if (this.props.fromLobby === true) {
+            return <Link to={redirect} className='btn teal accent-4 waves-effect waves-light'>Join Room</Link>
         } else {
-            return <button className='btn green accent-4 waves-effect waves-light' onClick={this.props.close}>Close</button>
+            return <button className='btn teal accent-4 waves-effect waves-light' onClick={this.props.close}>Close</button>
         }
     }
 
-    gameInfo(){
-        if (this.props.gameType === 'webcam'){
+    gameInfo() {
+        if (this.props.gameType === 'webcam') {
             return <p>This is an interactive webcam room where 2 players can interact with each other
                 and play their own home games such as Charades over webcam.</p>
         } else {
             return [<span key='0'>This is a 5 card per hand game where lowest point total wins after 10 rounds.</span>,
-                <ul key='1'>
-                    <li>Click on the high value cards you would like to discard.</li>
-                    <li>Then click the discard button to replace the cards.</li>
-                    <li>You must discard at least 1 card per round but no more than 3 cards.</li>
-                    <li>Aces are the best cards having a 1 point value.</li>
-                    <li>Jacks, Queens, and Kings are 10 points each.</li>
-                </ul>]
+            <ul key='1'>
+                <li>Click on the high value cards you would like to discard.</li>
+                <li>Then click the discard button to replace the cards.</li>
+                <li>You must discard at least 1 card per round but no more than 3 cards.</li>
+                <li>Aces are the best cards having a 1 point value.</li>
+                <li>Jacks, Queens, and Kings are 10 points each.</li>
+            </ul>]
         }
     }
 

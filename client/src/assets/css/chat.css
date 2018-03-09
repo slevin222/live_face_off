@@ -17,6 +17,7 @@
 }
 
 #chat-window{
+    padding: 3%;
     height: 90%;
     overflow: auto;
     word-wrap: break-word;
@@ -43,7 +44,7 @@
 
 
 #message{
-    /* padding: 10px 20px; */
+    padding: 3%;
     box-sizing: border-box;
     background: #eee;
     border: 0;
