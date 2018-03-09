@@ -13,15 +13,13 @@ import CamGame from './camGame';
 import redirectUser from '../hoc/redirectUser';
 import authUser from '../hoc/authUser';
 import '../assets/css/app.css'
-import LandingBG from '../assets/images/background-tile.png'
-
 
 const App = () => {
     return (
         <div className="mainApp">
             <div className="gradientStyle">
                 <Navbar />
-                <Route exact path='/' component={redirectUser(Homepage, '/lobby')} />
+                <Route exact path='/' component={Homepage} />
                 <Route path='/about' component={About} />
                 <Route path="/camGame" component={authUser(CamGame)} />
                 <Route path='/gamepage' component={authUser(GamePage)} />
@@ -30,8 +28,8 @@ const App = () => {
                 <Route path='/login' component={redirectUser(LoginPage, '/lobby')} />
                 <div className="noMobileSupportModal screenTooSmall">
                     <div className="noMobileSupportModalContent">
-                        <p>Support for mobile devices and small tablets is currently in development.</p>
-                        <p>Please visit our website on a laptop or desktop platform.</p>
+                        <p>Support for mobile devices is currently in development.</p>
+                        <p>Please visit our website on a desktop, laptop or tablet.</p>
                     </div>
                 </div>
             </div>
