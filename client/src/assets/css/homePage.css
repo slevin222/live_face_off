@@ -5,12 +5,8 @@
 
 .title {
     color: rgba(0,181,161,1); 
-    text-shadow: 1px 1px #008894, 
-                     2px 2px #008894, 
-                     3px 3px #008894, 
-                     4px 4px #008894, 
-                     5px 5px #008894, 
-                     6px 6px #008894;
+    text-shadow: 2px 2px 4px #008894; 
+   
 }
 
 .titleLine{
@@ -25,12 +21,8 @@
     animation-duration: 3s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
-    text-shadow: 1px 1px #008894, 
-                     2px 2px #008894, 
-                     3px 3px #008894, 
-                     4px 4px #008894, 
-                     5px 5px #008894, 
-                     6px 6px #008894;
+    text-shadow: 5px 5px 10px #008894; 
+   
 }
 
 @keyframes floating {
@@ -41,18 +33,14 @@ to   { transform: translate(0, -0px); }
 }
 
 .mainDiv{
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .feature {
     font-size: 10vmin;
     color: rgba(0,181,161,1); 
-    text-shadow: 1px 1px #008894, 
-                     2px 2px #008894, 
-                     3px 3px #008894, 
-                     4px 4px #008894, 
-                     5px 5px #008894, 
-                     6px 6px #008894;
+    text-shadow: 4px 4px 6px #008894; 
+   
 }
 
 #fam{
@@ -77,5 +65,10 @@ to   { transform: translate(0, -0px); }
 .paragraphInHomePage {
     font-weight: 800;
     font-size: 2.25vmin;
+    padding-top:4%;
 }
 
+.paragraphTopHomePage{
+    font-weight: 800;
+    font-size: 2vmin;
+}

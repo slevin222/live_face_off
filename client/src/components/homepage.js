@@ -22,7 +22,7 @@ class Homepage extends Component {
                                 <div className="card contentBorder">
                                     <div className="card-content">
                                         <h3 className='title center center-align'>What is Live Face Off?</h3>
-                                        <p className="center center-align paragraphInHomePage">Want to reconnect with a family member overseas? Need a place to hangout with buddies after a long day of work? Live Face Off is a platform where you can easily spend some time with someone close and catch up. Our mission is to create an interface that can be used by just about anyone, while bringing together core technologies that allow for easy communication and fun.</p>
+                                        <p className="center center-align paragraphTopHomePage">Want to reconnect with a family member overseas? Need a place to hangout with buddies after a long day of work? Live Face Off is a platform where you can easily spend some time with someone close and catch up. Our mission is to create an interface that can be used by just about anyone, while bringing together core technologies that allow for easy communication and fun.</p>
                                         <div className='fam row'>
                                             <div className="col s12">
                                                 <img id="fam" src={fam} />
@@ -31,7 +31,7 @@ class Homepage extends Component {
                                         <div className="row">
                                             <div className="col s12">
                                                 <div className='accountAccess center center-align'>
-                                                    <Link id='loginHomepage' className='btn green accent-4 waves-effect waves-light btn-large' to='/login' style={{ margin: '2%' }}>Login</Link>
+                                                    <Link id='loginHomepage' className='btn teal accent-4 waves-effect waves-light btn-large' to='/login' style={{ margin: '2%' }}>Login</Link>
                                                     <Link id='signUpAcc' className='btn orange accent-4 waves-effect waves-light btn-large' to='/register' style={{ margin: '2%' }} >Sign Up</Link>
                                                 </div>
                                             </div>
