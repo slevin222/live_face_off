@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/css/lobbyPage.css'
 import axios from 'axios';
-import CreateGameModal from './createGameModal';
+import GameInfoModal from './gameInfoModal';
 import Leaderboard from './leaderboard';
 import DisplayMessages from './errorMessage';
 import dummyData from './dummyData';
@@ -66,7 +66,7 @@ class LobbyPage extends Component {
             }],
         });
         const data = { gameType, maxPlayers };
-        console.log('Data sent to server: ', data);
+
         axios({
             method: 'post',
             url: `/tokbox/room`,
@@ -75,15 +75,13 @@ class LobbyPage extends Component {
                 maxPlayers
             }
         }).then(res => {
-            console.log("this is the response", res);
             this.setState({
                 roomKeyFromServer: res.data.roomKey
             });
-            console.log(this.state.roomKeyFromServer);
+
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
             sessionStorage.setItem('roomKey', res.data.roomKey);
-            console.log(JSON.parse(dataFromServer));
 
             this.setDisplayModal();
         });
@@ -102,16 +100,13 @@ class LobbyPage extends Component {
                 roomKey
             }
         }).then(res => {
-            console.log("this is the response", res);
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
             sessionStorage.setItem('roomKey', res.data.roomKey);
-            console.log(JSON.parse(dataFromServer));
+
             if (res.data.hasOwnProperty('pathname')) {
                 const { origin } = location;
                 location.href = `${origin}${res.data.pathname}`;
-
-                console.log(res.data.pathname);
             }
             if (res.data.hasOwnProperty('messages')) {
                 this.setState({
@@ -156,7 +151,6 @@ class LobbyPage extends Component {
         return (
             <div className='container'>
                 <DisplayMessages messages={messages} />
-
                 <div className='row'>
                     <div className='col l3 s6 offset-s3 z-depth-5 contentBorder center-align profileCard'>
                         <div>
@@ -172,7 +166,6 @@ class LobbyPage extends Component {
                             </ul>
                         </div>
                     </div>
-
                     <div className='col l8 s12 offset-l1 z-depth-5 createGame contentBorder'>
                         <div style={{width: '100%'}}>
                             <h5 className='center-align lobbyHeaders'>Create a Game</h5>
@@ -219,15 +212,9 @@ class LobbyPage extends Component {
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-                <div className='row'>
-
-                </div>
-
                 <Leaderboard data={leaderboardData} />
-                <CreateGameModal gameType={gameType} roomKey={roomKeyFromServer} display={displayModal} />
+                <GameInfoModal fromLobby={true} gameType={gameType} roomKey={roomKeyFromServer} display={displayModal} />
             </div>
         )
     }
