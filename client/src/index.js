@@ -7,7 +7,6 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/index';
 import types from './actions/types';
 import axios from 'axios';
-
 import App from './components/app';
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
