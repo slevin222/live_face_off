@@ -5,8 +5,18 @@ import '../assets/css/homePage.css';
 import fam from '../assets/images/itlitfam.png';
 import homepage from '../assets/images/homepage.jpg'
 
-
 class Homepage extends Component {
+    switchLinks(){
+        if(this.props.auth){
+            return <Link id='toLobby' className='btn green accent-4 waves-effect waves-light btn-large' to='/lobby' style={{ margin: '2%' }}>Go To Lobby</Link>
+        } else {
+            return [
+                <Link key='0' id='loginHomepage' className='btn green accent-4 waves-effect waves-light btn-large' to='/login' style={{ margin: '2%' }}>Login</Link>,
+                <Link key='1' id='signUpAcc' className='btn orange accent-4 waves-effect waves-light btn-large' to='/register' style={{ margin: '2%' }} >Sign Up</Link>
+            ]
+        }
+    }
+
     render() {
         return (
             <div className='pageContainer'>
@@ -31,8 +41,7 @@ class Homepage extends Component {
                                         <div className="row">
                                             <div className="col s12">
                                                 <div className='accountAccess center center-align'>
-                                                    <Link id='loginHomepage' className='btn green accent-4 waves-effect waves-light btn-large' to='/login' style={{ margin: '2%' }}>Login</Link>
-                                                    <Link id='signUpAcc' className='btn orange accent-4 waves-effect waves-light btn-large' to='/register' style={{ margin: '2%' }} >Sign Up</Link>
+                                                    {this.switchLinks()}
                                                 </div>
                                             </div>
                                         </div>
@@ -98,4 +107,10 @@ class Homepage extends Component {
     }
 }
 
-export default Homepage;
+function mapStateToProps(state) {
+    return {
+        auth: state.user.auth
+    }
+}
+
+export default connect(mapStateToProps)(Homepage);
