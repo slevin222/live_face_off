@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../assets/css/homePage.css';
 import fam from '../assets/images/itlitfam.png';
-import homepage from '../assets/images/homepage.jpg'
+import homepage from '../assets/images/LFOdemo.png'
 
 class Homepage extends Component {
     switchLinks() {
@@ -99,7 +99,11 @@ class Homepage extends Component {
                 </div>
                 <div className="row">
                     <div className="imageContainer col l6 offset-l3 s12">
-                        <img src={homepage} className="gameImage col s12" />
+                        <div className="card contentBorder" id="examplePlay">
+                            <div className="card-content">
+                                <img src={homepage} className="gameImage col s12 z-depth-5" id="gameImage" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
