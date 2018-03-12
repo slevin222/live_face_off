@@ -52,6 +52,10 @@ to   { transform: translate(0, -0px); }
     height: 55vh;
 }
 
+#gameImage{
+    padding: 0;
+}
+
 .homepageLastRow {
     margin-bottom: 0;
 }
@@ -71,4 +75,8 @@ to   { transform: translate(0, -0px); }
 .paragraphTopHomePage{
     font-weight: 800;
     font-size: 2vmin;
+}
+
+#examplePlay{
+    height: 63vh;
 }
