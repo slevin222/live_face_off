@@ -35,6 +35,7 @@
 
 #cardContainer{
     padding: 5%;
+    height: 60%;
 }
 
 .teamText{
@@ -44,4 +45,12 @@
 .camGameBtn{
     font-size: 1.3vmin;
     padding: 0 1.5rem;
+}
+
+#infoBtn{
+    padding-right: 0;
+}
+
+#endGameBtn{
+    padding-left: 0;
 }

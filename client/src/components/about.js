@@ -9,7 +9,7 @@ export default (props) => {
     return (
         <div className='aboutUs'>
             <div className="row">
-                <div className="col l6 s6 offset-l3 offset-s3">
+                <div className="col l6 s8 offset-l3 offset-s2">
                     <h3 className="aboutTitle center center-align">Meet the Team!</h3>
                     <div className="card contentBorder">
                         <div className="card-content">
