@@ -13,7 +13,7 @@ export default (props) => {
                     <h3 className="aboutTitle center center-align">Meet the Team!</h3>
                     <div className="card contentBorder">
                         <div className="card-content">
-                            <img src={familyphoto} className="contentBorder aboutUsImage col s12 z-depth-5" id="aboutUsImage" />
+                            <img src={familyphoto} className="aboutUsImage col s12 z-depth-5" id="aboutUsImage" />
                             <h6 className="figCaptionText center center-align"><strong>From left to right:</strong> Crystal Navarro, Khaleel Younis, Paul Lee, Shawn Levin</h6>
                         </div>
                     </div>

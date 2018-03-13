@@ -101,7 +101,7 @@ class Homepage extends Component {
                     <div className="imageContainer col l6 offset-l3 s12">
                         <div className="card contentBorder" id="examplePlay">
                             <div className="card-content">
-                                <img src={homepage} className="gameImage col s12 z-depth-5" id="gameImage" />
+                                <img src={homepage} className="contentBorder gameImage col s12 z-depth-5" id="gameImage" />
                             </div>
                         </div>
                     </div>

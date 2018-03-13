@@ -54,6 +54,7 @@ to   { transform: translate(0, -0px); }
 
 #gameImage{
     padding: 0;
+    border-radius: 15px;
 }
 
 .homepageLastRow {
@@ -78,5 +79,5 @@ to   { transform: translate(0, -0px); }
 }
 
 #examplePlay{
-    height: 63vh;
+    height: 60vh;
 }
