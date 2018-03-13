@@ -1,0 +1,33 @@
+.navbarItem {
+    padding: 0vh 1vh;
+    height: 100%;
+    font-size: 1.5rem;
+}
+
+.navbarUl {
+    height: 100%;
+}
+
+.navbarLi {
+    height: 100%;
+}
+
+nav.navBar.teal {
+    min-height: 7.5vh;
+    max-height: 7.5vh;
+}
+
+a.brand-logo.left {
+    height: 100%;
+    margin-left: 5%;
+}
+.nav-wrapper {
+    height: 100%;
+}
+
+.navImg {
+    position: absolute;
+    left: -28%;
+    top: 7%;
+    width: 26%;
+}
