@@ -13,12 +13,12 @@
 }
 
 div.col.s12.playerHand {
-    padding-top: 8vh;     
+    padding-top: 2vh;     
 }
 
 .playerHand{
     height: 100%;
-    display: inline-flex; 
+    display: flex; 
     flex-wrap: wrap;
 } 
 
