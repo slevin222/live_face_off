@@ -13,9 +13,10 @@
 }
 #camChat{
     padding: 0;
+    height: 55vh;
 }
 .webpage{
-    height: 91vh;
+    height: 92.5vh;
     margin: 0;
 }
 

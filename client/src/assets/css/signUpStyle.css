@@ -7,7 +7,11 @@
 }
 
 .signUpContainer {
-    height: 86vh;
+    height: 92.5vh;
+}
+
+div.container.signUpContainer {
+    padding-top: 2vh;
 }
 
 .rowlines{

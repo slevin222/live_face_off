@@ -29,7 +29,11 @@ body{
 }
 
 .loginContainer {
-    height: 86.5vh;
+    height: 92.5vh;
+}
+
+div.container.loginContainer {
+    padding-top: 2vh;
 }
 
 .logInBtn {

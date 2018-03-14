@@ -11,10 +11,15 @@
     width: 100%;
     margin-bottom: 0;
 }
+
+div.col.s12.playerHand {
+    padding-top: 8vh;     
+}
+
 .playerHand{
     height: 100%;
     display: inline-flex; 
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 } 
 
 .playerCard0{
@@ -42,8 +47,8 @@
 
 
 .bottomInfo{
-    height: 17%;
-    margin:0;
+    height: 15%;
+    margin: 3% 0 0 0;
 }
 
 .gameTotals{
