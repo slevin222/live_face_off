@@ -10,9 +10,7 @@
     font-size: 3vmin;
 }
 
-.frontAndBack {
-    font-size: 4vmin;
-}
+
 
 span {
     font-weight: 500;
@@ -26,16 +24,16 @@ span {
 
 .frontEnd, .backEnd, .aboutTitle{
     color: rgba(0,181,161,1); 
-    text-shadow: 2px 2px 4px #008894; 
-
-  
+    text-shadow: 2px 2px 4px #074a50; 
 }
 
 .figCaptionText{
     color: rgba(0,181,161,1); 
-    text-shadow: 1px 1px 1px #008894;
-    padding-top: 1%; 
-    font-size: 2vmin;
 
-  
+    padding-top: 1%; 
+    font-size: 2.5vmin;
+}
+
+#icons{
+    padding-bottom: 3%;
 }
