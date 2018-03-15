@@ -9,8 +9,9 @@
 .aboutUsNames {
     font-weight: 600;
     font-size: 3vmin;
+    color: darkorange;
+    text-shadow: 1px 1px 3px #074a50;
 }
-
 
 div.card-content.cardBox {
     padding-bottom: 0;
@@ -27,7 +28,7 @@ span {
 .contactIcon {
     font-size: 50px;
     padding: 0 10px;
-    color: black;
+    color: darkcyan;
 }
 
 div.icons.center.center-align.col.s12 {

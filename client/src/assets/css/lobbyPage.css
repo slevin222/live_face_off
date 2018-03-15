@@ -13,7 +13,7 @@
 
 .profileCard, .createGame {
     margin-top: 3%;
-    height: 40vh;
+    height: 300px
 }
 
 .topCards{
@@ -53,7 +53,7 @@
 }
 
 .joinTitle {
-    margin-top: 0;
+    margin-top: -25px;
 }
 
 .tableMargin {
@@ -112,7 +112,13 @@
 }
 
 .userIcon {
-    font-size: 6vmin;
+    font-size: 50px;
+    color: rgba(0,181,161,1);
+}
+
+.lobbyUsername {
+    margin-top: 5%;
+    /* color: rgba(0,181,161,1);  */
 }
 
 .userIconPos {
