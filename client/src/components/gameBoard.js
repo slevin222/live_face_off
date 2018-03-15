@@ -10,7 +10,7 @@ import Deal52WaitingModal from './deal52WaitingModal';
 
 class GameBoard extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             players: [1],
             playerHand1: [],
@@ -191,10 +191,10 @@ class GameBoard extends Component {
                     <h3>Deal 52</h3>
                     <ul>Instructions
                     <li>Deal 52 is a 5 card per hand game where lowest point total wins after 10 rounds</li>
-                        <li>When each hand is delt you must discard at least 1 card per round but not more than 3 cards</li>
+                        <li>When each hand is dealt you must discard at least 1 card per round but not more than 3 cards</li>
                         <li>The point total per each card the value on the face with Jacks, Queens and Kings all having a 10 point value</li>
                         <li>Ace is the best card with a 1 point value</li>
-                        <li>Once your hand is delt click on the high value cards you would like to discard</li>
+                        <li>Once your hand is dealt click on the high value cards you would like to discard</li>
                         <li>Then click the discard button below for those cards to be replaced</li>
                     </ul>
                     <button onClick={this.dealInitialHand} className="waves-effect waves-light btn blue-grey darken-2" type="submit">Start Game</button>
@@ -230,7 +230,6 @@ class GameBoard extends Component {
                 <Deal52WaitingModal display={displayDeal52WaitingModal} close={this.closeDeal52WaitingModal} player={players[0]} />
                 <EndGameModal display={displayEndGameModal} close={this.closeEndGameModal} points={player1Total} />
                 <GameInfoModal gameType='deal52' display={displayInfoModal} close={this.closeInfoModal} roomKey={this.roomKeyId} />
-
             </div>
         );
     }

@@ -6,6 +6,7 @@ import LFOlogoSM from '../assets/images/LFOlogoSM.png'
 import '../assets/css/navbar.css'
 
 class Navbar extends Component {
+    //switches nav links depending if user is logged in or not.
     renderLinks() {
         if (this.props.auth) {
             return [

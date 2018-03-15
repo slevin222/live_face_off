@@ -21,12 +21,10 @@ class LobbyPage extends Component {
             displayModal: false,
             messages: null,
             teamName: '',
-            //roomKey that is used in the Modal
             roomKeyFromServer: ''
         };
-        //leaderboard dummy data
-        this.leaderboardDummyData = dummyData;
 
+        this.leaderboardDummyData = dummyData;
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleJoinSubmit = this.handleJoinSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -54,10 +52,10 @@ class LobbyPage extends Component {
 
     //attached to the start button, sends info the server to create the lobby, then receives the key used for people to join with.
     handleSubmit(event) {
+        const { lobbies, gameType, maxPlayers, room } = this.state;
         document.getElementById('startButton').disabled = true;
         event.preventDefault();
 
-        const { lobbies, gameType, maxPlayers, room } = this.state;
         this.setState({
             lobbies: [...lobbies, {
                 'gameType': gameType,
@@ -65,7 +63,6 @@ class LobbyPage extends Component {
                 'room': room
             }],
         });
-        const data = { gameType, maxPlayers };
 
         axios({
             method: 'post',
@@ -82,7 +79,6 @@ class LobbyPage extends Component {
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
             sessionStorage.setItem('roomKey', res.data.roomKey);
-
             this.setDisplayModal();
         });
     }
@@ -117,6 +113,7 @@ class LobbyPage extends Component {
         });
     }
 
+    //Updates React state for form inputs and form selection on every key change.
     handleChange(event) {
         const { name, value } = event.target;
         this.setState({
@@ -132,16 +129,17 @@ class LobbyPage extends Component {
     }
 
     componentDidMount() {
+        //initializes the MaterializeCSS select tags
         $('select').material_select();
         $('select').on('change', this.handleChange);
-        //axios call would go here and
+
         this.setState({
-            //leaderboardData: *axios data goes here*
             leaderboardData: this.leaderboardDummyData
         })
     }
 
     componentWillUnmount() {
+        //Removes the event handler from select tags
         $('select').off('change', this.handleChange);
     }
 
@@ -206,7 +204,7 @@ class LobbyPage extends Component {
                         </div>
                     </div>
                     <div className='col s4 center-align' id="joinCard">
-                        <div className="card contentBorder z-depth-5 profileCard ">
+                        <div className="card contentBorder z-depth-5 profileCard">
                             <div className="card-content">
                                 <div className="col s12">
                                     <h5 className='joinTitle lobbyText'>Join a Game</h5>
@@ -226,10 +224,10 @@ class LobbyPage extends Component {
                             </div>
                         </div>
                     </div>
-                </div >
+                </div>
                 <Leaderboard data={leaderboardData} />
                 <GameInfoModal fromLobby={true} gameType={gameType} roomKey={roomKeyFromServer} display={displayModal} />
-            </div >
+            </div>
         )
     }
 }

@@ -24,7 +24,7 @@ class GamePage extends Component {
                         <Chat />
                     </div>
                     <GameBoard />
-                </div >
+                </div>
             </div>
         )
     }
