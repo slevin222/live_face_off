@@ -136,7 +136,6 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                     messages: 'Uh oh, that lobby is full!'
                 });
             };
-            console.log('Lobby: ', lobby);
             lobby.players.push(req.user.firstName);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);

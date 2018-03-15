@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import '../assets/css/gameBoard.css';
+import { connect } from 'react-redux';
+import { setFinalScore } from '../actions'
 import deck from './deck';
 import CardClicked from './cardClicked';
 import GameInfoModal from './gameInfoModal';
 import EndGameModal from "./endGameModal";
-// import CardDeck from './cardDeck';
 import Deal52WaitingModal from './deal52WaitingModal';
 
 class GameBoard extends Component {
     constructor(props) {
-
-
         super(props)
         this.state = {
             players: [1],
@@ -22,7 +21,6 @@ class GameBoard extends Component {
             displayInfoModal: false,
             displayDeal52WaitingModal: true
         }
-
         this.roomKeyId = sessionStorage.getItem('roomKey');
         this.deck = [];
         this.discardPile = [];
@@ -43,8 +41,10 @@ class GameBoard extends Component {
     displayEndGame() {
         this.setState({
             displayEndGameModal: true,
-        })
-
+        }, () => {
+            this.props.setFinalScore(this.state.player1Total);
+            console.log('final score: ', this.state.player1Total);
+        });
     }
 
     closeEndGameModal() {
@@ -236,5 +236,4 @@ class GameBoard extends Component {
     }
 }
 
-export default GameBoard;
-
+export default connect(null, { setFinalScore })(GameBoard);

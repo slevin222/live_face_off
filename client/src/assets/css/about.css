@@ -12,15 +12,26 @@
 }
 
 
+div.card-content.cardBox {
+    padding-bottom: 0;
+}
+
+.frontAndBack {
+    font-size: 4vmin;
+}
 
 span {
     font-weight: 500;
 }
 
 .contactIcon {
-    font-size: 5vmin;
-    padding: 2%;
+    font-size: 50px;
+    padding: 0 10px;
     color: black;
+}
+
+div.icons.center.center-align.col.s12 {
+    padding: 1% 0;
 }
 
 .frontEnd, .backEnd, .aboutTitle{
@@ -30,11 +41,6 @@ span {
 
 .figCaptionText{
     color: rgba(0,181,161,1); 
-
     padding-top: 1%; 
-    font-size: 2.5vmin;
-}
-
-#icons{
-    padding-bottom: 3%;
+    font-size: 2vmin;
 }

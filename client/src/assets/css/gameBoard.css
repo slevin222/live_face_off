@@ -13,7 +13,7 @@
 }
 
 div.col.s12.playerHand {
-    padding-top: 2vh;     
+    padding-top: 4vh;     
 }
 
 .playerHand{
@@ -53,17 +53,24 @@ div.col.s12.playerHand {
 
 .gameTotals{
     margin-top: 0;
-    font-weight: bold;
-    font-size: 1.6vmin;
+    font-weight: 800;
+    font-size: 1.7vmin;
 }
 
 .gameMessage{
-    font-weight: bold;
-    font-size: 1.8vmin;
+    font-weight: 800;
+    font-size: 2vmin;
+    margin: 0;
 }
 
 .bottomCard{
     margin: 0;
     height: 100%;
     border-radius: 10px;
+}
+
+@media only screen and (min-height: 768px) and (max-height: 847px) {
+    .bottomInfo{
+        margin: 4.5% 0 0 0;
+    }
 }
