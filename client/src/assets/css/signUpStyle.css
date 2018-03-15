@@ -21,11 +21,11 @@ div.container.signUpContainer {
 #submitButton {
     margin-left: 20px;
 }
+
 .signUpText{
     color: rgba(0,181,161,1); 
 
 }
-
 
 /* Media Queries */
 @media only screen and (max-height: 768px) {

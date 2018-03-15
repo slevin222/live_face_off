@@ -6,6 +6,7 @@ import fam from '../assets/images/itlitfam.png';
 import homepage from '../assets/images/LFOdemo.png'
 
 class Homepage extends Component {
+    //switches btn links depending on whether user is logged in or not.
     switchLinks() {
         if (this.props.auth) {
             return <Link id='toLobby' className='btn teal accent-4 waves-effect waves-light btn-large' to='/lobby' style={{ margin: '2%' }}>Go To Lobby</Link>
@@ -23,7 +24,7 @@ class Homepage extends Component {
                 <div className='row'>
                     <div className='landing col l6 s12'>
                         <div className='mainDiv'>
-                            <h1 className="gameTitle home center center-align">Live Face Off </h1>
+                            <h1 className="gameTitle home center center-align">Live Face Off</h1>
                         </div>
                     </div>
                     <div className='col l6 s12'>

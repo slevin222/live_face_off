@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+//HOC which prevents users from accessing lobbies and games if they're not logged in.
 export default function(WrappedComponent){
     class Auth extends Component {
 
         componentDidMount(){
-            console.log('is user authorized',this.props.auth);
-
             if(!this.props.auth){
                 this.props.history.push('/');
             }

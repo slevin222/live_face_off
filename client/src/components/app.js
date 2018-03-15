@@ -1,5 +1,5 @@
 import 'materialize-css/dist/css/materialize.min.css';
-import '../assets/css/mediaQueries.css';
+import '../assets/css/noMobileSupportModal.css';
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Navbar from './navbar';
@@ -16,18 +16,18 @@ import '../assets/css/app.css'
 
 const App = () => {
     return (
-        <div className="mainApp">
-            <div className="gradientStyle">
+        <div className='mainApp'>
+            <div className='gradientStyle'>
                 <Navbar />
                 <Route exact path='/' component={Homepage} />
                 <Route path='/about' component={About} />
-                <Route path="/camGame" component={authUser(CamGame)} />
+                <Route path='/camGame' component={authUser(CamGame)} />
                 <Route path='/gamepage' component={authUser(GamePage)} />
                 <Route path='/lobby' component={authUser(LobbyPage)} />
                 <Route path='/register' component={redirectUser(SignUp, '/login')} />
                 <Route path='/login' component={redirectUser(LoginPage, '/lobby')} />
-                <div className="noMobileSupportModal screenTooSmall">
-                    <div className="noMobileSupportModalContent">
+                <div className='noMobileSupportModal screenTooSmall'>
+                    <div className='noMobileSupportModalContent'>
                         <p>Support for mobile devices is currently in development.</p>
                         <p>Please visit our website on a desktop, laptop or tablet.</p>
                     </div>

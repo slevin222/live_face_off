@@ -6,7 +6,6 @@
 .title {
     color: rgba(0,181,161,1); 
     /* text-shadow: 2px 2px 4px #008894;  */
-   
 }
 
 .titleLine{
@@ -21,15 +20,13 @@
     animation-duration: 3s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
-    text-shadow: 5px 5px 10px #074a50; 
-   
+    text-shadow: 5px 5px 10px #074a50;
 }
 
 @keyframes floating {
-from { transform: translate(0,  0px); }
-65%  { transform: translate(0, 15px); }
-to   { transform: translate(0, -0px); }
-
+    from { transform: translate(0,  0px); }
+    65%  { transform: translate(0, 15px); }
+    to   { transform: translate(0, -0px); }
 }
 
 .mainDiv{
