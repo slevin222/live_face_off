@@ -159,7 +159,7 @@ class LobbyPage extends Component {
                                     <div className='userIconPos'>
                                         <i className="userIcon far fa-user-circle"></i>
                                     </div>
-                                    <h5 style={{ marginTop: '5%' }}><span>{firstName || 'Elton'} {lastName || 'John'}</span></h5>
+                                    <h5 className="lobbyUsername"><span>{firstName || 'Elton'} {lastName || 'John'}</span></h5>
                                     <ul className='profileInfo'>
                                         <li>Team Name: {teamName || 'blue'}</li>
                                         <li>Last Login: Yesterday</li>
