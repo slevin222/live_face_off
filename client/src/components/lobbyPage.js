@@ -150,6 +150,7 @@ class LobbyPage extends Component {
 
         return (
             <div className='container'>
+                <DisplayMessages messages={messages} />
                 <div className='row topCards'>
                     <div className='col s4 center-align' id="playerCard">
                         <div className="card contentBorder profileCard z-depth-5">
