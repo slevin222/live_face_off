@@ -1,15 +1,13 @@
 import types from '../actions/types';
 
 const DEFAULT_STATE = {
-    auth: false
+    finalScore: null
 };
 
 export default function (state = DEFAULT_STATE, action) {
     switch (action.type) {
-        case types.SIGN_IN:
-            return { auth: true };
-        case types.SIGN_OUT:
-            return { auth: false };
+        case types.SET_FINAL_SCORE:
+            return { finalScore: action.payload };
         default:
             return state;
     }

@@ -31,3 +31,10 @@ export function signOut() {
         }
     }
 }
+
+export function setFinalScore(finalScore) {
+    return {
+        payload: finalScore,
+        type: types.SET_FINAL_SCORE
+    }
+}

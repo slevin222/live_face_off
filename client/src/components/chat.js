@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import '../assets/css/chat.css';
+import { connect } from 'react-redux';
 import openSocket from 'socket.io-client';
 import ChatHistory from './chatHistory';
 import axios from 'axios';
@@ -16,7 +17,7 @@ class Chat extends Component {
             players: []
         };
 
-        this.socket = openSocket('/');
+        this.socket = openSocket('http://localhost:5000');
 
         this.socket.on('chat', (data) => {
             console.log('data in client: ', data);
@@ -76,6 +77,16 @@ class Chat extends Component {
         })
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log('Next props: ', nextProps.finalScore.finalScore);
+        console.log('this. props: ', this.props.finalScore.finalScore);
+        if (this.props.finalScore.finalScore !== nextProps.finalScore.finalScore) {
+            this.socket.emit('endGame', {
+                finalScore: nextProps.finalScore.finalScore
+            });
+        }
+    }
+
     handleInputChange(event) {
         const { value } = event.target;
         this.setState({
@@ -107,4 +118,10 @@ class Chat extends Component {
     }
 }
 
-export default Chat;
+function mapStateToProps(state) {
+    return {
+        finalScore: state.finalScore
+    }
+}
+
+export default connect(mapStateToProps, null)(Chat);

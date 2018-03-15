@@ -20,6 +20,14 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    gamesPlayed: {
+        type: Number,
+        default: 0
+    },
+    wins: {
+        type: Number,
+        default: 0
+    },
     date: {
         type: Date,
         default: Date.now

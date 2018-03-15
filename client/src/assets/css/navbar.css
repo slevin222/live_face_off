@@ -12,11 +12,6 @@
     height: 100%;
 }
 
-nav.navBar.teal {
-    min-height: 7.5vh;
-    max-height: 7.5vh;
-}
-
 a.brand-logo.left {
     height: 100%;
     margin-left: 5%;

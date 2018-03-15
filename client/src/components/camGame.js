@@ -87,7 +87,7 @@ class CamGame extends Component {
                                 </div>
                                 <div className="row">
                                     <div className="col s6 center-align" id="infoBtn">
-                                        <button onClick={this.displayInfo} className='btn teal accent-4 camGameBtn waves-effect waves-light'>Info</button>
+                                        <button onClick={this.displayInfo} className='btn teal accent-4 camGameBtn waves-effect waves-light'>Room Info</button>
                                     </div>
                                     <div className="col s6 center-align" id="endGameBtn">
                                         <button onClick={this.displayWinner} className="btn red accent-4 camGameBtn waves-effect waves-light">End Game</button>
