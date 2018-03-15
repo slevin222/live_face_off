@@ -17,7 +17,7 @@ class Chat extends Component {
             players: []
         };
 
-        this.socket = openSocket('http://localhost:5000');
+        this.socket = openSocket('/');
 
         this.socket.on('chat', (data) => {
             console.log('data in client: ', data);
