@@ -6,6 +6,7 @@ import deck from './deck';
 import CardClicked from './cardClicked';
 import GameInfoModal from './gameInfoModal';
 import EndGameModal from "./endGameModal";
+import Deal52WaitingModal from './deal52WaitingModal';
 
 class GameBoard extends Component {
     constructor(props) {
@@ -17,7 +18,8 @@ class GameBoard extends Component {
             player1Total: 0,
             gameMessage: 'Click on up to 3 cards then discard',
             displayEndGameModal: false,
-            displayInfoModal: false
+            displayInfoModal: false,
+            displayDeal52WaitingModal: true
         }
         this.roomKeyId = sessionStorage.getItem('roomKey');
         this.deck = [];
@@ -28,6 +30,7 @@ class GameBoard extends Component {
 
         this.displayEndGame = this.displayEndGame.bind(this);
         this.closeEndGameModal = this.closeEndGameModal.bind(this);
+        this.closeDeal52WaitingModal = this.closeDeal52WaitingModal.bind(this);
         this.dealInitialHand = this.dealInitialHand.bind(this);
         this.cardsToDiscard = this.cardsToDiscard.bind(this);
         this.discardCardBtn = this.discardCardBtn.bind(this);
@@ -72,6 +75,12 @@ class GameBoard extends Component {
     closeInfoModal() {
         this.setState({
             displayInfoModal: false
+        })
+    }
+
+    closeDeal52WaitingModal() {
+        this.setState({
+            displayDeal52WaitingModal: false
         })
     }
 
@@ -174,7 +183,7 @@ class GameBoard extends Component {
     }
 
     render() {
-        const { playerHand1, player1Total, gameMessage, displayInfoModal, displayEndGameModal } = this.state;
+        const { playerHand1, player1Total, gameMessage, displayInfoModal, displayEndGameModal, players, displayDeal52WaitingModal } = this.state;
 
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
             return (
@@ -218,8 +227,10 @@ class GameBoard extends Component {
                         </div >
                     </div>
                 </div>
+                <Deal52WaitingModal display={displayDeal52WaitingModal} close={this.closeDeal52WaitingModal} player={players[0]} />
                 <EndGameModal display={displayEndGameModal} close={this.closeEndGameModal} points={player1Total} />
                 <GameInfoModal gameType='deal52' display={displayInfoModal} close={this.closeInfoModal} roomKey={this.roomKeyId} />
+
             </div>
         );
     }

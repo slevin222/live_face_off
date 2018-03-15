@@ -11,6 +11,7 @@
     font-size: 3vmin;
 }
 
+
 div.card-content.cardBox {
     padding-bottom: 0;
 }
@@ -35,12 +36,11 @@ div.icons.center.center-align.col.s12 {
 
 .frontEnd, .backEnd, .aboutTitle{
     color: rgba(0,181,161,1); 
-    text-shadow: 2px 2px 4px #008894; 
+    text-shadow: 2px 2px 4px #074a50; 
 }
 
 .figCaptionText{
     color: rgba(0,181,161,1); 
-    text-shadow: 1px 1px 1px #008894;
     padding-top: 1%; 
     font-size: 2vmin;
 }
