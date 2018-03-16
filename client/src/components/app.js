@@ -28,8 +28,11 @@ const App = () => {
                 <Route path='/login' component={redirectUser(LoginPage, '/lobby')} />
                 <div className='noMobileSupportModal screenTooSmall'>
                     <div className='noMobileSupportModalContent'>
-                        <p>Support for mobile devices is currently in development.</p>
-                        <p>Please visit our website on a desktop, laptop or tablet.</p>
+                        <p className='rotateTablet'>Please rotate your tablet to landscape mode.</p>
+                        <div className='noMobSupport'>
+                            <p>Support for small mobile devices is not available.</p>
+                            <p>Please visit our website on a desktop, laptop or tablet.</p>
+                        </div>
                     </div>
                 </div>
             </div>

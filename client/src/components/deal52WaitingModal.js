@@ -9,12 +9,15 @@ class Deal52WaitingModal extends Component {
         };
 
         return (
-            <div className='endGameModal' style={displayModal}>
-                <div className='endGameModalContent'>
+            <div className='waitingGameModal' style={displayModal}>
+                <div className='waitingModalContent contentBorder'>
                     <div className='center-align'>
-                        <h3>Waiting For All Players</h3>
-                        <h3></h3>
-                        <button onClick={this.props.close} className="waves-effect waves-light btn teal accent-4">Start Game</button>
+                        <h4>Waiting For All Players</h4>
+                        <div>
+                            <h5>Unique room key</h5>
+                            <div style={{ margin: '16px 0' }}><span className='roomKeyStyle'>{this.props.roomKey}</span></div>
+                            <p>Share this key with your friends and family so they can join your room!</p>
+                        </div>
                     </div>
                 </div>
             </div>

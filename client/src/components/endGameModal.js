@@ -10,7 +10,7 @@ class EndGameModal extends Component {
 
         return (
             <div className='endGameModal' style={displayModal}>
-                <div className='endGameModalContent'>
+                <div className='endGameModalContent contentBorder'>
                     <div className='center-align'>
                         <h3>Final Score</h3>
                         <h3>{this.props.points}</h3>
