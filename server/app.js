@@ -104,6 +104,30 @@ io.on('connection', function (socket) {
         socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has connected to the room`);
     });
 
+    //Socket.io for starting a game
+    //waits until the entire room is full before beginning
+    socket.on('startGame', function (data) {
+        socket.join(data.room);
+        if (data.roomPlayers.length === parseInt(data.maxPlayers)) {
+            io.to(data.room).emit('startGame', 'hello from the other side');
+        } else {
+            return;
+        }
+    });
+
+    //Socket.io for starting a game
+    //waits until the entire room is full before beginning
+    socket.on('restartGame', function (data) {
+        console.log('data: ', data);
+        let finishedPlayers = data.roomPlayers;
+        console.log('finishedPlayers: ', finishedPlayers);
+        if (finishedPlayers.length === parseInt(data.maxPlayers)) {
+            io.to(data.room).emit('startGame', 'hello from the other side');
+        } else {
+            return;
+        }
+    });
+
     //socket.io that checks when deal52 game has finished
     socket.on('endGame', function (data) {
         console.log('socket.totalUsers: ', socket.totalUsers);

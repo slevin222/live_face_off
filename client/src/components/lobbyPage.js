@@ -56,7 +56,6 @@ class LobbyPage extends Component {
     handleSubmit(event) {
         document.getElementById('startButton').disabled = true;
         event.preventDefault();
-
         const { lobbies, gameType, maxPlayers, room } = this.state;
         this.setState({
             lobbies: [...lobbies, {
