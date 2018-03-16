@@ -20,11 +20,16 @@ class GamePage extends Component {
                     </div>
                 </div>
                 <div className="row gameCards">
-                    <div className="col s3 camChat">
+                    <div className="col l3 camChat hide-on-med-and-down">
                         <Chat />
                     </div>
-                    <GameBoard />
-                </div>
+                    <div className="col l9 s12">
+                        <GameBoard />
+                    </div>
+                </div >
+                {/* <div className="col s6 offset-s3 camChat show-on-med-and-down hide-on-large-only">
+                    <Chat />
+                </div> */}
             </div>
         )
     }

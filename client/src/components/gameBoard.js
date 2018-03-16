@@ -161,17 +161,41 @@ class GameBoard extends Component {
 
     cardsToDiscard(event) {
         var oldClickedCards = this.state.clickedCards.slice();
-        let cardPosition = parseInt((event.target.className).slice(-1));
-        oldClickedCards[cardPosition] = true;
-        this.discardArr.push(cardPosition);
-        this.setState({
-            clickedCards: oldClickedCards
-        })
+        var cardPosition = parseInt((event.target.className).slice(-1));
+        console.log(typeof cardPosition)
+        if (oldClickedCards[cardPosition] === true) {
+            oldClickedCards[cardPosition] = false;
+            switch (cardPosition) {
+                case this.discardArr[0]:
+                    this.discardArr.splice(0, 1);
+                    break;
+                case this.discardArr[1]:
+                    this.discardArr.splice(1, 1);
+                    break;
+                case this.discardArr[2]:
+                    this.discardArr.splice(2, 1);
+                    break;
+                case this.discardArr[3]:
+                    this.discardArr.splice(3, 1);
+                    break;
+                case this.discardArr[4]:
+                    this.discardArr.splice(4, 1);
+            }
+            this.setState({
+                clickedCards: oldClickedCards
+            })
+        } else {
+            oldClickedCards[cardPosition] = true;
+            this.discardArr.push(cardPosition);
+            this.setState({
+                clickedCards: oldClickedCards
+            })
+        }
     };
 
     discardCards(deleteIndexArray) {
         if (deleteIndexArray.length > 3 || deleteIndexArray.length < 1) {
-            const newMessage = 'You must only discard 1 to 3 cards per turn';
+            const newMessage = 'You must discard 1 to 3 cards per turn';
             this.setState({
                 gameMessage: newMessage,
                 clickedCards: [false, false, false, false, false]
@@ -246,35 +270,39 @@ class GameBoard extends Component {
             )
         }
         return (
-            <div className="col l9 s12 gameArea">
+            <div className="col l12 s12 m12 gameArea">
                 <div className="row cardsArea">
                     <div className="col s12 playerHand">
                         {this.renderCards(5)}
                     </div>
                 </div>
                 <div className="row bottomInfo">
-                    <div className="card bottomCard">
-                        <div className="card-content">
-                            <div className="col s3 l3">
-                                <h6 className="gameMessage">{gameMessage}</h6>
-                            </div>
-                            <div className="col s3 l3 center-align">
-                                <button onClick={this.discardCardBtn} className="waves-effect waves-light btn red accent-4 center-align" type="submit">Discard</button>
-                            </div>
-                            <div className="col s3 l3 center-align">
-                                <button onClick={this.displayInfo} className="waves-effect waves-light btn teal accent-4" type="button">Info</button>
-                            </div>
-                            <div className="col s3 l3">
-                                <h6 className="right-align gameTotals">Total Points : {player1Total}</h6>
-                                <h6 className="right-align gameTotals">Current Round : {this.roundCounter} / 10 </h6>
-                            </div>
-                        </div >
+                    <div className="col l12 s12 bottomCardContainer">
+                        <div className="card bottomCard">
+                            <div className="card-content">
+                                <div className="col s3 l3">
+                                    <h6 className="gameMessage">{gameMessage}</h6>
+                                </div>
+                                <div className="col s3 l3 center-align">
+                                    <button onClick={this.discardCardBtn} className="waves-effect waves-light btn red accent-4 center-align" type="submit">Discard</button>
+                                </div>
+                                <div className="col s3 l3 center-align">
+                                    <button onClick={this.displayInfo} className="waves-effect waves-light btn teal accent-4" type="button">Info</button>
+                                </div>
+                                <div className="col s3 l3">
+                                    <h6 className="right-align gameTotals">Total Points : {player1Total}</h6>
+                                    <h6 className="right-align gameTotals">Current Round : {this.roundCounter} / 10 </h6>
+                                </div>
+                            </div >
+                        </div>
                     </div>
                 </div>
+
                 <Deal52WaitingModal display={displayDeal52WaitingModal} close={this.closeDeal52WaitingModal} player={players[0]} />
                 <EndGameModal display={displayEndGameModal} close={this.closeEndGameModal} points={player1Total} />
                 <GameInfoModal gameType='deal52' display={displayInfoModal} close={this.closeInfoModal} roomKey={this.roomKeyId} />
             </div>
+
         );
     }
 }
