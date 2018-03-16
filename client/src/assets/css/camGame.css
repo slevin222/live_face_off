@@ -63,9 +63,7 @@
     #camChat{
         height: 50vh;
     }
-    .container{
-        width: 85%;
-    }
+ 
 } 
 
 @media only screen and (min-height: 768px) and (max-height: 847px) {
@@ -76,7 +74,7 @@
         height: 60vh;
     }
     .container{
-        width: 85%;
+        width: 75%;
     }
 }
 
@@ -110,6 +108,16 @@
     }
 }
 
+@media only screen and (max-width: 768px) {
+   
+    .container{
+        width: 85%;
+    }
+} 
 
-
-
+@media only screen and (max-width: 988px) {
+   
+    .container{
+        width: 80%;
+    }
+} 
