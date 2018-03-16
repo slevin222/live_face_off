@@ -3,16 +3,22 @@ import '../assets/css/gameBoard.css';
 import { connect } from 'react-redux';
 import { setFinalScore } from '../actions'
 import deck from './deck';
+import openSocket from 'socket.io-client';
 import CardClicked from './cardClicked';
 import GameInfoModal from './gameInfoModal';
 import EndGameModal from "./endGameModal";
 import Deal52WaitingModal from './deal52WaitingModal';
+import axios from 'axios';
+
 
 class GameBoard extends Component {
     constructor(props) {
         super(props);
         this.state = {
             players: [1],
+            roomPlayers: null,
+            room: null,
+            maxPlayers: null,
             playerHand1: [],
             clickedCards: [false, false, false, false, false],
             player1Total: 0,
@@ -21,6 +27,7 @@ class GameBoard extends Component {
             displayInfoModal: false,
             displayDeal52WaitingModal: true
         }
+        this.socket = openSocket('http://localhost:5000');
         this.roomKeyId = sessionStorage.getItem('roomKey');
         this.deck = [];
         this.discardPile = [];
@@ -28,14 +35,16 @@ class GameBoard extends Component {
         this.roundCounter = 1;
         this.finalScore = [];
 
+        this.handleWaitingModal = this.handleWaitingModal.bind(this);
         this.displayEndGame = this.displayEndGame.bind(this);
         this.closeEndGameModal = this.closeEndGameModal.bind(this);
-        this.closeDeal52WaitingModal = this.closeDeal52WaitingModal.bind(this);
         this.dealInitialHand = this.dealInitialHand.bind(this);
         this.cardsToDiscard = this.cardsToDiscard.bind(this);
         this.discardCardBtn = this.discardCardBtn.bind(this);
         this.displayInfo = this.displayInfo.bind(this);
         this.closeInfoModal = this.closeInfoModal.bind(this);
+
+        this.socket.on('startGame', this.handleWaitingModal);
     }
 
     displayEndGame() {
@@ -59,10 +68,16 @@ class GameBoard extends Component {
             player1Total: 0,
             gameMessage: 'Click on up to 3 cards then discard',
             displayEndGameModal: false,
-            displayInfoModal: false
+            displayInfoModal: false,
+            displayDeal52WaitingModal: true
         }, () => {
             this.shuffleDeck();
             this.dealInitialHand();
+        });
+        this.socket.emit('restartGame', {
+            room: this.state.room,
+            roomPlayers: this.state.roomPlayers,
+            maxPlayers: this.state.maxPlayers
         });
     }
 
@@ -78,15 +93,44 @@ class GameBoard extends Component {
         })
     }
 
-    closeDeal52WaitingModal() {
+    handleWaitingModal() {
+        console.log('WE MADE IT!');
         this.setState({
-            displayDeal52WaitingModal: false
-        })
+            displayDeal52WaitingModal: false,
+        });
     }
 
     componentDidMount() {
         this.shuffleDeck();
         this.dealInitialHand();
+    }
+
+    async componentWillMount() {
+        let sessionInfo = sessionStorage.getItem('gameSession');
+        sessionInfo = JSON.parse(sessionInfo);
+        console.log('sessionInfo: ', sessionInfo);
+        await axios({
+            method: 'post',
+            url: 'tokbox/sockets',
+            data: {
+                room: sessionInfo.roomKey
+            }
+        }).then(response => {
+            console.log('response from connectUsers axios call: ', response);
+            console.log('response.data.maxPlayer: ', response.data.maxPlayer);
+            this.setState({
+                maxPlayers: response.data.maxPlayer,
+                roomPlayers: [...response.data.players],
+                room: sessionInfo.roomKey
+            }, () => {
+                console.log('this.maxPlayers: ', this.state.maxPlayers);
+                this.socket.emit('startGame', {
+                    room: this.state.room,
+                    roomPlayers: this.state.roomPlayers,
+                    maxPlayers: this.state.maxPlayers
+                });
+            });
+        });
     }
 
     shuffleDeck() {
