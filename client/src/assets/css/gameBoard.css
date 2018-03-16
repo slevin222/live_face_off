@@ -7,7 +7,7 @@
     margin: 0;
 }
 .cardsArea{
-    height:60%;
+    height:66%;
     /* width: 100%; */
     margin-bottom: 0;
 }
@@ -25,37 +25,21 @@
 
 .fullHand{
     height: 100%;
-    display: flex; 
 }
-/* .playerCard0{
-    height: 100%;
-    width: 19%;
-    cursor: pointer;
-    background-size: 100%;
-    border-radius: 1.5%;
-    margin: .5%;
-    background-repeat:no-repeat;
-} */
+
 .playerCard0{
-    /* height: 100%; */
-    box-sizing: border-box;
     width: 98%;
     cursor: pointer;
-    background-size: 100%;
     border-radius: 1.5%;
     margin: .5%;
-    background-repeat:no-repeat;
 }
 
 .playerCard1,
 .playerCard2,
 .playerCard3,
 .playerCard4{
-    box-sizing: border-box;
-    /* height: 100%; */
     width: 98%;
     cursor: pointer;
-    background-size: 100%;
     border-radius: 1.5%;
     margin: .5%;
     background-repeat:no-repeat;
