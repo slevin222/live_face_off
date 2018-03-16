@@ -1,11 +1,13 @@
 .imageRow > .imageContainer > .aboutUsImage {
     padding: 0;
 }
+
 #aboutUsImage {
     padding: 0;
     margin-bottom: 2%;
     border-radius: 15px;
 }
+
 .aboutUsNames {
     font-weight: 600;
     font-size: 3vmin;

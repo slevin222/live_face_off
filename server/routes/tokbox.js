@@ -112,13 +112,16 @@ router.get('/lobby', (req, res) => {
 router.post('/sockets', (req, res, next) => {
     let room = req.body.room;
     let players;
+    let maxPlayer;
     Lobby.findOne({ roomKey: room }, (err, lobby) => {
         if (err) return next(err);
         if (lobby) {
-            players = lobby.players
+            players = lobby.players;
+            maxPlayer = lobby.maxPlayer;
         }
         res.json({
-            players
+            players,
+            maxPlayer
         });
     });
 });

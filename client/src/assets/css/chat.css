@@ -43,7 +43,6 @@
     color: #232320;
 }
 
-
 #message{
     padding: 3%;
     box-sizing: border-box;
@@ -66,7 +65,5 @@
 input::-webkit-input-placeholder, 
 handle::-webkit-input-placeholder {
     font-family: 'Work Sans', sans-serif;
-
     color: darkgrey;
-
 }

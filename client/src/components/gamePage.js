@@ -4,10 +4,10 @@ import Chat from './chat';
 import TokBox from './openTok';
 import '../assets/css/gamePage.css';
 
+
 class GamePage extends Component {
     constructor(props) {
         super(props);
-        this.roomKeyId = sessionStorage.getItem('roomKey');
     }
 
     render() {
