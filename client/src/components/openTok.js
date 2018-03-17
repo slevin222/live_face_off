@@ -106,7 +106,7 @@ class TokBox extends Component {
             )
         }
         return (
-            <div className="row col s12 fullscreen">
+            <div className="row col s12 fullscreen" id='fullScreen'>
                 {/* <div>Session Status: {connection}</div>
                 {error ? (
                     <div className="error">
