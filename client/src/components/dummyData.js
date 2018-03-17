@@ -1,62 +1,62 @@
 export default [
     {
         'rank': '1',
-        'teamName': 'Shawn\'s Team',
+        'name': 'Shawn',
         'gameType': 'Deal 52',
-        'wins': '10'
+        'score': '6'
     },
     {
-        'rank': '2',
-        'teamName': 'Paul\'s Team',
+        'rank': '1',
+        'name': 'Paul',
         'gameType': 'Deal 52',
-        'wins': '9'
+        'score': '6'
     },
     {
-        'rank': '3',
-        'teamName': 'Khaleel\'s Team',
+        'rank': '1',
+        'name': 'Khaleel',
         'gameType': 'Deal 52',
-        'wins': '8'
+        'score': '6'
     },
     {
-        'rank': '4',
-        'teamName': 'Crystal\'s Team',
+        'rank': '1',
+        'name': 'Crystal',
         'gameType': 'Deal 52',
-        'wins': '7'
+        'score': '6'
     },
     {
         'rank': '5',
-        'teamName': 'Nick\'s Team',
+        'name': 'Nick',
         'gameType': 'Deal 52',
-        'wins': '6'
+        'score': '7'
     },
     {
         'rank': '6',
-        'teamName': 'Kelcey\'s Team',
+        'name': 'Kelcey',
         'gameType': 'Deal 52',
-        'wins': '5'
+        'score': '8'
     },
     {
         'rank': '7',
-        'teamName': 'Andrea\'s Team',
+        'name': 'Andrea',
         'gameType': 'Deal 52',
-        'wins': '4'
+        'score': '9'
     },
     {
         'rank': '8',
-        'teamName': 'Henry\'s Team',
+        'name': 'Henry',
         'gameType': 'Deal 52',
-        'wins': '3'
+        'score': '10'
     },
     {
         'rank': '9',
-        'teamName': 'Taylor\'s Team',
+        'name': 'Taylor',
         'gameType': 'Deal 52',
-        'wins': '2'
+        'score': '11'
     },
     {
         'rank': '10',
-        'teamName': 'Jason\'s Team',
+        'name': 'Jason',
         'gameType': 'Deal 52',
-        'wins': '1'
+        'score': '12'
     }
 ]
