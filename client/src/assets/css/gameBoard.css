@@ -1,3 +1,4 @@
+
 .gameArea{
     height: 100%;
     padding: 0;
@@ -7,16 +8,13 @@
     margin: 0;
 }
 .cardsArea{
-    height:66%;
+    height:61%;
     /* width: 100%; */
     margin-bottom: 0;
 }
 .camChat{
     height: 85%;
 }
-/* div.col.s12.playerHand {
-    padding-top: 4vh;     
-} */
 
 .playerHand{
     height: 100%;
@@ -66,6 +64,7 @@
     margin: 0;
     height: 100%;
     border-radius: 10px;
+    background-color:ghostwhite;
 }
 
 .bottomCardContainer{
@@ -75,5 +74,11 @@
 @media only screen and (min-height: 768px) and (max-height: 847px) {
     .bottomInfo{
         margin: 4.5% 0 0 0;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .cardsArea{
+        padding-top: 4%;
     }
 }

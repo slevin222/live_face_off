@@ -21,7 +21,7 @@
     height: 90%;
     overflow: auto;
     word-wrap: break-word;
-    background: #EBEBEB;
+    background: ghostwhite;
     text-align: left;
     border-radius: 25px 25px 0px 0px;
 }
@@ -52,7 +52,6 @@
     width: 100%;
     background: #fff;
     border-bottom: 1px solid #eee;
-    font-family: Nunito;
     font-size: 16px;
     margin: 0;
 }
