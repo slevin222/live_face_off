@@ -7,11 +7,11 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/index';
 import types from './actions/types';
 import axios from 'axios';
-
 import App from './components/app';
 
-const store = createStore(rootReducer, {}, applyMiddleware(thunk));
+const store = createStore(rootReducer, {}, applyMiddleware(thunk)); //thunk middleware used for async axios calls
 
+//checks to see if user is logged in and keeps user logged in if user refreshes page or navigates away.
 if(localStorage.getItem('token')){
     store.dispatch({
         type: types.SIGN_IN

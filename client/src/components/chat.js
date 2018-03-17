@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import '../assets/css/chat.css';
+import { connect } from 'react-redux';
 import openSocket from 'socket.io-client';
 import ChatHistory from './chatHistory';
 import axios from 'axios';
@@ -16,7 +17,7 @@ class Chat extends Component {
             players: []
         };
 
-        this.socket = openSocket('/');
+        this.socket = openSocket('http://localhost:5000');
 
         this.socket.on('chat', (data) => {
             console.log('data in client: ', data);
@@ -76,6 +77,16 @@ class Chat extends Component {
         })
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log('Next props: ', nextProps.finalScore.finalScore);
+        console.log('this. props: ', this.props.finalScore.finalScore);
+        if (this.props.finalScore.finalScore !== nextProps.finalScore.finalScore) {
+            this.socket.emit('endGame', {
+                finalScore: nextProps.finalScore.finalScore
+            });
+        }
+    }
+
     handleInputChange(event) {
         const { value } = event.target;
         this.setState({
@@ -100,11 +111,17 @@ class Chat extends Component {
                         <div id="feedback"></div>
                     </div>
                     <input value={this.state.message} onChange={this.handleInputChange.bind(this)} id="message" type="text" placeholder="Type Message" />
-                    <button className="chatBtn waves-effect waves-light btn green accent-4" onClick={this.sendMessage.bind(this)} id="send">Send</button>
+                    <button className="chatBtn waves-effect waves-light btn teal accent-4" onClick={this.sendMessage.bind(this)} id="send">Send</button>
                 </form>
             </div>
         )
     }
 }
 
-export default Chat;
+function mapStateToProps(state) {
+    return {
+        finalScore: state.finalScore
+    }
+}
+
+export default connect(mapStateToProps, null)(Chat);

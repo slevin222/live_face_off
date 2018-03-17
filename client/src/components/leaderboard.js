@@ -7,9 +7,9 @@ class Leaderboard extends Component {
             return (
                 <tr key={index}>
                     <td>{item.rank}</td>
-                    <td>{item.teamName}</td>
+                    <td>{item.name}</td>
                     <td>{item.gameType}</td>
-                    <td>{item.wins}</td>
+                    <td>{item.score}</td>
                 </tr>
             )
         });
@@ -22,9 +22,9 @@ class Leaderboard extends Component {
                         <thead>
                             <tr>
                                 <th>Rank</th>
-                                <th>Team Name</th>
+                                <th>Name</th>
                                 <th>Game Type</th>
-                                <th>Wins</th>
+                                <th>Low Score</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -17,6 +17,14 @@ const FacebookUserSchema = new Schema({
     lastName: {
         type: String
     },
+    gamesPlayed: {
+        type: Number,
+        default: 0
+    },
+    wins: {
+        type: Number,
+        default: 0
+    },
     token: {
         type: String
     }

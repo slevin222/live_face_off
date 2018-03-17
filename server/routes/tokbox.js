@@ -112,13 +112,16 @@ router.get('/lobby', (req, res) => {
 router.post('/sockets', (req, res, next) => {
     let room = req.body.room;
     let players;
+    let maxPlayer;
     Lobby.findOne({ roomKey: room }, (err, lobby) => {
         if (err) return next(err);
         if (lobby) {
-            players = lobby.players
+            players = lobby.players;
+            maxPlayer = lobby.maxPlayer;
         }
         res.json({
-            players
+            players,
+            maxPlayer
         });
     });
 });
@@ -136,7 +139,6 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                     messages: 'Uh oh, that lobby is full!'
                 });
             };
-            console.log('Lobby: ', lobby);
             lobby.players.push(req.user.firstName);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);

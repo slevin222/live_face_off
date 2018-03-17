@@ -1,62 +1,79 @@
 .gameArea{
     height: 100%;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
     padding: 0;
 }
 
 .gameCards{
     margin: 0;
 }
+.cardsArea{
+    height:66%;
+    /* width: 100%; */
+    margin-bottom: 0;
+}
+.camChat{
+    height: 85%;
+}
+/* div.col.s12.playerHand {
+    padding-top: 4vh;     
+} */
 
 .playerHand{
-    height: 68%;
-    width: 100%;
-    display: flex;
-    /* background-color: lightslategrey; */
-    background-color: #ffdfba; 
+    height: 100%;
+    display: flex; 
 } 
 
+.fullHand{
+    height: 100%;
+}
+
 .playerCard0{
-    height: 69%;
-    width: 19%;
-    display: inline-flex;
-    flex-wrap: wrap;
+    width: 98%;
     cursor: pointer;
-    background-size: 100%;
     border-radius: 1.5%;
     margin: .5%;
-    background-repeat:no-repeat;
 }
 
 .playerCard1,
 .playerCard2,
 .playerCard3,
 .playerCard4{
-    height: 69%;
-    width: 19%;
-    display: inline-flex;
-    flex-wrap: wrap;
+    width: 98%;
     cursor: pointer;
-    background-size: 100%;
     border-radius: 1.5%;
     margin: .5%;
     background-repeat:no-repeat;
 } 
 
-
 .bottomInfo{
-    height: 10%;
+    height: 20%;
+    margin: 3% 0 0 0;
 }
 
 .gameTotals{
     margin-top: 0;
-    font-weight: bold;
+    font-weight: 800;
+    font-size: 1.7vmin;
 }
 
 .gameMessage{
-    font-weight: bold;
+    font-weight: 800;
+    font-size: 2vmin;
+    margin: 0;
 }
 
+.bottomCard{
+    margin: 0;
+    height: 100%;
+    border-radius: 10px;
+}
 
+.bottomCardContainer{
+    height: 100%;
+}
+
+@media only screen and (min-height: 768px) and (max-height: 847px) {
+    .bottomInfo{
+        margin: 4.5% 0 0 0;
+    }
+}
