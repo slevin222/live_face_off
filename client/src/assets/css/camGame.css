@@ -55,6 +55,10 @@
     padding-left: 0;
 }
 
+#fullScreen{
+    padding-top: 1%;
+}
+
 /* Media Queries */
 @media only screen and (max-height: 768px) {
     .webpage{

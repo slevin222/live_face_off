@@ -100,7 +100,7 @@ io.on('connection', function (socket) {
         let usernames = data.players
         socket.username = usernames[usernames.length - 1];
         socket.join(data.room);
-        socket.emit('chat', `Admin: You have connected to room: ${data.room}.`);
+        socket.emit('chat', `Admin: You have connected to room: ${data.room}`);
         socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has connected to the room`);
     });
 

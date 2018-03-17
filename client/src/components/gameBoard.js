@@ -162,7 +162,6 @@ class GameBoard extends Component {
     cardsToDiscard(event) {
         var oldClickedCards = this.state.clickedCards.slice();
         var cardPosition = parseInt((event.target.className).slice(-1));
-        console.log(typeof cardPosition)
         if (oldClickedCards[cardPosition] === true) {
             oldClickedCards[cardPosition] = false;
             switch (cardPosition) {
@@ -181,10 +180,15 @@ class GameBoard extends Component {
                 case this.discardArr[4]:
                     this.discardArr.splice(4, 1);
             }
+
             this.setState({
                 clickedCards: oldClickedCards
             })
         } else {
+            if (this.discardArr.length >= 3) {
+                console.log("too many cards :", this.discardArr);
+                return;
+            }
             oldClickedCards[cardPosition] = true;
             this.discardArr.push(cardPosition);
             this.setState({
@@ -194,15 +198,15 @@ class GameBoard extends Component {
     };
 
     discardCards(deleteIndexArray) {
-        if (deleteIndexArray.length > 3 || deleteIndexArray.length < 1) {
-            const newMessage = 'You must discard 1 to 3 cards per turn';
-            this.setState({
-                gameMessage: newMessage,
-                clickedCards: [false, false, false, false, false]
-            });
-            this.discardArr = [];
-            return;
-        }
+        // if (deleteIndexArray.length > 3 || deleteIndexArray.length < 1) {
+        //     const newMessage = 'You must discard 1 to 3 cards per turn';
+        //     this.setState({
+        //         gameMessage: newMessage,
+        //         clickedCards: [false, false, false, false, false]
+        //     });
+        //     this.discardArr = [];
+        //     return;
+        // }
 
         deleteIndexArray.sort(function (a, b) { return b - a });
         let currentPlayersHand = this.state.playerHand1;
@@ -245,7 +249,7 @@ class GameBoard extends Component {
     renderCards(count) {
         let cards = [];
         for (let index = 0; index < count; index++) {
-            cards.push(<CardClicked key={index} handleClick={this.cardsToDiscard} className={'playerCard' + index} style={this.state.playerHand1[index].image} clickedStatus={this.state.clickedCards[index]} />)
+            cards.push(<CardClicked key={index} discardArr={this.discardArr} handleClick={this.cardsToDiscard} className={'playerCard' + index} style={this.state.playerHand1[index].image} clickedStatus={this.state.clickedCards[index]} />)
         }
         return cards;
     }
@@ -255,7 +259,7 @@ class GameBoard extends Component {
 
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
             return (
-                <div className="instructions">
+                <div className="instructions center-align">
                     <h3>Deal 52</h3>
                     <ul>Instructions
                     <li>Deal 52 is a 5 card per hand game where lowest point total wins after 10 rounds</li>
@@ -265,7 +269,6 @@ class GameBoard extends Component {
                         <li>Once your hand is dealt click on the high value cards you would like to discard</li>
                         <li>Then click the discard button below for those cards to be replaced</li>
                     </ul>
-                    <button onClick={this.dealInitialHand} className="waves-effect waves-light btn blue-grey darken-2" type="submit">Start Game</button>
                 </div>
             )
         }
