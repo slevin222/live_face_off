@@ -211,11 +211,18 @@ io.on('connection', function (socket) {
     });
 
     //socket.io that checks when deal52 game has finished
+    //adds player object to games array in db --- when full checks for winner using helper functions, then sets length back to 0 for the next round
     socket.on('endGame', function (data) {
         socket.finalScore = data.finalScore;
         Lobby.findOne({ roomKey: data.room }, (err, lobby) => {
             if (err) return next(err);
             if (lobby) {
+                let object = {
+                    username: socket.username,
+                    finalScore: data.finalScore
+                };
+                lobby.deal52Games.push(object);
+                addToGamesPlayed(socket);
                 if (lobby.deal52Games.length === lobby.maxPlayer) {
                     let lowestNumber = 100;
                     let winner;
@@ -227,26 +234,11 @@ io.on('connection', function (socket) {
                     }
                     secureWinner(socket, winner);
                     lobby.deal52Games.length = 0;
-                    let object = {
-                        username: socket.username,
-                        finalScore: data.finalScore
-                    };
-                    lobby.deal52Games.push(object);
-                    lobby.save(function (err, lobby) {
-                        if (err) return next(err);
-                    });
-                    addToGamesPlayed(socket);
-                } else {
-                    let object = {
-                        username: socket.username,
-                        finalScore: data.finalScore
-                    };
-                    lobby.deal52Games.push(object);
-                    lobby.save(function (err, lobby) {
-                        if (err) return next(err);
-                    });
-                    addToGamesPlayed(socket);
+                    io.to(data.room).emit('chat', `Admin: ${winner} has won with a final score of: ${lowestNumber}.`);
                 }
+                lobby.save(function (err, lobby) {
+                    if (err) return next(err);
+                });
             }
         });
         io.to(data.room).emit('chat', `Admin: ${socket.username}'s final score is: ${data.finalScore}.`);
