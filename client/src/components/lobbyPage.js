@@ -226,7 +226,7 @@ class LobbyPage extends Component {
                 </div>
                 <Leaderboard data={leaderboardData} />
                 <GameInfoModal fromLobby={true} gameType={gameType} roomKey={roomKeyFromServer} display={displayModal} />
-            </div>
+            </div >
         )
     }
 }
