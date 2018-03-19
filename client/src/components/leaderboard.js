@@ -13,9 +13,10 @@ class Leaderboard extends Component {
     mapUserData() {
         const { userMap } = this.state;
         console.log('userMap after decomposing: ', userMap);
-        let rankCounter = 1;
-        const list = userMap.map((item, index) => {
+        let rankCounter = 0;
+        const list = userMap[0].map((item, index) => {
             rankCounter = rankCounter++
+            rankCounter++;
             console.log('inside map');
             return (
                 <tr key={index}>

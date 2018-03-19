@@ -28,3 +28,8 @@ a.brand-logo.left {
     top: 7%;
     width: 26%;
 }
+
+.homeHover :hover{
+    background-color: rgba(0,0,0,0.17);
+    /* height: 95%; */
+}
