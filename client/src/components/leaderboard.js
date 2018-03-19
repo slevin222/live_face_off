@@ -1,19 +1,54 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Leaderboard extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            userMap: [],
+            list: []
+        }
+    }
 
-    render() {
-        const list = this.props.data.map((item, index) => {
+    mapUserData() {
+        const { userMap } = this.state;
+        console.log('userMap after decomposing: ', userMap);
+        let rankCounter = 0;
+        const list = userMap[0].map((item, index) => {
+            rankCounter = rankCounter++
+            rankCounter++;
+            console.log('inside map');
             return (
                 <tr key={index}>
-                    <td>{item.rank}</td>
+                    <td>{rankCounter}</td>
                     <td>{item.name}</td>
-                    <td>{item.gameType}</td>
-                    <td>{item.score}</td>
+                    <td>Deal 52</td>
+                    <td>{item.lowestScore}</td>
                 </tr>
             )
         });
+        this.setState({
+            list
+        });
+    }
 
+    componentWillMount() {
+        axios({
+            method: 'get',
+            url: 'tokbox/leaderboard',
+        }).then(res => {
+            console.log('response from tokbox/leaderboard: ', res);
+            console.log('res.data.userMap: ', res.data.userMap);
+            this.setState({
+                userMap: [...this.state.userMap, res.data.userMap]
+            }, () => {
+                this.mapUserData(10);
+            });
+        });
+    }
+
+    render() {
+        const { list } = this.state;
         return (
             <div className='row z-depth-5 leaderBoard contentBorder'>
                 <div className='col s8 offset-s2'>
@@ -24,7 +59,7 @@ class Leaderboard extends Component {
                                 <th>Rank</th>
                                 <th>Name</th>
                                 <th>Game Type</th>
-                                <th>Low Score</th>
+                                <th>Lowest Score</th>
                             </tr>
                         </thead>
                         <tbody>
