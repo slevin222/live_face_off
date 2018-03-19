@@ -29,6 +29,7 @@ require('./models/Lobby');
 const GoogleUser = mongoose.model('googleUsers');
 const FacebookUser = mongoose.model('facebookUsers');
 const LocalUser = mongoose.model('users');
+const Lobby = mongoose.model('lobby');
 
 //Load Routes
 const auth = require('./routes/auth');
@@ -82,23 +83,80 @@ app.use('/auth', auth);
 app.use('/users', users);
 app.use('/tokbox', tokbox);
 
+//Helper function for finding and saving winner to database for socket.
+let secureWinner = (socket, winner) => {
+    let searchID;
+    let User;
+    let id;
+    if (socket.playerId.local) {
+        searchID = '_id';
+        User = LocalUser;
+        id = socket.playerId.local.toString();;
+    } else if (socket.playerId.google) {
+        searchID = 'googleID';
+        User = GoogleUser;
+        id = socket.playerId.google.toString();;
+    } else if (socket.playerId.facebook) {
+        searchID = 'facebookID';
+        User = FacebookUser;
+        id = socket.playerId.facebook.toString();;
+    }
+    User.findOne({ [searchID]: id }, (err, user) => {
+        if (err) return next(err);
+        if (user) {
+            user.wins++
+        }
+        user.save((err) => {
+            if (err) return next(err);
+        });
+    });
+}
+
+//Helper function for adding to gamesplayed for user in socket.
+let addToGamesPlayed = (socket) => {
+    let searchID;
+    let User;
+    let id;
+    if (socket.playerId.local) {
+        searchID = '_id';
+        User = LocalUser;
+        id = socket.playerId.local.toString();
+    } else if (socket.playerId.google) {
+        searchID = 'googleID';
+        User = GoogleUser;
+        id = socket.playerId.google.toString();
+    } else if (socket.playerId.facebook) {
+        searchID = 'facebookID';
+        User = FacebookUser;
+        id = socket.playerId.facebook.toString();
+    }
+    User.findOne({ [searchID]: id }, (err, user) => {
+        if (err) return next(err);
+        if (user) {
+            user.gamesPlayed++;
+            if (socket.finalScore < user.deal52LowestScore) {
+                user.deal52LowestScore = socket.finalScore;
+            }
+        }
+        user.save((err) => {
+            if (err) return next(err);
+        });
+    });
+}
+
 //socket.io for chat & game
 io.on('connection', function (socket) {
     console.log('Made socket connection.', socket.id);
 
     socket.on('chat', function (data) {
-        let message = data.message
-        let room = data.room;
-        io.to(room).emit('chat', `${socket.username}: ${message}`);
+        io.to(data.room).emit('chat', `${socket.username}: ${data.message}`);
     });
 
     //socket.io for rooms
     //lets user know when it is connected to the room 
     socket.on('adduser', function (data) {
-        socket.totalUsers = data.players;
         socket.room = data.room;
-        let usernames = data.players
-        socket.username = usernames[usernames.length - 1];
+        socket.username = data.player
         socket.join(data.room);
         socket.emit('chat', `Admin: You have connected to room: ${data.room}`);
         socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has connected to the room`);
@@ -107,78 +165,83 @@ io.on('connection', function (socket) {
     //Socket.io for starting a game
     //waits until the entire room is full before beginning
     socket.on('startGame', function (data) {
+        socket.room = data.room;
+        socket.username = data.player
+        socket.playerId = data.playerId;
         socket.join(data.room);
-        if (data.roomPlayers.length === parseInt(data.maxPlayers)) {
-            io.to(data.room).emit('startGame', 'hello from the other side');
-        } else {
-            return;
-        }
+        Lobby.findOne({ roomKey: socket.room }, (err, lobby) => {
+            if (err) return next(err);
+            if (lobby) {
+                lobby.activePlayers.push(socket.username);
+            }
+            lobby.save((err) => {
+                if (err) return next(err);
+            });
+            if (lobby.activePlayers.length === lobby.maxPlayer) {
+                io.to(data.room).emit('startGame', 'hello from the other side');
+            } else {
+                return;
+            }
+        });
     });
 
     //Socket.io for starting a game
     //waits until the entire room is full before beginning
     socket.on('restartGame', function (data) {
-        console.log('data: ', data);
-        let finishedPlayers = data.roomPlayers;
-        console.log('finishedPlayers: ', finishedPlayers);
-        if (finishedPlayers.length === parseInt(data.maxPlayers)) {
-            io.to(data.room).emit('startGame', 'hello from the other side');
-        } else {
-            return;
-        }
+        Lobby.findOne({ roomKey: socket.room }, (err, lobby) => {
+            if (err) return next(err);
+            if (lobby) {
+                if (lobby.activePlayers.includes(socket.username)) {
+                    lobby.activePlayers.splice(socket.username, 1);
+                    lobby.finishedPlayers.push(socket.username);
+                } else if (lobby.finishedPlayers.includes(socket.username)) {
+                    lobby.finishedPlayers.splice(socket.username, 1);
+                    lobby.activePlayers.push(socket.username);
+                }
+            }
+            lobby.save((err) => {
+                if (err) return next(err);
+            });
+            if ((lobby.finishedPlayers.length || lobby.activePlayers.length) === lobby.maxPlayer) {
+                io.to(data.room).emit('startGame', 'hello from the other side');
+            } else {
+                return;
+            }
+        });
     });
 
     //socket.io that checks when deal52 game has finished
+    //adds player object to games array in db --- when full checks for winner using helper functions, then sets length back to 0 for the next round
     socket.on('endGame', function (data) {
-        console.log('socket.totalUsers: ', socket.totalUsers);
-        socket.finishedPlayers = [];
-        let scoreArray = [];
-        let winningNumber;
-        let winningName;
-        io.to(socket.room).emit('chat', `Admin: ${socket.username}'s final score is: ${data.finalScore}.`);
-        let finishedPlayerUsername = socket.totalUsers.splice(socket.username, 1);
-        console.log('finishedPlayerUsername: ', finishedPlayerUsername);
-        let finishedPlayerFinalScore = data.finalScore;
-        socket.finishedPlayers.push({
-            username: finishedPlayerUsername,
-            finalScore: finishedPlayerFinalScore
-        });
-        console.log('finishedPlayers: ', socket.finishedPlayers);
-        // GoogleUser.findOne({ firstName: socket.username }, (err, user) => {
-        //     if (err) return next(err);
-        //     if (user) {
-        //         user.gamesPlayed = ++user.gamesPlayed
-        //     }
-        //     user.save((err) => {
-        //         if (err) return next(err);
-        //     });
-        // });
-        console.log('finishedPlayers length: ', socket.finishedPlayers.length);
-        console.log('totalUsers length: ', socket.totalUsers.length);
-        if (socket.finishedPlayers.length === socket.totalUsers.length) {
-            for (let playerIndex = 0; playerIndex < socket.finishedPlayers.length; playerIndex++) {
-                scoreArray.push(socket.finishedPlayers[playerIndex].finalScore);
-            }
-            let winningNumber = Math.min(...scoreArray);
-            for (let numberIndex = 0; numberIndex < socket.finishedPlayers.length; numberIndex++) {
-                if (winningNumber === socket.finishedPlayers[numberIndex].finalScore) {
-                    winningName = socket.finishedPlayers[numberIndex].username;
+        socket.finalScore = data.finalScore;
+        Lobby.findOne({ roomKey: data.room }, (err, lobby) => {
+            if (err) return next(err);
+            if (lobby) {
+                let object = {
+                    username: socket.username,
+                    finalScore: data.finalScore
+                };
+                lobby.deal52Games.push(object);
+                addToGamesPlayed(socket);
+                if (lobby.deal52Games.length === lobby.maxPlayer) {
+                    let lowestNumber = 100;
+                    let winner;
+                    for (let playerIndex = 0; playerIndex < lobby.deal52Games.length; playerIndex++) {
+                        if (lobby.deal52Games[playerIndex].finalScore < lowestNumber) {
+                            lowestNumber = lobby.deal52Games[playerIndex].finalScore;
+                            winner = lobby.deal52Games[playerIndex].username;
+                        }
+                    }
+                    secureWinner(socket, winner);
+                    lobby.deal52Games.length = 0;
+                    io.to(data.room).emit('chat', `Admin: ${winner} has won with a final score of: ${lowestNumber}.`);
                 }
-            }
-            console.log('winningNumber: ', winningNumber);
-            GoogleUser.findOne({ firstName: winningName }, (err, user) => {
-                console.log('winning name inside of googleuser: ', winningName);
-                if (err) return next(err);
-                if (user) {
-                    user.wins = ++user.wins
-                }
-                user.save((err) => {
+                lobby.save(function (err, lobby) {
                     if (err) return next(err);
                 });
-            });
-        } else {
-            return;
-        }
+            }
+        });
+        io.to(data.room).emit('chat', `Admin: ${socket.username}'s final score is: ${data.finalScore}.`);
     });
 
     //let's all clients know when a user disconnects

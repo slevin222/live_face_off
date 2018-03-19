@@ -71,12 +71,28 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     res.status(500).send({ error: 'createSession error:' + err });
                     return;
                 }
+                let id = {
+                    'local': req.user._id,
+                    'username': req.user.firstName
+                };
+                if (req.user.googleID) {
+                    id = {
+                        'google': req.user.googleID,
+                        'username': req.user.firstName
+                    };
+                } else if (req.user.facebookID) {
+                    id = {
+                        'facebook': req.user.facebookID,
+                        'username': req.user.firstName
+                    };
+                }
                 const lobby = new Lobby({
                     roomNumber: room,
                     gameType: gameType,
                     roomKey: roomKey,
                     sessionId: session.sessionId,
-                    players: [req.user.firstName],
+                    player: req.user.firstName,
+                    ids: [id],
                     maxPlayer: maxPlayers
                 });
                 lobby.save((err) => {
@@ -111,17 +127,19 @@ router.get('/lobby', (req, res) => {
 //Post route to grab info from gamepages before they load
 router.post('/sockets', (req, res, next) => {
     let room = req.body.room;
-    let players;
+    let player;
     let maxPlayer;
     Lobby.findOne({ roomKey: room }, (err, lobby) => {
         if (err) return next(err);
         if (lobby) {
-            players = lobby.players;
+            player = lobby.player;
             maxPlayer = lobby.maxPlayer;
+            id = lobby.ids[lobby.ids.length - 1];
         }
         res.json({
-            players,
-            maxPlayer
+            player,
+            maxPlayer,
+            id
         });
     });
 });
@@ -134,12 +152,28 @@ router.post('/create', ensureAuthenticated, (req, res) => {
         if (!lobby) {
             res.json({ messages: 'That lobby does not exist!' });
         } else {
-            if (lobby.maxPlayer === lobby.players.length) {
+            if (lobby.maxPlayer === lobby.ids.length) {
                 return res.json({
                     messages: 'Uh oh, that lobby is full!'
                 });
             };
-            lobby.players.push(req.user.firstName);
+            let id = {
+                'local': req.user._id,
+                'username': req.user.firstName
+            };
+            if (req.user.googleID) {
+                id = {
+                    'google': req.user.googleID,
+                    'username': req.user.firstName
+                };
+            } else if (req.user.facebookID) {
+                id = {
+                    'facebook': req.user.facebookID,
+                    'username': req.user.firstName
+                };
+            }
+            lobby.player = req.user.firstName;
+            lobby.ids.push(id);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);
             });
@@ -163,11 +197,26 @@ router.post('/delete', ensureAuthenticated, (req, res) => {
     Lobby.findOne({ roomKey: room }, (err, lobby) => {
         if (err) return next(err);
         if (lobby) {
-            lobby.players.splice(req.user.firstName, 1);
+            let id = {
+                'local': req.user._id,
+                'username': req.user.firstName
+            };
+            if (req.user.googleID) {
+                id = {
+                    'google': req.user.googleID,
+                    'username': req.user.firstName
+                };
+            } else if (req.user.facebookID) {
+                id = {
+                    'facebook': req.user.facebookID,
+                    'username': req.user.firstName
+                };
+            }
+            lobby.ids.splice(req.user.id, 1);
             lobby.save(function (err, updatedLobby) {
                 if (err) return err.message;
             });
-            if (lobby.players.length === 0) {
+            if (lobby.ids.length === 0) {
                 lobby.remove({ roomKey: room }, (err) => {
                     if (err) return err.message;
                 });

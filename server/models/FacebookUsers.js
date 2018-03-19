@@ -25,6 +25,10 @@ const FacebookUserSchema = new Schema({
         type: Number,
         default: 0
     },
+    deal52LowestScore: {
+        type: Number,
+        default: 50
+    },
     token: {
         type: String
     }

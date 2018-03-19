@@ -16,12 +16,13 @@ class GameBoard extends Component {
         super(props);
         this.state = {
             players: [1],
-            roomPlayers: null,
+            currentPlayer: '',
+            playerId: null,
             room: null,
-            maxPlayers: null,
             playerHand1: [],
             clickedCards: [false, false, false, false, false],
             player1Total: 0,
+            roundFinalScore: null,
             gameMessage: 'Click on up to 3 cards then discard',
             displayEndGameModal: false,
             displayInfoModal: false,
@@ -51,8 +52,11 @@ class GameBoard extends Component {
         this.setState({
             displayEndGameModal: true,
         }, () => {
+            this.socket.emit('endGame', {
+                finalScore: this.state.player1Total,
+                room: this.state.room,
+            });
             this.props.setFinalScore(this.state.player1Total);
-            console.log('final score: ', this.state.player1Total);
         });
     }
 
@@ -73,11 +77,11 @@ class GameBoard extends Component {
         }, () => {
             this.shuffleDeck();
             this.dealInitialHand();
-        });
-        this.socket.emit('restartGame', {
-            room: this.state.room,
-            roomPlayers: this.state.roomPlayers,
-            maxPlayers: this.state.maxPlayers
+            this.socket.emit('restartGame', {
+                room: this.state.room,
+                player: this.state.currentPlayer,
+                finalScore: this.finalScore[this.finalScore.length - 1]
+            });
         });
     }
 
@@ -94,7 +98,6 @@ class GameBoard extends Component {
     }
 
     handleWaitingModal() {
-        console.log('WE MADE IT!');
         this.setState({
             displayDeal52WaitingModal: false,
         });
@@ -108,7 +111,6 @@ class GameBoard extends Component {
     async componentWillMount() {
         let sessionInfo = sessionStorage.getItem('gameSession');
         sessionInfo = JSON.parse(sessionInfo);
-        console.log('sessionInfo: ', sessionInfo);
         await axios({
             method: 'post',
             url: 'tokbox/sockets',
@@ -116,18 +118,15 @@ class GameBoard extends Component {
                 room: sessionInfo.roomKey
             }
         }).then(response => {
-            console.log('response from connectUsers axios call: ', response);
-            console.log('response.data.maxPlayer: ', response.data.maxPlayer);
             this.setState({
-                maxPlayers: response.data.maxPlayer,
-                roomPlayers: [...response.data.players],
-                room: sessionInfo.roomKey
+                currentPlayer: response.data.player,
+                room: sessionInfo.roomKey,
+                playerId: response.data.id
             }, () => {
-                console.log('this.maxPlayers: ', this.state.maxPlayers);
                 this.socket.emit('startGame', {
                     room: this.state.room,
-                    roomPlayers: this.state.roomPlayers,
-                    maxPlayers: this.state.maxPlayers
+                    player: this.state.currentPlayer,
+                    playerId: this.state.playerId
                 });
             });
         });
@@ -135,7 +134,7 @@ class GameBoard extends Component {
 
     shuffleDeck() {
         this.deck = deck.slice().sort(function () { return 0.5 - Math.random(); });
-    }
+    } s
 
     dealInitialHand() {
 
@@ -241,8 +240,6 @@ class GameBoard extends Component {
     }
 
     endGame() {
-        const finalScore = this.state.player1Total;
-        this.finalScore.push(finalScore);
         this.displayEndGame();
     };
 
