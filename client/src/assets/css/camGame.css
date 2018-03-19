@@ -55,9 +55,9 @@
     padding-left: 0;
 }
 
-#fullScreen{
+/* #fullScreen{
     padding-top: 1%;
-}
+} */
 
 /* Media Queries */
 @media only screen and (max-height: 768px) {

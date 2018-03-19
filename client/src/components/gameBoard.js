@@ -197,15 +197,6 @@ class GameBoard extends Component {
     };
 
     discardCards(deleteIndexArray) {
-        // if (deleteIndexArray.length > 3 || deleteIndexArray.length < 1) {
-        //     const newMessage = 'You must discard 1 to 3 cards per turn';
-        //     this.setState({
-        //         gameMessage: newMessage,
-        //         clickedCards: [false, false, false, false, false]
-        //     });
-        //     this.discardArr = [];
-        //     return;
-        // }
 
         deleteIndexArray.sort(function (a, b) { return b - a });
         let currentPlayersHand = this.state.playerHand1;
@@ -297,7 +288,6 @@ class GameBoard extends Component {
                         </div>
                     </div>
                 </div>
-
                 <Deal52WaitingModal display={displayDeal52WaitingModal} close={this.closeDeal52WaitingModal} player={players[0]} />
                 <EndGameModal display={displayEndGameModal} close={this.closeEndGameModal} points={player1Total} />
                 <GameInfoModal gameType='deal52' display={displayInfoModal} close={this.closeInfoModal} roomKey={this.roomKeyId} />
