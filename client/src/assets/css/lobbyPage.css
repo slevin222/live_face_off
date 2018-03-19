@@ -6,7 +6,9 @@
     position: relative;
     display: inline-block;
 }
-
+#lobbyContainer{
+    height: 200vh;
+}
 .lobbyText{
     color: rgba(0,181,161,1);
 }
@@ -95,7 +97,7 @@
 
 .leaderBoard{
     margin-bottom: 2%;
-    height: 45%;
+   
 }
 
 .dropdown a:hover {background-color: #ddd}
