@@ -28,7 +28,7 @@ class GameBoard extends Component {
             displayInfoModal: false,
             displayDeal52WaitingModal: true
         }
-        this.socket = openSocket('/');
+        this.socket = openSocket('http://localhost:5000');
         this.roomKeyId = sessionStorage.getItem('roomKey');
         this.deck = [];
         this.discardPile = [];
