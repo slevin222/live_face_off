@@ -4,7 +4,6 @@ import axios from 'axios';
 import GameInfoModal from './gameInfoModal';
 import Leaderboard from './leaderboard';
 import DisplayMessages from './errorMessage';
-import dummyData from './dummyData';
 
 class LobbyPage extends Component {
     constructor(props) {
@@ -23,8 +22,6 @@ class LobbyPage extends Component {
             teamName: '',
             roomKeyFromServer: ''
         };
-
-        this.leaderboardDummyData = dummyData;
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleJoinSubmit = this.handleJoinSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
