@@ -14,22 +14,20 @@ class Chat extends Component {
             output: '',
             messages: [],
             room: '',
-            players: []
+            currentPlayer: '',
+            maxPlayers: null,
         };
-
         this.socket = openSocket('http://localhost:5000');
 
         this.socket.on('chat', (data) => {
-            console.log('data in client: ', data);
             this.setState({
                 messages: [...this.state.messages, data]
             });
-            console.log('this.state.messages: ', this.state.messages);
         });
 
-        this.socket.on('adduser', (data) => {
-            console.log('data on socket.on(adduser):', data);
-        })
+        // this.socket.on('adduser', (data) => {
+        //     console.log('data on socket.on(adduser):', data);
+        // })
 
         this.sendMessage = (event) => {
             event.preventDefault();
@@ -54,14 +52,14 @@ class Chat extends Component {
                 room: sessionInfo.roomKey
             }
         }).then(response => {
-            console.log('response from connectUsers axios call: ', response);
             this.setState({
-                players: [...response.data.players],
+                currentPlayer: response.data.player,
                 room: sessionInfo.roomKey
-            });
-            this.socket.emit('adduser', {
-                room: sessionInfo.roomKey,
-                players: response.data.players
+            }, () => {
+                this.socket.emit('adduser', {
+                    room: this.state.room,
+                    player: this.state.currentPlayer
+                });
             });
         });
     }
@@ -75,16 +73,6 @@ class Chat extends Component {
                 room
             }
         })
-    }
-
-    componentWillReceiveProps(nextProps) {
-        console.log('Next props: ', nextProps.finalScore.finalScore);
-        console.log('this. props: ', this.props.finalScore.finalScore);
-        if (this.props.finalScore.finalScore !== nextProps.finalScore.finalScore) {
-            this.socket.emit('endGame', {
-                finalScore: nextProps.finalScore.finalScore
-            });
-        }
     }
 
     handleInputChange(event) {
