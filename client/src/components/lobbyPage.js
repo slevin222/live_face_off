@@ -45,7 +45,10 @@ class LobbyPage extends Component {
             this.setState({
                 firstName: res.data.firstName,
                 lastName: res.data.lastName,
-                teamName: `${res.data.firstName}'s Team`
+                teamName: `${res.data.firstName}'s Team`,
+                gamesPlayed: res.data.gamesPlayed,
+                totalWins: res.data.totalWins,
+                lowestScore: res.data.lowestScore
             });
         });
     }
@@ -143,7 +146,7 @@ class LobbyPage extends Component {
     }
 
     render() {
-        const { leaderboardData, gameType, firstName, lastName, roomKey, displayModal, messages, roomKeyFromServer, teamName } = this.state;
+        const { leaderboardData, gameType, firstName, lastName, gamesPlayed, totalWins, lowestScore, roomKey, displayModal, messages, roomKeyFromServer, teamName } = this.state;
 
         return (
             <div className='container'>
@@ -156,12 +159,12 @@ class LobbyPage extends Component {
                                     <div className='userIconPos'>
                                         <i className="userIcon far fa-user-circle"></i>
                                     </div>
-                                    <h5 className="lobbyUsername"><span>{firstName || 'Elton'} {lastName || 'John'}</span></h5>
+                                    <h5 className="lobbyUsername"><span>{firstName} {lastName}</span></h5>
                                     <ul className='profileInfo'>
-                                        <li>Team Name: {teamName || 'blue'}</li>
-                                        <li>Last Login: Yesterday</li>
-                                        <li>Deal 52 Total Score: 21</li>
-                                        <li>Deal 52 Wins: 3</li>
+                                        <li>Team Name: {teamName}</li>
+                                        <li>Deal52 Games Played: {gamesPlayed || 0}</li>
+                                        <li>Deal 52 Lowest Score: {lowestScore || 0}</li>
+                                        <li>Deal 52 Wins: {totalWins || 0}</li>
                                     </ul>
                                 </div>
                             </div>

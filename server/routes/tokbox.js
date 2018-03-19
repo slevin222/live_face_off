@@ -19,8 +19,10 @@ const {
 require('../models/Lobby');
 const Lobby = mongoose.model('lobby');
 
-//Load Google Model
-const User = mongoose.model('googleUsers');
+//Load User Models
+const GoogleUser = mongoose.model('googleUsers');
+const LocalUser = mongoose.model('users');
+const FacebookUser = mongoose.model('facebookUsers');
 
 //Initiate new OpenTok instance
 const opentok = new OpenTok(apiKey, secret);
@@ -118,9 +120,76 @@ router.get('/lobby', (req, res) => {
     if (req.user) {
         res.json({
             firstName: req.user.firstName.charAt(0).toUpperCase() + req.user.firstName.slice(1),
-            lastName: req.user.lastName.charAt(0).toUpperCase() + req.user.lastName.slice(1)
+            lastName: req.user.lastName.charAt(0).toUpperCase() + req.user.lastName.slice(1),
+            gamesPlayed: req.user.gamesPlayed,
+            lowestScore: req.user.deal52LowestScore,
+            totalWins: req.user.wins
+
         });
     }
+});
+
+//Get list of all users and their scores for the leaderboard
+router.get('/leaderboard', (req, res) => {
+    let userMap = [];
+    let finishedCheck = [];
+    LocalUser.find({}, function (err, users) {
+        for (let playerIndex = 0; playerIndex < users.length; playerIndex++) {
+            let userObject = {
+                name: users[playerIndex].firstName,
+                lowestScore: users[playerIndex].deal52LowestScore
+            }
+            userMap.push(userObject);
+        }
+        //Because of asynch database calls, we need this check in all to make sure that we get the full list of data
+        finishedCheck.push('localFinished');
+        if (finishedCheck.length === 3) {
+            console.log('userMap in facebook: ', userMap);
+            userMap.sort((a, b) => (a.lowestScore) - b.lowestScore);
+            console.log('userMap sorted: ', userMap);
+            res.json({
+                userMap
+            });
+        }
+    });
+    GoogleUser.find({}, function (err, users) {
+        for (let playerIndex = 0; playerIndex < users.length; playerIndex++) {
+            let userObject = {
+                name: users[playerIndex].firstName,
+                lowestScore: users[playerIndex].deal52LowestScore
+            }
+            userMap.push(userObject);
+        }
+        //Because of asynch database calls, we need this check in all to make sure that we get the full list of data
+        finishedCheck.push('googleFinished');
+        if (finishedCheck.length === 3) {
+            console.log('userMap in facebook: ', userMap);
+            userMap.sort((a, b) => (a.lowestScore) - b.lowestScore);
+            console.log('userMap sorted: ', userMap);
+            res.json({
+                userMap
+            });
+        }
+    });
+    FacebookUser.find({}, function (err, users) {
+        for (let playerIndex = 0; playerIndex < users.length; playerIndex++) {
+            let userObject = {
+                name: users[playerIndex].firstName,
+                lowestScore: users[playerIndex].deal52LowestScore
+            }
+            userMap.push(userObject);
+        }
+        //Because of asynch database calls, we need this check in all to make sure that we get the full list of data
+        finishedCheck.push('facebookFinished');
+        if (finishedCheck.length === 3) {
+            console.log('userMap in facebook: ', userMap);
+            userMap.sort((a, b) => (a.lowestScore) - b.lowestScore);
+            console.log('userMap sorted: ', userMap);
+            res.json({
+                userMap
+            });
+        }
+    });
 });
 
 //Socket.io chat setup with user names and room attached to
