@@ -12,12 +12,10 @@ class Leaderboard extends Component {
 
     mapUserData() {
         const { userMap } = this.state;
-        console.log('userMap after decomposing: ', userMap);
         let rankCounter = 0;
         const list = userMap[0].map((item, index) => {
             rankCounter = rankCounter++
             rankCounter++;
-            console.log('inside map');
             return (
                 <tr key={index}>
                     <td>{rankCounter}</td>
@@ -37,8 +35,6 @@ class Leaderboard extends Component {
             method: 'get',
             url: 'tokbox/leaderboard',
         }).then(res => {
-            console.log('response from tokbox/leaderboard: ', res);
-            console.log('res.data.userMap: ', res.data.userMap);
             this.setState({
                 userMap: [...this.state.userMap, res.data.userMap]
             }, () => {
@@ -52,7 +48,7 @@ class Leaderboard extends Component {
         return (
             <div className='row z-depth-5 leaderBoard contentBorder'>
                 <div className='col s8 offset-s2'>
-                    <h5 className='center-align lobbyHeaders'>Top 10 Leaderboard</h5>
+                    <h5 className='center-align lobbyHeaders'>Leaderboard</h5>
                     <table className='highlight bordered centered tableMargin'>
                         <thead>
                             <tr>
