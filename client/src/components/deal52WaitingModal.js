@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../assets/css/endGameModal.css';
+import '../assets/css/waitingGameModals.css';
 
 class Deal52WaitingModal extends Component {
 
@@ -13,11 +13,6 @@ class Deal52WaitingModal extends Component {
                 <div className='waitingModalContent contentBorder'>
                     <div className='center-align'>
                         <h4 id="waitingText">Waiting For All Players</h4>
-                        {/* <div>
-                            <h5>Unique room key</h5>
-                            <div style={{ margin: '16px 0' }}><span className='roomKeyStyle'>{this.props.roomKey}</span></div>
-                            <p>Share this key with your friends and family so they can join your room!</p>
-                        </div> */}
                     </div>
                 </div>
             </div>
