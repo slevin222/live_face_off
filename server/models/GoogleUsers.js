@@ -25,6 +25,10 @@ const GoogleUserSchema = new Schema({
         type: Number,
         default: 0
     },
+    deal52LowestScore: {
+        type: Number,
+        default: 50
+    },
     image: {
         type: String
     }
