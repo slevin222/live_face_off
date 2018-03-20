@@ -21,7 +21,7 @@ const GoogleUserSchema = new Schema({
         type: Number,
         default: 0
     },
-    id: {
+    identifier: {
         type: Object
     },
     wins: {
