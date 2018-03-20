@@ -20,7 +20,6 @@ export function signOut() {
     return async dispatch => {
         try {
             await axios.get('/auth/logout');
-
             localStorage.removeItem('token');
             sessionStorage.clear();
             dispatch({ type: types.SIGN_OUT })

@@ -30,6 +30,11 @@ class LobbyPage extends Component {
     setDisplayModal() {
         this.setState({
             displayModal: true
+        }, () => {
+            if (this.state.displayModal) {
+                let body = document.getElementsByTagName('BODY')[0];
+                body.style.overflow = 'hidden';
+            }
         })
     }
 
