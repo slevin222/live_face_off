@@ -73,17 +73,17 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     res.status(500).send({ error: 'createSession error:' + err });
                     return;
                 }
-                req.user.id = {
+                req.user.identifier = {
                     'local': req.user._id,
                     'username': req.user.firstName
                 };
                 if (req.user.googleID) {
-                    req.user.id = {
+                    req.user.identifier = {
                         'google': req.user.googleID,
                         'username': req.user.firstName
                     };
                 } else if (req.user.facebookID) {
-                    req.user.id = {
+                    req.user.identifier = {
                         'facebook': req.user.facebookID,
                         'username': req.user.firstName
                     };
@@ -93,7 +93,7 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     gameType: gameType,
                     roomKey: roomKey,
                     sessionId: session.sessionId,
-                    ids: [req.user.id],
+                    ids: [req.user.identifier],
                     maxPlayer: maxPlayers
                 });
                 lobby.save((err) => {
@@ -195,11 +195,11 @@ router.post('/sockets', (req, res, next) => {
             //find user id in lobby then match and send user info to client for the socket
             for (let idIndex = 0; idIndex < lobby.ids.length; idIndex++) {
                 if (lobby.ids[idIndex].username === req.user.firstName) {
-                    req.user.id = lobby.ids[idIndex];
+                    req.user.identifier = lobby.ids[idIndex];
                 }
             }
             maxPlayer = lobby.maxPlayer;
-            id = req.user.id;
+            id = req.user.identifier;
         }
         res.json({
             maxPlayer,
@@ -222,22 +222,22 @@ router.post('/join', ensureAuthenticated, (req, res) => {
                 });
             };
             //check to see which user method they logged in with, and set correct information in lobby
-            req.user.id = {
+            req.user.identifier = {
                 'local': req.user._id,
                 'username': req.user.firstName
             };
             if (req.user.googleID) {
-                req.user.id = {
+                req.user.identifier = {
                     'google': req.user.googleID,
                     'username': req.user.firstName
                 };
             } else if (req.user.facebookID) {
-                req.user.id = {
+                req.user.identifier = {
                     'facebook': req.user.facebookID,
                     'username': req.user.firstName
                 };
             }
-            lobby.ids.push(req.user.id);
+            lobby.ids.push(req.user.identifier);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);
             });
