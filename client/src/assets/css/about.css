@@ -12,6 +12,7 @@
     font-weight: 600;
     font-size: 3vmin;
     color: rgba(0,181,161,1); 
+    color:  #ff6d00;
    
 }
 
@@ -44,6 +45,7 @@ div.icons.center.center-align.col.s12 {
 
 .figCaptionText{
     color: rgba(0,181,161,1); 
+    color:  #ff6d00;
     padding-top: 1%; 
     font-size: 2vmin;
 }
