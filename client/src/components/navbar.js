@@ -32,10 +32,8 @@ class Navbar extends Component {
     render() {
         return (
             <nav className='teal accent-4 navBar'>
-                <div className="nav-wrapper">
-                    <div>
-                        <Link to='/' className='brand-logo left'><span>Live Face Off</span><img className="navImg" src={LFOlogoSM} /></Link>
-                    </div>
+                <div className="nav-wrapper ">
+                    <Link to='/' className='brand-logo left'><span>Live Face Off</span><img className="navImg" src={LFOlogoSM} /></Link>
                     <ul className="right navbarUl">
                         <li className="navbarLi"><Link to='/about' className="navbarItem">About</Link></li>
                         {this.renderLinks()}

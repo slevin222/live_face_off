@@ -57,6 +57,7 @@ class LoginPage extends Component {
 
         return (
             <div className='container loginContainer'>
+                <DisplayMessages messages={messages} />
                 <div className='signInArea contentBorder z-depth-5'>
                     <div className='row'>
                         <div className="col s12 homeTitle center-align">
@@ -97,7 +98,6 @@ class LoginPage extends Component {
                         </form>
                     </div>
                 </div>
-                <DisplayMessages messages={messages} />
             </div>
         )
     }

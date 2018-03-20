@@ -21,6 +21,9 @@ const FacebookUserSchema = new Schema({
         type: Number,
         default: 0
     },
+    id: {
+        type: Object
+    },
     wins: {
         type: Number,
         default: 0
