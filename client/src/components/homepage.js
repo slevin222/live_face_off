@@ -73,7 +73,7 @@ class Homepage extends Component {
                                 <div className="card-content">
                                     <h5 className='center center-align'>Easy Navigation</h5>
                                     <div className='divider black'></div>
-                                    <p className="paragraphInHomePage center center-align">Once you log in, you are welcomed into our lobby. You have the option of creating your own game and sharing your special key code with friends or family, or you have the option to join a room with a given key. There are no installations or downloads required to have with Live Face Off!</p>
+                                    <p className="paragraphInHomePage center center-align">Once you log in, you are welcomed into our lobby. You have the option of creating your own game and sharing your special key code with friends or family, or join a room with a given key. There are no installations or downloads required to get started with Live Face Off!</p>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@ class Homepage extends Component {
                                 <div className="card-content">
                                     <h5 className='center center-align'>Variety of Games</h5>
                                     <div className='divider black'></div>
-                                    <p className="paragraphInHomePage center center-align">We enhanced the experience enabling you to communicate with your friends and family via video and voice. If you have a slower connection or don't have a web cam, we have you covered. You can always communicate just as easily with our integrated webchat!</p>
+                                    <p className="paragraphInHomePage center center-align">We enhanced the experience by enabling you to communicate with your friends and family via video and voice. If you have a slower connection or don't have a webcam, you can always communicate just as easily with our integrated web chat!</p>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@ class Homepage extends Component {
                                 <div className="card-content">
                                     <h5 className='center center-align'>Video, Voice, and Text Chat</h5>
                                     <div className='divider black'></div>
-                                    <p className="paragraphInHomePage center center-align">Choose from a our range of games or play a peer to peer game in our webchat game room. You have the option to customize scores and win conditions in each game room.</p>
+                                    <p className="paragraphInHomePage center center-align">Choose between our Deal 52 card game or a peer to peer game in our webchat game room. You will have the option to customize scores and win conditions with our webchat game.</p>
                                     <p className="center center-align paragraphInHomePage"><i> More Coming soon!</i></p>
                                 </div>
                             </div>
