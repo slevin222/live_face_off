@@ -9,7 +9,6 @@
 }
 .cardsArea{
     height:61%;
-    /* width: 100%; */
     margin-bottom: 0;
 }
 .camChat{
@@ -79,6 +78,6 @@
 
 @media only screen and (max-width: 1300px) {
     .cardsArea{
-        padding-top: 4%;
+        padding-top: 2%;
     }
 }

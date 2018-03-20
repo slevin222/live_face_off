@@ -17,6 +17,7 @@ class Chat extends Component {
             currentPlayer: '',
             maxPlayers: null,
         };
+
         this.socket = openSocket('http://localhost:5000', { 'forceNew': true });
 
         this.socket.on('chat', (data) => {
