@@ -73,17 +73,17 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     res.status(500).send({ error: 'createSession error:' + err });
                     return;
                 }
-                let id = {
+                req.user.id = {
                     'local': req.user._id,
                     'username': req.user.firstName
                 };
                 if (req.user.googleID) {
-                    id = {
+                    req.user.id = {
                         'google': req.user.googleID,
                         'username': req.user.firstName
                     };
                 } else if (req.user.facebookID) {
-                    id = {
+                    req.user.id = {
                         'facebook': req.user.facebookID,
                         'username': req.user.firstName
                     };
@@ -93,8 +93,7 @@ router.post('/room', ensureAuthenticated, function (req, res) {
                     gameType: gameType,
                     roomKey: roomKey,
                     sessionId: session.sessionId,
-                    player: req.user.firstName,
-                    ids: [id],
+                    ids: [req.user.id],
                     maxPlayer: maxPlayers
                 });
                 lobby.save((err) => {
@@ -193,12 +192,16 @@ router.post('/sockets', (req, res, next) => {
     Lobby.findOne({ roomKey: room }, (err, lobby) => {
         if (err) return next(err);
         if (lobby) {
-            player = lobby.player;
+            //find user id in lobby then match and send user info to client for the socket
+            for (let idIndex = 0; idIndex < lobby.ids.length; idIndex++) {
+                if (lobby.ids[idIndex].username === req.user.firstName) {
+                    req.user.id = lobby.ids[idIndex];
+                }
+            }
             maxPlayer = lobby.maxPlayer;
-            id = lobby.ids[lobby.ids.length - 1];
+            id = req.user.id;
         }
         res.json({
-            player,
             maxPlayer,
             id
         });
@@ -219,23 +222,22 @@ router.post('/join', ensureAuthenticated, (req, res) => {
                 });
             };
             //check to see which user method they logged in with, and set correct information in lobby
-            let id = {
+            req.user.id = {
                 'local': req.user._id,
                 'username': req.user.firstName
             };
             if (req.user.googleID) {
-                id = {
+                req.user.id = {
                     'google': req.user.googleID,
                     'username': req.user.firstName
                 };
             } else if (req.user.facebookID) {
-                id = {
+                req.user.id = {
                     'facebook': req.user.facebookID,
                     'username': req.user.firstName
                 };
             }
-            lobby.player = req.user.firstName;
-            lobby.ids.push(id);
+            lobby.ids.push(req.user.id);
             lobby.save(function (err, updatedLobby) {
                 if (err) return next(err);
             });
@@ -259,24 +261,12 @@ router.post('/delete', ensureAuthenticated, (req, res) => {
     Lobby.findOne({ roomKey: room }, (err, lobby) => {
         if (err) return next(err);
         if (lobby) {
-            //check to see which user method they logged in with to splice out the correct information from the database
-            let id = {
-                'local': req.user._id,
-                'username': req.user.firstName
-            };
-            if (req.user.googleID) {
-                id = {
-                    'google': req.user.googleID,
-                    'username': req.user.firstName
-                };
-            } else if (req.user.facebookID) {
-                id = {
-                    'facebook': req.user.facebookID,
-                    'username': req.user.firstName
-                };
-            }
             //removes the person from the lobby and then checks to see if that was the last person, and if it was deletes the lobby from the DB.
-            lobby.ids.splice(req.user.id, 1);
+            for (let idIndex = 0; idIndex < lobby.ids.length; idIndex++) {
+                if (lobby.ids[idIndex].username === req.user.firstName) {
+                    lobby.ids.splice(idIndex, 1);
+                }
+            }
             lobby.save(function (err, updatedLobby) {
                 if (err) return err.message;
             });

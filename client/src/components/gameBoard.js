@@ -29,7 +29,7 @@ class GameBoard extends Component {
             displayInfoModal: false,
             displayDeal52WaitingModal: true
         }
-        this.socket = openSocket('/', { 'forceNew': true });
+        this.socket = openSocket('http://localhost:5000', { 'forceNew': true });
         this.roomKeyId = sessionStorage.getItem('roomKey');
         this.deck = [];
         this.discardPile = [];
@@ -56,6 +56,7 @@ class GameBoard extends Component {
             this.socket.emit('endGame', {
                 finalScore: this.state.player1Total,
                 room: this.state.room,
+                player: this.state.currentPlayer
             });
             this.props.setFinalScore(this.state.player1Total);
         });
@@ -120,7 +121,7 @@ class GameBoard extends Component {
             }
         }).then(response => {
             this.setState({
-                currentPlayer: response.data.player,
+                currentPlayer: response.data.id.username,
                 room: sessionInfo.roomKey,
                 playerId: response.data.id
             }, () => {
