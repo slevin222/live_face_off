@@ -155,6 +155,7 @@ io.on('connection', function (socket) {
     //socket.io for rooms
     //lets user know when it is connected to the room 
     socket.on('adduser', function (data) {
+        console.log("Data sent from socket event", data);
         socket.room = data.room;
         socket.username = data.player
         socket.join(data.room);
