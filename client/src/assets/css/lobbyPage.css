@@ -6,9 +6,7 @@
     position: relative;
     display: inline-block;
 }
-#lobbyContainer{
-    height: 200vh;
-}
+
 .lobbyText{
     color: darkorange;
 }
@@ -97,7 +95,7 @@
 
 .leaderBoard{
     margin-bottom: 2%;
-   
+    height: 660px;
 }
 
 .dropdown a:hover {background-color: #ddd}
