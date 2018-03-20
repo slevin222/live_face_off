@@ -14,9 +14,7 @@
 
 a.brand-logo.left {
     height: 100%;
-    margin-left: 5%;
-   
-
+    margin-left: 4.5%;
 }
 
 .nav-wrapper {
@@ -25,13 +23,25 @@ a.brand-logo.left {
 
 .navImg {
     position: absolute;
-    left: -28%;
-    top: 7%;
+    top: 10%;
+    left: -26%;
     width: 26%;
 }
 
-.brand-logo:hover{
-    background-color:rgba(124, 118, 118, 0.3);
-
+@media only screen and (min-width: 1200px) and (max-width: 1439px) {
+    a.brand-logo.left {
+        margin-left: 3.5%;
+    }
 }
 
+@media only screen and (min-width: 1440px) {
+    a.brand-logo.left {
+        margin-left: 3.2%;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    a.brand-logo.left {
+        margin-left: 3%;
+    }
+}

@@ -6,11 +6,9 @@
     position: relative;
     display: inline-block;
 }
-#lobbyContainer{
-    height: 200vh;
-}
+
 .lobbyText{
-    color: rgba(0,181,161,1);
+    color: rgb(255, 123, 0);
 }
 
 .profileCard, .createGame {
@@ -64,7 +62,7 @@
 
 .lobbyHeaders {
     margin-top: 1.8rem;
-    color: rgba(0,181,161,1);
+    color: rgb(255, 123, 0);
 }
 
 .dropdownContent {
@@ -97,7 +95,7 @@
 
 .leaderBoard{
     margin-bottom: 2%;
-   
+    height: 660px;
 }
 
 .dropdown a:hover {background-color: #ddd}

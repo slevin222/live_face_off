@@ -149,35 +149,42 @@ io.on('connection', function (socket) {
     console.log('Made socket connection.', socket.id);
 
     socket.on('chat', function (data) {
-        io.to(data.room).emit('chat', `${socket.username}: ${data.message}`);
+        io.to(data.room).emit('chat', `${data.player}: ${data.message}`);
     });
 
     //socket.io for rooms
     //lets user know when it is connected to the room 
     socket.on('adduser', function (data) {
         socket.room = data.room;
-        socket.username = data.player
         socket.join(data.room);
         socket.emit('chat', `Admin: You have connected to room: ${data.room}`);
-        socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has connected to the room`);
+        socket.broadcast.to(data.room).emit('chat', `Admin: ${data.player} has connected to the room`);
     });
 
     //Socket.io for starting a game
     //waits until the entire room is full before beginning
     socket.on('startGame', function (data) {
         socket.room = data.room;
-        socket.username = data.player
         socket.playerId = data.playerId;
         socket.join(data.room);
         Lobby.findOne({ roomKey: socket.room }, (err, lobby) => {
             if (err) return next(err);
             if (lobby) {
-                lobby.activePlayers.push(socket.username);
+                //if one or the other is more full push people rejoining back into the correct array, or if its a brand new game just push into activeplayers spot
+                if (lobby.activePlayers.length > lobby.finishedPlayers.length) {
+                    lobby.activePlayers.push(data.player);
+                } else if (lobby.activePlayers.length < lobby.finishedPlayers.length) {
+                    lobby.finishedPlayers.push(data.player);
+                } else if (lobby.activePlayers.length === lobby.finishedPlayers.length) {
+                    lobby.activePlayers.push(data.player);
+                }
             }
             lobby.save((err) => {
                 if (err) return next(err);
             });
             if (lobby.activePlayers.length === lobby.maxPlayer) {
+                io.to(data.room).emit('startGame', 'hello from the other side');
+            } else if (lobby.finishedPlayers.length === lobby.maxPlayer) {
                 io.to(data.room).emit('startGame', 'hello from the other side');
             } else {
                 return;
@@ -191,21 +198,21 @@ io.on('connection', function (socket) {
         Lobby.findOne({ roomKey: socket.room }, (err, lobby) => {
             if (err) return next(err);
             if (lobby) {
-                if (lobby.activePlayers.includes(socket.username)) {
-                    lobby.activePlayers.splice(socket.username, 1);
-                    lobby.finishedPlayers.push(socket.username);
-                } else if (lobby.finishedPlayers.includes(socket.username)) {
-                    lobby.finishedPlayers.splice(socket.username, 1);
-                    lobby.activePlayers.push(socket.username);
+                if (lobby.activePlayers.includes(data.player)) {
+                    lobby.activePlayers.splice(lobby.activePlayers.indexOf(data.player), 1);
+                    lobby.finishedPlayers.push(data.player);
+                } else if (lobby.finishedPlayers.includes(data.player)) {
+                    lobby.finishedPlayers.splice(lobby.finishedPlayers.indexOf(data.player), 1);
+                    lobby.activePlayers.push(data.player);
                 }
             }
             lobby.save((err) => {
                 if (err) return next(err);
             });
-            if ((lobby.finishedPlayers.length || lobby.activePlayers.length) === lobby.maxPlayer) {
+            if (lobby.finishedPlayers.length === lobby.maxPlayer) {
                 io.to(data.room).emit('startGame', 'hello from the other side');
-            } else {
-                return;
+            } else if (lobby.activePlayers.length === lobby.maxPlayer) {
+                io.to(data.room).emit('startGame', 'hello from the other side');
             }
         });
     });
@@ -217,37 +224,77 @@ io.on('connection', function (socket) {
         Lobby.findOne({ roomKey: data.room }, (err, lobby) => {
             if (err) return next(err);
             if (lobby) {
+                if (lobby.deal52Games.length >= lobby.maxPlayer) {
+                    while (lobby.deal52Games.length > 0) {
+                        lobby.deal52Games.pop();
+                    }
+                    lobby.save(function (err) {
+                        if (err) return err;
+                    });
+                }
                 let object = {
-                    username: socket.username,
+                    username: data.player,
                     finalScore: data.finalScore
                 };
                 lobby.deal52Games.push(object);
                 addToGamesPlayed(socket);
+                lobby.save(function (err) {
+                    if (err) return err;
+                });
                 if (lobby.deal52Games.length === lobby.maxPlayer) {
                     let lowestNumber = 100;
                     let winner;
+                    //checks for winner and if there is a tie does not award a win to anyone
                     for (let playerIndex = 0; playerIndex < lobby.deal52Games.length; playerIndex++) {
+                        if (lobby.deal52Games[playerIndex].finalScore === lowestNumber) {
+                            io.to(data.room).emit('chat', `Admin: There was a tie with the score: ${lowestNumber}.`);
+                            winner = null;
+                        }
                         if (lobby.deal52Games[playerIndex].finalScore < lowestNumber) {
                             lowestNumber = lobby.deal52Games[playerIndex].finalScore;
                             winner = lobby.deal52Games[playerIndex].username;
                         }
                     }
-                    secureWinner(socket, winner);
-                    lobby.deal52Games.length = 0;
-                    io.to(data.room).emit('chat', `Admin: ${winner} has won with a final score of: ${lowestNumber}.`);
+                    if (winner !== null) {
+                        secureWinner(socket, winner);
+                        io.to(data.room).emit('chat', `Admin: ${winner} has won with a final score of: ${lowestNumber}.`);
+                    }
+                }
+            }
+        });
+        io.to(data.room).emit('chat', `Admin: ${data.player}'s final score is: ${data.finalScore}.`);
+    });
+
+    //let's all clients know when a user disconnects from chat
+    //lowers the count of the maxPlayer in the room
+    socket.on('chatDisconnected', function (data) {
+        io.to(data.room).emit('chat', `Admin: ${data.player} has left the room.`);
+        Lobby.findOne({ roomKey: data.room }, (err, lobby) => {
+            if (err) return next(err);
+            if (lobby) {
+                if (lobby.activePlayers.includes(data.player)) {
+                    lobby.activePlayers.splice(lobby.activePlayers.indexOf(data.player), 1);
+                } else if (lobby.finishedPlayers.includes(data.player)) {
+                    lobby.finishedPlayers.splice(lobby.finishedPlayers.indexOf(data.player), 1);
+                }
+                for (let idIndex = 0; idIndex < lobby.ids.length; idIndex++) {
+                    if (lobby.ids[idIndex].username === data.player) {
+                        lobby.ids.splice(idIndex, 1);
+                    }
                 }
                 lobby.save(function (err, lobby) {
                     if (err) return next(err);
                 });
             }
         });
-        io.to(data.room).emit('chat', `Admin: ${socket.username}'s final score is: ${data.finalScore}.`);
+        socket.leave(data.room);
+        socket.disconnect();
     });
 
-    //let's all clients know when a user disconnects
-    socket.on('disconnect', function (data) {
-        socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has disconnected to the room`);
-        socket.leave(socket.room);
+    //Disconnects the game socket without letting the chat know they have disconnected.
+    socket.on('gameDisconnected', function (data) {
+        socket.leave(data.room);
+        socket.disconnect();
     });
 });
 

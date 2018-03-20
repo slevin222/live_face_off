@@ -90,7 +90,7 @@ class LobbyPage extends Component {
 
         axios({
             method: 'post',
-            url: `/tokbox/create`,
+            url: `/tokbox/join`,
             data: {
                 roomKey
             }
@@ -98,7 +98,6 @@ class LobbyPage extends Component {
             const dataFromServer = JSON.stringify(res.data);
             sessionStorage.setItem('gameSession', dataFromServer);
             sessionStorage.setItem('roomKey', res.data.roomKey);
-
             if (res.data.hasOwnProperty('pathname')) {
                 const { origin } = location;
                 location.href = `${origin}${res.data.pathname}`;
