@@ -11,7 +11,7 @@
 .aboutUsNames {
     font-weight: 600;
     font-size: 3vmin;
-    color: darkorange;
+    color: rgb(255, 123, 0);
    
 }
 
@@ -39,11 +39,11 @@ div.icons.center.center-align.col.s12 {
 
 .frontEnd, .backEnd, .aboutTitle{
     color: rgba(0,181,161,1); 
-    text-shadow: 2px 2px 4px #074a50; 
+    text-shadow: 2px 2px 4px rgb(128, 66, 9); 
 }
 
 .figCaptionText{
-    color: rgba(0,181,161,1); 
+    color: rgb(255, 123, 0);
     padding-top: 1%; 
     font-size: 2vmin;
 }

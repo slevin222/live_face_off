@@ -15,9 +15,6 @@ const LobbySchema = new Schema({
     sessionId: {
         type: String
     },
-    player: {
-        type: String
-    },
     activePlayers: {
         type: Array
     },

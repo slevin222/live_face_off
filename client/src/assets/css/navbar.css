@@ -23,7 +23,25 @@ a.brand-logo.left {
 
 .navImg {
     position: absolute;
-    height: 100%;
+    top: 10%;
     left: -26%;
     width: 26%;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1439px) {
+    a.brand-logo.left {
+        margin-left: 3.5%;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    a.brand-logo.left {
+        margin-left: 3.2%;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    a.brand-logo.left {
+        margin-left: 3%;
+    }
 }
