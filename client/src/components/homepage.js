@@ -73,7 +73,7 @@ class Homepage extends Component {
                                 <div className="card-content">
                                     <h5 className='center center-align'>Easy Navigation</h5>
                                     <div className='divider black'></div>
-                                    <p className="paragraphInHomePage center center-align">Once you log in, you are welcomed into our lobby. You have the option of creating your own game and sharing your special key code with friends or family, or join a room with a given key. There are no installations or downloads required to get started with Live Face Off!</p>
+                                    <p className="paragraphInHomePage center center-align">Once you log in, you are welcomed into our lobby. You have the option of creating your own game and sharing your special key code with friends and family or joining a room with a given key. There are no installations or downloads required to get started with Live Face Off!</p>
                                 </div>
                             </div>
                         </div>
