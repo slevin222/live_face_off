@@ -119,6 +119,7 @@ router.post('/room', ensureAuthenticated, function (req, res) {
 router.get('/lobby', (req, res) => {
     if (req.user) {
         res.json({
+            //capitalize first letter in first and last name
             firstName: req.user.firstName.charAt(0).toUpperCase() + req.user.firstName.slice(1),
             lastName: req.user.lastName.charAt(0).toUpperCase() + req.user.lastName.slice(1),
             gamesPlayed: req.user.gamesPlayed,
@@ -136,21 +137,15 @@ router.get('/leaderboard', (req, res) => {
     LocalUser.find({}, function (err, users) {
         for (let playerIndex = 0; playerIndex < users.length; playerIndex++) {
             let userObject = {
-                name: users[playerIndex].firstName,
+                //capitalize first letter in name
+                name: users[playerIndex].firstName.charAt(0).toUpperCase() + users[playerIndex].firstName.slice(1),
                 lowestScore: users[playerIndex].deal52LowestScore
             }
             userMap.push(userObject);
         }
         //Because of asynch database calls, we need this check in all to make sure that we get the full list of data
         finishedCheck.push('localFinished');
-        if (finishedCheck.length === 3) {
-            console.log('userMap in facebook: ', userMap);
-            userMap.sort((a, b) => (a.lowestScore) - b.lowestScore);
-            console.log('userMap sorted: ', userMap);
-            res.json({
-                userMap
-            });
-        }
+        sortLeaderboard(finishedCheck, userMap, res);
     });
     GoogleUser.find({}, function (err, users) {
         for (let playerIndex = 0; playerIndex < users.length; playerIndex++) {
@@ -162,14 +157,7 @@ router.get('/leaderboard', (req, res) => {
         }
         //Because of asynch database calls, we need this check in all to make sure that we get the full list of data
         finishedCheck.push('googleFinished');
-        if (finishedCheck.length === 3) {
-            console.log('userMap in facebook: ', userMap);
-            userMap.sort((a, b) => (a.lowestScore) - b.lowestScore);
-            console.log('userMap sorted: ', userMap);
-            res.json({
-                userMap
-            });
-        }
+        sortLeaderboard(finishedCheck, userMap, res);
     });
     FacebookUser.find({}, function (err, users) {
         for (let playerIndex = 0; playerIndex < users.length; playerIndex++) {
@@ -181,16 +169,20 @@ router.get('/leaderboard', (req, res) => {
         }
         //Because of asynch database calls, we need this check in all to make sure that we get the full list of data
         finishedCheck.push('facebookFinished');
-        if (finishedCheck.length === 3) {
-            console.log('userMap in facebook: ', userMap);
-            userMap.sort((a, b) => (a.lowestScore) - b.lowestScore);
-            console.log('userMap sorted: ', userMap);
-            res.json({
-                userMap
-            });
-        }
+        sortLeaderboard(finishedCheck, userMap, res);
     });
 });
+
+//leaderboard helper function (sorts user data list from lowest score to highest)
+function sortLeaderboard(finishedCheck, userMap, res) {
+    if (finishedCheck.length === 3) {
+        userMap.sort((a, b) => (a.lowestScore) - b.lowestScore);
+        userMap = userMap.slice(0, 10);
+        res.json({
+            userMap
+        });
+    }
+}
 
 //Socket.io chat setup with user names and room attached to
 //Post route to grab info from gamepages before they load
@@ -214,7 +206,7 @@ router.post('/sockets', (req, res, next) => {
 });
 
 //Use roomKey to Join a room. Room key is given to the user when they hit the start button
-router.post('/create', ensureAuthenticated, (req, res) => {
+router.post('/join', ensureAuthenticated, (req, res) => {
     let { roomKey } = req.body;
     Lobby.findOne({ roomKey: roomKey }, (err, lobby) => {
         if (err) return next(err);
@@ -226,6 +218,7 @@ router.post('/create', ensureAuthenticated, (req, res) => {
                     messages: 'Uh oh, that lobby is full!'
                 });
             };
+            //check to see which user method they logged in with, and set correct information in lobby
             let id = {
                 'local': req.user._id,
                 'username': req.user.firstName
@@ -266,6 +259,7 @@ router.post('/delete', ensureAuthenticated, (req, res) => {
     Lobby.findOne({ roomKey: room }, (err, lobby) => {
         if (err) return next(err);
         if (lobby) {
+            //check to see which user method they logged in with to splice out the correct information from the database
             let id = {
                 'local': req.user._id,
                 'username': req.user.firstName
@@ -281,6 +275,7 @@ router.post('/delete', ensureAuthenticated, (req, res) => {
                     'username': req.user.firstName
                 };
             }
+            //removes the person from the lobby and then checks to see if that was the last person, and if it was deletes the lobby from the DB.
             lobby.ids.splice(req.user.id, 1);
             lobby.save(function (err, updatedLobby) {
                 if (err) return err.message;

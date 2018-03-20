@@ -14,8 +14,7 @@
 
 a.brand-logo.left {
     height: 100%;
-    margin-left: 5%;
-
+    margin-left: 4.5%;
 }
 
 .nav-wrapper {
@@ -24,12 +23,7 @@ a.brand-logo.left {
 
 .navImg {
     position: absolute;
-    left: -28%;
-    top: 7%;
+    height: 100%;
+    left: -26%;
     width: 26%;
-}
-
-.homeHover :hover{
-    background-color: rgba(0,0,0,0.17);
-    /* height: 95%; */
 }

@@ -17,7 +17,7 @@ class Chat extends Component {
             currentPlayer: '',
             maxPlayers: null,
         };
-        this.socket = openSocket('/');
+        this.socket = openSocket('http://localhost:5000', { 'forceNew': true });
 
         this.socket.on('chat', (data) => {
             this.setState({
@@ -65,14 +65,18 @@ class Chat extends Component {
     }
 
     componentWillUnmount() {
-        const { room } = this.state;
+        const { room, currentPlayer } = this.state;
         axios({
             method: 'post',
             url: '/tokbox/delete',
             data: {
                 room
             }
-        })
+        });
+        this.socket.emit('chatDisconnected', {
+            room,
+            player: currentPlayer
+        });
     }
 
     handleInputChange(event) {

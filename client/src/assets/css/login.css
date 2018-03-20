@@ -29,8 +29,7 @@ body {
 }
 
 .loginContainer {
-    /* height: 91.5vh; */
-    height: calc(100vh - 94.9px);
+    height: 91.5vh;
 }
 
 .logInBtn {
@@ -56,7 +55,7 @@ body {
 }
 
 /* Media Queries */
-/* @media only screen and (max-height: 768px) {
+@media only screen and (max-height: 768px) {
     .loginContainer{
         height: 90.9vh;
     }
@@ -84,4 +83,4 @@ body {
     .loginContainer {
         height: 93.3vh;
     }
-} */
+}

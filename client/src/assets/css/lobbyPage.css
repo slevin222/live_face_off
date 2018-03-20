@@ -8,7 +8,7 @@
 }
 
 .lobbyText{
-    color: rgba(0,181,161,1);
+    color: darkorange;
 }
 
 .profileCard, .createGame {
@@ -62,7 +62,7 @@
 
 .lobbyHeaders {
     margin-top: 1.8rem;
-    color: rgba(0,181,161,1);
+    color: darkorange;
 }
 
 .dropdownContent {

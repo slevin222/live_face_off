@@ -159,7 +159,7 @@ io.on('connection', function (socket) {
         socket.username = data.player
         socket.join(data.room);
         socket.emit('chat', `Admin: You have connected to room: ${data.room}`);
-        socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has connected to the room`);
+        socket.broadcast.to(data.room).emit('chat', `Admin: ${data.player} has connected to the room`);
     });
 
     //Socket.io for starting a game
@@ -199,6 +199,8 @@ io.on('connection', function (socket) {
                     lobby.activePlayers.push(socket.username);
                 }
             }
+            console.log('lobby.activePlayers: ', lobby.activePlayers);
+            console.log('lobby.finishedPlayers: ', lobby.finishedPlayers);
             lobby.save((err) => {
                 if (err) return next(err);
             });
@@ -217,12 +219,23 @@ io.on('connection', function (socket) {
         Lobby.findOne({ roomKey: data.room }, (err, lobby) => {
             if (err) return next(err);
             if (lobby) {
+                if (lobby.deal52Games.length >= lobby.maxPlayer) {
+                    while (lobby.deal52Games.length > 0) {
+                        lobby.deal52Games.pop();
+                    }
+                    lobby.save(function (err) {
+                        if (err) return err;
+                    });
+                }
                 let object = {
                     username: socket.username,
                     finalScore: data.finalScore
                 };
                 lobby.deal52Games.push(object);
                 addToGamesPlayed(socket);
+                lobby.save(function (err) {
+                    if (err) return err;
+                });
                 if (lobby.deal52Games.length === lobby.maxPlayer) {
                     let lowestNumber = 100;
                     let winner;
@@ -230,24 +243,38 @@ io.on('connection', function (socket) {
                         if (lobby.deal52Games[playerIndex].finalScore < lowestNumber) {
                             lowestNumber = lobby.deal52Games[playerIndex].finalScore;
                             winner = lobby.deal52Games[playerIndex].username;
+                        } else if (lobby.deal52Games[playerIndex].finalScore === lowestNumber) {
+
                         }
                     }
                     secureWinner(socket, winner);
-                    lobby.deal52Games.length = 0;
                     io.to(data.room).emit('chat', `Admin: ${winner} has won with a final score of: ${lowestNumber}.`);
                 }
-                lobby.save(function (err, lobby) {
-                    if (err) return next(err);
-                });
             }
         });
         io.to(data.room).emit('chat', `Admin: ${socket.username}'s final score is: ${data.finalScore}.`);
     });
 
-    //let's all clients know when a user disconnects
-    socket.on('disconnect', function (data) {
-        socket.broadcast.to(data.room).emit('chat', `Admin: ${socket.username} has disconnected to the room`);
-        socket.leave(socket.room);
+    //let's all clients know when a user disconnects from chat
+    socket.on('chatDisconnected', function (data) {
+        io.to(data.room).emit('chat', `Admin: ${data.player} has left the room.`);
+        Lobby.findOne({ roomKey: data.room }, (err, lobby) => {
+            if (err) return next(err);
+            if (lobby) {
+                lobby.maxPlayer--;
+            }
+            lobby.save(function (err, lobby) {
+                if (err) return next(err);
+            });
+        });
+        socket.leave(data.room);
+        socket.disconnect();
+    });
+
+    //Disconnects the game socket without letting the chat know they have disconnected.
+    socket.on('gameDisconnected', function (data) {
+        socket.leave(data.room);
+        socket.disconnect();
     });
 });
 

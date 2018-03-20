@@ -3,12 +3,11 @@
     src: url('../fonts/crewniverse_font.ttf')
 }
 
-.title {
-    color: rgba(0,181,161,1); 
-    /* text-shadow: 2px 2px 4px #008894;  */
+h3.title.center.center-align {
+    color: darkorange;
 }
-.center{
-    color: rgba(0,181,161,1);
+h5.center.center-align{
+    color: darkorange;
 }
 .titleLine{
     font-family: crewniverse; 
