@@ -13,6 +13,8 @@ class GameInfoModal extends Component {
 
     //switches btn links depending if the user is coming from the lobby or clicking game info.
     switchBtn(redirect) {
+        let body = document.getElementsByTagName('BODY')[0];
+        body.style.overflow = 'visible';
         if (this.props.fromLobby === true) {
             return <Link to={redirect} className='btn teal accent-4 waves-effect waves-light'>Join Room</Link>
         } else {

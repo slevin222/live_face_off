@@ -31,11 +31,15 @@ class Chat extends Component {
 
         this.sendMessage = (event) => {
             event.preventDefault();
-            this.socket.emit('chat', {
-                message: this.state.message,
-                room: this.state.room,
-                player: this.state.currentPlayer
-            });
+            if (this.state.message === '') {
+                return;
+            } else {
+                this.socket.emit('chat', {
+                    message: this.state.message,
+                    room: this.state.room,
+                    player: this.state.currentPlayer
+                });
+            }
             this.setState({
                 message: ''
             });
