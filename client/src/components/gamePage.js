@@ -27,9 +27,6 @@ class GamePage extends Component {
                         <GameBoard />
                     </div>
                 </div >
-                {/* <div className="col s6 offset-s3 camChat show-on-med-and-down hide-on-large-only">
-                    <Chat />
-                </div> */}
             </div>
         )
     }

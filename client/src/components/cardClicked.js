@@ -9,8 +9,6 @@ class CardClicked extends Component {
     }
 
     render() {
-
-
         return (
             <div onClick={(event) => this.props.handleClick(event)} style={{ opacity: this.props.clickedStatus ? .6 : 1 }} className="fullHand">
                 <img src={this.props.style} className={this.props.className} />

@@ -146,7 +146,7 @@ class LobbyPage extends Component {
         const { leaderboardData, gameType, firstName, lastName, gamesPlayed, totalWins, lowestScore, roomKey, displayModal, messages, roomKeyFromServer, teamName } = this.state;
 
         return (
-            <div className='container'>
+            <div className='container' id="lobbyContainer" >
                 <DisplayMessages messages={messages} />
                 <div className='row topCards'>
                     <div className='col s4 center-align' id="playerCard">
@@ -226,7 +226,7 @@ class LobbyPage extends Component {
                 </div>
                 <Leaderboard data={leaderboardData} />
                 <GameInfoModal fromLobby={true} gameType={gameType} roomKey={roomKeyFromServer} display={displayModal} />
-            </div>
+            </div >
         )
     }
 }

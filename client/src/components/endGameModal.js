@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import '../assets/css/endGameModal.css';
+import '../assets/css/waitingGameModals.css';
 
 class EndGameModal extends Component {
 
     render() {
-        let displayModal = {
+        let displayEndModal = {
             display: this.props.display ? 'block' : 'none'
         };
 
         return (
-            <div className='endGameModal' style={displayModal}>
-                <div className='endGameModalContent contentBorder'>
+            <div className='waitingGameModal' id="waitingModalContent" style={displayEndModal}>
+                <div className='waitingModalContent contentBorder'>
                     <div className='center-align'>
                         <h3>Final Score</h3>
                         <h3>{this.props.points}</h3>
