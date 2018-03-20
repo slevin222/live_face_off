@@ -90,7 +90,7 @@ class LobbyPage extends Component {
 
         axios({
             method: 'post',
-            url: `/tokbox/create`,
+            url: `/tokbox/join`,
             data: {
                 roomKey
             }

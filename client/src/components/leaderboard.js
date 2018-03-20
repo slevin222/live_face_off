@@ -48,7 +48,7 @@ class Leaderboard extends Component {
         return (
             <div className='row z-depth-5 leaderBoard contentBorder'>
                 <div className='col s8 offset-s2'>
-                    <h5 className='center-align lobbyHeaders'>Leaderboard</h5>
+                    <h5 className='center-align lobbyHeaders'>Top 10 Leaderboard</h5>
                     <table className='highlight bordered centered tableMargin'>
                         <thead>
                             <tr>
