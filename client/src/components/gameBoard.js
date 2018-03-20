@@ -14,6 +14,7 @@ import axios from 'axios';
 class GameBoard extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             players: [1],
             currentPlayer: '',
@@ -28,6 +29,7 @@ class GameBoard extends Component {
             displayInfoModal: false,
             displayDeal52WaitingModal: true
         }
+
         this.socket = openSocket('http://localhost:5000');
         this.roomKeyId = sessionStorage.getItem('roomKey');
         this.deck = [];
@@ -134,7 +136,7 @@ class GameBoard extends Component {
 
     shuffleDeck() {
         this.deck = deck.slice().sort(function () { return 0.5 - Math.random(); });
-    } s
+    }
 
     dealInitialHand() {
 
@@ -248,15 +250,7 @@ class GameBoard extends Component {
         if (!playerHand1[0] || !playerHand1[1] || !playerHand1[2] || !playerHand1[3]) {
             return (
                 <div className="instructions center-align">
-                    <h3>Deal 52</h3>
-                    <ul>Instructions
-                    <li>Deal 52 is a 5 card per hand game where lowest point total wins after 10 rounds</li>
-                        <li>When each hand is dealt you must discard at least 1 card per round but not more than 3 cards</li>
-                        <li>The point total per each card the value on the face with Jacks, Queens and Kings all having a 10 point value</li>
-                        <li>Ace is the best card with a 1 point value</li>
-                        <li>Once your hand is dealt click on the high value cards you would like to discard</li>
-                        <li>Then click the discard button below for those cards to be replaced</li>
-                    </ul>
+                    <h2>Deal 52</h2>
                 </div>
             )
         }

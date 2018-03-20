@@ -2,12 +2,7 @@ import React from 'react';
 import '../assets/css/about.css';
 import familyphoto from '../assets/images/familyphoto.jpg'
 
-//Not being used.
-import github from '../assets/images/github.svg'
-import portfolio from '../assets/images/portfolio.png'
-
 export default () => {
-
     return (
         <div className='aboutUs'>
             <div className='row'>
