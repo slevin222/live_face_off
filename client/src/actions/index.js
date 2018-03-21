@@ -35,3 +35,15 @@ export function setFinalScore(finalScore) {
         type: types.SET_FINAL_SCORE
     }
 }
+
+export function enterRoom() {
+    return {
+        type: types.ENTER_ROOM
+    }
+}
+
+export function leaveRoom() {
+    return {
+        type: types.LEAVE_ROOM
+    }
+}
