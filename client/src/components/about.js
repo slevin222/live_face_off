@@ -40,7 +40,7 @@ export default () => {
                             <div className='card contentBorder'>
                                 <div className='card-content cardBox'>
                                     <h4 className='aboutUsNames center center-align'>Khaleel Younis</h4>
-                                    <p>I had the pleasure to work with Node.js, Express, Passport MongoDB, Socket.io and plenty more to build, alongside my partner Crystal, the backend portion of Live Face Off. The hardest, and most entertaining, challenge was correctly implementing the webcam and having it communicate properly with the back end.</p>
+                                    <p>I had the pleasure of working with Node.js, Express, Passport, MongoDB, Socket.io and plenty more to build, alongside my partner Crystal, the backend portion of Live Face Off. Correctly implementing a system that would track wins, games played, lowest score, and more through Socket.io was definitely a challenge, but also a very rewarding experience. Continuously building the database as the project evolved, gave me insight on what it would take to scale an future applications to larger heights.</p>
                                 </div>
                                 <div className='row'>
                                     <div className='center center-align col s12' id='icons'>
