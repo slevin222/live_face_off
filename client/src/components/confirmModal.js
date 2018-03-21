@@ -29,9 +29,9 @@ class ConfirmModal extends Component {
             <div className='confirmModal' style={displayModal}>
                 <div className='confirmModalContent contentBorder center-align'>
                     <div>
-                        <h3>Are you sure you want to leave your family?</h3>
+                        <h3>Are you sure you want to leave?</h3>
                         {this.switchLinks()}
-                        <button className='btn teal accent-4 waves-effect waves-light' onClick={this.props.close}>No</button>
+                        <button style={{marginLeft: '15px'}} className='btn red accent-4 waves-effect waves-light' onClick={this.props.close}>No</button>
                     </div>
                 </div>
             </div>
