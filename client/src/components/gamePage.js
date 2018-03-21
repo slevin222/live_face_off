@@ -3,11 +3,16 @@ import GameBoard from './gameBoard';
 import Chat from './chat';
 import TokBox from './openTok';
 import '../assets/css/gamePage.css';
-
+import { connect } from 'react-redux';
+import { enterRoom } from "../actions";
 
 class GamePage extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.enterRoom();
     }
 
     render() {
@@ -32,4 +37,4 @@ class GamePage extends Component {
     }
 }
 
-export default GamePage;
+export default connect(null, { enterRoom: enterRoom })(GamePage);

@@ -1,6 +1,4 @@
-
 .waitingGameModal {
-
     display: none;
     position: absolute;
     z-index: 1;
@@ -11,6 +9,7 @@
     overflow: hidden;
     background-color: rgba(0,0,0,0.8);
 }
+
 #waitingModalContent{
     height: 58%;
     width: 74%;
@@ -55,7 +54,5 @@
         left: 0;
         width: 100%;
         top: 34%;
-       
     }
-    
 }

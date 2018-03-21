@@ -29,6 +29,12 @@
     cursor: pointer;
     border-radius: 1.5%;
     margin: .5%;
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .playerCard1,
@@ -40,6 +46,12 @@
     border-radius: 1.5%;
     margin: .5%;
     background-repeat:no-repeat;
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 } 
 
 .bottomInfo{
