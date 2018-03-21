@@ -171,6 +171,7 @@ class GameBoard extends Component {
     cardsToDiscard(event) {
         var oldClickedCards = this.state.clickedCards.slice();
         var cardPosition = parseInt((event.target.className).slice(-1));
+        console.log("card position :", cardPosition)
         if (oldClickedCards[cardPosition] === true) {
             oldClickedCards[cardPosition] = false;
             switch (cardPosition) {
