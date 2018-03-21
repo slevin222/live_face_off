@@ -245,16 +245,39 @@ io.on('connection', function (socket) {
                 if (lobby.deal52Games.length === lobby.maxPlayer) {
                     let lowestNumber = 100;
                     let winner;
+                    let tiedPlayers = [];
+                    let player1, player2, player3, player4;
                     //checks for winner and if there is a tie does not award a win to anyone
                     for (let playerIndex = 0; playerIndex < lobby.deal52Games.length; playerIndex++) {
                         if (lobby.deal52Games[playerIndex].finalScore === lowestNumber) {
-                            io.to(data.room).emit('chat', `Admin: There was a tie with the score: ${lowestNumber}.`);
-                            winner = null;
+                            if (tiedPlayers.indexOf(winner) < 0) {
+                                tiedPlayers.push(winner);
+                            }
+                            tiedPlayers.push(lobby.deal52Games[playerIndex].username);
                         }
                         if (lobby.deal52Games[playerIndex].finalScore < lowestNumber) {
                             lowestNumber = lobby.deal52Games[playerIndex].finalScore;
                             winner = lobby.deal52Games[playerIndex].username;
                         }
+                    }
+                    if (tiedPlayers.length === 2) {
+                        player1 = tiedPlayers[0];
+                        player2 = tiedPlayers[1];
+                        winner = null;
+                        io.to(data.room).emit('chat', `Admin: There was a tie between ${player1} and ${player2} with a final score of: ${lowestNumber}.`);
+                    } else if (tiedPlayers.length === 3) {
+                        player1 = tiedPlayers[0];
+                        player2 = tiedPlayers[1];
+                        player3 = tiedPlayers[2];
+                        winner = null;
+                        io.to(data.room).emit('chat', `Admin: There was a tie between ${player1}, ${player2}, and ${player3} with a final score of: ${lowestNumber}.`);
+                    } else if (tiedPlayers.length === 4) {
+                        player1 = tiedPlayers[0];
+                        player2 = tiedPlayers[1];
+                        player3 = tiedPlayers[2];
+                        player4 = tiedPlayers[3];
+                        winner = null;
+                        io.to(data.room).emit('chat', `Admin: There was a tie between ${player1}, ${player2}, ${player3}, and ${player4} with a final score of: ${lowestNumber}.`);
                     }
                     if (winner !== null) {
                         secureWinner(socket, winner);
