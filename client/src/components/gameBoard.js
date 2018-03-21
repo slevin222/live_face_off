@@ -195,7 +195,6 @@ class GameBoard extends Component {
             })
         } else {
             if (this.discardArr.length >= 3) {
-                console.log("too many cards :", this.discardArr);
                 return;
             }
             oldClickedCards[cardPosition] = true;

@@ -7,7 +7,8 @@ export default function (WrappedComponent) {
 
         componentDidMount() {
             if (!this.props.auth) {
-                this.props.history.push('/');
+                const { origin } = location;
+                location.href = `${origin}${'/'}`;
             }
         }
 
