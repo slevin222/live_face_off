@@ -4,6 +4,8 @@ import '../assets/css/camGame.css';
 import Chat from './chat';
 import CamGameWinModal from './camGameWinModal';
 import GameInfoModal from './gameInfoModal';
+import { connect } from 'react-redux';
+import { enterRoom } from "../actions";
 
 class CamGame extends Component {
     constructor(props) {
@@ -23,6 +25,10 @@ class CamGame extends Component {
         this.displayWinner = this.displayWinner.bind(this);
         this.closeWinModal = this.closeWinModal.bind(this);
         this.handleScoreInput = this.handleScoreInput.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.enterRoom();
     }
 
     handleScoreInput(event) {
@@ -110,4 +116,4 @@ class CamGame extends Component {
     }
 }
 
-export default CamGame;
+export default connect(null, { enterRoom: enterRoom })(CamGame);

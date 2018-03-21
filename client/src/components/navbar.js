@@ -11,7 +11,7 @@ class Navbar extends Component {
         super(props);
 
         this.state = {
-            displayModal: true,
+            displayModal: false,
             route: ''
         }
 
@@ -36,27 +36,24 @@ class Navbar extends Component {
     renderLinks() {
         if(this.props.auth === true && this.props.inRoom === true){
             const { displayModal, route } = this.state;
-
             return (
                 <div className="nav-wrapper">
-                    <Link to='/' className='brand-logo left'><span>Live Face Off</span><img className="navImg" src={LFOlogoSM} /></Link>
+                    <a onClick={()=> {this.setDisplayModal('')}} className='brand-logo left' style={{cursor: 'pointer'}}><span>Live Face Off</span><img className="navImg" src={LFOlogoSM} /></a>
                     <ul className="right navbarUl">
                         <li className="navbarLi">
-                            {/*<Link to='/about' className="navbarItem">About</Link>*/}
-                            <a onClick={() => {this.setDisplayModal('/about')}} className="navbarItem">Abouttt</a>
+                            <a onClick={()=> {this.setDisplayModal('About')}} className="navbarItem">About</a>
                         </li>
                         <li className="navbarLi">
-                            <Link to='/lobby' className="navbarItem">Lobby</Link>
+                            <a onClick={()=> {this.setDisplayModal('Lobby')}} className="navbarItem">Lobby</a>
                         </li>
                         <li className="navbarLi">
-                            <a onClick={this.props.signOut} className="navbarItem">Logout</a>
+                            <a onClick={()=> {this.setDisplayModal('signOut')}} className="navbarItem">Logout</a>
                         </li>
                     </ul>
-                    <ConfirmModal display={displayModal} route={route} close={this.closeConfirmModal}/>
+                    <ConfirmModal display={displayModal} route={route} close={this.closeConfirmModal} signOut={this.props.signOut}/>
                 </div>
             )
         } else if (this.props.auth === true && this.props.inRoom === false){
-
             return (
                 <div className="nav-wrapper">
                     <Link to='/' className='brand-logo left'><span>Live Face Off</span><img className="navImg" src={LFOlogoSM} /></Link>
@@ -73,9 +70,7 @@ class Navbar extends Component {
                     </ul>
                 </div>
             )
-
         } else {
-
             return (
                 <div className="nav-wrapper">
                     <Link to='/' className='brand-logo left'><span>Live Face Off</span><img className="navImg" src={LFOlogoSM} /></Link>
@@ -93,42 +88,12 @@ class Navbar extends Component {
                 </div>
             )
         }
-
-
-
-        // if (this.props.auth) {
-        //     return [
-                {/*<li className="navbarLi" key='0'>*/}
-                    {/*<Link to='/lobby' className="navbarItem">Lobby</Link>*/}
-                {/*</li>,*/}
-                {/*<li className="navbarLi" key='1'>*/}
-                    {/*<a onClick={this.props.signOut} className="navbarItem">Logout</a>*/}
-                {/*</li>*/}
-        //     ]
-        // }
-        //
-        // return [
-        //     <li className="navbarLi" key='0'>
-        //         <Link to='/register' className="navbarItem">Sign Up</Link>
-        //     </li>,
-        //     <li className="navbarLi" key='1'>
-        //         <Link to='/login' className="navbarItem">Login</Link>
-        //     </li>
-        // ]
     }
 
     render() {
-        console.log(this.props)
-        console.log(this.props)
+        console.log(this.props);
         return (
             <nav className='teal accent-4 navBar'>
-                {/*<div className="nav-wrapper ">*/}
-                    {/*<Link to='/' className='brand-logo left'><span>Live Face Off</span><img className="navImg" src={LFOlogoSM} /></Link>*/}
-                    {/*<ul className="right navbarUl">*/}
-                        {/*<li className="navbarLi"><Link to='/about' className="navbarItem">About</Link></li>*/}
-                        {/*{this.renderLinks()}*/}
-                    {/*</ul>*/}
-                {/*</div>*/}
                 {this.renderLinks()}
             </nav>
         )
