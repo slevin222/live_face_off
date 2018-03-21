@@ -218,7 +218,7 @@ router.post('/join', ensureAuthenticated, (req, res) => {
         } else {
             if (lobby.maxPlayer === lobby.ids.length) {
                 return res.json({
-                    messages: 'Uh oh, that lobby is full!'
+                    messages: 'Uh oh, that room is full!'
                 });
             };
             //check to see which user method they logged in with, and set correct information in lobby
