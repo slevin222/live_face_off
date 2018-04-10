@@ -1,5 +1,5 @@
 # Live Face Off
-
+#### [View Live Site](http://livefaceoff.com)
 Connect with your friends and family and enjoy some time with each other.
 
 ![Landing Page](images/homepage.png) | ![Login Page](images/login.png)
